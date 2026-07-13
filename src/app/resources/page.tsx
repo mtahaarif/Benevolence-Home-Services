@@ -1,48 +1,101 @@
+"use client";
+
 import Link from "next/link";
-import { CardGrid, HeroSection, InfoCard, PageShell, SectionCard, SectionHeading } from "@/components/site-shell";
-import {  resources } from "@/data/site-content";
+import { CardGrid, HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
+import ScrollReveal from "@/components/scroll-reveal";
+import { resources } from "@/data/site-content";
 
 export default function ResourcesPage() {
   return (
     <>
+      {/* Hero Banner Section - Unwrapped to preserve initial LCP loading speed */}
       <HeroSection
         eyebrow="Resources"
         title="Helpful organizations for families and care professionals"
         description="We keep a curated set of public health and home-care links available for families who want to continue learning."
         primaryAction={{ label: "Contact Us", href: "/contact-us" }}
         secondaryAction={{ label: "Services", href: "/services" }}
-        imageSrc= "/nh-23119104148Uam2713.webp"
+        imageSrc="/nh-23119104148Uam2713.webp"
         imageAlt="Happy elderly couple"
       />
 
-      <section className="px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+      {/* Section 1: Curated External Reference Grid */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/40">
         <PageShell>
-          <SectionHeading
-            eyebrow="Resources"
-            title="Trusted references"
-            description="These organizations offer additional information about public health, home care, and workforce guidance."
-          />
-          <CardGrid className="mt-8 xl:grid-cols-2">
-            {resources.map((resource) => (
-              <InfoCard key={resource.label} title={resource.label} body={resource.href} accent="External Link" />
-            ))}
-          </CardGrid>
+          <ScrollReveal>
+            <SectionHeading
+              centered
+              eyebrow="Resources"
+              title="Trusted Reference Portals"
+              description="These professional organizations offer additional information about public health directives, home care regulations, and healthcare workforce guidance."
+            />
+          </ScrollReveal>
 
-          <SectionCard title="Continue exploring">
-            <p>
-              If you need help understanding how these resources apply to your situation, contact our team and we will walk through it with you.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/contact-us" className="bg-[color:var(--brand-blue)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white">
-                Contact Us
-              </Link>
-              <Link href="/about-us" className="bg-[rgba(245,170,65,0.12)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--brand-ink)]">
-                About Us
-              </Link>
-            </div>
-          </SectionCard>
+          {/* Modernized Resource Link Directory Layout */}
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-12">
+            {resources.map((resource, idx) => (
+              <ScrollReveal key={resource.label || idx}>
+                <a
+                  href={resource.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col justify-between bg-white border border-slate-100 p-6 rounded-2xl shadow-[0_4px_20px_rgba(15,47,89,0.02)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/20 hover:shadow-[0_12px_30px_rgba(17,104,179,0.06)] min-h-[160px]"
+                >
+                  <div className="space-y-3">
+                    <div className="h-9 w-9 bg-brand-blue/5 text-brand-blue flex items-center justify-center rounded-xl shadow-inner">
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.004 9.004 0 018.716 6.747M12 3a9.004 9.004 0 00-8.716 6.747M3.75 12h16.5" />
+                      </svg>
+                    </div>
+                    <h3 className="font-display text-sm sm:text-base font-bold text-brand-ink leading-snug group-hover:text-brand-blue transition-colors">
+                      {resource.label}
+                    </h3>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 pt-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-brand-orange transition-colors">
+                    Visit Website 
+                    <span className="text-xs font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                  </div>
+                </a>
+              </ScrollReveal>
+            ))}
+          </div>
         </PageShell>
       </section>
+
+      {/* Section 2: Immersive Bottom Exploration CTA */}
+      <ScrollReveal>
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-t border-brand-blue/10 rounded-t-[3rem]">
+          <PageShell>
+            <div className="mx-auto max-w-3xl text-center space-y-6">
+              <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl lg:text-5xl tracking-tight">
+                Need Help Navigating Public Resources?
+              </h2>
+              <p className="text-sm sm:text-base leading-relaxed text-slate-700 max-w-2xl mx-auto">
+                If you need assistance understanding how these various public health platforms, insurance frameworks, or organizational resources apply directly to your unique family situation, contact our team. We will walk through them with you step-by-step.
+              </p>
+              
+              <div className="pt-6 flex flex-wrap justify-center gap-4">
+                <Link 
+                  href="/contact-us"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-md transition-all duration-300 hover:bg-brand-blue active:scale-98"
+                >
+                  Contact Our Team
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[9px] font-bold">
+                    →
+                  </span>
+                </Link>
+                <Link 
+                  href="/about-us"
+                  className="inline-flex items-center justify-center rounded-full bg-white border border-slate-200 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-brand-ink transition hover:bg-slate-50 shadow-sm"
+                >
+                  About Our Agency
+                </Link>
+              </div>
+            </div>
+          </PageShell>
+        </section>
+      </ScrollReveal>
     </>
   );
 }

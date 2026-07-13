@@ -99,7 +99,7 @@ export function HeroSection({
     <section className="w-full px-0 pt-0">
       <div className="relative w-full overflow-hidden bg-white">
         
-        <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[420px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
+        <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[320px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
           
           {/* BACKGROUND SLIDER WITH SMOOTH CROSSFADE */}
           {images.map((src, index) => (
