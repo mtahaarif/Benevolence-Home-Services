@@ -1,0 +1,6 @@
+- This workspace is a Next.js App Router project for Benevolence Home Services.
+- Keep the site on the blue, orange, and white palette used by the brand mark.
+- Preserve the squared, borderless navbar and footer styling.
+- Prefer data-driven routes and shared components over duplicated page markup.
+- The current public routes are `/`, `/about-us`, `/services`, `/careers`, `/resources`, `/payment`, and `/contact-us`.
+- Use `npm run build` to validate changes before finishing.

@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffdf7;
+  --foreground: #12305e;
+  --surface: rgba(255, 255, 255, 0.84);
+  --surface-strong: #ffffff;
+  --border: rgba(18, 48, 94, 0.12);
+  
+  --brand-blue: #1168b3;
+  --brand-orange: #f5aa41;
+  --brand-gold: #f8c967;
+  --brand-ink: #0f2f59;
 }
 
+/* Properly wire the design tokens into Tailwind v4's theme configuration engine */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-ink: var(--brand-ink);
+
+  /* This binds Next.js font variables directly to Tailwind utility tokens */
+  --font-sans: var(--font-manrope), sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), Arial, sans-serif;
+  min-height: 100%;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  top: -6rem;
+  left: -8rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(245, 170, 65, 0.22), rgba(245, 170, 65, 0));
+}
+
+body::after {
+  right: -7rem;
+  top: 8rem;
+  width: 26rem;
+  height: 26rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(17, 104, 179, 0.18), rgba(17, 104, 179, 0));
+}
+
+::selection {
+  background: rgba(245, 170, 65, 0.28);
+  color: var(--brand-ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-shadow {
+  box-shadow: 0 20px 60px rgba(15, 47, 89, 0.08);
 }
