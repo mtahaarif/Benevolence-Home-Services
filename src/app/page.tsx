@@ -264,7 +264,7 @@ export default function HomePage() {
               <div className="relative aspect-[4/3] w-full max-w-[480px] mx-auto lg:ml-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/10 translate-x-3 translate-y-3 -z-10" />
                 <Image 
-                  src="/nh-2172642748U38tie9.webp" 
+                  src="/o6ipogo6ipogo6ip.png" 
                   alt="Compassionate nurse-led interaction model"
                   fill
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl"
