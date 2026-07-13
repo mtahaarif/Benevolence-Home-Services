@@ -445,7 +445,7 @@ export default function HomePage() {
                   href="/contact-us"
                   className="inline-flex items-center gap-1.5 mt-6 text-xs font-bold uppercase tracking-wider text-brand-orange hover:underline"
                 >
-                  Book Assessment <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                  Book Assessment <span className="transition-transform duration-300 group-hover:translate-x-0.5">rightarrow</span>
                 </Link>
               </div>
 
@@ -454,18 +454,31 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
-      {/* Section 6: Mission Statement Overview Block wrapper */}
+      {/* Section 6: Mission Statement Overview Block with Full-Image Faded Background Layer */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-slate-50 border-t border-slate-200/50 rounded-t-[3rem]">
+        <section className="relative px-4 py-24 sm:px-6 lg:px-8 lg:py-32 overflow-hidden border-t border-slate-200/50 rounded-t-[3rem]">
+          {/* Hardware-accelerated full background image instance */}
+          <div className="absolute inset-0 -z-10 w-full h-full">
+            <Image
+              src="/ff329731-2265-4376-a04c-f10a744fb417.jpg"
+              alt="Mission Statement Background"
+              fill
+              priority
+              className="object-cover object-center scale-102 filter transition-all duration-300"
+            />
+            {/* Highly customized glass backdrop blend layer matrix to fade background */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/70 to-white/70 backdrop-blur-[1px]" />
+          </div>
+
           <PageShell>
-            <div className="mx-auto max-w-4xl text-center space-y-5">
+            <div className="mx-auto max-w-4xl text-center space-y-6 relative z-10">
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-ink tracking-tight">
                 Our Mission Statement
               </h2>
-              <p className="text-base sm:text-xl text-slate-700 leading-relaxed font-light max-w-3xl mx-auto italic pt-2">
+              <p className="text-base sm:text-xl lg:text-2xl text-slate-800 font-light max-w-3xl mx-auto italic pt-2 leading-relaxed font-serif">
                 &ldquo;Our mission is to provide compassionate, high-quality non-medical home care that empowers individuals to live with dignity, independence, and comfort in their own homes. We are committed to building meaningful relationships, delivering personalized care, and supporting families through dependable, nurse-guided care services.&rdquo;
               </p>
-              <div className="pt-6 text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
+              <div className="pt-6 text-xs sm:text-sm text-slate-600 font-medium max-w-md mx-auto leading-relaxed">
                 Benevolence Home Services is proud to be a nurse-led, faith-based home care agency committed to compassionate, non-medical support for seniors and families.
               </div>
             </div>
