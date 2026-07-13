@@ -95,7 +95,7 @@ export default function RespiteCarePage() {
         description="Allow family caregivers time to recharge with temporary support services."
         primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2412692819U06281e.webp"
+        imageSrc="/nh-2182343844Us238i0.webp"
         imageAlt="Family caregiver passing duties smoothly to a professional respite provider"
       />
 

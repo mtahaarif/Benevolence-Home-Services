@@ -91,7 +91,7 @@ export default function MedicationRemindersPage() {
         description="Stay consistent with timely reminders for scheduled medication intake."
         primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2412692819U06281e.webp" 
+        imageSrc="/nh-2371714204U3a085e.webp" 
         imageAlt="Caregiver helping senior manage prescription timeline accurately"
       />
 

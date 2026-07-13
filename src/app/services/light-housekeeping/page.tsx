@@ -74,7 +74,7 @@ export default function LightHousekeepingPage() {
         description="Keep living spaces clean with routine tidying, laundry, and organization."
         primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2412692819U06281e.webp" 
+        imageSrc="/nh-2172630013U9i2e14.webp" 
         imageAlt="Caregiver keeping living spaces tidy and organized"
       />
 

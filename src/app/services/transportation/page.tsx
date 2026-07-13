@@ -95,7 +95,7 @@ export default function TransportationServicesPage() {
         description="Access reliable assistance for errands, shopping, and essential appointments."
         primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2412692819U06281e.webp"
+        imageSrc="/nh-140315263.webp"
         imageAlt="Caregiver accompanying senior citizen safely during vehicle transition"
       />
 

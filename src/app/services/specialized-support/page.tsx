@@ -63,12 +63,12 @@ export default function SpecializedSupportPage() {
     <>
       {/* Banner / Hero Section */}
       <HeroSection
-        eyebrow="Home » Services"
+        eyebrow="Services"
         title="Specialized Support"
         description="We address unique care requirements with expertise and individualized attention."
         primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2412692819U06281e.webp"
+        imageSrc="/nh-2212833857U072s1e.webp"
         imageAlt="Healthcare professional providing attentive, specialized support"
       />
 

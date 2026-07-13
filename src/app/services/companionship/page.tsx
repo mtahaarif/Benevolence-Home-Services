@@ -72,7 +72,7 @@ export default function CompanionshipPage() {
         description="Provide reliable assistance for appointments, errands, and social gatherings"
         primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2412692819U06281e.webp" 
+        imageSrc="/nh-23828104413Umet879.webp" 
         imageAlt="Caregiver engaging in friendly conversation with a senior"
       />
 

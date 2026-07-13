@@ -51,7 +51,7 @@ export default function PersonalCarePage() {
         description="Support mobility needs through safe transfers and proper positioning techniques"
         primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
         secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2412692819U06281e.webp" 
+        imageSrc="/nh-2411535922U62t38i.webp" 
         imageAlt="Caregiver providing professional personal care support"
       />
 
