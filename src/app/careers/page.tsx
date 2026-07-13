@@ -132,13 +132,13 @@ export default function CareersPage() {
               </ScrollReveal>
             </div>
 
-            {/* Right Column: Advanced Job Application Form (Replaces clunky inputs with premium glass interface) */}
-            <ScrollReveal id="application-form">
-              <div className="bg-white border border-slate-200/60 rounded-[2.5rem] p-8 sm:p-10 shadow-[0_20px_50px_rgba(15,47,89,0.06)] relative overflow-hidden">
+            {/* Right Column: Advanced Job Application Form Container */}
+            <ScrollReveal>
+              <div id="application-form" className="bg-white border border-slate-200/60 rounded-[2.5rem] p-8 sm:p-10 shadow-[0_20px_50px_rgba(15,47,89,0.06)] relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-blue to-brand-orange" />
                 
                 {isSubmitted ? (
-                  /* Success feedback state */
+                  /* Success feedback state panel */
                   <div className="py-16 text-center space-y-6 animate-fade-in">
                     <div className="h-16 w-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
                       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className="h-8 w-8">
@@ -159,7 +159,7 @@ export default function CareersPage() {
                     </button>
                   </div>
                 ) : (
-                  /* Main Interactive Form fields mapped from old website reference images */
+                  /* Form collection fields elements */
                   <form onSubmit={handleFormSubmit} className="space-y-6">
                     <div className="space-y-1">
                       <h3 className="font-display text-2xl font-semibold text-brand-ink">Submit Application</h3>
@@ -167,7 +167,6 @@ export default function CareersPage() {
                     </div>
 
                     <div className="grid gap-5 sm:grid-cols-2">
-                      {/* Name input */}
                       <div className="space-y-2">
                         <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Full Name *</label>
                         <input
@@ -180,7 +179,6 @@ export default function CareersPage() {
                         />
                       </div>
 
-                      {/* Position select dropdown */}
                       <div className="space-y-2">
                         <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Position Applying For *</label>
                         <select
@@ -198,7 +196,6 @@ export default function CareersPage() {
                     </div>
 
                     <div className="grid gap-5 sm:grid-cols-2">
-                      {/* Email input */}
                       <div className="space-y-2">
                         <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Email Address *</label>
                         <input
@@ -211,7 +208,6 @@ export default function CareersPage() {
                         />
                       </div>
 
-                      {/* Phone Input */}
                       <div className="space-y-2">
                         <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Phone Number *</label>
                         <input
@@ -225,7 +221,6 @@ export default function CareersPage() {
                       </div>
                     </div>
 
-                    {/* Drag-and-drop styled Resume Uploader */}
                     <div className="space-y-2">
                       <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Attach Resume *</label>
                       <input
@@ -250,7 +245,6 @@ export default function CareersPage() {
                       </div>
                     </div>
 
-                    {/* Message / Cover letter field */}
                     <div className="space-y-2">
                       <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Message / Cover Note</label>
                       <textarea
@@ -262,7 +256,6 @@ export default function CareersPage() {
                       />
                     </div>
 
-                    {/* Terms Checkbox */}
                     <label className="flex items-start gap-3 cursor-pointer select-none">
                       <input
                         required
@@ -276,7 +269,6 @@ export default function CareersPage() {
                       </span>
                     </label>
 
-                    {/* Form submit button wrapper with dynamic loading animation */}
                     <button
                       type="submit"
                       disabled={isSubmitting}

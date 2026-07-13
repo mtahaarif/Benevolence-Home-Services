@@ -15,6 +15,20 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+export const metadata: Metadata = {
+  title: {
+    default: "Benevolence Home Services",
+    template: "%s | Benevolence Home Services",
+  },
+  description:
+    "Benevolence Home Services is a nurse-led, faith-based home care website built in Next.js.",
+  icons: {
+    icon: "/footer-logo.png",
+    shortcut: "/footer-logo.png",
+    apple: "/footer-logo.png",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
