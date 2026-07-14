@@ -40,6 +40,10 @@ export const navItems: NavItem[] = [
       { label: "Specialized Support", href: "/services/specialized-support" },
     ]
   },
+    { 
+    label: "Areas We Serve", 
+    href: "/areas-we-serve",
+  },
   { 
     label: "Careers", 
     href: "/careers",

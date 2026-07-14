@@ -1,27 +1,24 @@
 "use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { brand, navItems } from "@/data/site-content";
 
 function BrandMark() {
   return (
-    <div className="flex items-center gap-3">
-      {/* Update src to match the exact name of your logo file in the public folder */}
+    <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
       <img
         src="/footer-logo.png"
         alt="Benevolence Home Services Logo"
-        className="h-10 w-auto shrink-0 sm:h-12 object-contain"
+        className="h-9 w-auto shrink-0 sm:h-11 object-contain"
       />
-      
-      {/* Remove this div if your logo picture already includes the text */}
-      <div className="leading-tight">
-        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-brand-blue sm:text-[0.72rem]">
+      <div className="leading-tight shrink-0">
+        <p className="text-[0.62rem] font-bold uppercase tracking-[0.3em] text-[#0c3e72] sm:text-[0.68rem]">
           {brand.shortName}
         </p>
-        <p className="font-display text-lg font-semibold text-brand-ink sm:text-xl">
-          HomeServices
+        <p className="font-display text-sm font-extrabold text-brand-ink tracking-tight sm:text-base">
+          Home Services
         </p>
       </div>
     </div>
@@ -33,97 +30,107 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    // Floating Pill Layout with Liquid Glass Backdrop
-    <header className="sticky top-4 z-50 mx-auto w-[96%] max-w-7xl mb-6">
-      <div className="flex w-full items-center justify-between gap-4 rounded-full border border-white/40 bg-white/75 px-4 py-3 shadow-[0_8px_30px_rgba(15,47,89,0.12)] backdrop-blur-xl sm:px-6">
+    <header className="sticky top-4 z-50 mx-auto w-[95%] max-w-7xl">
+      {/* Outer Liquid Glass Shell Container */}
+      <div className="flex w-full items-center justify-between gap-4 rounded-full border border-white/50 bg-white/80 px-4 py-2.5 shadow-[0_10px_40px_rgba(15,47,89,0.06)] backdrop-blur-xl sm:px-6">
         
-        <Link href="/" className="shrink-0" aria-label={brand.name}>
+        {/* Brand/Logo Anchor */}
+        <Link href="/" className="shrink-0 transition-transform active:scale-98" aria-label={brand.name}>
           <BrandMark />
         </Link>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Vector Toggle Button */}
         <button
           type="button"
-          onClick={() => setOpen((value) => !value)}
-          className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-md transition active:scale-95 lg:hidden"
+          onClick={() => setOpen(!open)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#0c3e72] text-white shadow-md transition-all active:scale-95 lg:hidden"
           aria-expanded={open}
+          aria-label="Toggle Menu"
           aria-controls="primary-navigation"
         >
-          {open ? "Close" : "Menu"}
+          {open ? (
+            <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-4 w-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="h-4 w-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          )}
         </button>
-{/* Navigation Links */}
+
+        {/* Navigation Link Layer */}
         <nav
           id="primary-navigation"
           className={`${
-            open ? "flex" : "hidden"
-          } absolute left-0 right-0 top-[120%] flex-col gap-2 rounded-3xl border border-white/40 bg-white/95 px-6 py-6 shadow-2xl backdrop-blur-2xl lg:static lg:flex lg:flex-1 lg:flex-row lg:items-center lg:justify-end lg:gap-1.5 lg:border-none lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none`}
+            open ? "translate-y-0 opacity-100 visible" : "translate-y-2 opacity-0 invisible lg:translate-y-0 lg:opacity-100 lg:visible"
+          } absolute left-0 right-0 top-[120%] flex flex-col gap-2 rounded-3xl border border-slate-100 bg-white/98 px-6 py-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 lg:static lg:flex lg:flex-1 lg:flex-row lg:items-center lg:justify-end lg:gap-1 lg:border-none lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none`}
         >
           {navItems.map((item) => {
             const active = pathname === item.href;
             const isCTA = item.label === "Contact Us";
 
             return (
-              <div key={item.href} className="group relative flex flex-col lg:block">
+              <div key={item.label} className="group relative flex flex-col lg:block">
                 
-                {/* Main Link / Trigger */}
+                {/* Main Menu Links with strict whitespace preservation */}
                 <Link
                   href={item.href}
-                  target={item.target} // Applied target
+                  target={item.target}
                   rel={item.target === "_blank" ? "noopener noreferrer" : undefined}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center justify-between gap-1.5 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all xl:text-xs ${
+                  className={`flex items-center justify-between gap-1.5 rounded-full px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] whitespace-nowrap transition-all xl:px-3.5 xl:text-[11px] ${
                     isCTA
-                      ? "bg-brand-blue text-white shadow-md hover:bg-brand-blue/90"
+                      ? "bg-[#0c3e72] text-white shadow-sm hover:bg-brand-blue"
                       : active
-                      ? "bg-brand-blue/10 text-brand-blue"
-                      : "text-brand-ink hover:bg-brand-blue/10 hover:text-brand-blue"
+                      ? "bg-brand-blue/5 text-[#0c3e72]"
+                      : "text-brand-ink hover:bg-slate-50 hover:text-[#0c3e72]"
                   }`}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
                   
-                  {/* Dropdown Chevron Arrow */}
                   {item.subItems && (
                     <svg
-                      className={`h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180 ${
-                        isCTA ? "text-white" : "opacity-50"
-                      }`}
+                      className="h-2.5 w-2.5 opacity-60 transition-transform duration-300 group-hover:rotate-180 shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
+                      strokeWidth={3}
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                   )}
                 </Link>
 
+                {/* Submenu configurations */}
                 {item.subItems && (
                   <>
-                    {/* Mobile Nested Links (Accordion style) */}
-                    <div className="mt-2 flex flex-col gap-1 pl-4 lg:hidden">
+                    {/* Mobile Menu Accordion Viewport */}
+                    <div className="mt-1 flex flex-col gap-1 pl-4 lg:hidden">
                       {item.subItems.map((sub) => (
                         <Link
                           key={sub.href}
                           href={sub.href}
-                          target={sub.target} // Applied target to mobile sub-link
+                          target={sub.target}
                           rel={sub.target === "_blank" ? "noopener noreferrer" : undefined}
                           onClick={() => setOpen(false)}
-                          className="rounded-lg px-4 py-2 text-[10px] font-semibold uppercase tracking-widest text-slate-600 transition hover:bg-brand-blue/10 hover:text-brand-blue"
+                          className="rounded-xl px-4 py-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500 whitespace-nowrap transition-colors hover:bg-slate-50 hover:text-[#0c3e72]"
                         >
                           {sub.label}
                         </Link>
                       ))}
                     </div>
 
-                    {/* Desktop Hover Dropdown */}
-                    <div className="absolute left-0 top-full z-50 hidden pt-4 opacity-0 transition-all duration-300 invisible translate-y-2 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 lg:block">
-                      <div className="flex w-60 flex-col gap-1 rounded-2xl border border-white/50 bg-white/90 p-2 shadow-xl backdrop-blur-xl">
+                    {/* Desktop Dropdown Panel with no-wrap constraint */}
+                    <div className="absolute left-0 top-full z-50 hidden pt-3 opacity-0 transition-all duration-300 invisible translate-y-2 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 lg:block">
+                      <div className="flex w-fit min-w-[200px] flex-col gap-0.5 rounded-2xl border border-slate-100 bg-white p-2 shadow-[0_15px_40px_rgba(15,47,89,0.1)] backdrop-blur-xl">
                         {item.subItems.map((sub) => (
                           <Link
                             key={sub.href}
                             href={sub.href}
-                            target={sub.target} // Applied target to desktop sub-link
+                            target={sub.target}
                             rel={sub.target === "_blank" ? "noopener noreferrer" : undefined}
-                            className="rounded-xl px-4 py-3 text-[10px] font-semibold uppercase tracking-widest text-slate-700 transition-colors hover:bg-brand-blue/10 hover:text-brand-blue"
+                            className="rounded-xl px-4 py-2.5 text-[9.5px] font-bold uppercase tracking-widest text-slate-600 whitespace-nowrap transition-all hover:bg-brand-blue/5 hover:text-[#0c3e72] hover:translate-x-0.5"
                           >
                             {sub.label}
                           </Link>
