@@ -33,6 +33,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -40,6 +41,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-manrope), Arial, sans-serif;
   min-height: 100%;
+  overflow-x: clip;
 }
 
 body::before,

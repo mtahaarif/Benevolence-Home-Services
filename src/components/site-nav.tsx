@@ -30,9 +30,9 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-4 z-50 mx-auto w-[95%] max-w-7xl">
-      {/* Outer Liquid Glass Shell Container */}
-      <div className="flex w-full items-center justify-between gap-4 rounded-full border border-white/50 bg-white/80 px-4 py-2.5 shadow-[0_10px_40px_rgba(15,47,89,0.06)] backdrop-blur-xl sm:px-6">
+    <header className="sticky top-0 z-50 w-full border-b border-white/50 bg-white/85 shadow-[0_10px_40px_rgba(15,47,89,0.06)] backdrop-blur-xl">
+      {/* Full-width rectangular navigation bar */}
+      <div className="relative flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8 overflow-x-clip">
         
         {/* Brand/Logo Anchor */}
         <Link href="/" className="shrink-0 transition-transform active:scale-98" aria-label={brand.name}>
@@ -64,7 +64,7 @@ export function SiteNav() {
           id="primary-navigation"
           className={`${
             open ? "translate-y-0 opacity-100 visible" : "translate-y-2 opacity-0 invisible lg:translate-y-0 lg:opacity-100 lg:visible"
-          } absolute left-0 right-0 top-[120%] flex flex-col gap-2 rounded-3xl border border-slate-100 bg-white/98 px-6 py-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 lg:static lg:flex lg:flex-1 lg:flex-row lg:items-center lg:justify-end lg:gap-1 lg:border-none lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none`}
+          } absolute left-0 right-0 top-full mt-3 flex flex-col gap-2 rounded-none border border-slate-100 bg-white/98 px-6 py-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 lg:static lg:mt-0 lg:flex lg:flex-1 lg:flex-row lg:items-center lg:justify-end lg:gap-1 lg:border-none lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none`}
         >
           {navItems.map((item) => {
             const active = pathname === item.href;
@@ -81,7 +81,7 @@ export function SiteNav() {
                   onClick={() => setOpen(false)}
                   className={`flex items-center justify-between gap-1.5 rounded-full px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] whitespace-nowrap transition-all xl:px-3.5 xl:text-[11px] ${
                     isCTA
-                      ? "bg-[#0c3e72] text-white shadow-sm hover:bg-brand-blue"
+                      ? "bg-[#0c3e72] !text-white shadow-sm hover:bg-brand-blue"
                       : active
                       ? "bg-brand-blue/5 text-[#0c3e72]"
                       : "text-brand-ink hover:bg-slate-50 hover:text-[#0c3e72]"
