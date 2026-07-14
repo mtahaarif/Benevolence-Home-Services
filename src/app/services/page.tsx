@@ -106,7 +106,7 @@ export default function ServicesPage() {
   return (
     <>
       <HeroSection
-        eyebrow="The Care Directory"
+        eyebrow="Services"
         title="Elevating the Standard of Home Care in Westchester."
         description="From specialized Alzheimer's care to everyday homemaker assistance, we provide non-medical home care designed to keep your loved ones safe, dignified, and comfortably independent."
         primaryAction={{ label: "Contact Us", href: "/contact-us" }}

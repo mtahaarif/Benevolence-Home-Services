@@ -5,51 +5,51 @@ import Link from "next/link";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 
-// 1. Locally Optimized Data Engine for 23 Cities
-// Grouped into regions for the Scrollspy sidebar
+// 1. ULTIMATE SEO DATA ENGINE
+// Every description is meticulously crafted to pair a High-Value Keyword with a City/Region.
 const regionalData = [
   {
     id: "dupage-county",
     name: "DuPage County",
-    description: "Delivering top-tier, nurse-led home care to families throughout DuPage County's vibrant neighborhoods.",
+    description: "Delivering top-tier, nurse-led home care, Alzheimer's support, and 24-hour live-in assistance to seniors and families throughout DuPage County.",
     cities: [
-      { name: "Oak Brook", zipCodes: "60523", desc: "Luxury, concierge-level private duty care and 24-hour support." },
-      { name: "Hinsdale", zipCodes: "60521", desc: "Discreet, premium personal care and specialized memory support." },
-      { name: "Naperville", zipCodes: "60540, 60563", desc: "Comprehensive senior care tailored to active Naperville residents." },
-      { name: "Downers Grove", zipCodes: "60515", desc: "Flexible hourly and overnight home care schedules." },
-      { name: "Elmhurst", zipCodes: "60126", desc: "Dedicated light housekeeping and meal preparation services." },
-      { name: "Lombard", zipCodes: "60148", desc: "Trustworthy companionship and daily routine assistance." },
-      { name: "Wheaton", zipCodes: "60187", desc: "Faith-based and holistic senior wellness care options." },
-      { name: "Glen Ellyn", zipCodes: "60137", desc: "Compassionate respite relief for devoted family caregivers." },
-      { name: "Burr Ridge", zipCodes: "60527", desc: "High-end post-surgical recovery and overnight monitoring." },
-      { name: "Clarendon Hills", zipCodes: "60514", desc: "Personalized mobility support and fall prevention." },
-      { name: "Villa Park", zipCodes: "60181", desc: "Routine medication prompting and grocery shopping errands." },
-      { name: "Addison", zipCodes: "60101", desc: "Reliable transportation and medical appointment escorts." },
-      { name: "Glendale Heights", zipCodes: "60139", desc: "Caring, dignified assistance with bathing and grooming." },
-      { name: "Bensenville", zipCodes: "60106", desc: "Safe, comfortable transitions from hospital to home." },
+      { name: "Oak Brook", zipCodes: "60523", desc: "Luxury private duty home care, 24-hour live-in support, and dedicated companion care in Oak Brook." },
+      { name: "Hinsdale", zipCodes: "60521", desc: "Discreet, premium personal care assistance, post-hospital recovery, and specialized memory support for Hinsdale seniors." },
+      { name: "Naperville", zipCodes: "60540, 60563", desc: "Comprehensive senior home care tailored to Naperville residents, including hourly care and transportation services." },
+      { name: "Downers Grove", zipCodes: "60515", desc: "Flexible hourly home care, overnight monitoring, and reliable medication reminders in Downers Grove." },
+      { name: "Elmhurst", zipCodes: "60126", desc: "Dedicated homemaker services, light housekeeping, and nutritious meal preparation for Elmhurst families." },
+      { name: "Lombard", zipCodes: "60148", desc: "Trustworthy companion care, daily routine assistance, and fall prevention services for Lombard seniors." },
+      { name: "Wheaton", zipCodes: "60187", desc: "Holistic senior wellness, personal hygiene assistance, and dedicated respite care options in Wheaton." },
+      { name: "Glen Ellyn", zipCodes: "60137", desc: "Compassionate respite relief for devoted family caregivers, paired with engaging companionship in Glen Ellyn." },
+      { name: "Burr Ridge", zipCodes: "60527", desc: "High-end post-surgical recovery support, overnight monitoring, and specialized mobility assistance in Burr Ridge." },
+      { name: "Clarendon Hills", zipCodes: "60514", desc: "Personalized mobility support, fall prevention, and trusted hourly senior care in Clarendon Hills." },
+      { name: "Villa Park", zipCodes: "60181", desc: "Routine medication prompting, grocery shopping errands, and daily living assistance for Villa Park residents." },
+      { name: "Addison", zipCodes: "60101", desc: "Reliable transportation, medical appointment escorts, and safe home environments for seniors in Addison." },
+      { name: "Glendale Heights", zipCodes: "60139", desc: "Caring, dignified assistance with bathing, grooming, and personal hygiene in Glendale Heights." },
+      { name: "Bensenville", zipCodes: "60106", desc: "Safe, comfortable transitional care from hospital to home, and continuous chronic condition support in Bensenville." },
     ]
   },
   {
     id: "cook-county",
     name: "Cook County (West)",
-    description: "Providing exceptional private duty care and companionship across western Cook County communities.",
+    description: "Providing exceptional private duty home care, hourly respite relief, and senior companionship across western Cook County communities.",
     cities: [
-      { name: "Westchester", zipCodes: "60154", desc: "Our hometown base, offering round-the-clock specialized support." },
-      { name: "Oak Park", zipCodes: "60301-60304", desc: "Premium live-in and hourly home care services for Oak Park families." },
-      { name: "La Grange", zipCodes: "60525", desc: "Dedicated respite and companionship care in the heart of La Grange." },
-      { name: "Berwyn", zipCodes: "60402", desc: "Reliable medication reminders and homemaker services." },
-      { name: "Brookfield", zipCodes: "60513", desc: "Compassionate Alzheimer's and Dementia support." },
-      { name: "Franklin Park", zipCodes: "60131", desc: "Post-hospital recovery and mobility assistance." },
-      { name: "Elmwood Park", zipCodes: "60707", desc: "Dependable transportation and senior wellness plans." },
-      { name: "Cicero", zipCodes: "60804", desc: "Bilingual, culturally competent personal care and support." },
+      { name: "Westchester", zipCodes: "60154", desc: "Our hometown headquarters, offering premier round-the-clock specialized support and personal home care in Westchester." },
+      { name: "Oak Park", zipCodes: "60301-60304", desc: "Premium live-in home care, overnight assistance, and hourly senior support services for Oak Park families." },
+      { name: "La Grange", zipCodes: "60525", desc: "Dedicated respite care, engaging companionship, and safe mobility assistance in the heart of La Grange." },
+      { name: "Berwyn", zipCodes: "60402", desc: "Reliable medication reminders, professional homemaker services, and light housekeeping in Berwyn." },
+      { name: "Brookfield", zipCodes: "60513", desc: "Compassionate Alzheimer's care, Dementia support, and cognitive wellness programs for Brookfield seniors." },
+      { name: "Franklin Park", zipCodes: "60131", desc: "Expert post-hospital recovery, mobility assistance, and personalized transition care in Franklin Park." },
+      { name: "Elmwood Park", zipCodes: "60707", desc: "Dependable transportation, social escorts, and comprehensive senior wellness plans in Elmwood Park." },
+      { name: "Cicero", zipCodes: "60804", desc: "Culturally competent personal care, supportive companionship, and dignified daily routine assistance in Cicero." },
     ]
   },
   {
     id: "chicagoland",
     name: "Greater Chicago",
-    description: "Extending our compassionate, non-medical care footprint into the greater Chicago metropolitan area.",
+    description: "Extending our compassionate, non-medical senior care and specialized private duty footprint into the greater Chicago metropolitan area.",
     cities: [
-      { name: "Chicago", zipCodes: "Select Neighborhoods", desc: "Comprehensive home care coverage across Chicago, focusing on safe, independent urban living." }
+      { name: "Chicago", zipCodes: "Select Neighborhoods", desc: "Comprehensive home care coverage across Chicago, focusing on safe, independent urban living, personal care, and specialized support." }
     ]
   }
 ];
@@ -102,9 +102,9 @@ export default function AreasWeServePage() {
   return (
     <>
       <HeroSection
-        eyebrow="Local Service Coverage"
+        eyebrow="Areas We Serve"
         title="Home Care Near You in Illinois."
-        description="Headquartered in Westchester, Benevolence Home Services provides premium, non-medical in-home care to 23 communities across DuPage County, Cook County, and Chicagoland."
+        description="Headquartered in Westchester, IL, Benevolence Home Services provides premium, non-medical in-home care, senior companionship, and specialized dementia support to 23 communities across DuPage County, Cook County, and Chicagoland."
         primaryAction={{ label: "Request Care", href: "/contact-us" }}
         secondaryAction={{ label: "View Services", href: "/services" }}
         imageSrc="/nh-2172642748U38tie9.webp" 
