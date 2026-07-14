@@ -1,188 +1,361 @@
-Benevolence Home Services - Corporate Web Application
+# Benevolence Home Services
 
-A premium, high-performance corporate web application engineered for Benevolence Home Services, a premier non-medical home care agency serving Westchester, Cook County, DuPage County, Lake County, and Will County, Illinois.
+Benevolence Home Services is a Next.js App Router marketing site for a nurse-led, non-medical home care agency based in Westchester, Illinois. The codebase is built to present the brand, explain its services, route visitors to consultation and contact actions, and support search-friendly service pages for the agency’s core offerings.
 
-This repository houses a meticulously crafted digital experience built on modern web technologies. It is designed to deliver lightning-fast performance, stringent ADA accessibility, and a visually stunning interface that builds immediate trust with prospective clients, their families, and healthcare partners.
+This repository currently implements the public-facing website, a shared site shell, a small content layer, a contact form API route, and a set of service pages with repeated but intentionally styled layouts. It also includes a few external link destinations for payment, scheduling, and hiring intake.
 
-Table of Contents
+## What This Project Includes
 
-About the Project
+The site is organized around a shared navigation/footer shell and a route-based information architecture. Most pages are static marketing pages rendered in the App Router, while the contact experience uses a lightweight JSON API route for form submission.
 
-Comprehensive Page Directory
+Implemented areas include:
 
-Core Application Routes
+- A branded homepage with hero imagery, a nurse-led comparison section, accordion content, and mission-focused CTAs.
+- An About Us page and a separate About Owner page.
+- A services index plus eight individual service pages.
+- A careers page with a client-side application experience.
+- A resources page with curated external references.
+- A contact page with a working submit endpoint, embedded map, and scheduling links.
+- Shared UI primitives for hero banners, section wrappers, headings, and scroll-triggered reveal animations.
+- Global theme tokens, typography, and brand styling.
 
-Clinical & Supportive Service Routes
+## Tech Stack
 
-Design System & UI Architecture
+- Framework: Next.js 16.2.10 with App Router
+- UI: React 19.2.4
+- Language: TypeScript 5
+- Styling: Tailwind CSS 4 via `@tailwindcss/postcss`
+- Linting: ESLint 9 with `eslint-config-next`
 
-Clinical Compliance & Copy Guidelines
+The root layout loads Google fonts with `next/font/google`, and the site metadata and manifest are configured for a branded browser/app experience.
 
-Technology Stack
+## Information Architecture
 
-Project Structure
+The application is intentionally structured around visitor intent: learn, compare, contact, apply, or browse services.
 
-Getting Started & Deployment
+### Public Routes Implemented in the App Router
 
-🏢 About the Project
+- `/` - Homepage
+- `/about-us` - Agency overview, mission, and vision
+- `/about-owner` - Founder biography page
+- `/services` - Master services index
+- `/services/personal-care`
+- `/services/companionship`
+- `/services/light-housekeeping`
+- `/services/meal-preparation`
+- `/services/medication-reminders`
+- `/services/respite-care`
+- `/services/specialized-support`
+- `/services/transportation`
+- `/careers` - Recruitment and application page
+- `/resources` - External learning resources
+- `/contact-us` - Contact and consultation page
 
-Benevolence Home Services provides critical, purpose-driven home care. The website serves as the agency's digital front door and primary lead-generation engine. The UI/UX is purposefully designed to evoke trust, clinical integrity, warmth, safety, and elite professionalism.
+### API Route
 
-Built entirely on the Next.js 14+ App Router, the architecture ensures optimal SEO, robust performance metrics (perfect Core Web Vitals), and seamless, instantaneous navigation. The interface accommodates both elderly users requiring high-contrast readability and younger family decision-makers evaluating digital trust signals.
+- `POST /api/contact` - Validates and accepts contact form submissions
 
-🗺 Comprehensive Page Directory
+### External Destinations Used by the Site
 
-The application utilizes Next.js App Router conventions. Every page is conversion-optimized, utilizing kinetic scroll animations and strategically placed consultation pipelines.
+- PayPal payment link in the navigation and services page
+- Calendly scheduling link in the contact page
+- Jotform pre-hire link in the careers navigation submenu
 
-Core Application Routes
+## Page-by-Page Documentation
 
-These top-level pages form the foundational architecture of the business, handling everything from client acquisition and education to talent recruitment.
+### Homepage `/`
 
-/ (Home/Landing): The overarching cinematic introduction to the agency. Features a dynamic hero section, high-level service summaries, core value propositions, geographic service area maps, and primary trust signals (certifications and testimonials).
+The homepage is a long-form brand and conversion page. It uses a large hero section with rotating background imagery, strong copy, and primary and secondary actions.
 
-/about-us: The agency's narrative hub. Details the founding mission, leadership philosophy, rigorous caregiver vetting/background check processes, and deep commitment to the local Illinois communities. Establishes the empathetic "why" behind the brand.
+Below the hero, the page includes:
 
-/services: The master index of all care frameworks. Acts as a highly visual, interactive dashboard utilizing premium grid layouts to route users to specific, granular care services based on their immediate needs.
+- A detailed introduction to Benevolence Home Services.
+- A comparison table contrasting nurse-led care with traditional home care.
+- A faith-and-care narrative section with expandable FAQ-style accordions.
+- Three compact CTA cards for eligibility, referrals, and scheduling an assessment.
+- A final mission statement section with a background image and centered positioning.
 
-/careers: The dedicated recruitment portal. Crucial for scaling agency operations. Highlights company culture, caregiver benefits, continuous training programs, and features seamless application pipelines for top-tier nursing and caregiving talent.
+The homepage also contains several content blocks that are deliberately designed for trust-building and route discovery rather than a simple brochure layout.
 
-/resources: The educational and SEO engine. Contains comprehensive family caregiver guides, aging-in-place checklists, blog articles, and detailed information regarding Long-Term Care (LTC) insurance and Veterans (VA) benefits.
+### About Us `/about-us`
 
-/payment: A transparent financial routing page. Outlines accepted payment methods, private pay structures, insurance partnerships, and provides secure gateways for clients to manage their invoices digitally.
+The About Us page explains the agency’s identity as a non-medical, nurse-led home care provider. It focuses on:
 
-/contact-us: The primary conversion hub. Contains secure, HIPAA-compliant lead-generation forms, direct click-to-call functionality (tel:7083040296), operating hours, emergency protocols, and regional office footprint details.
+- Who the agency is
+- The mission statement
+- The vision statement
+- Care philosophy and dignity-centered support
 
-Clinical & Supportive Service Routes (/services/*)
+It uses large imagery blocks with offset frames, side-by-side text/image composition, and scroll-triggered reveal sections.
 
-These are highly customized, SEO-targeted landing pages detailing specific care frameworks. Each page utilizes the bespoke "Premium Solid Offset Drop" UI design to systematically display care expectations, capabilities, and FAQ accordions.
+### About Owner `/about-owner`
 
-/services/personal-care: Focuses on maintaining client dignity and hygiene. Details daily assistance protocols including bathing, grooming, dressing routines, safe transfers, and mobility support.
+This page presents the founder and owner, Katrina Turman, with a portrait section and a long-form biography. It is positioned as a personal trust-building page that connects the agency to its leadership and community service story.
 
-/services/companionship: Focuses on mental stimulation and emotional well-being. Details activity-based engagement, meaningful conversation, reliable assistance for outings, and strategies to prevent senior isolation and depression.
+### Services Index `/services`
 
-/services/light-housekeeping: Covers environmental upkeep and fall prevention. Details routine tidying, laundry & linen care, clutter management, sweeping/mopping, and hazard reduction to ensure a safe home space.
+This is the main service hub. It renders a grid of service cards backed by the `homeCareServices` data array, each card linking to a deeper service page.
 
-/services/meal-preparation: Details nutritional planning, dietary restriction management (diabetic, heart-healthy, etc.), fresh meal preparation, hydration tracking, and compassionate assistance with feeding.
+The page also includes a services hero, a short support-oriented introduction, and a closing CTA section prompting users to contact the team.
 
-/services/medication-reminders: Focuses on schedule adherence and safety. Details timely verbal prompts, visual supply tracking, and refill notifications. (Strictly non-administration to adhere to licensing laws).
+### Individual Service Pages
 
-/services/respite-care: Outlines temporary relief solutions for burnt-out family caregivers. Details flexible scheduling (hourly to overnight), continuity of care, and emergency fill-in support.
+Each service page follows a shared pattern:
 
-/services/specialized-support: Covers advanced protocols requiring focused caregiver expertise. Details Alzheimer's & Dementia cognitive care, post-surgery/rehabilitation support, Parkinson's care, and palliative/end-of-life comfort support.
+- A hero banner
+- A descriptive overview
+- A scope-of-service checklist
+- A visually styled expectations or benefits grid
+- An FAQ accordion section
+- A bottom CTA panel
 
-/services/transportation-services: Details logistical mobility. Covers secure, door-to-door transit for medical appointments, grocery shopping, prescription pickups, and social outings, including wheelchair and walker assistance.
+The service pages currently implemented are:
 
-🎨 Design System & UI Architecture
+- Personal Care
+- Companionship
+- Light Housekeeping
+- Meal Preparation and Nutrition
+- Medication Reminders
+- Respite Care
+- Specialized Support
+- Transportation Services
 
-The "Premium Solid Offset Drop" Cards
+Each page uses custom iconography and alternating card backplates to maintain visual consistency while still giving each service a distinct content emphasis.
 
-To maintain absolute consistency and establish a premium brand identity, the project utilizes a bespoke, highly kinetic UI pattern across all service capabilities grids.
+### Careers `/careers`
 
-Mechanism: A crisp white foreground card (bg-white border border-slate-900/80) sits atop an absolute-positioned colored background layer. These backplates alternate mathematically between the brand's primary colors.
+The careers page is built to attract caregivers and other care professionals. It includes:
 
-Interaction: On hover (group-hover), the foreground card translates dynamically diagonally (-translate-x-3 -translate-y-3), revealing more of the solid colored backplate underneath to simulate tactile depth without relying on performance-heavy CSS blurs.
+- A hero section focused on purpose-driven work
+- A “What You Can Expect” value section
+- A recruitment note explaining the page’s intent
+- A client-side application form experience
+- A simulated submission success state
 
-Iconography: Each card utilizes custom, hand-coded SVG monoline icons specific to the medical or supportive context of that card.
+Important implementation detail: the form is currently client-side only. It does not post to a backend endpoint, upload resumes to storage, or persist applicant data. It is a front-end application flow only.
 
-Core Components
+### Resources `/resources`
 
-ScrollReveal: A custom viewport intersection wrapper (framer-motion or native CSS) that fluidly fades and translates typography and grids into the viewport as the user scrolls, creating a polished editorial feel.
+The resources page is a curated link directory to public organizations relevant to healthcare, recruitment, and home care learning. It is intentionally lightweight and functions as a trust and SEO support page rather than a blog or knowledge base.
 
-Interactive FAQ Accordions: Smooth, state-driven FAQ sections built into every service page to capture long-tail SEO queries. Features rotating caret animations and calculated max-height transitions.
+### Contact Us `/contact-us`
 
-Brand Palette (Configured in tailwind.config.ts)
+The contact page includes:
 
-Brand Blue (#0c3e72): Primary trust color. Used for alternating offset drops, primary buttons, and section accents.
+- A hero section with consultation and call actions
+- A structured contact form
+- Privacy agreement checkbox gating form submission
+- A Google Maps embed for the office location
 
-Brand Orange: Secondary energetic/warmth color. Used for alternating card backplates, checklist bullets, and UI highlights.
+The form posts JSON to `POST /api/contact`. On success, the form resets and shows a confirmation message. On failure, it surfaces the API response message or a local validation error.
 
-Brand Ink (slate-900): Deep slate/navy used for primary headings, ensuring strict ADA-compliant contrast ratios.
+## Shared UI System
 
-⚖️ Clinical Compliance & Copy Guidelines
+The repository has a small set of reusable building blocks in `src/components`:
 
-Benevolence Home Services operates as a non-medical home care agency. Strict compliance phrasing is hard-coded into the application. When modifying content, developers and copywriters MUST adhere to these rules to protect the agency's liability and state licensing:
+### `SiteChrome`
 
-Medication: Caregivers CANNOT "administer" medication, "prescribe," or "organize pillboxes." They can only provide "reminders," "prompts," and "supply tracking."
+Wraps the application with the site navigation, main content slot, and footer.
 
-Physical Therapy: Caregivers CANNOT "perform physical therapy." They can only "encourage prescribed exercises" or "provide mobility support."
+### `SiteNav`
 
-Medical Care: Do not use terms like "nursing," "diagnose," "treat," or "medical advice." Use terms like "support," "assist," "monitor," and "care for."
+Provides the sticky top navigation, mobile menu toggle, active route highlighting, and dropdown submenus.
 
-🛠 Technology Stack
+### `SiteFooter`
 
-Framework: Next.js 14+ (App Router)
+Displays contact information, quick links, social links, and a branded logo panel.
 
-Library: React 18+
+### `HeroSection`
 
-Language: TypeScript 5+
+The hero component supports:
 
-Styling: Tailwind CSS 3.4+
+- Eyebrow text
+- Title and description
+- Primary and optional secondary actions
+- Optional facts chips
+- One or more background images
 
-Components: Custom modular shell (HeroSection, PageShell, SectionHeading)
+If multiple images are supplied, the component crossfades between them on a timed interval.
 
-📂 Project Structure
+### `PageShell`
 
+Provides consistent horizontal constraints and page padding.
+
+### `SectionHeading`
+
+Standardizes section labels, titles, and descriptions across the site.
+
+### `ScrollReveal`
+
+Uses an `IntersectionObserver` to animate sections into view with opacity, translate, skew, and scale transitions.
+
+### Additional Shell Helpers
+
+`site-shell.tsx` also exports `CardGrid`, `InfoCard`, `BulletPanel`, and `SectionCard`. These are reusable content primitives for layout consistency.
+
+## Content and Data Layer
+
+The shared content file at `src/data/site-content.ts` centralizes the site’s common data:
+
+- Brand identity values
+- Primary navigation items and submenu entries
+- Contact details
+- Social links
+- Homepage highlight copy
+- Comparison bullets for nurse-led vs traditional care
+- Service summary cards
+- Care pillar copy
+- Careers benefits
+- Resource links
+- Privacy policy-related highlights
+
+This data-driven structure reduces copy duplication and keeps navigation and contact details aligned across header, footer, and page sections.
+
+## Forms and API Behavior
+
+### Contact Form
+
+The contact form in `src/components/contact-form.tsx` collects:
+
+- Full name
+- Address
+- Email
+- Phone
+- Message
+- Privacy consent
+
+Submission sends a JSON payload to `/api/contact`. The API currently performs simple required-field validation and returns a success message. It does not yet integrate with email, CRM, or a database.
+
+### Careers Application Form
+
+The careers page includes a polished application flow with:
+
+- Name
+- Position selection
+- Email
+- Phone
+- Resume upload input
+- Cover note
+- Privacy acknowledgement
+
+At present, the submission handler simulates success after a short delay. It is a front-end prototype for the applicant experience rather than a full intake system.
+
+## Design System
+
+The site uses a clear blue/orange/white brand palette defined in `src/app/globals.css`.
+
+Core visual traits include:
+
+- Blue as the primary trust color
+- Orange as the accent and warmth color
+- Deep ink/navy for headings and dark UI sections
+- White and soft neutral surfaces for readability
+- Offset card shadows and framed images for depth
+- Large rounded corners on content cards and media panels
+
+The CSS file also defines:
+
+- Theme variables for color tokens
+- Brand shadow utility
+- Decorative radial background shapes
+- Smooth scrolling
+- Selection styling
+
+The overall visual language is intentionally premium and editorial rather than generic corporate boilerplate.
+
+## Route and Navigation Notes
+
+The navigation is mostly data-driven through `src/data/site-content.ts`, but there are a few implementation caveats worth knowing:
+
+- The Payment item in the navigation points to an external PayPal payment page rather than an internal `/payment` route.
+- The Careers submenu contains an external Jotform link for pre-hire intake.
+- The Contact Us submenu includes a Blog link to `/blog`, but there is no blog route implemented in the repository.
+- The footer and contact form reference privacy policy links, including `/privacy-policy` and `/privacy-policy.pdf`; those assets or routes are not present in the current workspace.
+
+These are not build blockers, but they are important for keeping documentation and implementation aligned.
+
+## Metadata and PWA Support
+
+The project includes:
+
+- Root metadata in `src/app/layout.tsx`
+- A web app manifest in `src/app/manifest.ts`
+- Favicon/icon references to the footer logo asset
+
+This gives the site a more complete browser and mobile app presentation.
+
+## Project Structure
+
+```text
 src/
-├── app/
-│   ├── layout.tsx                     # Root layout, global fonts, and metadata
-│   ├── page.tsx                       # Home page
-│   ├── about-us/page.tsx              # Agency mission and history
-│   ├── services/page.tsx              # Master services index
-│   ├── careers/page.tsx               # Recruitment portal
-│   ├── resources/page.tsx             # Educational hub & guides
-│   ├── payment/page.tsx               # Billing & insurance info
-│   ├── contact-us/page.tsx            # Lead generation routing
-│   │
-│   └── services/                      # Granular service routes
-│       ├── companionship/page.tsx
-│       ├── light-housekeeping/page.tsx
-│       ├── meal-preparation/page.tsx
-│       ├── medication-reminders/page.tsx
-│       ├── personal-care/page.tsx
-│       ├── respite-care/page.tsx
-│       ├── specialized-support/page.tsx
-│       └── transportation-services/page.tsx
-│
-├── components/
-│   ├── scroll-reveal.tsx              # Viewport animation wrapper
-│   ├── site-shell.tsx                 # Layout macros (Hero, PageShell)
-│   └── navigation/                    # Header, Footer, Mobile Menus
-│
-├── public/                            # Static assets and WebP optimized images
-└── styles/
-    └── globals.css                    # Tailwind directives and base layers
+    app/
+        layout.tsx
+        manifest.ts
+        globals.css
+        page.tsx
+        about-us/page.tsx
+        about-owner/page.tsx
+        careers/page.tsx
+        contact-us/page.tsx
+        resources/page.tsx
+        services/page.tsx
+        services/personal-care/page.tsx
+        services/companionship/page.tsx
+        services/light-housekeeping/page.tsx
+        services/meal-preparation/page.tsx
+        services/medication-reminders/page.tsx
+        services/respite-care/page.tsx
+        services/specialized-support/page.tsx
+        services/transportation/page.tsx
+        api/contact/route.ts
+    components/
+        contact-form.tsx
+        scroll-reveal.tsx
+        site-nav.tsx
+        site-shell.tsx
+    data/
+        site-content.ts
+public/
+    ...static images, logos, and downloadable assets
+```
 
+## Local Development
 
-🚀 Getting Started & Deployment
+Install dependencies and run the app locally:
 
-Local Development
-
-Clone the repository & install dependencies:
-
-git clone https://github.com/your-org/benevolence-home-services.git
-cd benevolence-home-services
+```bash
 npm install
-
-
-Run the development server:
-
 npm run dev
+```
 
+The development server runs on `http://localhost:3000` by default.
 
-Navigate to http://localhost:3000 in your browser.
+## Validation Commands
 
-Deployment (Vercel)
+Use the following commands to validate the project:
 
-This application is architected for zero-config, edge-network deployment on Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-Push your code to your connected GitHub repository.
+`npm run build` is the main production verification command for this workspace.
 
-Import the project into the Vercel dashboard.
+## Deployment
 
-Vercel will automatically detect the Next.js App Router framework.
+The site is well suited to Vercel deployment because it is a standard Next.js App Router project.
 
-Configure required Environment Variables (e.g., SMTP configurations for the /contact-us and /careers forms).
+Typical deployment steps:
 
-Deploy.
+1. Push the repository to your Git provider.
+2. Import the project into Vercel.
+3. Confirm build and environment settings.
+4. Deploy.
 
-Architected and developed to provide a standard of digital excellence that perfectly matches Benevolence Home Services' standard of clinical care.
+If contact, scheduling, or hiring flows are extended beyond the current front-end implementation, add the necessary environment variables and backend integrations before production use.
+
+## Current Implementation Summary
+
+This project is already a fully formed marketing website with a shared shell, a route-driven content architecture, and multiple service-specific landing pages. The strongest implementation patterns are the data-driven navigation/content layer, the reusable hero and section primitives, the scroll reveal animation, and the consistent visual system that carries across the entire site.
+
+The main gaps are not structural but operational: the contact route is minimal by design, the careers submission is simulated, and a few navigation/footer links point to routes or assets that are not yet present. Those are straightforward follow-up items if you want the documentation to match a more complete production rollout.
