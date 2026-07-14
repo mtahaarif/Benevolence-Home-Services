@@ -230,7 +230,7 @@ export default function RespiteCarePage() {
                   alt="Professional respite caregiver staying with an elderly person at home" 
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl" 
                   fill 
-                  src="/thumb-22914111356U07ma39.webp"
+                  src="/nh-2182343844Us238i0.webp"
                 />
               </div>
             </ScrollReveal>

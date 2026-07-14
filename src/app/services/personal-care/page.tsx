@@ -113,7 +113,7 @@ export default function PersonalCarePage() {
               <div className="relative w-full aspect-square max-w-[460px] mx-auto lg:ml-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/5 translate-x-3 translate-y-3 -z-10" />
                 <Image
-                  src="/thumb-23706104744U61tse5.webp" 
+                  src="/nh-2411535922U62t38i.webp" 
                   alt="Empathetic non-medical home care assistance in Westchester"
                   fill
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl"

@@ -180,7 +180,7 @@ export default function HomePage() {
         imageAlt="Compassionate home care support in Westchester"
       />
 
-      {/* Section 1: Mobile-Stacking Highlights Grid wrapper */}
+      {/* Section 1: Mobile-Stacking Highlights Grid wrapper 
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/40">
           <PageShell>
@@ -231,7 +231,7 @@ export default function HomePage() {
           </PageShell>
         </section>
       </ScrollReveal>
-
+*/}
       {/* Section 2: Introducing Benevolence with Soft Light Blue Tint Background wrapper */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-y border-brand-blue/10">
