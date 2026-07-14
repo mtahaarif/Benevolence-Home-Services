@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
+import ScrollReveal from "@/components/scroll-reveal";
 import { homeCareServices } from "@/data/site-content";
 
 // High-fidelity monoline stroke icon mappings
@@ -73,6 +74,7 @@ function getSlug(title: string): string {
 export default function ServicesPage() {
   return (
     <>
+      {/* Hero Section */}
       <HeroSection
         eyebrow="Services"
         title="We offer the following services"
@@ -83,83 +85,88 @@ export default function ServicesPage() {
         imageAlt="Two elders and a caregiver smiling"
       />
 
+      {/* Main Grid Viewport Section */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <PageShell>
-          <SectionHeading
-            eyebrow="Home Maker In DuPage County, Illinois"
-            title="Support built around daily living, dignity, and independence"
-            description="Every service is intentionally chosen to help clients stay safe, comfortable, and well supported at home."
-          />
+          <ScrollReveal>
+            <SectionHeading
+              eyebrow="Home Maker In DuPage County, Illinois"
+              title="Support built around daily living, dignity, and independence"
+              description="Every service is intentionally chosen to help clients stay safe, comfortable, and well supported at home."
+            />
+          </ScrollReveal>
           
-          {/* 
-            STACKING FIX: Handled spacing on mobile to prevent natural gaps from breaking sticky cards, 
-            then shifts cleanly into standard grid layouts on larger screen widths.
-          */}
           <div className="mt-14 space-y-12 sm:space-y-0 sm:grid sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 relative">
             {homeCareServices.map((service, index) => {
               const itemUrl = `/services/${getSlug(service.title)}`;
               
               return (
-                <Link 
-                  key={service.title} 
-                  href={itemUrl}
-                  // Calculates individual sticky landing layout constraints dynamically for CSS execution
+                /* FIXED: Sticky wrapper is separated from the CSS Transform animation to prevent stacking context breaking */
+                <div 
+                  key={service.title}
+                  className="sticky top-[var(--stack-top)] sm:relative sm:top-auto h-[360px]"
                   style={{ "--stack-top": `calc(6.5rem + ${index * 16}px)` } as React.CSSProperties}
-                  className="group sticky top-[var(--stack-top)] sm:relative sm:top-auto flex flex-col items-center justify-center text-center overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white p-8 h-[360px] shadow-[0_12px_30px_rgba(15,47,89,0.05)] transition-all duration-500 ease-in-out hover:-translate-y-1.5 hover:border-brand-blue/30 hover:shadow-[0_20px_40px_rgba(17,104,179,0.08)]"
                 >
-                  {/* Container wrapper handles vertical translation sync smoothly */}
-                  <div className="flex flex-col items-center transition-transform duration-500 ease-in-out transform group-hover:-translate-y-6">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-blue/5 transition-colors duration-500 group-hover:bg-brand-blue/10">
-                      <ServiceIcon title={service.title} />
-                    </div>
+                  <ScrollReveal className="h-full">
+                    <Link 
+                      href={itemUrl}
+                      className="group flex flex-col items-center justify-center text-center overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white p-8 h-full shadow-[0_12px_30px_rgba(15,47,89,0.05)] transition-all duration-500 ease-in-out hover:-translate-y-1.5 hover:border-brand-blue/30 hover:shadow-[0_20px_40px_rgba(17,104,179,0.08)]"
+                    >
+                      <div className="flex flex-col items-center transition-transform duration-500 ease-in-out transform group-hover:-translate-y-6">
+                        <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-blue/5 transition-colors duration-500 group-hover:bg-brand-blue/10">
+                          <ServiceIcon title={service.title} />
+                        </div>
 
-                    <h3 className="mt-6 font-display text-lg font-semibold text-brand-ink max-w-[180px] leading-snug">
-                      {service.title}
-                    </h3>
-                  </div>
+                        <h3 className="mt-6 font-display text-lg font-semibold text-brand-ink max-w-[180px] leading-snug">
+                          {service.title}
+                        </h3>
+                      </div>
 
-                  {/* Description panels display dynamically beneath the title component */}
-                  <div className="absolute bottom-8 left-6 right-6 opacity-0 max-h-0 transition-all duration-500 ease-in-out pointer-events-none group-hover:pointer-events-auto group-hover:opacity-100 group-hover:max-h-[140px]">
-                    <p className="text-xs sm:text-[13px] leading-relaxed text-slate-600 line-clamp-4">
-                      {service.body}
-                    </p>
-                    <span className="inline-flex items-center gap-1 mt-3 text-[11px] font-bold uppercase tracking-widest text-brand-blue">
-                      Learn More 
-                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </span>
-                  </div>
-
-                </Link>
+                      <div className="absolute bottom-8 left-6 right-6 opacity-0 max-h-0 transition-all duration-500 ease-in-out pointer-events-none group-hover:pointer-events-auto group-hover:opacity-100 group-hover:max-h-[140px]">
+                        <p className="text-xs sm:text-[13px] leading-relaxed text-slate-600 line-clamp-4">
+                          {service.body}
+                        </p>
+                        <span className="inline-flex items-center gap-1 mt-3 text-[11px] font-bold uppercase tracking-widest text-brand-blue">
+                          Learn More 
+                          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </span>
+                      </div>
+                    </Link>
+                  </ScrollReveal>
+                </div>
               );
             })}
           </div>
         </PageShell>
       </section>
 
-      <section className="px-4 py-12 sm:px-6 lg:px-8 lg:py-20 bg-background/50 border-t border-slate-200/60">
-        <PageShell>
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionHeading
-              centered
-              eyebrow="Purpose-Driven Home Care Services"
-              title="Are you looking for reliable home care services?"
-              description="Contact us now to see how we can help you navigate personalized care options cleanly."
-            />
-            
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact-us"
-                className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md transition hover:bg-[#0c5a99]"
-              >
-                Get Started Today
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-brand-blue text-[10px]">
-                  →
-                </span>
-              </Link>
+      {/* Action / Outreach Link Panel Section */}
+      <ScrollReveal>
+        <section className="px-4 py-12 sm:px-6 lg:px-8 lg:py-20 bg-brand-blue/10 border-t border-brand-blue/10 rounded-t-[3rem]">
+          <PageShell>
+            <div className="mx-auto max-w-3xl text-center space-y-6">
+              <SectionHeading
+                centered
+                eyebrow="Purpose-Driven Home Care Services"
+                title="Are you looking for reliable home care services?"
+                description="Contact us now to see how we can help you navigate personalized care options cleanly."
+              />
+              
+              <div className="pt-4 flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/contact-us"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white !text-white shadow-md transition duration-300 hover:bg-brand-blue active:scale-98"
+                >
+                  Get Started Today
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold">
+                    →
+                  </span>
+                </Link>
+              </div>
             </div>
-          </div>
-        </PageShell>
-      </section>
+          </PageShell>
+        </section>
+      </ScrollReveal>
     </>
   );
 }

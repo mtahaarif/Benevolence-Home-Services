@@ -242,14 +242,18 @@ export default function HomePage() {
                   Introducing <br /> Benevolence Home Services
                 </span>
                 <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-blue tracking-tight leading-tight">
-                  Health Care Services in <br className="hidden sm:inline" />Will County, Illinois
+                  Chicagoland’s trusted provider for in-home senior care
                 </h2>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                  At Benevolence Home Services, we are dedicated to providing compassionate and high-quality home care services in Westchester, Illinois. We understand that everyone deserves to live with dignity and independence in the comfort of their own home.
+                  At Benevolence Home Services, we provide compassionate, reliable, and personalized home care services throughout the Chicagoland area. Our mission is to help seniors and individuals maintain their independence, dignity, and quality of life while remaining safe and comfortable in their own homes.
                 </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                  Our team of experienced and compassionate caregivers is committed to providing personalized support that meets your unique needs. Whether you require assistance with daily living activities, companionship, personal care, or nurse-led oversight and care coordination, we are here to help.
+                  Our experienced caregivers offer a wide range of in-home care services, including personal care, companionship, assistance with daily living activities, respite care, and nurse-led oversight and care coordination. Every care plan is tailored to the unique needs, preferences, and goals of each client and their family.
                 </p>
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                  Whether you need short-term assistance or ongoing senior care support, Benevolence Home Services is committed to delivering exceptional home care services you can trust. We proudly serve families across Will County, Cook County, DuPage County, and Kane County, providing dependable care that brings peace of mind to clients and their loved ones.
+                </p>
+
                 <div className="pt-4">
                   <Link 
                     href="/about-us"

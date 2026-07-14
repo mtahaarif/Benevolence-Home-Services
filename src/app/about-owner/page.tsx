@@ -41,13 +41,10 @@ export default function AboutOwnerPage() {
                 <h2 className="font-display text-4xl font-semibold text-brand-ink sm:text-5xl tracking-tight">
                   Katrina Turman
                 </h2>
-                <div className="inline-flex items-center gap-2 rounded-full bg-brand-blue/5 px-4 py-1.5 mx-auto">
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand-orange animate-pulse" />
                   <span className="text-[10px] font-bold uppercase tracking-widest text-brand-blue">
                     Founder / Owner
                   </span>
                 </div>
-              </div>
 
               {/* Written Biography Text Blocks */}
               <div className="space-y-6 text-sm sm:text-base leading-relaxed text-slate-600 text-left max-w-2xl mx-auto">
