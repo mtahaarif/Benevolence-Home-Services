@@ -269,7 +269,7 @@ Because the application utilizes a Local Data Engine and a Smart Content Parser,
       "1. This will automatically render as a floating feature card."
     ]
   }
-
+```
 11.2. How to add a new Service
 Similarly, do not create a new routing folder inside app/services/. The dynamic [slug]/page.tsx template handles all rendering.
 
