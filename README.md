@@ -270,7 +270,7 @@ Because the application utilizes a Local Data Engine and a Smart Content Parser,
     ]
   }
 ```
-11.2. How to add a new Service
+### 11.2. How to add a new Service
 Similarly, do not create a new routing folder inside app/services/. The dynamic [slug]/page.tsx template handles all rendering.
 
 Open src/data/services.ts.
@@ -285,7 +285,7 @@ Inject the localized SEO metadata.
 
 Insert the new service card into the master /services index grid.
 
-11.3. How to integrate a CRM/Email provider
+### 11.3. How to integrate a CRM/Email provider
 The contact form currently validates data and returns a success response to the client. To plug in a backend provider (like SendGrid, HubSpot, Salesforce, or Firebase):
 
 Open src/app/api/contact/route.ts.
@@ -312,7 +312,7 @@ try {
 
 // 2. EXISTING SUCCESS RESPONSE
 return NextResponse.json({ success: true });
-12. Implementation Log (Changelog)
+## 12. Implementation Log (Changelog)
 This section acts as an ongoing chronological changelog. Developers should append new system-wide changes, version bumps, or architectural shifts to the bottom of this list.
 
 [v1.0.0] Initial Migration: Core Next.js 14+ setup initiated. Shared SiteChrome, Nav, and Footer components implemented with Tailwind configuration.
