@@ -3,6 +3,13 @@ import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { brand, contactDetails, navItems, socialLinks } from "@/data/site-content";
 import { useState, useEffect } from "react";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+  FaTiktok,
+} from "react-icons/fa";
 
 type ChromeProps = {
   children: React.ReactNode;
@@ -346,21 +353,31 @@ function SiteFooter() {
               <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">
                 Like, Share, or Comment:
               </span>
-              <div className="flex gap-2.5">
-                {socialLinks.map((item) => (
+            <div className="flex gap-2.5">
+              {socialLinks.map((item) => {
+                const icon = {
+                  LinkedIn: <FaLinkedinIn size={15} />,
+                  Facebook: <FaFacebookF size={15} />,
+                  Instagram: <FaInstagram size={15} />,
+                  YouTube: <FaYoutube size={15} />,
+                  TikTok: <FaTiktok size={15} />,
+                }[item.label];
+
+                return (
                   <Link
                     key={item.href}
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-7 w-7 items-center justify-center rounded-full bg-[color:var(--brand-ink)] border border-white/30 text-white transition hover:bg-white hover:text-[color:var(--brand-ink)]"
                     aria-label={item.label}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/30 text-white transition-all duration-300 hover:bg-white hover:text-[color:var(--brand-ink)] hover:scale-110"
                   >
-                    {/* Using the first letter of the social network as a clean icon fallback */}
-                    <span className="text-[11px] font-bold">{item.label[0]}</span>
+                    {icon}
                   </Link>
-                ))}
-              </div>
+                );
+              })}
+            </div>
+              
             </div>
 
           </div>

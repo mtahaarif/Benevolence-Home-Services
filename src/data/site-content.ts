@@ -78,9 +78,11 @@ export const contactDetails = {
 } as const;
 
 export const socialLinks = [
-  { label: "Facebook", href: "https://www.facebook.com/" },
-  { label: "X", href: "https://www.twitter.com/" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/benevolence-home-services" },
+  { label: "Facebook", href: "https://www.facebook.com/people/Benevolence-Care-Page/61567035436101/" },
+  { label: "Instagram", href: "https://www.instagram.com/benevolencehsvc/" },
+  { label: "YouTube", href: "https://www.youtube.com/@BenevolenceHomeServicesStaff" },
+  { label: "TikTok", href: "https://www.tiktok.com/@benevolencehomeservices" },
 ] as const;
 
 export const homeHighlights = [
