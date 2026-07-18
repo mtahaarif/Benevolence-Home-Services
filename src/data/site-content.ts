@@ -1,5 +1,5 @@
 export const brand = {
-  name: "Benevolence Home Services",
+  name: "Benevolence Home Services and Staffing Agency",
   shortName: "Benevolence",
   tagline: "Homecare Solution Enterprises",
 };
