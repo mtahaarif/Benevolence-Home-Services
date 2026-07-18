@@ -137,9 +137,6 @@ export default function AboutUsPage() {
             
             <div className="w-full lg:w-5/12 lg:sticky lg:top-[120px] self-start space-y-6 pt-4 relative z-10">
               <ScrollReveal>
-                <span className="inline-block py-1.5 px-4 rounded-full bg-[#0c3e72]/5 border border-[#0c3e72]/10 text-xs font-extrabold uppercase tracking-widest text-[#0c3e72] shadow-sm">
-                  Our Core Framework
-                </span>
                 <h2 className="text-4xl md:text-5xl font-display font-bold text-brand-ink leading-tight tracking-tight mt-6">
                   The Principles That Guide Our Care
                 </h2>
@@ -194,9 +191,6 @@ export default function AboutUsPage() {
           <div className="mb-24 lg:mb-36">
             <ScrollReveal>
               <div className="max-w-2xl mb-12 lg:mb-16">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#ea6725] bg-orange-50 px-4 py-2 rounded-full inline-block mb-4">
-                  Eligibility Landscape
-                </span>
                 <h2 className="font-display text-3xl sm:text-5xl font-bold text-brand-ink tracking-tight">
                   Supporting Seniors, Adults, and Family Caregivers
                 </h2>
@@ -239,9 +233,6 @@ export default function AboutUsPage() {
           <div className="border-t border-slate-100 pt-24 lg:pt-32">
             <ScrollReveal>
               <div className="max-w-2xl mb-16 lg:mb-24">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#0c3e72] bg-blue-50 px-4 py-2 rounded-full inline-block mb-4">
-                  Operational Methodology
-                </span>
                 <h2 className="font-display text-3xl sm:text-5xl font-bold text-brand-ink tracking-tight">
                   Our Approach to Care
                 </h2>

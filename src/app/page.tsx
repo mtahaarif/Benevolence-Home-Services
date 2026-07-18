@@ -489,6 +489,30 @@ export default function HomePage() {
           </PageShell>
         </section>
       </ScrollReveal>
+      {/* FIXED FOOTER CALL TO ACTION IN THEME WITH HOMEPAGE */}
+      <ScrollReveal>
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-[#0a2540] text-center relative z-50 rounded-t-[3rem] text-white">
+          <PageShell>
+            <div className="mx-auto max-w-3xl space-y-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-white">Let Us Help You Build the Right Care Plan</h2>
+              <p className="text-blue-100/80 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+                Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, BENEVOLENCE HOME SERVICES is ready to help. Contact us to discuss non-medical home care in Westchester or throughout Cook, DuPage, Kane, Lake, and Will Counties.
+              </p>
+              
+              <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
+                <Link href="/contact-us" aria-label="Navigate to our intake contact form to request consultation details" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#0a2540] !text-[#0a2540] shadow-md hover:bg-blue-50 transition-all w-full sm:w-auto">
+                  Request a Care Consultation
+                </Link>
+                <a href="tel:7083040296" aria-label="Call our primary phone line at 708-304-0296" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">
+                  Call 708-304-0296
+                </a>
+              </div>
+            </div>
+          </PageShell>
+        </section>
+      </ScrollReveal>
+
+
     </>
   );
 }

@@ -246,25 +246,23 @@ export default function ServicesPage() {
         </PageShell>
       </section>
 
-      {/* Conversion Shell with Enforced White Text Links */}
+      {/* FIXED FOOTER CALL TO ACTION IN THEME WITH HOMEPAGE */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-[#0c3e72] text-center relative overflow-hidden rounded-t-[3rem]">
-          <div className="absolute top-[-50%] left-[-10%] w-[400px] h-[400px] bg-blue-400/20 rounded-full blur-[80px] pointer-events-none" />
-          <div className="absolute bottom-[-50%] right-[-10%] w-[400px] h-[400px] bg-cyan-400/10 rounded-full blur-[80px] pointer-events-none" />
-
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-[#0a2540] text-center relative z-50 rounded-t-[3rem] text-white">
           <PageShell>
-            <div className="relative z-10 mx-auto max-w-2xl space-y-8">
-              <h2 className="text-4xl font-display font-bold text-white">Begin the Conversation.</h2>
-              <p className="text-blue-100/80 font-medium text-base max-w-xl mx-auto leading-relaxed">
-                Contact us to schedule a complimentary in-home assessment and discover how our dedicated care professionals can gracefully elevate your family's quality of life.
+            <div className="mx-auto max-w-3xl space-y-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-white">Let Us Help You Build the Right Care Plan</h2>
+              <p className="text-blue-100/80 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+                Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, BENEVOLENCE HOME SERVICES is ready to help. Contact us to discuss non-medical home care in Westchester or throughout Cook, DuPage, Kane, Lake, and Will Counties.
               </p>
-              <div className="pt-4">
-                <Link
-                  href="/contact-us"
-                  className="inline-flex items-center gap-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] !text-white shadow-xl transition-all duration-500 hover:bg-brand-blue hover:border-white/50 sm:hover:-translate-y-1"
-                >
-                  Request Assessment
+              
+              <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
+                <Link href="/contact-us" aria-label="Navigate to our intake contact form to request consultation details" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#0a2540] !text-[#0a2540] shadow-md hover:bg-blue-50 transition-all w-full sm:w-auto">
+                  Request a Care Consultation
                 </Link>
+                <a href="tel:7083040296" aria-label="Call our primary phone line at 708-304-0296" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">
+                  Call 708-304-0296
+                </a>
               </div>
             </div>
           </PageShell>

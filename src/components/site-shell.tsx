@@ -340,7 +340,7 @@ function SiteFooter() {
             
             {/* Copyright & Legal Text */}
             <div className="text-[11px] leading-relaxed tracking-wider text-white/70">
-              <p>© Copyright 2026 | Privacy Notice | Designed by Proweaver</p>
+              <p>© Copyright 2026 | Privacy Notice </p>
               <p className="mt-0.5">
                 <Link href="/privacy-policy" className="hover:text-white transition">
                   Do Not Sell/Share My Personal Information
