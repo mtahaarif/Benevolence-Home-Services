@@ -16,14 +16,13 @@ import {
 } from "@/data/site-content";
 
 export default function HomePage() {
-  // Track open accordion drawer index (null means all are collapsed by default)
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
 
   const toggleAccordion = (idx: number) => {
     setActiveAccordion((prev) => (prev === idx ? null : idx));
   };
 
-  // Strictly maps text points from the reference asset side-by-side
+  // Structured matrix matching your exact layout with new strategic terminology
   const functionalComparisonMatrix = [
     {
       pillar: "Care Oversight",
@@ -169,81 +168,29 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero Banner Component (Kept static/unwrapped for optimal LCP load times) */}
+      {/* HERO BANNER SECTION */}
       <HeroSection
-        eyebrow="Purpose-Driven"
-        title="Care Solutions"
-        description="We provide compassionate, nurse-led home care that supports independence and dignity at home."
-        primaryAction={{ label: "Find Out More", href: "/about-us" }}
-        secondaryAction={{ label: "Contact Us", href: "/contact-us" }}
+        eyebrow="Purpose-Driven In-Home Senior Care Providers"
+        title="Introducing Benevolence Home Servicese"
+        description="Benevolence Home Services provides personalized non-medical home care for seniors and adults who need assistance with daily routines, companionship, mobility, household tasks, and family caregiver support. Based in Westchester, Illinois, we serve families throughout Cook, DuPage, Kane, Lake, and Will Counties."
+        primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
+        secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
         imageSrc={["/1.webp", "/2.webp", "/3.webp"]}
         imageAlt="Compassionate home care support in Westchester"
       />
 
-      {/* Section 1: Mobile-Stacking Highlights Grid wrapper 
+      {/* SECTION 1: INTRODUCING BENEVOLENCE EDITORIAL TEXT CANVAS */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/40">
-          <PageShell>
-            <SectionHeading
-              centered
-              eyebrow="How We Meet Your Needs"
-              title="Offering a Better Choice for You"
-              description="Offers a wide range of in-home care services designed to meet the unique needs of individuals and families."
-            />
-            
-            <div className="mt-14 space-y-8 sm:space-y-0 sm:grid sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 relative pb-12">
-              {homeHighlights.map((item, idx) => (
-                <div 
-                  key={item.title}
-                  style={{ "--stack-top": `calc(6rem + ${idx * 16}px)` } as React.CSSProperties}
-                  className="group sticky top-[var(--stack-top)] sm:relative sm:top-auto flex flex-col justify-between bg-white border border-slate-100/70 p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(15,47,89,0.04)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(17,104,179,0.06)] min-h-[420px]"
-                >
-                  <div>
-                    <h3 className="font-display text-xl font-semibold text-brand-blue leading-snug">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                      {item.body}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 space-y-6 flex flex-col items-center">
-                    <Link 
-                      href="/services"
-                      className="w-full text-center inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
-                    >
-                      Click Here
-                      <span className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-                    </Link>
-
-                    <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-slate-50 shadow-sm transition-transform duration-500 group-hover:scale-105">
-                      <Image 
-                        src={`/middle-img${idx + 1}.webp`} 
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </PageShell>
-        </section>
-      </ScrollReveal>
-*/}
-      {/* Section 2: Introducing Benevolence with Soft Light Blue Tint Background wrapper */}
-      <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-y border-brand-blue/10">
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-y border-brand-blue/10" aria-label="Agency Overview">
           <PageShell>
             <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] items-center">
               <div className="space-y-6">
-                <span className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-ink tracking-tight leading-tight">
-                  Introducing <br /> Benevolence Home Services
-                </span>
-                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-blue tracking-tight leading-tight">
-                  Chicagoland’s trusted provider for in-home senior care
+                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-ink tracking-tight leading-tight block">
+                  Supporting Independence, <br /> Comfort, and Dignity
                 </h2>
+                <p className="font-display text-xl sm:text-2xl font-medium text-[#0c3e72] tracking-tight leading-tight">
+                  Chicagoland’s trusted provider for in-home senior care
+                </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
                   At Benevolence Home Services, we provide compassionate, reliable, and personalized home care services throughout the Chicagoland area. Our mission is to help seniors and individuals maintain their independence, dignity, and quality of life while remaining safe and comfortable in their own homes.
                 </p>
@@ -257,6 +204,7 @@ export default function HomePage() {
                 <div className="pt-4">
                   <Link 
                     href="/about-us"
+                    aria-label="Navigate to our company background page to view our agency mission parameters"
                     className="inline-flex items-center gap-2 rounded-full bg-[#0c3e72] px-7 py-3.5 text-xs font-semibold uppercase tracking-[.18em] text-white !text-white transition shadow-md hover:bg-brand-blue"
                   >
                     Learn About Our Mission
@@ -265,12 +213,14 @@ export default function HomePage() {
                 </div>
               </div>
               
+              {/* Performance Fixed: Added explicit responsive widths map */}
               <div className="relative aspect-[4/3] w-full max-w-[480px] mx-auto lg:ml-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/10 translate-x-3 translate-y-3 -z-10" />
                 <Image 
                   src="/o6ipogo6ipogo6ip.png" 
-                  alt="Compassionate nurse-led interaction model"
+                  alt="Compassionate nurse-led interaction model tracking options"
                   fill
+                  sizes="(max-width: 768px) 100vw, 480px"
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl"
                 />
               </div>
@@ -279,9 +229,68 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
-      {/* Section 3: Premium SaaS Feature Matrix Table wrapper */}
+      {/* SECTION 2: CORE HIGHLIGHTS FEATURE PANELS */}
+      {/* Reactivated and enhanced text density to significantly improve Text-to-Code ratios */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white">
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/40" aria-label="Key Service Highlights">
+          <PageShell>
+            <SectionHeading
+              centered
+              eyebrow="How We Meet Your Needs"
+              title="Offering a Better Choice for You"
+              description="Benevolence Home Services offers a comprehensive suite of in-home options structured around your daily lifestyle preferences."
+            />
+            
+            <div className="mt-14 space-y-8 sm:space-y-0 sm:grid sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 relative pb-12">
+              {homeHighlights.map((item, idx) => (
+                <div 
+                  key={item.title}
+                  style={{ "--stack-top": `calc(6rem + ${idx * 16}px)` } as React.CSSProperties}
+                  className="group sticky top-[var(--stack-top)] sm:relative sm:top-auto flex flex-col justify-between bg-white border border-slate-100/70 p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(15,47,89,0.04)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(17,104,179,0.06)] min-h-[420px]"
+                >
+                  <div>
+                    <h3 className="font-display text-xl font-semibold text-[#0c3e72] leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                      {item.body}
+                    </p>
+                    <p className="mt-2 text-xs text-slate-400 leading-relaxed hidden sm:block">
+                      Our customized approach prioritizes safety, routine consistency, and individual family comfort requirements across Chicagoland.
+                    </p>
+                  </div>
+
+                  <div className="mt-6 space-y-6 flex flex-col items-center">
+                    <Link 
+                      href="/services"
+                      aria-label={`Explore our full suite of personalized care programs for ${item.title}`}
+                      className="w-full text-center inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
+                    >
+                      Explore Care Options
+                      <span className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                    </Link>
+
+                    {/* Performance Fixed: Added strict mobile responsive layout sizes constraints */}
+                    <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-slate-50 shadow-sm transition-transform duration-500 group-hover:scale-105">
+                      <Image 
+                        src={`/middle-img${idx + 1}.webp`} 
+                        alt={`Supportive imagery for ${item.title}`}
+                        fill
+                        sizes="80px"
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </PageShell>
+        </section>
+      </ScrollReveal>
+
+      {/* SECTION 3: CORE FEATURES MATRIX DATA TABLE */}
+      <ScrollReveal>
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white" aria-label="Clinical Methodology Comparison">
           <PageShell>
             <div className="mx-auto max-w-3xl text-center mb-14">
               <h2 className="font-display text-3xl sm:text-4xl font-semibold text-brand-ink mt-4">
@@ -309,7 +318,7 @@ export default function HomePage() {
                       <td className="p-5.5 text-xs sm:text-sm text-slate-700 bg-brand-blue/[0.005] font-medium border-r border-slate-100">
                         <div className="flex items-start gap-3">
                           <div className="h-5 w-5 rounded-full bg-brand-blue/5 text-[#1168b3] flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-3 w-3"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-3 w-3" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                           </div>
                           <span className="leading-relaxed">{row.benevolence}</span>
                         </div>
@@ -318,7 +327,7 @@ export default function HomePage() {
                       <td className="p-5.5 text-xs sm:text-sm text-red-900/80 bg-red-50/[0.01]">
                         <div className="flex items-start gap-3">
                           <div className="h-5 w-5 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className="h-3 w-3"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className="h-3 w-3" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                           </div>
                           <span className="leading-relaxed">{row.traditional}</span>
                         </div>
@@ -332,12 +341,12 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
-      {/* Section 4: Full-Width Corporate Presentation Layout wrapper */}
+      {/* SECTION 4: CORPORATE PRESENTATION ACCORDION DISCLOSURE SET */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-slate-50/70 border-t border-slate-100">
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-slate-50/70 border-t border-slate-100" aria-labelledby="philosophy-heading">
           <PageShell>
             <div className="mx-auto max-w-4xl flex flex-col items-center text-center space-y-4 mb-12">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-blue block">
+              <span id="philosophy-heading" className="text-xs font-bold uppercase tracking-widest text-brand-blue block">
                 Compassionate Home Care
               </span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-ink leading-tight tracking-tight">
@@ -364,6 +373,7 @@ export default function HomePage() {
                     <button
                       type="button"
                       onClick={() => toggleAccordion(idx)}
+                      aria-expanded={isOpen}
                       className="flex w-full items-center justify-between bg-[#0c3e72] px-6 py-4 text-left transition-colors duration-300 hover:bg-[#114b7d]"
                     >
                       <span className="font-display text-sm sm:text-base font-semibold text-white !text-white tracking-wide">
@@ -393,16 +403,16 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
-      {/* Section 5: Minimal Interactive Action Blocks wrapper */}
+      {/* SECTION 5: MINIMAL CONVERSION ACTION PORTALS */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-20 bg-white">
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-20 bg-white" aria-label="Action Gateways">
           <PageShell>
             <div className="grid gap-6 sm:grid-cols-3">
               
               <div className="bg-slate-50/80 p-8 rounded-[2rem] border border-slate-100 flex flex-col justify-between group transition-all duration-300 hover:bg-white hover:shadow-lg">
                 <div>
                   <div className="h-11 w-11 bg-brand-blue/5 text-brand-blue flex items-center justify-center rounded-xl mb-5">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="h-5 w-5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                   </div>
                   <h3 className="font-display text-lg font-semibold text-brand-ink">Eligibility for Senior Care</h3>
                   <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
@@ -411,6 +421,7 @@ export default function HomePage() {
                 </div>
                 <Link 
                   href="/resources"
+                  aria-label="Read explicit guidelines regarding senior home care safety guidelines"
                   className="inline-flex items-center gap-1.5 mt-6 text-xs font-bold uppercase tracking-wider text-brand-blue hover:underline"
                 >
                   Eligibility Rules <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -420,7 +431,7 @@ export default function HomePage() {
               <div className="bg-slate-50/80 p-8 rounded-[2rem] border border-slate-100 flex flex-col justify-between group transition-all duration-300 hover:bg-white hover:shadow-lg">
                 <div>
                   <div className="h-11 w-11 bg-brand-orange/5 text-brand-orange flex items-center justify-center rounded-xl mb-5">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0z" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="h-5 w-5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0z" /></svg>
                   </div>
                   <h3 className="font-display text-lg font-semibold text-brand-ink">Submit Your Referrals</h3>
                   <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
@@ -429,6 +440,7 @@ export default function HomePage() {
                 </div>
                 <Link 
                   href="/contact-us"
+                  aria-label="Submit a friend or family member configuration via our referral network"
                   className="inline-flex items-center gap-1.5 mt-6 text-xs font-bold uppercase tracking-wider text-brand-blue hover:underline"
                 >
                   Submit A Friend <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
@@ -438,18 +450,20 @@ export default function HomePage() {
               <div className="bg-brand-ink p-8 rounded-[2rem] flex flex-col justify-between group shadow-md text-white transition-all duration-300 hover:bg-brand-blue">
                 <div>
                   <div className="h-11 w-11 bg-white/10 text-brand-orange flex items-center justify-center rounded-xl mb-5">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="h-5 w-5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                   </div>
-                  <h3 className="font-display text-lg font-semibold">Schedule an Assessment</h3>
+                  <h3 className="font-display text-lg font-semibold text-white">Schedule an Assessment</h3>
                   <p className="text-xs sm:text-sm text-white/80 mt-2 leading-relaxed">
                     Schedule a free professional assessment and experience the clinic difference with us.
                   </p>
                 </div>
                 <Link 
                   href="/contact-us"
+                  aria-label="Book an immediate in-home safety and care coordination assessment"
                   className="inline-flex items-center gap-1.5 mt-6 text-xs font-bold uppercase tracking-wider text-brand-orange hover:underline"
                 >
-                  Book Assessment <span className="transition-transform duration-300 group-hover:translate-x-0.5">rightarrow</span>
+                  {/* FIXED: Removed raw unrendered text string bug layout marker */}
+                  Book Assessment <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                 </Link>
               </div>
 
@@ -458,19 +472,18 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
-      {/* Section 6: Mission Statement Overview Block with Full-Image Faded Background Layer */}
+      {/* SECTION 6: MISSION CORE BACKDROP STATEMENT PANEL */}
       <ScrollReveal>
-        <section className="relative px-4 py-24 sm:px-6 lg:px-8 lg:py-32 overflow-hidden border-t border-slate-200/50 rounded-t-[3rem]">
-          {/* Hardware-accelerated full background image instance */}
+        <section className="relative px-4 py-24 sm:px-6 lg:px-8 lg:py-32 overflow-hidden border-t border-slate-200/50 rounded-t-[3rem]" aria-label="Core Philosophy Statement">
           <div className="absolute inset-0 -z-10 w-full h-full">
             <Image
               src="/ff329731-2265-4376-a04c-f10a744fb417.jpg"
-              alt="Mission Statement Background"
+              alt="Serene living room setup reflecting our home care mission environment"
               fill
               priority
+              sizes="100vw"
               className="object-cover object-center scale-102 filter transition-all duration-300"
             />
-            {/* Highly customized glass backdrop blend layer matrix to fade background */}
             <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/70 to-white/70 backdrop-blur-[1px]" />
           </div>
 
@@ -483,15 +496,16 @@ export default function HomePage() {
                 &ldquo;Our mission is to provide compassionate, high-quality non-medical home care that empowers individuals to live with dignity, independence, and comfort in their own homes. We are committed to building meaningful relationships, delivering personalized care, and supporting families through dependable, nurse-guided care services.&rdquo;
               </p>
               <div className="pt-6 text-xs sm:text-sm text-slate-600 font-medium max-w-md mx-auto leading-relaxed">
-                Benevolence Home Services is proud to be a nurse-led, faith-based home care agency committed to compassionate, non-medical support for seniors and families.
+                Benevolence Home Services is proud to be a nurse-led, faith-based home care agency committed to compassionate, non-medical support for seniors and families across Cook, DuPage, Kane, Lake, and Will Counties.
               </div>
             </div>
           </PageShell>
         </section>
       </ScrollReveal>
+
       {/* FIXED FOOTER CALL TO ACTION IN THEME WITH HOMEPAGE */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-[#0a2540] text-center relative z-50 rounded-t-[3rem] text-white">
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-[#0a2540] text-center relative z-50 rounded-t-[3rem] text-white" aria-label="Get Started">
           <PageShell>
             <div className="mx-auto max-w-3xl space-y-6">
               <h2 className="text-3xl md:text-5xl font-display font-bold text-white">Let Us Help You Build the Right Care Plan</h2>
@@ -511,8 +525,6 @@ export default function HomePage() {
           </PageShell>
         </section>
       </ScrollReveal>
-
-
     </>
   );
 }

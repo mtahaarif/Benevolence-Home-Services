@@ -89,6 +89,7 @@ export const homeHighlights = [
   {
     title: "Companionship",
     body: "We provide companionship to enrich lives and combat loneliness.",
+    href: "/services/companionship",
   },
   {
 
