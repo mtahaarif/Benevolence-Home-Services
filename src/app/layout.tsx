@@ -17,11 +17,11 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Benevolence Home Services",
-    template: "%s | Benevolence Home Services",
+    default: "Benevolence Home Services and Staffing Agency",
+    template: "%s | Benevolence Home Services and Staffing Agency",
   },
   description:
-    "Benevolence Home Services is a nurse-led, faith-based home care website built in Next.js.",
+    "Benevolence Home Services is a nurse-led, faith-based home care agency committed to compassionate, non-medical support for seniors and families.",
   icons: {
     icon: "/footer-logo.png",
     shortcut: "/footer-logo.png",
