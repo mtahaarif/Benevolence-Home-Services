@@ -1,0 +1,16 @@
+{
+  "name": "Benevolence Home Services",
+  "short_name": "Benevolence",
+  "description": "Professional care and home services.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

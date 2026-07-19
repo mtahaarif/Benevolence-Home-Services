@@ -101,15 +101,17 @@ export default function SpecializedSupportPage() {
   return (
     <>
       {/* Banner / Hero Section */}
-      <HeroSection
-        eyebrow="Services"
-        title="Specialized Support"
-        description="We address unique care requirements with expertise and individualized attention."
-        primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
-        secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2212833857U072s1e.webp"
-        imageAlt="Healthcare professional providing attentive, specialized support"
-      />
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Advanced Cognitive &amp; Memory Care"
+          title="Specialized Alzheimer's &amp; Dementia Care Plans"
+          description=""
+          primaryAction={{ label: "Request Specialized Care", href: "/contact-us" }}
+          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          imageSrc="/nh-2212833857U072s1e.webp"
+          imageAlt="Healthcare professional providing attentive, specialized support"
+        />
+      </div>
 
       {/* Overview Section */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/30">

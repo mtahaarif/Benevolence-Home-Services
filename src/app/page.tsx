@@ -168,16 +168,21 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO BANNER SECTION */}
-      <HeroSection
-        eyebrow="Purpose-Driven In-Home Senior Care Providers"
-        title="Introducing Benevolence Home Servicese"
-        description="Benevolence Home Services provides personalized non-medical home care for seniors and adults who need assistance with daily routines, companionship, mobility, household tasks, and family caregiver support. Based in Westchester, Illinois, we serve families throughout Cook, DuPage, Kane, Lake, and Will Counties."
-        primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
-        secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
-        imageSrc={["/1.webp", "/2.webp", "/3.webp"]}
-        imageAlt="Compassionate home care support in Westchester"
-      />
+      {/* HERO BANNER SECTION WITH ARBITRARY CHILD TARGETING FOR BUTTON COLOR */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Chicagoland’s trusted provider for in-home senior care"
+          title="Introducing Benevolence Home Services"
+          description=""
+          primaryAction={{ 
+            label: "Request a Care Consultation", 
+            href: "/contact-us"
+          }}
+          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          imageSrc={["/1.webp", "/2.webp", "/3.webp"]}
+          imageAlt="Compassionate home care support in Westchester"
+        />
+      </div>
 
       {/* SECTION 1: INTRODUCING BENEVOLENCE EDITORIAL TEXT CANVAS */}
       <ScrollReveal>
@@ -189,7 +194,7 @@ export default function HomePage() {
                   Supporting Independence, <br /> Comfort, and Dignity
                 </h2>
                 <p className="font-display text-xl sm:text-2xl font-medium text-[#0c3e72] tracking-tight leading-tight">
-                  Chicagoland’s trusted provider for in-home senior care
+                  Elevating Home Care with Compassion
                 </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
                   At Benevolence Home Services, we provide compassionate, reliable, and personalized home care services throughout the Chicagoland area. Our mission is to help seniors and individuals maintain their independence, dignity, and quality of life while remaining safe and comfortable in their own homes.
@@ -230,7 +235,6 @@ export default function HomePage() {
       </ScrollReveal>
 
       {/* SECTION 2: CORE HIGHLIGHTS FEATURE PANELS */}
-      {/* Reactivated and enhanced text density to significantly improve Text-to-Code ratios */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/40" aria-label="Key Service Highlights">
           <PageShell>
@@ -462,7 +466,6 @@ export default function HomePage() {
                   aria-label="Book an immediate in-home safety and care coordination assessment"
                   className="inline-flex items-center gap-1.5 mt-6 text-xs font-bold uppercase tracking-wider text-brand-orange hover:underline"
                 >
-                  {/* FIXED: Removed raw unrendered text string bug layout marker */}
                   Book Assessment <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                 </Link>
               </div>
@@ -514,7 +517,11 @@ export default function HomePage() {
               </p>
               
               <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
-                <Link href="/contact-us" aria-label="Navigate to our intake contact form to request consultation details" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#0a2540] !text-[#0a2540] shadow-md hover:bg-blue-50 transition-all w-full sm:w-auto">
+                <Link 
+                  href="/contact-us" 
+                  aria-label="Navigate to our intake contact form to request consultation details" 
+                  className="inline-flex items-center justify-center rounded-full bg-brand-blue px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-[#0c5a99] transition-all w-full sm:w-auto"
+                >
                   Request a Care Consultation
                 </Link>
                 <a href="tel:7083040296" aria-label="Call our primary phone line at 708-304-0296" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">

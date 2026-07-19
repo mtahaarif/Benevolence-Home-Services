@@ -169,15 +169,17 @@ export default function RespiteCarePage() {
   return (
     <>
       {/* Banner / Hero Section */}
-      <HeroSection
-        eyebrow="Services"
-        title="Respite Care"
-        description="Allow family caregivers time to recharge with temporary support services."
-        primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
-        secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2182343844Us238i0.webp"
-        imageAlt="Family caregiver passing duties smoothly to a professional respite provider"
-      />
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Dedicated Family Caregiver Relief"
+          title="Professional Respite Care Options Near You"
+          description=""
+          primaryAction={{ label: "Book Respite Relief", href: "/contact-us" }}
+          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          imageSrc="/nh-2182343844Us238i0.webp"
+          imageAlt="Family caregiver passing duties smoothly to a professional respite provider"
+        />
+      </div>
 
       {/* Overview Section */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/30">

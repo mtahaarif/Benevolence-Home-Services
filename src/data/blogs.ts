@@ -16,7 +16,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   // --- 2025 ARTICLES ---
   {
-    slug: "smooth-recovery-transitioning-from-hospital-to-home",
+    slug: "smooth-recovery",
     title: "Smooth Recovery: Transitioning from Hospital to Home",
     metaTitle: "Post-Hospital Transitional Home Care | Westchester IL",
     metaDescription: "Learn key steps for a successful transition from hospital to home care in Westchester, Will County, and DuPage County with professional non-medical support.",
@@ -40,7 +40,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "strengthening-bonds-through-empathy-and-understanding",
+    slug: "strengthening-bonds",
     title: "Strengthening Bonds Through Empathy And Understanding",
     metaTitle: "Dementia & Memory Care Companionship | Westchester IL",
     metaDescription: "Explore the vital role of empathy, active listening, and customized routines in senior dementia and Alzheimer's care across western Illinois communities.",
@@ -60,7 +60,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "post-surgery-recovery-stay-complication-free-at-home",
+    slug: "post-surgery-recovery",
     title: "Post-Surgery Recovery: Stay Complication-Free At Home",
     metaTitle: "Post-Surgical Home Care Aftercare | Westchester IL",
     metaDescription: "Thoughtful preparation, medical monitoring, and a hygienic home environment are vital for a complication-free post-surgery recovery at home.",
@@ -82,7 +82,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "protecting-seniors-infection-prevention-tips",
+    slug: "protecting-seniors-infection",
     title: "Protecting Seniors: Infection Prevention Tips",
     metaTitle: "Senior Infection Prevention & Hygiene | Westchester IL",
     metaDescription: "Discover how home care assistance, professional housekeeping, and comprehensive health monitoring prevent dangerous senior infections at home.",
@@ -104,7 +104,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "boost-senior-wellness-with-activities",
+    slug: "boost-senior-wellness",
     title: "Boost Senior Wellness with Activities",
     metaTitle: "Active Aging & Senior Wellness Exercises | Westchester IL",
     metaDescription: "Boost elderly physical and emotional health with personalized fitness routines, chair exercises, and engaging companion hobbies.",
@@ -126,7 +126,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "how-staff-turnover-affects-patient-trust-and-care",
+    slug: "patient-trust-and-care",
     title: "How Staff Turnover Affects Patient Trust and Care",
     metaTitle: "Impact of Caregiver Turnover on Patient Trust | Home Care",
     metaDescription: "Understand the challenges of staff turnover in senior care, its emotional impact on families, and core strategies to optimize retention metrics.",
@@ -147,7 +147,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "early-warning-signs-of-heart-issues-in-home-care",
+    slug: "signs-of-heart-issues",
     title: "Early Warning Signs of Heart Issues in Home Care",
     metaTitle: "Senior Heart Disease Symptoms & Monitoring | Home Care",
     metaDescription: "Identify early physical, behavioral, and emotional indicators of cardiovascular health concerns in aging loved ones at home.",
@@ -168,7 +168,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "managing-hearing-and-vision-impairments-in-senior-care",
+    slug: "hearing-and-vision-impairments",
     title: "Managing Hearing and Vision Impairments in Senior Care",
     metaTitle: "Sensory Loss Support & Adaptive Home Environments",
     metaDescription: "Discover how non-medical care plans adapt living environments and implement communication strategies for senior sensory impairments.",
@@ -231,7 +231,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "enhance-mobility-with-simple-exercises",
+    slug: "enhance-mobility-with-exercises",
     title: "Enhance Mobility with Simple Exercises",
     metaTitle: "Low-Impact Senior Mobility Exercises | Westchester IL",
     metaDescription: "Incorporate ankle circles, seated marches, and simple stretching parameters safely into an elderly daily care plan.",
@@ -312,7 +312,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "battlefield-to-home-transitioning-veteran-to-home-care",
+    slug: "transitioning-veteran-to-home-care",
     title: "Battlefield to Home: Transitioning Veteran to Home Care",
     metaTitle: "VA Care Coordination & Home Support | Cook County",
     metaDescription: "Strategic parameters for transition care, post-military emotional health, and homemaker solutions for aging veterans.",
@@ -333,7 +333,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "essential-medication-tips-for-a-healthier-you",
+    slug: "essential-medication-tips",
     title: "Essential Medication Tips for a Healthier You!",
     metaTitle: "In-Home Medication Management & Reminders | Chicagoland",
     metaDescription: "Crucial safety rules, schedule tracking tips, and in-home medication reminder systems for seniors in Chicagoland.",
@@ -359,7 +359,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "benefits-of-a-live-in-caregiver-for-your-loved-ones",
+    slug: "caregiver-for-your-loved-ones",
     title: "Benefits of a Live-In Caregiver for Your Loved Ones",
     metaTitle: "24-Hour Live-In Care Benefits | Westchester IL Home Care",
     metaDescription: "Learn how 24-hour live-in care provides continuous support, fall prevention, and total peace of mind for families in Westchester.",
@@ -379,7 +379,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "promoting-independence-boosting-senior-confidence",
+    slug: "boosting-senior-confidence",
     title: "Promoting Independence: Boosting Senior Confidence",
     metaTitle: "Empowering Senior Independence & Confidence | Cook County",
     metaDescription: "How structured home care assistance balances safety support with emotional empowerment to boost senior confidence in Cook County.",
@@ -399,7 +399,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "effective-communication-with-dementia-patients",
+    slug: "communication-with-dementia-patients",
     title: "Effective Communication With Dementia Patients",
     metaTitle: "Dementia Communication Techniques | Westchester IL",
     metaDescription: "Master non-verbal cues, validation therapy, and calming communication routines for dementia care in Westchester, IL.",
@@ -420,7 +420,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "essential-hygiene-tips-for-seniors",
+    slug: "hygiene-tips-for-seniors",
     title: "Essential Hygiene Tips for Seniors",
     metaTitle: "Dignified Senior Hygiene & Personal Care | DuPage County",
     metaDescription: "Essential protocols for maintaining dignified personal hygiene, skin integrity, and bathing safety for seniors in DuPage County.",
@@ -441,7 +441,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "revitalize-your-spirit-nature-walks-for-wellness",
+    slug: "nature-walks-for-wellness",
     title: "Revitalize Your Spirit: Nature Walks for Wellness",
     metaTitle: "Nature Walks & Senior Physical Wellness | Cook County",
     metaDescription: "The psychological and physical benefits of supervised outdoor nature walking routines for seniors in Cook County.",
@@ -483,7 +483,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "personalized-support-for-managing-chronic-conditions",
+    slug: "managing-chronic-conditions",
     title: "Personalized Support for Managing Chronic Conditions",
     metaTitle: "Chronic Illness Home Care Management | Westchester IL",
     metaDescription: "Custom non-medical home care support systems to help seniors successfully manage chronic conditions in Westchester, IL.",
@@ -509,7 +509,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "building-resilience-against-depression-in-older-adults",
+    slug: "resilience-against-depression",
     title: "Building Resilience Against Depression in Older Adults",
     metaTitle: "Senior Mental Health & Depression Support | DuPage County",
     metaDescription: "Proactive behavioral adjustments, companion care solutions, and guidance to counter senior depression in DuPage County.",
@@ -533,7 +533,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "activities-for-seniors-enhancing-quality-of-life",
+    slug: "enhancing-quality-of-life",
     title: "Activities for Seniors: Enhancing Quality of Life",
     metaTitle: "Enriched Elderly Quality of Life Activities | Cook County",
     metaDescription: "How incorporating custom therapeutic activities into daily home care routines elevates senior quality of life in Cook County.",
@@ -553,7 +553,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "discovering-assistance-in-home-care-for-depression",
+    slug: "assistance-in-home-care-for-depression",
     title: "Discovering Assistance in Home Care for Depression",
     metaTitle: "In-Home Emotional Support Options | Westchester Senior Care",
     metaDescription: "Discover how customized non-medical home care plans offer critical companionship and support for seniors facing depression in Westchester.",
@@ -573,7 +573,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "combatting-senior-loneliness-through-companionship",
+    slug: "combatting-senior-loneliness",
     title: "Combatting Senior Loneliness Through Companionship",
     metaTitle: "Combatting Isolation with Senior Companionship | DuPage County",
     metaDescription: "How structured home companion services lower health risks associated with senior isolation across DuPage County.",
@@ -593,7 +593,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "the-importance-of-balanced-diets-in-senior-nutrition",
+    slug: "balanced-diets-in-senior-nutrition",
     title: "The Importance of Balanced Diets in Senior Nutrition",
     metaTitle: "Senior Nutrition Guidelines & Healthy Aging | Cook County",
     metaDescription: "A look at metabolic targets, hydration checkpoints, and meal options for seniors in Cook County, IL.",
@@ -613,7 +613,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "knowing-when-to-embrace-respite-care-services",
+    slug: "respite-care-services",
     title: "Knowing When to Embrace Respite Care Services",
     metaTitle: "When to Use Family Respite Relief Care | Caregiver Support",
     metaDescription: "Recognize the signs of physical and emotional caregiver burnout, and when to bring in temporary respite care services.",
@@ -635,7 +635,7 @@ export const blogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "embracing-vitality-exercises-for-senior-well-being",
+    slug: "embracing-vitality-exercises",
     title: "Embracing Vitality: Exercises for Senior Well-Being",
     metaTitle: "Senior Exercises for Vitality & Strength | Chicagoland",
     metaDescription: "Simple balance, flexibility, and core exercises to enhance senior vitality and prevent home falls in Chicagoland.",

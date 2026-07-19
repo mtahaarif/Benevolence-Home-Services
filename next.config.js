@@ -3,22 +3,12 @@ const nextConfig = {
   // Enforces clean trailing slash configurations for edge crawlers
   trailingSlash: false,
 
-  // Bundles everything needed into a clean runtime build isolated for GoDaddy node hosting
-  output: 'standalone', 
-  
-  async redirects() {
-    return [
-      {
-        source: '/index.html',
-        destination: '/',
-        permanent: true, // Issues a clean 301 redirect token
-      },
-      {
-        source: '/index.php',
-        destination: '/',
-        permanent: true,
-      },
-    ];
+  // Tells Next.js to build a standard static HTML/CSS/JS architecture
+  output: 'export', 
+
+  // Required for static exports because standard dynamic node image resizing requires a live server
+  images: {
+    unoptimized: true,
   },
 };
 

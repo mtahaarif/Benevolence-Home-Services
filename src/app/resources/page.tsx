@@ -8,26 +8,30 @@ import { resources } from "@/data/site-content";
 export default function ResourcesPage() {
   return (
     <>
-      {/* Hero Banner Section - Unwrapped to preserve initial LCP loading speed */}
-      <HeroSection
-        eyebrow="Resources"
-        title="Helpful organizations for families and care professionals"
-        description="We keep a curated set of public health and home-care links available for families who want to continue learning."
-        primaryAction={{ label: "Contact Us", href: "/contact-us" }}
-        secondaryAction={{ label: "Services", href: "/services" }}
-        imageSrc="/nh-23119104148Uam2713.webp"
-        imageAlt="Happy elderly couple"
-      />
-
+          {/* HERO BANNER SECTION WITH ARBITRARY CHILD TARGETING FOR BUTTON COLOR */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Elder Care Guides & Family Resourcess"
+          title="Illinois Senior Care Resources & Planning"
+          description=""
+          primaryAction={{ 
+            label: "Request a Care Consultation", 
+            href: "/contact-us"
+          }}
+          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          imageSrc="/nh-23119104148Uam2713.webp"
+          imageAlt="Happy elderly couple"
+        />
+      </div>
       {/* Section 1: Curated External Reference Grid */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/40">
         <PageShell>
           <ScrollReveal>
             <SectionHeading
               centered
-              eyebrow="Resources"
+              eyebrow="Resources for Safe Aging at Home"
               title="Trusted Reference Portals"
-              description="These professional organizations offer additional information about public health directives, home care regulations, and healthcare workforce guidance."
+              description="These professional organizations offer additional information about public health directives, home care regulations, and healthcare workforce guidance. We keep a curated set of public health and home-care links available for families who want to continue learning."
             />
           </ScrollReveal>
 

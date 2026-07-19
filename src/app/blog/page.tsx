@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { HeroSection, PageShell } from "@/components/site-shell";
+import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import { blogPosts } from "@/data/blogs";
 
@@ -17,16 +17,18 @@ export default function BlogDirectoryPage() {
 
   return (
     <>
-      <HeroSection
-        eyebrow="Insights & Guidance"
-        title="The Benevolence Care Journal"
-        description="Expert senior care advice, local Westchester health resources, and compassionate support strategies designed to help families navigate home care journeys smoothly."
-        primaryAction={{ label: "Contact Us", href: "/contact-us" }}
-        secondaryAction={{ label: "Explore Services", href: "/services" }}
-        imageSrc="/non-home-banner.jpg"
-        imageAlt="Senior reading an informative book safely at home"
-      />
-
+      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Educational Insights &amp; Family Caregiver Advice"
+          title="The Benevolence Senior Care &amp; Wellness Blog"
+          description=""
+          primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
+          secondaryAction={{ label: "Explore Our Services", href: "/services" }}
+          imageSrc="/non-home-banner.jpg"
+          imageAlt="Senior reading an informative book safely at home"
+        />
+      </div>
       <section className="relative px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-slate-50">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-[-5%] w-[500px] h-[500px] bg-brand-blue/10 rounded-full blur-[120px]" />
@@ -35,13 +37,13 @@ export default function BlogDirectoryPage() {
 
         <PageShell>
           <ScrollReveal>
-            <div className="relative z-10 max-w-3xl mx-auto text-center mb-16">
-              <span className="inline-block py-1.5 px-4 rounded-full bg-white/60 border border-white backdrop-blur-md text-xs font-bold uppercase tracking-[0.2em] text-brand-blue mb-6 shadow-sm">
-                Resource Library
-              </span>
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-brand-ink mb-4">
-                Educational Articles for Family Caregivers
-              </h2>
+            <div className="md:mb-20">
+            <SectionHeading
+              centered
+              eyebrow="Resource Library for Families & Caregivers"
+              title="Educational Articles for Family Caregivers"
+              description="Stay informed with expert articles, local elder care guidance, and practical planning tips curated by our nurse-led team to support healthy, dignified aging at home throughout Westchester and the surrounding counties."
+            />
             </div>
           </ScrollReveal>
 

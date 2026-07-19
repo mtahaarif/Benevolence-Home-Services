@@ -47,23 +47,24 @@ function CheckIcon() {
 export default function AboutUsPage() {
   return (
     <>
-      {/* HERO BANNER SECTION - Unwrapped to preserve initial LCP loading speed */}
-      <HeroSection
-        eyebrow="About Our Agency"
-        title="Home Care Services in Westchester, Illinois"
-        description="BENEVOLENCE HOME SERVICES and Staffing Agency is a nurse-led, faith-based home care organization committed to compassionate, non-medical support for seniors and families. Based in Westchester, Illinois, we provide personalized care configurations to help adults remain safe, comfortable, and independent in familiar home surroundings."
-        primaryAction={{ label: "Explore Our Services", href: "/services" }}
-        secondaryAction={{ label: "Connect With Our Team", href: "/contact-us" }}
-        imageSrc="/nh-23102650536U12a54t.webp"
-        imageAlt="Compassionate caregiver supporting a senior client at home in Westchester, Illinois"
-      />
-
+      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Our Mission, Values & Faith-Based Commitment"
+          title="Compassionate Senior Support Rooted in Integrity"
+          description=""
+          primaryAction={{ label: "Connect With Our Team", href: "/contact-us" }}
+          secondaryAction={{ label: "Explore Our Services", href: "/services" }}
+          imageSrc="/nh-23102650536U12a54t.webp" 
+          imageAlt="Compassionate caregiver supporting a senior client at home in Westchester, Illinois"
+        />
+      </div>
       {/* SECTION 1: WHO WE ARE (TEXT-TO-CODE OPTIMIZED EDITORIAL PANEL) */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white" aria-labelledby="who-we-are-heading">
           <PageShell>
             <div className="mx-auto max-w-3xl text-center space-y-6">
-              <span id="who-we-are-heading" className="text-[10px] font-bold uppercase tracking-widest text-[#0c3e72] bg-blue-50 px-4 py-2 rounded-full">
+              <span id="who-we-are-heading" className="text-[12px] font-bold uppercase tracking-widest text-[#0c3e72]">
                 Who We Are
               </span>
               <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl lg:text-5xl tracking-tight leading-tight">

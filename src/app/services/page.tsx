@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeroSection, PageShell } from "@/components/site-shell";
+import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 
 // 1. PRODUCTION METADATA ENGINE: Rendered statically for high crawling authority
@@ -117,17 +117,18 @@ function getSlug(title: string): string {
 export default function ServicesPage() {
   return (
     <>
-      {/* HERO SECTION CONTAINER */}
-      <HeroSection
-        eyebrow="Our Care Offerings"
-        title="Elevating the Standard of Home Care in Westchester"
-        description="From specialized Alzheimer's care to everyday homemaker assistance, we provide non-medical home care designed to keep your loved ones safe, dignified, and comfortably independent."
-        primaryAction={{ label: "Contact Us Today", href: "/contact-us" }}
-        secondaryAction={{ label: "Make a Secure Payment", href: "https://www.paypal.com/ncp/payment/H8ETWPE4HU59A" }}
-        imageSrc="/nh-2172642748U38tie9.webp"
-        imageAlt="Caregiver and senior client engaging in specialized home support"
-      />
-
+      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Nurse-Led In-Home Care Services"
+          title="Elevating the Standard of Home Care in Westchester, Illinois"
+          description=""
+          primaryAction={{ label: "Contact Us Today", href: "/contact-us" }}
+          secondaryAction={{ label: "Make a Secure Payment", href: "https://www.paypal.com/ncp/payment/H8ETWPE4HU59A" }}
+          imageSrc="/nh-2172642748U38tie9.webp" 
+          imageAlt="Caregiver and senior client reviewing an authorized home care service area map"
+        />
+      </div>
 
 
       {/* CORE SERVICES GRID MATRIX */}
@@ -141,13 +142,13 @@ export default function ServicesPage() {
 
         <PageShell>
           <ScrollReveal>
-            <div className="relative z-10 max-w-3xl mx-auto text-center mb-16 md:mb-20">
-              <span className="inline-block py-1.5 px-4 rounded-full bg-white/60 border border-white backdrop-blur-md text-xs font-bold uppercase tracking-[0.2em] text-brand-blue mb-6 shadow-sm">
-                Our Capabilities
-              </span>
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-brand-ink mb-6">
-                Tailored Support For Every Stage of Need.
-              </h2>
+            <div className="md:mb-20">
+            <SectionHeading
+              centered
+              eyebrow="Comprehensive Senior Care Solutions"
+              title="Tailored Support For Every Stage of Need."
+              description="Explore our comprehensive suite of specialized non-medical senior care options—ranging from dedicated daily companionship to advanced memory support—all thoughtfully structured under active clinical oversight. From specialized Alzheimer's care to everyday homemaker assistance, we provide non-medical home care designed to keep your loved ones safe, dignified, and comfortably independent."
+            />
             </div>
           </ScrollReveal>
           

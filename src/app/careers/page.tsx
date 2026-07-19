@@ -1,299 +1,337 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 
-const points = [
+const benefitsFramework = [
   {
-    title: "Supportive Leadership",
-    desc: "Work under dedicated, nurse-led clinical leadership that values your professional voice and safety.",
+    id: "01",
+    title: "Nurse-Led Clinical Backing",
+    desc: "Work with absolute confidence under a Registered Nurse who designs precise care plans, handles complex family coordination, and provides 24/7 advisory support.",
   },
   {
-    title: "Consistent Assignments",
-    desc: "Enjoy stable, client-focused care assignments designed to foster meaningful, long-term relationships.",
+    id: "02",
+    title: "Stable Local Assignments",
+    desc: "Enjoy consistent, non-rotating client matches right inside your local community, carefully scheduled to minimize travel times and eliminate route burnout.",
   },
   {
-    title: "Professional Support",
-    desc: "Access ongoing clinical guidance, professional mentorship, and continuous educational support.",
+    id: "03",
+    title: "RN Mentorship & Education",
+    desc: "Refine your frontline expertise with direct, hands-on mentorship from clinical experts alongside continuous educational tracks to elevate your career value.",
   },
   {
-    title: "Purpose-Driven Culture",
-    desc: "Be part of an organizational community deeply rooted in compassion, mutual respect, and integrity.",
+    id: "04",
+    title: "Faith-Centered Community",
+    desc: "Experience a truly respectful professional environment where caregiving is treated as a high calling rooted in compassion, patience, and deep humility.",
   },
 ] as const;
 
+const recruitmentSteps = [
+  {
+    step: "1",
+    title: "Secure Portal Review",
+    subtitle: "Digital Intakes Processed Within 48 Hours",
+    desc: "Submit your comprehensive employment timeline, professional references, and geographical preferences securely via our streamlined external Jotform framework.",
+  },
+  {
+    step: "2",
+    title: "Clinical Interview",
+    subtitle: "Evaluate Competence & Character Compatibility",
+    desc: "Meet face-to-face with our clinical leadership team to discuss your background, review caregiving philosophy alignment, and evaluate specialized communication skills.",
+  },
+  {
+    step: "3",
+    title: "IDPH Verification",
+    subtitle: "Background Integrity & State Compliance Mapping",
+    desc: "We conduct complete state compliance tracking, including mandatory background fingerprints via the Illinois Department of Public Health registry paths.",
+  },
+  {
+    step: "4",
+    title: "RN Guided Match",
+    subtitle: "Custom Client Introductions Under Clinical Care",
+    desc: "Receive comprehensive case briefings directly from our supervising Registered Nurse to align your unique style with a household that fits perfectly.",
+  },
+] as const;
+
+const specializedRolesData = {
+  companion: {
+    title: "In-Home Caregiver & Senior Companion",
+    locations: "Westchester, Cook County, & Eastern DuPage County",
+    highlights: ["Hourly & Respite Shifts Available", "No Prior Licensure Required", "Comprehensive Orientation Provided"],
+    summary: "Ideal for empathetic professionals seeking meaningful caregiver jobs in Westchester IL. This role focuses on supporting older adults with basic daily living parameters to preserve dignity and home safety.",
+    duties: [
+      "Deliver uplifting emotional companionship and cognitive stimulation routines.",
+      "Execute light housekeeping, structural organization, and laundry management.",
+      "Manage client grocery lists, meal preparation planning, and nutritional monitoring.",
+      "Provide vital assistance with transportation, local medical appointments, and essential pharmacy runs.",
+    ]
+  },
+  cna: {
+    title: "Certified Nursing Assistant (CNA)",
+    locations: "Will County, Cook County, Kane County, & Surrounding Towns",
+    highlights: ["Premium Hourly Rates", "Live-In Positions Available", "Direct RN Supervision & Advisory"],
+    summary: "Designed for highly technical professionals looking for CNA employment in DuPage and Will Counties. This position bridges high-quality daily lifestyle assistance with disciplined nurse-delegated care plan tracking.",
+    duties: [
+      "Perform safe mechanical transfers, ambulation support, and detailed fall-prevention tasks.",
+      "Execute comprehensive personal care tasks including bathing, grooming, and incontinence management.",
+      "Monitor delicate physical condition shifts and log vital signs for Registered Nurse oversight.",
+      "Provide essential non-medical support for chronic memory care and progressive physical decline cases.",
+    ]
+  }
+};
+
 export default function CareersPage() {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  
-  // Form submission and file states
-  const [fileName, setFileName] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    position: "",
-    message: "",
-    agreeToTerms: false,
-  });
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFileName(e.target.files[0].name);
-    }
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate premium micro-interaction submission flow
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1800);
-  };
+  const [activeRoleTab, setActiveRoleTab] = useState<"companion" | "cna">("companion");
+  const activeRole = specializedRolesData[activeRoleTab];
 
   return (
     <>
-      {/* Hero Section */}
-      <HeroSection
-        eyebrow="Careers"
-        title="Build a meaningful career in home care"
-        description="At Benevolence Home Services, we believe compassionate care starts with dedicated professionals who want to make a difference in the homes they serve."
-        primaryAction={{ label: "Apply Now", href: "#application-form" }}
-        secondaryAction={{ label: "Learn More", href: "/about-us" }}
-        imageSrc="/nh-1637163589-1.webp"
-        imageAlt="Group of caregivers standing together"
-      />
+      {/* HERO BANNER SECTION WITH ARBITRARY CHILD TARGETING FOR BUTTON COLOR */}
+      <div className="[&_a[href*='jotform.com']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Build a meaningful career in senior home care"
+          title="Join Our Growing Care Team"
+          description=""
+          primaryAction={{ 
+            label: "Apply Online Now", 
+            href: "https://www.jotform.com/app/223625216444452"
+          }}
+          secondaryAction={{ label: "Discover Our Mission", href: "/about-us" }}
+          imageSrc="/nh-1637163589-1.webp"
+          imageAlt="Group of professional caregivers standing together representing home care career opportunities"
+        />
+      </div>
 
-      {/* Main Structural Grid Section */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/40">
+      {/* SECTION 1: THE RECRUITMENT ADVANTAGE MATRIX */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white" aria-label="Employment Benefits Framework">
         <PageShell>
           <ScrollReveal>
             <SectionHeading
               centered
-              eyebrow="Why Work With Us"
-              title="A steady, respectful place to grow your care career"
-              description="Every team member plays a vital role in enhancing independence, dignity, and quality of life for those we serve."
+              eyebrow="Why Work With Benevolence"
+              title="A Steady, Respectful Workplace Built for Impact"
+              description="At Benevolence Home Services, we recognize that to care deeply for our clients, we must first empower and uplift our caregivers. We don't utilize third-party schedulers to make critical decisions—our agency is entirely guided by active clinical judgment."
             />
           </ScrollReveal>
 
-          {/* Grid Layout containing copy left and application form right */}
-          <div className="mt-16 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-start">
-            
-            {/* Left Column: Why Work With Us Narrative */}
-            <div className="space-y-10">
-              <ScrollReveal>
-                <div className="bg-white border border-slate-100 rounded-[2rem] p-8 sm:p-10 shadow-sm space-y-8">
-                  <h3 className="font-display text-2xl font-semibold text-brand-ink">
-                    What You Can Expect
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {benefitsFramework.map((item) => (
+              <div 
+                key={item.id}
+                className="group relative bg-slate-50/70 border border-slate-200/40 p-8 rounded-[2rem] shadow-[0_4px_20px_rgba(15,47,89,0.01)] transition-all duration-300 hover:bg-white hover:shadow-[0_15px_40px_rgba(12,62,114,0.05)] hover:-translate-y-1"
+              >
+                <div className="font-display font-black text-4xl text-brand-blue/10 transition-colors duration-300 group-hover:text-brand-orange/20">
+                  {item.id}
+                </div>
+                <h3 className="mt-4 font-display text-base sm:text-lg font-bold text-brand-ink leading-tight">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </PageShell>
+      </section>
+
+      {/* SECTION 2: ADVANCED INTERACTIVE JOB EXPLORER DASHBOARD */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-white to-slate-50/50 border-t border-slate-100" aria-label="Interactive Job Directory">
+        <PageShell>
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="font-display text-2xl sm:text-4xl font-semibold text-brand-ink">
+              Explore Our Regional Care Openings
+            </h2>
+            <p className="text-slate-500 text-xs sm:text-sm mt-3 max-w-xl mx-auto">
+              Select a position below to explore specific in-home roles, structural duties, and active regional service ranges throughout the greater Chicagoland area.
+            </p>
+
+            {/* ADVANCED TAB TOGGLE CONTROL */}
+            <div className="inline-flex p-1.5 bg-slate-100 rounded-full mt-8 border border-slate-200/60 shadow-inner">
+              <button
+                type="button"
+                onClick={() => setActiveRoleTab("companion")}
+                className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                  activeRoleTab === "companion"
+                    ? "bg-[#0c3e72] text-white shadow-md"
+                    : "text-slate-600 hover:text-brand-ink"
+                }`}
+              >
+                Caregiver & Companion
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveRoleTab("cna")}
+                className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                  activeRoleTab === "cna"
+                    ? "bg-[#0c3e72] text-white shadow-md"
+                    : "text-slate-600 hover:text-brand-ink"
+                }`}
+              >
+                Certified CNA Positions
+              </button>
+            </div>
+          </div>
+
+          {/* DASHBOARD CONTENT SHEET CONTAINER */}
+          <div className="max-w-5xl mx-auto bg-white border border-slate-200/60 rounded-[2.5rem] shadow-[0_12px_40px_rgba(15,47,89,0.03)] p-6 sm:p-10 transition-all duration-300">
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+              
+              {/* Dashboard Left Side: Summary & Duties */}
+              <div className="space-y-6">
+                <div>
+                  <span className="inline-block text-[10px] font-bold uppercase tracking-widest bg-brand-orange/10 text-brand-orange px-3 py-1 rounded-md mb-2">
+                    Active Hiring Channel
+                  </span>
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-brand-ink">
+                    {activeRole.title}
                   </h3>
+                  <p className="text-xs sm:text-sm font-semibold text-[#1168b3] mt-1 flex items-center gap-1.5">
+                    📍 Primary Employment Zones: <span className="text-slate-600 font-normal">{activeRole.locations}</span>
+                  </p>
+                </div>
+
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+                  {activeRole.summary}
+                </p>
+
+                <div className="space-y-3">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-ink border-b border-slate-100 pb-2">
+                    Core Clinical & Service Responsibilities:
+                  </h4>
+                  <ul className="space-y-2.5">
+                    {activeRole.duties.map((duty, index) => (
+                      <li key={index} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-500">
+                        <span className="h-2 w-2 rounded-full bg-[#1168b3] shrink-0 mt-1.5" />
+                        <span className="leading-relaxed">{duty}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Dashboard Right Side: Perks Callout & Quick Gateway Link */}
+              <div className="bg-slate-50 rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-slate-100">
+                <div className="space-y-6">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-[#0c3e72]">
+                    Position Highlights & Package Overview
+                  </h4>
                   
-                  {/* Detailed list with visual icons */}
-                  <div className="grid gap-6 sm:grid-cols-2">
-                    {points.map((point) => (
-                      <div key={point.title} className="space-y-2.5">
-                        <div className="flex items-center gap-3">
-                          <div className="h-6 w-6 rounded-full bg-brand-blue/5 text-brand-blue flex items-center justify-center shrink-0 shadow-inner">
-                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-3.5 w-3.5">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                            </svg>
-                          </div>
-                          <h4 className="font-display text-sm sm:text-base font-bold text-brand-ink">
-                            {point.title}
-                          </h4>
-                        </div>
-                        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed pl-9">
-                          {point.desc}
-                        </p>
+                  <div className="space-y-3">
+                    {activeRole.highlights.map((highlight, index) => (
+                      <div key={index} className="bg-white border border-slate-200/40 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-4 w-4 text-[#1168b3]">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                        <span className="text-xs sm:text-sm font-bold text-brand-ink">{highlight}</span>
                       </div>
                     ))}
                   </div>
-                </div>
-              </ScrollReveal>
 
-              {/* Informative Note Box Layout */}
-              <ScrollReveal>
-                <div className="bg-brand-blue/5 border border-brand-blue/10 rounded-[2rem] p-8 space-y-4">
-                  <h4 className="font-display text-sm font-bold text-brand-blue uppercase tracking-wider">
-                    Application Note
-                  </h4>
-                  <p className="text-xs sm:text-sm leading-relaxed text-slate-600">
-                    If you are interested in joining our home care team, please complete the application form. A member of our clinical advisory team will reach out directly to coordinate your next strategic onboarding steps.
-                  </p>
-                  <p className="text-xs text-slate-500 border-t border-slate-200/50 pt-4 leading-relaxed italic">
-                    Benevolence Home Services is a licensed non-medical home care provider and does not offer third-party staffing, employment agent, or placements services.
+                  <p className="text-xs text-slate-400 leading-relaxed italic pt-2">
+                    All candidates must maintain reliable, insured vehicle transportation and pass absolute reference checks to secure standard client home placements.
                   </p>
                 </div>
-              </ScrollReveal>
-            </div>
 
-            {/* Right Column: Advanced Job Application Form Container */}
-            <ScrollReveal>
-              <div id="application-form" className="bg-white border border-slate-200/60 rounded-[2.5rem] p-8 sm:p-10 shadow-[0_20px_50px_rgba(15,47,89,0.06)] relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-blue to-brand-orange" />
-                
-                {isSubmitted ? (
-                  /* Success feedback state panel */
-                  <div className="py-16 text-center space-y-6 animate-fade-in">
-                    <div className="h-16 w-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className="h-8 w-8">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="font-display text-2xl font-bold text-brand-ink">Application Submitted!</h3>
-                      <p className="text-sm text-slate-500 leading-relaxed max-w-sm mx-auto">
-                        Thank you for your interest. A member of our clinical recruiting team will review your credentials and contact you shortly.
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => setIsSubmitted(false)}
-                      className="text-xs font-bold text-brand-blue uppercase tracking-widest hover:underline"
-                    >
-                      Submit Another Form
-                    </button>
-                  </div>
-                ) : (
-                  /* Form collection fields elements */
-                  <form onSubmit={handleFormSubmit} className="space-y-6">
-                    <div className="space-y-1">
-                      <h3 className="font-display text-2xl font-semibold text-brand-ink">Submit Application</h3>
-                      <p className="text-xs sm:text-sm text-slate-400">Please provide your operational credentials below.</p>
-                    </div>
-
-                    <div className="grid gap-5 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Full Name *</label>
-                        <input
-                          required
-                          type="text"
-                          value={formData.fullName}
-                          onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                          placeholder="e.g. Jane Doe"
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-brand-ink focus:outline-none focus:border-brand-blue focus:bg-white transition-all"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Position Applying For *</label>
-                        <select
-                          required
-                          value={formData.position}
-                          onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-brand-ink focus:outline-none focus:border-brand-blue focus:bg-white transition-all appearance-none cursor-pointer"
-                        >
-                          <option value="">Select a role...</option>
-                          <option value="caregiver">Caregiver / Home Maker</option>
-                          <option value="cna">Certified Nursing Assistant (CNA)</option>
-                          <option value="rn">Registered Nurse (RN) supervisor</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="grid gap-5 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Email Address *</label>
-                        <input
-                          required
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="jane.doe@example.com"
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-brand-ink focus:outline-none focus:border-brand-blue focus:bg-white transition-all"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Phone Number *</label>
-                        <input
-                          required
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="(555) 000-0000"
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-brand-ink focus:outline-none focus:border-brand-blue focus:bg-white transition-all"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Attach Resume *</label>
-                      <input
-                        required
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={handleFileChange}
-                        accept=".pdf,.doc,.docx"
-                        className="hidden"
-                      />
-                      <div 
-                        onClick={() => fileInputRef.current?.click()}
-                        className="border-2 border-dashed border-slate-200 rounded-xl p-5 text-center cursor-pointer transition-colors bg-slate-50 hover:bg-slate-100/50 hover:border-brand-blue/40 flex flex-col items-center justify-center space-y-2"
-                      >
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className="h-7 w-7 text-slate-400">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-                        </svg>
-                        <p className="text-xs font-semibold text-brand-ink">
-                          {fileName ? `File Selected: ${fileName}` : "Click to select or drop your resume (PDF, Word)"}
-                        </p>
-                        <p className="text-[10px] text-slate-400">Acceptable file formats: .pdf, .doc, .docx</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Message / Cover Note</label>
-                      <textarea
-                        rows={3}
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Briefly state your qualifications or care philosophy..."
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-brand-ink focus:outline-none focus:border-brand-blue focus:bg-white transition-all resize-none"
-                      />
-                    </div>
-
-                    <label className="flex items-start gap-3 cursor-pointer select-none">
-                      <input
-                        required
-                        type="checkbox"
-                        checked={formData.agreeToTerms}
-                        onChange={(e) => setFormData({ ...formData, agreeToTerms: e.target.checked })}
-                        className="mt-1 h-4 w-4 accent-brand-blue rounded border-slate-300"
-                      />
-                      <span className="text-[11px] text-slate-500 leading-normal">
-                        By submitting this application form, you agree to the conditions of our Privacy Policy.
-                      </span>
-                    </label>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white !text-white shadow-md transition hover:bg-brand-blue active:scale-98 disabled:opacity-75 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Processing Application...
-                        </>
-                      ) : (
-                        <>
-                          Submit Application
-                          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[9px] font-bold">
-                            →
-                          </span>
-                        </>
-                      )}
-                    </button>
-                  </form>
-                )}
+                <div className="pt-8 border-t border-slate-200/60 mt-6">
+                  <a
+                    href="https://www.jotform.com/app/223625216444452"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-6 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-brand-blue transition-all duration-300"
+                  >
+                    Launch External Intake Form
+                    <span className="text-xs font-light">→</span>
+                  </a>
+                </div>
               </div>
-            </ScrollReveal>
 
+            </div>
           </div>
+        </PageShell>
+      </section>
+
+      {/* SECTION 3: VISUAL RECRUITMENT MILESTONE TIMELINE */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white border-t border-slate-100" aria-label="Recruitment Pathway Milestone Graph">
+        <PageShell>
+          <ScrollReveal>
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <h2 className="font-display text-2xl sm:text-4xl font-semibold text-brand-ink">
+                Our Transparent Hiring Pathway
+              </h2>
+              <p className="text-slate-500 text-xs sm:text-sm mt-3">
+                We believe in clarity from day one. Here is exactly what you can expect as you join our credentialed care ecosystem.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* LINEAR STEPPING SEQUENCE LAYOUT */}
+          <div className="max-w-4xl mx-auto relative grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {recruitmentSteps.map((item, index) => (
+              <div key={index} className="relative space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 bg-brand-blue/5 text-[#0c3e72] font-display font-black rounded-xl border border-brand-blue/10 shadow-sm flex items-center justify-center shrink-0">
+                    {item.step}
+                  </div>
+                  {index < 3 && (
+                    <div className="hidden lg:block absolute left-[44px] right-4 top-5 h-0.5 border-t border-dashed border-slate-200 -z-10" />
+                  )}
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="font-display font-bold text-sm sm:text-base text-brand-ink leading-tight">
+                    {item.title}
+                  </h3>
+                  <h4 className="text-[11px] font-bold uppercase tracking-wide text-brand-orange">
+                    {item.subtitle}
+                  </h4>
+                  <p className="text-xs text-slate-500 leading-relaxed pt-1">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </PageShell>
+      </section>
+
+      {/* SECTION 4: HIGH-IMPACT APPLICATION GATEWAY CARD */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-20 bg-white" aria-label="Final Application Terminal">
+        <PageShell>
+          <ScrollReveal>
+            <div className="max-w-4xl mx-auto bg-[#0a2540] rounded-[3rem] border border-slate-800 p-8 sm:p-12 text-white shadow-xl relative overflow-hidden text-center">
+              <div className="absolute inset-0 opacity-10 -z-10 mix-blend-overlay">
+                <div className="absolute inset-0 bg-radial-gradient from-white to-transparent" />
+              </div>
+
+              <div className="max-w-2xl mx-auto space-y-6 relative z-10">
+                <h2 className="font-display text-2xl sm:text-4xl font-bold tracking-tight text-white">
+                  Ready to Make a Meaningful Difference?
+                </h2>
+                <p className="text-sm sm:text-base text-blue-100/80 leading-relaxed font-medium">
+                  Take the first step toward a more fulfilling career path in senior care. Click below to launch your encrypted application portal securely powered by Jotform.
+                </p>
+
+                <div className="pt-4 flex flex-col items-center justify-center gap-4">
+                  <a 
+                    href="https://www.jotform.com/app/223625216444452" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-[#0c5a99] transition-all duration-300 w-full sm:w-auto"
+                  >
+                    Start Online Application
+                    <span className="text-sm font-light">→</span>
+                  </a>
+                  
+                  <div className="text-[11px] text-slate-400 max-w-md mx-auto leading-relaxed pt-2">
+                    Benevolence Home Services is an Equal Opportunity Employment provider compliant with IDPH regulatory frameworks operating across Cook, DuPage, Kane, Lake, and Will Counties.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
         </PageShell>
       </section>
     </>

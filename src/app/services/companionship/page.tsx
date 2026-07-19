@@ -105,16 +105,18 @@ export default function CompanionshipPage() {
 
   return (
     <>
-      {/* Banner / Hero Section */}
-      <HeroSection
-        eyebrow="Services"
-        title="Companionship"
-        description="Provide reliable assistance for appointments, errands, and social gatherings"
-        primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
-        secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-23828104413Umet879.webp" 
-        imageAlt="Caregiver engaging in friendly conversation with a senior"
-      />
+      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Faith-Centered Social Engagement"
+          title="Senior Companion Care Services in Westchester, IL"
+          description=""
+          primaryAction={{ label: "Request a Companion", href: "/contact-us" }}
+          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          imageSrc="/nh-23828104413Umet879.webp" 
+          imageAlt="Caregiver engaging in friendly conversation with a senior"
+        />
+      </div>
 
       {/* Overview Section */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/30">

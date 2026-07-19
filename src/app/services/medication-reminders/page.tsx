@@ -159,15 +159,17 @@ export default function MedicationRemindersPage() {
   return (
     <>
       {/* Banner / Hero Section */}
-      <HeroSection
-        eyebrow="Services"
-        title="Medication Reminders"
-        description="Stay consistent with timely reminders for scheduled medication intake."
-        primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
-        secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-2371714204U3a085e.webp" 
-        imageAlt="Caregiver helping senior manage prescription timeline accurately"
-      />
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Dependable Routine Monitoring"
+          title="In-Home Medication Reminders for Seniors"
+          description=""
+          primaryAction={{ label: "Request Reminder Setup", href: "/contact-us" }}
+          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          imageSrc="/nh-2371714204U3a085e.webp" 
+          imageAlt="Caregiver helping senior manage prescription timeline accurately"
+        />
+      </div>
 
       {/* Overview Section */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/30">

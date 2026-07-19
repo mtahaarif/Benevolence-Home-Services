@@ -151,15 +151,18 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      <HeroSection
-        eyebrow="Insights & Guidance"
-        title="The Benevolence Care Journal"
-        description="Expert senior care advice, local Westchester health resources, and compassionate support strategies designed to help families navigate home care journeys smoothly."
-        primaryAction={{ label: "Contact Us", href: "/contact-us" }}
-        secondaryAction={{ label: "Explore Services", href: "/services" }}
-        imageSrc="/non-home-banner.jpg"
-        imageAlt="Senior reading an informative book safely at home"
-      />
+      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Educational Insights &amp; Family Caregiver Advice"
+          title="The Benevolence Senior Care &amp; Wellness Blog"
+          description=""
+          primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
+          secondaryAction={{ label: "Explore Our Services", href: "/services" }}
+          imageSrc="/non-home-banner.jpg"
+          imageAlt="Senior reading an informative book safely at home"
+        />
+      </div>
 
       {/* ARTICLE HEADING BLOCK */}
       <section className="bg-white pt-16 pb-6 px-4 sm:px-6 lg:px-8">

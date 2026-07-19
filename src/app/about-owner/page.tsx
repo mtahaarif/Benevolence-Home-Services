@@ -8,17 +8,19 @@ import ScrollReveal from "@/components/scroll-reveal";
 export default function AboutOwnerPage() {
   return (
     <>
-      {/* Hero Banner Component (Kept static/unwrapped for optimized LCP load speeds) */}
-      <HeroSection
-        eyebrow="About Us"
-        title="Get to Know the Owner"
-        description="Respite Care in Westchester, Illinois"
-        primaryAction={{ label: "Contact Us", href: "/contact-us" }}
-        secondaryAction={{ label: "View Services", href: "/services" }}
-        imageSrc="/nh-2412692819U06281e.webp" 
-        imageAlt="Compassionate home care support in Westchester"
-      />
-
+      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Our Mission, Values & Faith-Based Commitment"
+          title="Get to Know the Owner"
+          description=""
+          primaryAction={{ label: "Connect With Our Team", href: "/contact-us" }}
+          secondaryAction={{ label: "Explore Our Services", href: "/services" }}
+          imageSrc="/nh-2412692819U06281e.webp" 
+          imageAlt="Compassionate home care support in Westchester"
+        />
+      </div>
+      
       {/* Biography Section */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/40">

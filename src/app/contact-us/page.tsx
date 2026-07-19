@@ -6,15 +6,22 @@ import { contactDetails } from "@/data/site-content";
 export default function ContactUsPage() {
   return (
     <>
-      <HeroSection
-        eyebrow=""
-        title="Contact Us"
-        description="Home Care Information in Westchester, Illinois"
-        primaryAction={{ label: "Book a Free Consultation", href: contactDetails.calendly }}
-        secondaryAction={{ label: "Call Now", href: contactDetails.phoneHref }}
-        imageSrc="/nh-2412692819U06281e.webp"
-        imageAlt="Caregiver and elderly woman looking at a tablet"
-      />
+
+      {/* HERO BANNER SECTION WITH ARBITRARY CHILD TARGETING FOR BUTTON COLOR */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Schedule an In-Home Assessment"
+          title="Connect with Westchester's Trusted Care Team"
+          description=""
+          primaryAction={{ 
+            label: "Book a Free Consultation", 
+            href: contactDetails.calendly
+          }}
+          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          imageSrc="/nh-2412692819U06281e.webp"
+          imageAlt="Caregiver and elderly woman looking at a tablet"
+        />
+      </div>
 
       <section className="px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
         <PageShell>

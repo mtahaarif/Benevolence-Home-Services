@@ -179,15 +179,17 @@ export default function TransportationServicesPage() {
   return (
     <>
       {/* Banner / Hero Section */}
-      <HeroSection
-        eyebrow="Services"
-        title="Transportation Services"
-        description="Access reliable assistance for errands, shopping, and essential appointments."
-        primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
-        secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
-        imageSrc="/nh-140315263.webp"
-        imageAlt="Caregiver accompanying senior citizen safely during vehicle transition"
-      />
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Safe &amp; Reliable Door-to-Door Escort Transit"
+          title="Senior Transportation &amp; Companion Travel Support"
+          description=""
+          primaryAction={{ label: "Book Senior Transit", href: "/contact-us" }}
+          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          imageSrc="/nh-140315263.webp"
+          imageAlt="Caregiver accompanying senior citizen safely during vehicle transition"
+        />
+      </div>
 
       {/* Overview Section */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/30">

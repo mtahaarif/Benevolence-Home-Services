@@ -43,17 +43,18 @@ export default function PersonalCarePage() {
 
   return (
     <>
-      {/* Hero Banner Section */}
+    {/* Hero Banner Section */}
+    <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
       <HeroSection
-        eyebrow="Services"
-        title="Personal Care"
-        description="Support mobility needs through safe transfers and proper positioning techniques"
-        primaryAction={{ label: "Book a Free Consultation", href: "/contact-us" }}
-        secondaryAction={{ label: "Call Now", href: "tel:7083040296" }}
+        eyebrow="Dignified Daily Lifestyle Support"
+        title="In-Home Personal Care Assistance in Westchester, IL"
+        description=""
+        primaryAction={{ label: "Schedule Personal Care", href: "/contact-us" }}
+        secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
         imageSrc="/nh-2411535922U62t38i.webp" 
         imageAlt="Caregiver providing professional personal care support"
       />
-
+    </div>
       {/* Section 1: Overview & Scope */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/30">
         <PageShell>
