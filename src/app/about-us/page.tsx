@@ -7,16 +7,17 @@ import ScrollReveal from "@/components/scroll-reveal";
 
 // 1. STATIC METADATA ENGINE: Pre-rendered on the server for maximum indexing authority
 export const metadata: Metadata = {
-  // OPTIMIZATION: Shortened title to resolve the "Title too long / > 580 pixels" and repetition warnings
-  title: "About Our Home Care Agency | Benevolence Home Services",
+  // OPTIMIZATION: Removed the hardcoded brand name. Next.js layout.tsx will append " | Benevolence Home Services" automatically.
+  // This completely resolves the "Title too long" and "Word repetition" penalties!
+  title: "About Our Home Care Agency",
   
-  // OPTIMIZATION: Shortened description to resolve the "> 1000 pixels" critical warning
   description: "Benevolence Home Services is a nurse-led home care agency in Westchester, IL, providing compassionate senior support across Chicagoland.",
   
-  // OPTIMIZATION: Ensures correct canonical routing 
+  // OPTIMIZATION: Using a relative path syncs flawlessly with the metadataBase in layout.tsx, resolving the Canonical mismatch error.
   alternates: {
-    canonical: "https://www.benevolencehomeservices.com/about-us",
+    canonical: "/about-us",
   },
+  
   keywords: [
     "Non-medical home care agency Westchester IL",
     "Nurse-led home care agency Chicago suburbs",
@@ -25,32 +26,30 @@ export const metadata: Metadata = {
     "Faith-based home care solutions Illinois",
     "Personal care assistance near me"
   ],
+  
   openGraph: {
-    title: "About BENEVOLENCE HOME SERVICES | Nurse-Led Senior Care",
+    title: "About Our Home Care Agency | Benevolence Home Services",
     description: "Discover our nurse-guided approach to personalized home care, companionship, and specialized dementia support frameworks across Chicagoland.",
     url: "https://www.benevolencehomeservices.com/about-us",
-    siteName: "BENEVOLENCE HOME SERVICES",
+    siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/footer-logo.png",
-        width: 800,
-        height: 600,
-        alt: "Benevolence Home Services and Staffing Agency Corporate Logo",
+        url: "/nh-23102650536U12a54t.webp",
+        width: 1200,
+        height: 630,
+        alt: "Benevolence Home Services Caregiver supporting a senior at home",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Our Home Care Agency | Benevolence Home Services",
+    description: "Discover our nurse-guided approach to personalized home care across Chicagoland.",
+    images: ["/nh-23102650536U12a54t.webp"],
   }
 };
-
-// Zero-dependency semantic SVG vector primitives
-function CheckIcon() {
-  return (
-    <svg className="w-5 h-5 text-[#ea6725] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-    </svg>
-  );
-}
 
 export default function AboutUsPage() {
   return (
@@ -72,7 +71,6 @@ export default function AboutUsPage() {
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white" aria-labelledby="who-we-are-heading">
           <PageShell>
             <div className="mx-auto max-w-3xl text-center space-y-6">
-              {/* OPTIMIZATION: Injected exact title keywords into content for Title/Content synchronization */}
               <span id="who-we-are-heading" className="text-[12px] font-bold uppercase tracking-widest text-[#0c3e72]">
                 About Our Home Care Agency
               </span>
@@ -85,7 +83,6 @@ export default function AboutUsPage() {
               <div className="text-sm sm:text-base leading-relaxed text-slate-600 space-y-6 pt-4 max-w-2xl mx-auto">
                 <p>
                   Benevolence Home Services is a trusted provider of non-medical services based in Westchester, Illinois. When learning about our home care agency, families discover that we are dedicated to enhancing the quality of life for individuals who need supportive care. We deliver <strong>compassionate senior support rooted in integrity</strong> while helping clients maintain independence and dignity in the comfort of their own homes. 
-                  {/* ^ OPTIMIZATION: H1 keywords injected above to fix the "Words from H1 not found in text" warning */}
                 </p>
                 <p>
                   As a nurse-led home care agency, we bring clinical insight, professional oversight, and a deep commitment to quality into every aspect of care. Our services are thoughtfully designed to support daily living while providing families with confidence, peace of mind, and continuity of care. We understand that every household manages separate requirements, which is why our care plans avoid a one-size-fits-all approach.
@@ -136,7 +133,7 @@ export default function AboutUsPage() {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-6 py-3.5 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
                   >
                     Start a Conversation Today
-                    <span className="sr-only"> about our mission</span> {/* OPTIMIZATION: Resolves duplicate anchor text */}
+                    <span className="sr-only"> about our mission</span>
                     <span aria-hidden="true" className="text-[10px] font-bold">→</span>
                   </Link>
                 </div>
@@ -215,7 +212,7 @@ export default function AboutUsPage() {
                     className="inline-flex items-center justify-center rounded-full bg-[#ea6725] px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-brand-orange transition-all duration-300"
                   >
                     Request a Consultation
-                    <span className="sr-only"> regarding our core framework</span> {/* OPTIMIZATION: Resolves duplicate anchor text */}
+                    <span className="sr-only"> regarding our core framework</span>
                   </Link>
                 </div>
               </ScrollReveal>
@@ -236,7 +233,6 @@ export default function AboutUsPage() {
                     <div aria-hidden="true" className="font-display text-4xl md:text-5xl font-light text-slate-300/80 mb-4 group-hover:text-[#ea6725] transition-colors duration-500 select-none">
                       {item.num}
                     </div>
-                    {/* OPTIMIZATION: Removed <h3> tags here and converted to styling classes to resolve the "28 Headings" structural flag */}
                     <p className="text-2xl font-display font-bold text-brand-ink mb-3 group-hover:text-[#0c3e72] transition-colors duration-500">
                       {item.title}
                     </p>
@@ -342,7 +338,6 @@ export default function AboutUsPage() {
                       <span aria-hidden="true" className="font-display text-4xl font-extralight text-slate-300 select-none block mb-2 tracking-tight">
                         Stage {(idx + 1).toString()}
                       </span>
-                      {/* OPTIMIZATION: Removed <h4> tags here and converted to styling classes to resolve the "28 Headings" structural flag */}
                       <p className="font-display font-bold text-xl text-brand-ink mb-2">
                         {step.title}
                       </p>
@@ -366,7 +361,6 @@ export default function AboutUsPage() {
             
             <div className="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm flex flex-col justify-between hover:border-[#0c3e72]/10 transition-colors">
               <div>
-                {/* OPTIMIZATION: Removed <h4> tags to reduce overall heading count bloat */}
                 <p className="font-display font-bold text-lg text-brand-ink mb-4">Non-Medical Support for Daily Living</p>
                 <ul className="space-y-2">
                   {[
