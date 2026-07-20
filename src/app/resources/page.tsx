@@ -12,7 +12,9 @@ export default function ResourcesPage() {
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
           eyebrow="Elder Care Guides & Family Resources"
-          title="Illinois Senior Care Resources & Planning"
+          // OPTIMIZATION FIX: Injected the brand name into the H1 so that all words 
+          // from the Meta Title are represented within the H1 heading.
+          title="Illinois Senior Care Resources by Benevolence Home Services"
           primaryAction={{ 
             label: "Request a Care Consultation", 
             href: "/contact-us"
@@ -34,7 +36,6 @@ export default function ResourcesPage() {
               <h2 className="font-display text-3xl sm:text-4xl font-semibold text-brand-ink mb-6">
                 Trusted Reference Portals
               </h2>
-              {/* OPTIMIZATION: Expanded word count & paragraph count. Injected exact H1/Title matches. */}
               <div className="space-y-4 text-sm sm:text-base leading-relaxed text-slate-600">
                 <p>
                   Navigating elder care can be complex, which is why we have compiled these <strong>Illinois senior care resources and planning</strong> guides. These trusted reference portals offer additional information about public health directives, home care regulations, and healthcare workforce guidance.
@@ -71,9 +72,8 @@ export default function ResourcesPage() {
                   </div>
 
                   <div className="flex items-center gap-1.5 pt-4 text-[10px] font-bold uppercase tracking-wider text-slate-400 group-hover:text-brand-orange transition-colors">
-                    Visit Website 
-                    {/* OPTIMIZATION: Screen-reader-only text solves the "Duplicate Anchor Texts" penalty */}
-                    <span className="sr-only"> for {resource.label}</span>
+                    {/* OPTIMIZATION FIX: Made the visible text dynamically unique to resolve the "Duplicate Anchor Text" penalty from crawler stripping the sr-only class. */}
+                    <span className="truncate">Access {resource.label}</span> 
                     <span aria-hidden="true" className="text-xs font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                   </div>
                 </a>
@@ -83,7 +83,64 @@ export default function ResourcesPage() {
         </PageShell>
       </section>
 
-      {/* Section 2: Immersive Bottom Exploration CTA */}
+      {/* OPTIMIZATION FIX: Section 2: Comprehensive Educational Guide (SEO Word Count Optimization). 
+          Added ~400 highly relevant, keyword-rich words to satisfy the "Thin Content / Under 800 words" critical warning. */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-white border-t border-slate-100" aria-label="Elder Care Planning Guide">
+        <PageShell>
+          <ScrollReveal>
+            <div className="max-w-4xl mx-auto space-y-10">
+              <div className="text-center mb-12">
+                <h2 className="font-display text-2xl sm:text-3xl font-semibold text-brand-ink">
+                  A Comprehensive Guide to Senior Care Planning in Illinois
+                </h2>
+                <p className="text-slate-500 mt-4 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
+                  Making informed decisions about elder care requires understanding the full spectrum of medical, legal, and financial support systems available. We have prepared this guide to help you utilize the resources above effectively.
+                </p>
+              </div>
+
+              <div className="space-y-8">
+                <div>
+                  <h3 className="font-display text-xl font-bold text-brand-ink mb-3">
+                    1. Assessing Daily Care and Medical Needs
+                  </h3>
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                    The first step in any senior care journey is properly evaluating the individual's ability to perform Activities of Daily Living (ADLs) such as bathing, dressing, meal preparation, and mobility. Utilizing the Illinois Department on Aging's functional assessment tools can give families a clear baseline. If cognitive decline is a concern, reaching out to the Alzheimer's Association local chapters early ensures you have access to memory care planning, caregiver support groups, and safety intervention strategies. Professional in-home care agencies, like Benevolence Home Services, often conduct these clinical assessments during initial consultations under the supervision of a Registered Nurse.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display text-xl font-bold text-brand-ink mb-3">
+                    2. Navigating Financial and Insurance Frameworks
+                  </h3>
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                    Understanding how to pay for senior care is one of the most common challenges families face. It is essential to recognize the differences between standard health insurance, Medicare, Medicaid, and private Long-Term Care (LTC) Insurance. While Medicare typically covers short-term rehabilitative stays and specific skilled nursing needs following a hospital admission, it generally does not pay for ongoing, non-medical custodial care at home. The Senior Health Insurance Program (SHIP) provided by the state of Illinois offers free, objective counseling to help you understand your Medicare benefits. Additionally, exploring Veterans Affairs (VA) benefits, such as the Aid and Attendance pension, can provide crucial financial relief for eligible veterans and their surviving spouses.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display text-xl font-bold text-brand-ink mb-3">
+                    3. Establishing Legal and Advance Directives
+                  </h3>
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                    Proactive legal planning protects the rights and wishes of older adults before a crisis occurs. Families should consult with elder law attorneys to establish essential documents, including a Durable Power of Attorney for Healthcare and Property, a Living Will, and specific Advance Directives. The Illinois Guardianship and Advocacy Commission is a valuable public portal for understanding state-specific requirements for legal guardianship and patient rights. Having these frameworks in place ensures that trusted family members can make rapid medical or financial decisions if their loved one suddenly becomes incapacitated or unable to communicate effectively.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display text-xl font-bold text-brand-ink mb-3">
+                    4. The Benefits of Local, Nurse-Led In-Home Care
+                  </h3>
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                    For many families in Westchester, Cook County, and DuPage County, the goal is to safely age in place. Partnering with a licensed, nurse-led agency guarantees that the care plan is clinically sound and adaptable to changing health conditions. We encourage families to use the Illinois Department of Public Health (IDPH) Health Care Worker Registry to verify agency compliance and caregiver background check standards. By leveraging both community resources and professional home care services, families can build a comprehensive safety net that prioritizes dignity, independence, and peace of mind for their aging loved ones.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </PageShell>
+      </section>
+
+      {/* Section 3: Immersive Bottom Exploration CTA */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-t border-brand-blue/10 rounded-t-[3rem]">
           <PageShell>
@@ -106,7 +163,7 @@ export default function ResourcesPage() {
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-md transition-all duration-300 hover:bg-brand-blue active:scale-98"
                 >
                   Contact Our Care Team
-                  <span className="sr-only"> for resource guidance</span> {/* OPTIMIZATION: Unique anchor link */}
+                  <span className="sr-only"> for resource guidance</span>
                   <span aria-hidden="true" className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[9px] font-bold">
                     →
                   </span>
@@ -115,7 +172,7 @@ export default function ResourcesPage() {
                   href="/about-us"
                   className="inline-flex items-center justify-center rounded-full bg-white border border-slate-200 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-brand-ink transition hover:bg-slate-50 shadow-sm"
                 >
-                  About Our Agency
+                  Learn About Our Agency
                 </Link>
               </div>
             </div>

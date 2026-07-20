@@ -93,9 +93,11 @@ export default function CareersPage() {
       <div className="[&_a[href*='jotform.com']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
           eyebrow="Build a meaningful career in senior home care"
-          title="Join Our Growing Care Team"
+          // OPTIMIZATION FIX: Injected "Home Care Careers" directly into the H1 to resolve the "Words from page title not used within H1" penalty.
+          title="Home Care Careers: Join Our Care Team"
           primaryAction={{ 
-            label: "Apply Online Now", 
+            // OPTIMIZATION FIX: Replaced generic "Apply Now" with specific anchor text to resolve duplicate anchor warnings.
+            label: "Apply for Caregiver Jobs", 
             href: "https://www.jotform.com/app/223625216444452"
           }}
           secondaryAction={{ label: "Discover Our Mission", href: "/about-us" }}
@@ -112,7 +114,6 @@ export default function CareersPage() {
               centered
               eyebrow="Why Work With Benevolence"
               title="A Steady, Respectful Workplace Built for Impact"
-              // OPTIMIZATION: H1 and Meta Title phrases strategically injected here to satisfy content matching penalties.
               description="At Benevolence Home Services, we recognize that to care deeply for our clients, we must first empower and uplift our caregivers. If you are seeking rewarding home care careers and caregiver jobs, we invite you to join our growing care team. We don't utilize third-party schedulers to make critical decisions—our agency is entirely guided by active clinical judgment."
             />
           </ScrollReveal>
@@ -243,8 +244,9 @@ export default function CareersPage() {
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-6 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-brand-blue transition-all duration-300"
                   >
-                    Launch External Intake Form
-                    <span className="sr-only"> for {activeRole.title} position</span> {/* OPTIMIZATION: Resolves duplicate anchor text */}
+                    {/* OPTIMIZATION FIX: Changed anchor text so it doesn't match the other Jotform links */}
+                    Submit Position Application
+                    <span className="sr-only"> for {activeRole.title} position</span>
                     <span aria-hidden="true" className="text-xs font-light">→</span>
                   </a>
                 </div>
@@ -322,8 +324,9 @@ export default function CareersPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-[#0c5a99] transition-all duration-300 w-full sm:w-auto"
                   >
-                    Start Online Application
-                    <span className="sr-only"> today to join our team</span> {/* OPTIMIZATION: Resolves duplicate anchor text */}
+                    {/* OPTIMIZATION FIX: Adjusted button text to be distinct from previous sections */}
+                    Start Your Online Application
+                    <span className="sr-only"> today to join our team</span>
                     <span aria-hidden="true" className="text-sm font-light">→</span>
                   </a>
                   
