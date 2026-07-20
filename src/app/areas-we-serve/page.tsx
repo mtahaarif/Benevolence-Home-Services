@@ -36,18 +36,6 @@ const regionalData = [
     ]
   },
   {
-    id: "kane-county",
-    name: "Kane County",
-    description: "Extending professional, nurse-led companion models and dignified personal routine assistance throughout Kane County territory.",
-    cities: [
-      { name: "Aurora", zipCodes: "60505, 60506", desc: "Comprehensive elder care options, 24-hour live-in support plans, and dedicated companion care in Aurora." },
-      { name: "St. Charles", zipCodes: "60174, 60175", desc: "Tailored memory support frameworks, hourly respite options, and personalized routine assistance in St. Charles." },
-      { name: "Geneva", zipCodes: "60134", desc: "Trusted homemaker assistance, grocery shopping errands, and continuous non-medical support for Geneva seniors." },
-      { name: "Batavia", zipCodes: "60510", desc: "Reliable medication reminders, safe mobility guidance, and light housekeeping tasks in Batavia." },
-      { name: "Elgin", zipCodes: "60120 - 60124", desc: "Compassionate senior companionship, routine wellness oversight, and dignified personal care options for Elgin families." }
-    ]
-  },
-  {
     id: "lake-county",
     name: "Lake County",
     description: "Providing specialized non-medical home care options, memory care support, and friendly companion escorts for Lake County families.",
@@ -251,7 +239,7 @@ export default function AreasWeServePage() {
             <div className="mx-auto max-w-3xl space-y-6">
               <h2 className="text-3xl md:text-5xl font-display font-bold text-white">Let Us Help You Build the Right Care Plan</h2>
               <p className="text-blue-100/80 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
-                Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, BENEVOLENCE HOME SERVICES is ready to help. Contact us to discuss non-medical home care in Westchester or throughout Cook, DuPage, Kane, Lake, and Will Counties.
+                Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, BENEVOLENCE HOME SERVICES is ready to help. Contact us to discuss non-medical home care in Westchester or throughout Cook, DuPage, Lake, and Will Counties.
               </p>
               
               <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
