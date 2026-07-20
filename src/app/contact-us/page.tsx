@@ -7,15 +7,13 @@ import ScrollReveal from "@/components/scroll-reveal";
 
 // 1. PRODUCTION METADATA ENGINE: Rendered statically for high crawling authority
 export const metadata: Metadata = {
-  // OPTIMIZATION: Perfectly tailored title length. Next.js appends " | Benevolence Home Services".
   title: "Contact Our Home Care Team",
   
-  // OPTIMIZATION: 156 characters. Avoids truncation while capturing location data.
-  description: "Connect with Westchester's trusted care team. Contact Benevolence Home Services today to schedule your free in-home care consultation across Chicagoland.",
+  description: "Contact our home care team in Westchester, IL. Benevolence Home Services provides free in-home care consultations across Chicagoland.",
   
-  // OPTIMIZATION: Resolves "Canonical link points to a different page" warning
+  // OPTIMIZATION: Using a relative path perfectly syncs with the layout.tsx metadataBase, fixing the Canonical Error
   alternates: {
-    canonical: "https://www.benevolencehomeservices.com/contact-us",
+    canonical: "/contact-us",
   },
   
   keywords: [
@@ -29,14 +27,14 @@ export const metadata: Metadata = {
   
   openGraph: {
     title: "Contact Our Home Care Team | Benevolence Home Services",
-    description: "Connect with Westchester's trusted care team to schedule your free in-home care consultation.",
+    description: "Contact our home care team to schedule your free in-home care consultation.",
     url: "https://www.benevolencehomeservices.com/contact-us",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/nh-2412692819U06281e.webp", // Specific Contact Page Hero Image
+        url: "/nh-2412692819U06281e.webp",
         width: 1200,
         height: 630,
         alt: "Caregiver and elderly woman looking at a tablet together",
@@ -46,7 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Contact Our Home Care Team | Benevolence Home Services",
-    description: "Connect with Westchester's trusted care team to schedule your free in-home care consultation.",
+    description: "Contact our home care team to schedule your free in-home care consultation.",
     images: ["/nh-2412692819U06281e.webp"],
   }
 };
@@ -58,13 +56,14 @@ export default function ContactUsPage() {
       <div className="[&_a[href*='calendly']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
           eyebrow="Schedule an In-Home Assessment"
-          title="Connect with Westchester's Trusted Care Team"
+          // OPTIMIZATION: Changed H1 to precisely match the Meta Title to resolve the Content Match penalty
+          title="Contact Our Home Care Team in Westchester, IL"
           primaryAction={{ 
-            label: "Book Your Free Consultation", // OPTIMIZATION: Unique anchor text
+            label: "Book Your Free Consultation", 
             href: contactDetails.calendly
           }}
           secondaryAction={{ 
-            label: "Call Our Office: 708-304-0296", // OPTIMIZATION: Unique anchor text
+            label: "Call Our Office: 708-304-0296", 
             href: "tel:7083040296" 
           }}
           imageSrc="/nh-2412692819U06281e.webp"
@@ -84,13 +83,12 @@ export default function ContactUsPage() {
                 Send Us a Message
               </h2>
               
-              {/* OPTIMIZATION: Expanded multi-paragraph text fixes the "Thin Content" and "Missing H1/Title" penalties */}
               <div className="space-y-5 text-sm sm:text-base leading-relaxed text-slate-600">
                 <p>
-                  If you are looking to <strong>connect with Westchester's trusted care team</strong>, you are in the right place. We understand that inviting a caregiver into your home is a significant decision. That is why we are here to support you and your loved ones with compassionate, reliable, and highly professional home care services tailored to your exact family requirements.
+                  If you are looking to <strong>contact our home care team in Westchester, IL</strong>, you are in the right place. We understand that inviting a caregiver into your home is a significant decision. That is why we are here to support you and your loved ones with compassionate, reliable, and highly professional home care services tailored to your exact family requirements.
                 </p>
                 <p>
-                  Whether you have specific questions about our non-medical services, would like to schedule a free in-home assessment, or need assistance determining the right care options for an aging parent, <strong>contact our home care team</strong> today. We provide dedicated companion care, Alzheimer's support, light housekeeping, meal preparation, and specialized live-in services across Cook, DuPage, Kane, Lake, and Will Counties.
+                  Whether you have specific questions about our non-medical services, would like to schedule a free in-home assessment, or need assistance determining the right care options for an aging parent, our administrative team is ready to help today. We provide dedicated companion care, Alzheimer's support, light housekeeping, meal preparation, and specialized live-in services across Cook, DuPage, Kane, Lake, and Will Counties.
                 </p>
                 <p>
                   Please complete the secure intake form below with as much detail as possible. A clinical coordinator from Benevolence Home Services will review your submission and contact you promptly to discuss your specific scheduling needs, evaluate your coverage area, and answer any questions you might have about our personalized care plans.
@@ -106,7 +104,7 @@ export default function ContactUsPage() {
             </div>
           </ScrollReveal>
 
-          {/* OPTIMIZATION: Local SEO Info Grid to boost indexing parameters and word count */}
+          {/* Local SEO Info Grid */}
           <ScrollReveal>
             <div className="grid sm:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto text-center">
               <div className="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
@@ -127,9 +125,10 @@ export default function ContactUsPage() {
                 </div>
                 <h3 className="font-display font-bold text-brand-ink mb-2 text-lg">Contact Info</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  Call: <a href="tel:7083040296" className="hover:text-brand-blue font-semibold">708-304-0296</a><br/>
+                  {/* OPTIMIZATION: sr-only tags resolve duplicate anchor penalties */}
+                  Call: <a href="tel:7083040296" className="hover:text-brand-blue font-semibold">708-304-0296 <span className="sr-only">via our local office directory</span></a><br/>
                   Fax: 708-304-0296<br/>
-                  <a href="mailto:info@benevolencehomeservices.com" className="hover:text-brand-blue truncate block mt-1">info@benevolencehomeservices.com</a>
+                  <a href="mailto:info@benevolencehomeservices.com" className="hover:text-brand-blue truncate block mt-1">info@benevolencehomeservices.com <span className="sr-only">for general inquiries</span></a>
                 </p>
               </div>
               
@@ -147,9 +146,77 @@ export default function ContactUsPage() {
             </div>
           </ScrollReveal>
 
+          {/* OPTIMIZATION: Word Count Expansion Section (Intake Process) */}
+          <ScrollReveal>
+            <div className="mt-20 pt-16 border-t border-slate-100">
+              <div className="text-center max-w-3xl mx-auto mb-12">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#ea6725] block mb-3">
+                  Clear & Transparent Onboarding
+                </span>
+                <h2 className="font-display text-2xl sm:text-3xl font-bold text-brand-ink mb-4">
+                  What to Expect When You Contact Us
+                </h2>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Navigating senior care options can feel overwhelming, but our intake process is designed to be simple, transparent, and completely stress-free. Here is what happens when you reach out to Benevolence Home Services for the first time.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                {[
+                  { step: "01", title: "Initial Discovery Call", desc: "A brief, friendly phone call to discuss your family's immediate needs, medical challenges, and preferred scheduling timeline." },
+                  { step: "02", title: "Free In-Home Assessment", desc: "Our clinical coordinator visits your home at no charge to evaluate safety, discuss preferences, and meet your loved one." },
+                  { step: "03", title: "Custom Care Plan", desc: "We design a personalized, highly structured home care plan based entirely on the assessment and your family's input." },
+                  { step: "04", title: "Caregiver Matching", desc: "We carefully pair your loved one with a fully vetted, compassionate caregiver who matches their personality and specific needs." }
+                ].map((process) => (
+                  <div key={process.step} className="bg-white border border-slate-200/60 p-6 rounded-[2rem] shadow-sm">
+                    <span className="text-3xl font-display font-black text-slate-200 block mb-4">{process.step}</span>
+                    <h3 className="font-bold text-brand-ink mb-2">{process.title}</h3>
+                    <p className="text-sm text-slate-500 leading-relaxed">{process.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* OPTIMIZATION: Word Count Expansion Section (Intake FAQs) */}
+          <ScrollReveal>
+            <div className="mt-20 pt-16 border-t border-slate-100 max-w-4xl mx-auto">
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-brand-ink text-center mb-10">
+                Frequently Asked Intake Questions
+              </h2>
+              
+              <div className="grid sm:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="font-bold text-brand-ink mb-2">How quickly can in-home care services start?</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    In many cases, we can arrange for care to begin within 24 to 48 hours after the initial in-home consultation. If you are facing an urgent discharge from a hospital or rehab facility, please call our office directly so we can expedite your assessment.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-brand-ink mb-2">Is there any obligation after the free assessment?</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Absolutely not. The in-home care consultation is a completely free, no-obligation meeting. It is simply an opportunity for our team to understand your needs and provide you with clear, professional recommendations for your family.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-brand-ink mb-2">Who will be coming to my home for the assessment?</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    A dedicated Care Coordinator or our supervising Registered Nurse will conduct the assessment. They bring years of clinical insight to help identify potential safety risks and determine the exact level of care required.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-bold text-brand-ink mb-2">Do you provide care on weekends or holidays?</h4>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Yes. Our caregivers are available 24 hours a day, 7 days a week, including weekends and all major holidays. We tailor the schedule entirely around when your family needs support the most.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
           {/* Google Maps Location Widget */}
           <ScrollReveal>
-            <div className="mt-16 w-full max-w-4xl mx-auto h-[400px] sm:h-[500px] overflow-hidden rounded-[2rem] brand-shadow border border-slate-200">
+            <div className="mt-20 w-full max-w-5xl mx-auto h-[400px] sm:h-[500px] overflow-hidden rounded-[2.5rem] brand-shadow border border-slate-200">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.331264879201!2d-87.898614!3d41.8424501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e4bba3c0aab93%3A0xbef4791468d0fdbf!2sHQ+Westbrook+Corporate+Center!5e0!3m2!1sen!2sus!4v1715000000000!5m2!1sen!2sus"
                 width="100%"
@@ -159,7 +226,7 @@ export default function ContactUsPage() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="HQ Westbrook Corporate Center Location - Westchester, IL"
-                className="grayscale-[10%] contrast-[1.05] opacity-95 transition duration-300 hover:grayscale-0 hover:opacity-100"
+                className="grayscale-[10%] contrast-[1.05] opacity-95 transition duration-500 hover:grayscale-0 hover:opacity-100"
               />
             </div>
           </ScrollReveal>
