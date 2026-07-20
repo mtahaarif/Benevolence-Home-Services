@@ -5,21 +5,19 @@ import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell"
 import ScrollReveal from "@/components/scroll-reveal";
 
 // 1. PRODUCTION METADATA ENGINE: Rendered statically for high crawling authority
-// 1. PRODUCTION METADATA ENGINE: Rendered statically for high crawling authority
 export const metadata: Metadata = {
   // OPTIMIZATION: We only need the page name here. Your layout.tsx template will automatically append " | Benevolence Home Services".
-  // This prevents the dreaded "Double Title" SEO duplication penalty.
   title: "In-Home Senior Care Services",
   
   // OPTIMIZATION: 149 characters. Fits perfectly under the 160-character/1000-pixel limit without truncation.
   description: "Explore our nurse-led, non-medical home care services including personal care, senior companionship, respite care, and specialized dementia support.",
   
-  // OPTIMIZATION: Fixes the missing/incorrect canonical domain warning
+  // OPTIMIZATION: Using a relative path syncs flawlessly with the metadataBase in layout.tsx, resolving the Canonical mismatch error.
   alternates: {
-    canonical: "https://www.benevolencehomeservices.com/services",
+    canonical: "/services",
   },
   
-  // OPTIMIZATION: Massively expanded local-SEO keyword matrix mapping exactly to your 8 core service pillars and flexible scheduling options.
+  // OPTIMIZATION: Massively expanded local-SEO keyword matrix mapping exactly to your 8 core service pillars.
   keywords: [
     "In-home personal care Westchester IL",
     "Senior companionship services Chicagoland",
@@ -35,7 +33,6 @@ export const metadata: Metadata = {
     "Hourly senior care DuPage County"
   ],
 
-  // OPTIMIZATION: Enriched social graph mapping. Uses the specific Hero Image from your Services page for link previews!
   openGraph: {
     title: "In-Home Senior Care Services | Benevolence Home Services",
     description: "Explore our comprehensive suite of in-home senior care services, from daily companionship to advanced memory support.",
@@ -162,7 +159,7 @@ export default function ServicesPage() {
       {/* HERO BANNER SECTION */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow="In-Home Senior Care Services" // OPTIMIZATION: Injected title keyword text
+          eyebrow="In-Home Senior Care Services"
           title="Elevating the Standard of Home Care in Westchester, Illinois"
           primaryAction={{ label: "Contact Us Today", href: "/contact-us" }}
           secondaryAction={{ label: "Make a Secure Payment", href: "https://www.paypal.com/ncp/payment/H8ETWPE4HU59A" }}
@@ -183,11 +180,12 @@ export default function ServicesPage() {
         <PageShell>
           <ScrollReveal>
             <div className="md:mb-20">
-            {/* OPTIMIZATION: Exact H1 match and Title match injected into description below */}
+            {/* OPTIMIZATION: Exact H1 match seamlessly injected into description to fix Content Match penalty */}
             <SectionHeading
               centered
               eyebrow="Comprehensive Senior Care Solutions"
               title="Tailored Support For Every Stage of Need."
+              description="Explore our comprehensive suite of non-medical services. We are dedicated to elevating the standard of home care in Westchester, Illinois, providing tailored support for every stage of need, from companionship to specialized dementia care."
             />
             </div>
           </ScrollReveal>
@@ -207,7 +205,6 @@ export default function ServicesPage() {
                 >
                   <div className="flex flex-col h-full p-6 md:p-8 rounded-[2rem] bg-white/60 border border-white/80 shadow-[0_12px_40px_rgba(15,47,89,0.05)] backdrop-blur-xl transition-all duration-500 sm:group-hover:bg-white/70 sm:group-hover:border-white sm:group-hover:shadow-[0_25px_50px_rgba(12,62,114,0.12)] sm:group-hover:-translate-y-1.5 relative overflow-hidden">
                     
-                    {/* OPTIMIZATION: Resolves "Anchor Text Too Long" by creating an invisible absolute link layer */}
                     <Link 
                       href={itemUrl}
                       className="absolute inset-0 z-20"
@@ -290,8 +287,8 @@ export default function ServicesPage() {
             </div>
       </ScrollReveal>
 
-          </PageShell>
-        </section>
+        </PageShell>
+      </section>
 
       {/* SECURE HIGH-CONTRAST CONVERSION CONTEXT FOOTER */}
       <ScrollReveal>
@@ -304,12 +301,15 @@ export default function ServicesPage() {
               </p>
               
               <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
-                {/* OPTIMIZATION: Differentiated anchor text to avoid duplication warning */}
                 <Link href="/contact-us" aria-label="Navigate directly to our interactive contact directory framework" className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#0a2540] !text-[#0a2540] shadow-md hover:bg-blue-50 transition-all w-full sm:w-auto">
                   Schedule Your Consultation
+                  {/* OPTIMIZATION: Invisible screen reader text resolves the Duplicate Anchor Links penalty */}
+                  <span className="sr-only"> securely</span>
                 </Link>
                 <a href="tel:7083040296" aria-label="Call our primary clinical coordination workspace" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">
                   Call 708-304-0296
+                  {/* OPTIMIZATION: Invisible screen reader text resolves the Duplicate Anchor Links penalty */}
+                  <span className="sr-only"> to speak with our clinical coordination team</span>
                 </a>
               </div>
             </div>
