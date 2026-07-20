@@ -60,7 +60,7 @@ function SpecializedIcon({ title }: { title: string }) {
   switch (title) {
     case "Alzheimer’s & Dementia Care":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Custom Brain/Cognitive Mapping Monoline Icon */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925-3.546 5.974 5.974 0 0 1-2.133-1A3.75 3.75 0 0 0 3 7.5a3.75 3.75 0 0 0 3.516 3.744A3.751 3.751 0 0 0 12 18Z" />
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 1-.495-7.467 5.99 5.99 0 0 1 1.925-3.546 5.974 5.974 0 0 0 2.133-1A3.75 3.75 0 0 1 21 7.5a3.75 3.75 0 0 1-3.516 3.744A3.751 3.751 0 0 1 12 18Z" />
@@ -68,14 +68,14 @@ function SpecializedIcon({ title }: { title: string }) {
       );
     case "Post-Surgery & Rehabilitation Support":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Custom Rehabilitation Arrow & Support Joint Monoline Icon */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
         </svg>
       );
     case "Support for Chronic Conditions & Disabilities":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Custom Physical Stability & Tremor Support Monoline Icon */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
         </svg>
@@ -83,7 +83,7 @@ function SpecializedIcon({ title }: { title: string }) {
     case "Palliative & End-of-Life Care Support":
     default:
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Custom Peace/Gentle Comfort Heart Monoline Icon */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
         </svg>
@@ -103,11 +103,11 @@ export default function SpecializedSupportPage() {
       {/* Banner / Hero Section */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow="Advanced Cognitive &amp; Memory Care"
-          title="Specialized Alzheimer's &amp; Dementia Care Plans"
-          description=""
-          primaryAction={{ label: "Request Specialized Care", href: "/contact-us" }}
-          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          eyebrow="Advanced Cognitive & Memory Care"
+          title="Specialized Alzheimer's & Dementia Care Plans"
+          // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Link penalty
+          primaryAction={{ label: "Request Specialized Support", href: "/contact-us" }}
+          secondaryAction={{ label: "Call for Specialized Care: 708-304-0296", href: "tel:7083040296" }}
           imageSrc="/nh-2212833857U072s1e.webp"
           imageAlt="Healthcare professional providing attentive, specialized support"
         />
@@ -128,14 +128,15 @@ export default function SpecializedSupportPage() {
               </ScrollReveal>
               
               <ScrollReveal>
+                {/* OPTIMIZATION: Injected the exact H1 and Title phrases to resolve the Content Match penalty */}
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  Certain needs require focused expertise, and this service is designed to address them with clarity and precision. Whether short-term or ongoing, every detail is handled with professionalism and intention. Individual requirements are prioritized, ensuring routines and care plans are consistently followed. Our team brings focus and dedication to every interaction. 
+                  Certain needs require focused expertise, and our <strong>specialized Alzheimer's & dementia care plans</strong> are designed to address them with clarity and precision. Whether short-term or ongoing, every detail is handled with professionalism and intention. Individual requirements are prioritized, ensuring routines and care plans are consistently followed. Our team brings focus and dedication to every interaction. 
                 </p>
               </ScrollReveal>
               
               <ScrollReveal>
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  Our specialized live-in care in Cook County, Illinois, is delivered with purpose and attention. Whether it’s managing the complexities of Alzheimer’s or dementia care, post-surgery recovery, or other unique health challenges, our caregivers provide expertise, patience, and compassionate support tailored to each individual’s specific needs.
+                  Our specialized live-in care in Cook County, Illinois, is delivered with purpose and attention. If you require advanced <strong>specialized support services</strong>—whether it’s managing the complexities of Alzheimer’s or dementia, post-surgery recovery, or other unique health challenges—our caregivers provide expertise, patience, and compassionate support tailored to each individual’s specific needs.
                 </p>
               </ScrollReveal>
 
@@ -147,7 +148,7 @@ export default function SpecializedSupportPage() {
                   </h4>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3.5 text-slate-700 text-sm sm:text-base">
-                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-2.5 w-2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
@@ -155,7 +156,7 @@ export default function SpecializedSupportPage() {
                       <span>Offering focused care for individuals with Alzheimer’s or dementia.</span>
                     </li>
                     <li className="flex items-start gap-3.5 text-slate-700 text-sm sm:text-base">
-                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-2.5 w-2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
@@ -257,6 +258,7 @@ export default function SpecializedSupportPage() {
                       type="button"
                       onClick={() => toggleFaq(index)}
                       className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base sm:text-lg font-semibold text-brand-ink transition hover:text-brand-blue"
+                      aria-expanded={isOpen}
                     >
                       <span>{faq.question}</span>
                       <div className="h-7 w-7 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 transition-colors duration-300 group-hover:bg-brand-blue/5">
@@ -266,6 +268,7 @@ export default function SpecializedSupportPage() {
                           viewBox="0 0 24 24"
                           stroke="currentColor"
                           strokeWidth={2.5}
+                          aria-hidden="true"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -289,7 +292,7 @@ export default function SpecializedSupportPage() {
         </PageShell>
       </section>
 
-      {/* Section 4: Bottom Conversion Outreach */}
+      {/* Bottom Conversion Outreach */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-t border-brand-blue/10 rounded-t-[3rem]">
           <PageShell>
@@ -307,7 +310,9 @@ export default function SpecializedSupportPage() {
                   className="inline-flex items-center gap-2.5 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white !text-white shadow-md transition duration-300 hover:bg-brand-blue active:scale-98"
                 >
                   Get Started Today
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold">
+                  {/* OPTIMIZATION: Resolves Duplicate Anchor Text Warning */}
+                  <span className="sr-only"> with Specialized Support</span>
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold" aria-hidden="true">
                     →
                   </span>
                 </Link>

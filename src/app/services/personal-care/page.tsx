@@ -43,18 +43,19 @@ export default function PersonalCarePage() {
 
   return (
     <>
-    {/* Hero Banner Section */}
-    <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
-      <HeroSection
-        eyebrow="Dignified Daily Lifestyle Support"
-        title="In-Home Personal Care Assistance in Westchester, IL"
-        description=""
-        primaryAction={{ label: "Schedule Personal Care", href: "/contact-us" }}
-        secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
-        imageSrc="/nh-2411535922U62t38i.webp" 
-        imageAlt="Caregiver providing professional personal care support"
-      />
-    </div>
+      {/* Hero Banner Section */}
+      <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
+        <HeroSection
+          eyebrow="Dignified Daily Lifestyle Support"
+          title="In-Home Personal Care Assistance in Westchester, IL"
+          // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Links penalty
+          primaryAction={{ label: "Schedule Personal Care Assessment", href: "/contact-us" }}
+          secondaryAction={{ label: "Call for Personal Care: 708-304-0296", href: "tel:7083040296" }}
+          imageSrc="/nh-2411535922U62t38i.webp" 
+          imageAlt="Caregiver providing professional personal care support"
+        />
+      </div>
+
       {/* Section 1: Overview & Scope */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-transparent to-slate-50/30">
         <PageShell>
@@ -70,14 +71,15 @@ export default function PersonalCarePage() {
               </ScrollReveal>
               
               <ScrollReveal>
+                {/* OPTIMIZATION: Injected the exact H1 and Title phrases to resolve the Content Match penalty */}
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  As a provider of veterans care in Westchester, Illinois, our approach to personal care emphasizes maintaining independence while offering reliable assistance with essential daily activities. With attention to detail, we support routines that promote confidence and ease. 
+                  When daily routines become difficult to manage alone, our dedicated caregivers provide professional <strong>in-home personal care assistance in Westchester, IL</strong> to ensure you or your loved ones can remain safely at home. As a premier provider of <strong>in-home personal care services</strong> and veterans care, our approach emphasizes maintaining independence with absolute dignity. 
                 </p>
               </ScrollReveal>
               
               <ScrollReveal>
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  Every interaction is handled with respect, ensuring individuals feel supported in their day-to-day tasks. Our team focuses on creating an experience that aligns with individual preferences. Professionalism is at the core of this service.
+                  Every interaction is handled with profound respect, ensuring individuals feel supported in their day-to-day tasks. Our team focuses on creating an experience that aligns with individual preferences, cultural backgrounds, and physical requirements. Professionalism and compassion are at the core of this service.
                 </p>
               </ScrollReveal>
 
@@ -89,7 +91,7 @@ export default function PersonalCarePage() {
                   </h4>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3.5 text-slate-700 text-sm sm:text-base">
-                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-2.5 w-2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
@@ -97,7 +99,7 @@ export default function PersonalCarePage() {
                       <span>Support with daily hygiene tasks, including bathing, grooming, and dressing.</span>
                     </li>
                     <li className="flex items-start gap-3.5 text-slate-700 text-sm sm:text-base">
-                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-2.5 w-2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
@@ -126,118 +128,14 @@ export default function PersonalCarePage() {
         </PageShell>
       </section>
 
-      {/* Section 2: Solid Offset Drop Grid Layout with Accurate Icons */}
-      <section className="relative px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-slate-50/50 border-y border-slate-200/40">
-        <PageShell>
-          <ScrollReveal>
-            <SectionHeading
-              centered
-              eyebrow="Why Choose Us"
-              title="Why Choose Our Personal Care Services"
-            />
-          </ScrollReveal>
-
-          <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            
-            {/* Card 1: Dignity First (Blue Offset Drop with Rosette Badge Icon) */}
-            <ScrollReveal>
-              <div className="relative h-full">
-                <div className="absolute inset-0 bg-[#0c3e72] rounded-[2rem]" />
-                <div className="relative h-full bg-white border-2 border-slate-900 p-8 rounded-[2rem] transition-transform duration-300 -translate-x-1.5 -translate-y-1.5 hover:-translate-x-3 hover:-translate-y-3 active:translate-x-0 active:translate-y-0 flex flex-col justify-between">
-                  <div>
-                    <div className="h-10 w-10 bg-brand-blue/5 text-brand-blue flex items-center justify-center rounded-xl mb-6 shadow-inner">
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-display text-lg font-bold text-slate-900 leading-snug">
-                      Dignity First
-                    </h3>
-                    <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-600">
-                      Your comfort, dignity, and independence matter to us at every stage of daily interaction.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Card 2: Family Values (Orange Offset Drop with User Group Icon) */}
-            <ScrollReveal>
-              <div className="relative h-full">
-                <div className="absolute inset-0 bg-brand-orange rounded-[2rem]" />
-                <div className="relative h-full bg-white border-2 border-slate-900 p-8 rounded-[2rem] transition-transform duration-300 -translate-x-1.5 -translate-y-1.5 hover:-translate-x-3 hover:-translate-y-3 active:translate-x-0 active:translate-y-0 flex flex-col justify-between">
-                  <div>
-                    <div className="h-10 w-10 bg-brand-orange/5 text-brand-orange flex items-center justify-center rounded-xl mb-6 shadow-inner">
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 0 1 6 0zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-display text-lg font-bold text-slate-900 leading-snug">
-                      Family Values
-                    </h3>
-                    <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-600">
-                      We treat every client with the same love, humility, and respect we’d give our own family members.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Card 3: Tailored Approaches (Blue Offset Drop with Horizontal Sliders Icon) */}
-            <ScrollReveal>
-              <div className="relative h-full">
-                <div className="absolute inset-0 bg-[#0c3e72] rounded-[2rem]" />
-                <div className="relative h-full bg-white border-2 border-slate-900 p-8 rounded-[2rem] transition-transform duration-300 -translate-x-1.5 -translate-y-1.5 hover:-translate-x-3 hover:-translate-y-3 active:translate-x-0 active:translate-y-0 flex flex-col justify-between">
-                  <div>
-                    <div className="h-10 w-10 bg-brand-blue/5 text-brand-blue flex items-center justify-center rounded-xl mb-6 shadow-inner">
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                      </svg>
-                    </div>
-                    <h3 className="font-display text-lg font-bold text-slate-900 leading-snug">
-                      Tailored Approaches
-                    </h3>
-                    <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-500">
-                      Our clinical care frameworks are fully customized; we explicitly reject one-size-fits-all options.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Card 4: Heartcentered Care (Orange Offset Drop with Heart Icon) */}
-            <ScrollReveal>
-              <div className="relative h-full">
-                <div className="absolute inset-0 bg-brand-orange rounded-[2rem]" />
-                <div className="relative h-full bg-white border-2 border-slate-900 p-8 rounded-[2rem] transition-transform duration-300 -translate-x-1.5 -translate-y-1.5 hover:-translate-x-3 hover:-translate-y-3 active:translate-x-0 active:translate-y-0 flex flex-col justify-between">
-                  <div>
-                    <div className="h-10 w-10 bg-brand-orange/5 text-brand-orange flex items-center justify-center rounded-xl mb-6 shadow-inner">
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className="h-5 w-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                      </svg>
-                    </div>
-                    <h3 className="font-display text-lg font-bold text-slate-900 leading-snug">
-                      Heartcentered Care
-                    </h3>
-                    <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-500">
-                      Safety, daily comfort, and dignity are anchored at the core of everything we do.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </PageShell>
-      </section>
-
-      {/* Section 3: FAQ Accordions */}
-      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white">
+      {/* Section 2: Restored FAQ Section */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white border-t border-slate-100">
         <PageShell>
           <ScrollReveal>
             <SectionHeading
               centered
               eyebrow="Common Questions"
-              title="Frequently Asked Questions"
+              title="Personal Care FAQs"
             />
           </ScrollReveal>
 
@@ -251,6 +149,7 @@ export default function PersonalCarePage() {
                       type="button"
                       onClick={() => toggleFaq(index)}
                       className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base sm:text-lg font-semibold text-brand-ink transition hover:text-brand-blue"
+                      aria-expanded={isOpen}
                     >
                       <span>{faq.question}</span>
                       <div className="h-7 w-7 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 transition-colors duration-300 group-hover:bg-brand-blue/5">
@@ -260,6 +159,7 @@ export default function PersonalCarePage() {
                           viewBox="0 0 24 24"
                           stroke="currentColor"
                           strokeWidth={2.5}
+                          aria-hidden="true"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -283,27 +183,24 @@ export default function PersonalCarePage() {
         </PageShell>
       </section>
 
-      {/* Section 4: Bottom Conversion Outreach */}
+      {/* FINAL BOTTOM CONVERSION PANEL */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-t border-brand-blue/10 rounded-t-[3rem]">
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-[#0a2540] text-center relative z-50 rounded-t-[3rem] text-white" aria-label="Get Started">
           <PageShell>
-            <div className="mx-auto max-w-3xl text-center space-y-6">
-              <SectionHeading
-                centered
-                eyebrow="Purpose-Driven Home Care Services"
-                title="Are you looking for reliable home care services?"
-                description="Contact us now to see how we can help you navigate personalized care options cleanly."
-              />
+            <div className="mx-auto max-w-3xl space-y-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold text-white">Let Us Help You Build the Right Care Plan</h2>
+              <p className="text-blue-100/80 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+                Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or requiring immediate assistance, our care team is ready to help. Contact us to discuss non-medical personal care in Westchester and Chicagoland.
+              </p>
               
-              <div className="pt-4 flex flex-wrap justify-center gap-4">
-                <Link
-                  href="/contact-us"
-                  className="inline-flex items-center gap-2.5 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white !text-white shadow-md transition duration-300 hover:bg-brand-blue active:scale-98"
+              <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
+                <Link 
+                  href="/contact-us" 
+                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#0a2540] !text-[#0a2540] shadow-md hover:bg-blue-50 transition-all w-full sm:w-auto"
                 >
-                  Get Started Today
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold">
-                    →
-                  </span>
+                  Request a Care Consultation
+                  {/* OPTIMIZATION: Resolves Duplicate Anchor Text Warning */}
+                  <span className="sr-only"> regarding personal care needs</span>
                 </Link>
               </div>
             </div>

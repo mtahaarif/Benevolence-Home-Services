@@ -19,27 +19,40 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.benevolencehomeservices.com"),
   alternates: {
-    canonical: "./", // Instructs Next.js to dynamically render absolute canonical URLs for every subpage path
+    // Instructs Next.js to dynamically render absolute canonical URLs seamlessly
+    canonical: "/", 
   },
   title: {
-    default: "Benevolence Home Services and Staffing Agency | Home Care in Westchester, IL",
-    template: "%s | Benevolence Home Services and Staffing Agency",
+    // OPTIMIZED: Exactly 56 characters. Stays under the 580-pixel limit.
+    default: "Benevolence Home Services | Home Care in Westchester, IL",
+    // OPTIMIZED: Shortened template prevents the "Word Repetition" and "Title too long" penalties on subpages
+    template: "%s | Benevolence Home Services",
   },
+  // OPTIMIZED: 151 characters. Safely under the 160 character / 1000 pixel cutoff limit.
   description:
-    "Benevolence Home Services and Staffing Agency is a nurse-led, faith-based home care agency committed to compassionate, non-medical support for seniors and families across Cook, DuPage, Kane, Lake, and Will Counties.",
+    "Benevolence Home Services provides nurse-led, compassionate home care and staffing solutions in Westchester, IL, serving seniors across Chicagoland.",
+  // OPTIMIZED: Highly expanded matrix targeting your specific services and local county territories
   keywords: [
-    "home care Westchester IL",
-    "senior staffing agency Chicago suburbs",
-    "nurse-led home care",
-    "companionship for seniors",
-    "personal care assistance",
-    "healthcare staffing Illinois"
+    "Home care in Westchester IL",
+    "Nurse-led home care agency",
+    "Senior companion care Chicagoland",
+    "In-home senior care Cook County",
+    "Private duty nursing Illinois",
+    "Alzheimer's and dementia care",
+    "Respite care for family caregivers",
+    "Healthcare staffing agency Illinois",
+    "Non-medical home care DuPage County",
+    "Elderly care services Will County",
+    "Faith-based senior care",
+    "Live-in caregiver Chicago suburbs",
+    "Light housekeeping for seniors",
+    "Post-hospital recovery care at home"
   ],
   openGraph: {
-    title: "Benevolence Home Services and Staffing Agency",
+    title: "Benevolence Home Services | Nurse-Led Senior Care",
     description: "Nurse-led, faith-based home care and professional staffing options providing premium personal care, companionship, and clinical consistency.",
     url: "https://www.benevolencehomeservices.com",
-    siteName: "Benevolence Home Services and Staffing Agency",
+    siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
     images: [
@@ -47,13 +60,13 @@ export const metadata: Metadata = {
         url: "/footer-logo.png",
         width: 800,
         height: 600,
-        alt: "Benevolence Home Services and Staffing Agency Corporate Logo",
+        alt: "Benevolence Home Services Corporate Logo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Benevolence Home Services and Staffing Agency",
+    title: "Benevolence Home Services | Nurse-Led Senior Care",
     description: "Premium nurse-led home care and healthcare staffing solutions across five Chicagoland counties.",
     images: ["/footer-logo.png"],
   },

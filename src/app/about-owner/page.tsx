@@ -13,7 +13,6 @@ export default function AboutOwnerPage() {
         <HeroSection
           eyebrow="Our Mission, Values & Faith-Based Commitment"
           title="Get to Know the Owner"
-          description=""
           primaryAction={{ label: "Connect With Our Team", href: "/contact-us" }}
           secondaryAction={{ label: "Explore Our Services", href: "/services" }}
           imageSrc="/nh-2412692819U06281e.webp" 

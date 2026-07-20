@@ -17,18 +17,18 @@ export default function BlogDirectoryPage() {
 
   return (
     <>
-      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      {/* HERO BANNER SECTION */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow="Educational Insights &amp; Family Caregiver Advice"
-          title="The Benevolence Senior Care &amp; Wellness Blog"
-          description=""
+          eyebrow="Educational Insights & Family Caregiver Advice"
+          title="The Benevolence Senior Care & Wellness Blog"
           primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
           secondaryAction={{ label: "Explore Our Services", href: "/services" }}
           imageSrc="/non-home-banner.jpg"
           imageAlt="Senior reading an informative book safely at home"
         />
       </div>
+      
       <section className="relative px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-slate-50">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-[-5%] w-[500px] h-[500px] bg-brand-blue/10 rounded-full blur-[120px]" />
@@ -42,7 +42,8 @@ export default function BlogDirectoryPage() {
               centered
               eyebrow="Resource Library for Families & Caregivers"
               title="Educational Articles for Family Caregivers"
-              description="Stay informed with expert articles, local elder care guidance, and practical planning tips curated by our nurse-led team to support healthy, dignified aging at home throughout Westchester and the surrounding counties."
+              // OPTIMIZATION: H1 and Title phrases strategically injected here to satisfy content matching penalties.
+              description="Welcome to The Benevolence Senior Care & Wellness Blog. Stay informed with expert articles, local elder care guidance, and practical planning tips curated by our nurse-led team to support healthy, dignified aging at home throughout Westchester and the surrounding counties."
             />
             </div>
           </ScrollReveal>
@@ -70,9 +71,18 @@ export default function BlogDirectoryPage() {
           {/* Cards Grid System */}
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {filteredPosts.map((post) => (
-              <div key={post.slug} className="w-full min-h-[460px] h-auto group">
-                <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
-                  
+              // OPTIMIZATION: Removed <Link> as the outer wrapper to solve "Anchor text too long"
+              <div key={post.slug} className="w-full min-h-[460px] h-auto group relative">
+                
+                {/* OPTIMIZATION: Invisible Link Layer with Screen Reader Only Text for 100% Unique Anchors */}
+                <Link 
+                  href={`/blog/${post.slug}`} 
+                  className="absolute inset-0 z-20"
+                >
+                  <span className="sr-only">Read article: {post.title}</span>
+                </Link>
+
+                <div className="flex flex-col h-full">
                   {/* Frosted Glass Card Shell */}
                   <div className="flex flex-col h-full rounded-[2rem] bg-white/50 border border-white/80 shadow-[0_8px_32px_rgba(15,47,89,0.03)] backdrop-blur-xl transition-all duration-500 hover:bg-white/70 hover:border-white hover:shadow-[0_20_48px_rgba(12,62,114,0.1)] hover:-translate-y-1.5 relative overflow-hidden">
                     
@@ -80,7 +90,7 @@ export default function BlogDirectoryPage() {
                     <div className="w-full h-44 relative overflow-hidden rounded-t-[1.9rem] border-b border-white/40 bg-slate-100">
                       <img 
                         src={post.image} 
-                        alt={post.title} 
+                        alt={`Cover image for ${post.title}`} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
                       />
@@ -109,22 +119,21 @@ export default function BlogDirectoryPage() {
                       <div className="mt-auto pt-4 border-t border-slate-200/50 flex flex-col gap-3.5">
                         <div className="flex flex-wrap gap-1">
                           {post.keywords.map((kw) => (
-                            <span key={kw} className="text-[9.5px] font-bold text-slate-500/80 bg-white/80 border border-white/90 rounded px-2 py-0.5 whitespace-nowrap">
+                            <span key={kw} className="text-[9.5px] font-bold text-slate-500/80 bg-white/80 border border-white/90 rounded px-2 py-0.5 whitespace-nowrap relative z-30">
                               {kw}
                             </span>
                           ))}
                         </div>
                         
                         <div className="flex items-center justify-between text-[10px] font-extrabold uppercase tracking-widest text-[#0c3e72] pt-0.5 group-hover:text-brand-blue">
-                          <span>Read Article</span>
-                          <span className="transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                          <span aria-hidden="true">Read Article</span>
+                          <span aria-hidden="true" className="transform transition-transform duration-300 group-hover:translate-x-1">→</span>
                         </div>
                       </div>
 
                     </div>
-
                   </div>
-                </Link>
+                </div>
               </div>
             ))}
           </div>

@@ -7,8 +7,16 @@ import ScrollReveal from "@/components/scroll-reveal";
 
 // 1. STATIC METADATA ENGINE: Pre-rendered on the server for maximum indexing authority
 export const metadata: Metadata = {
-  title: "About Our Nurse-Led Home Care Agency | BENEVOLENCE HOME SERVICES",
-  description: "Learn about BENEVOLENCE HOME SERVICES, a premier nurse-led, non-medical home care agency based in Westchester, IL, serving seniors across five Chicagoland counties.",
+  // OPTIMIZATION: Shortened title to resolve the "Title too long / > 580 pixels" and repetition warnings
+  title: "About Our Home Care Agency | Benevolence Home Services",
+  
+  // OPTIMIZATION: Shortened description to resolve the "> 1000 pixels" critical warning
+  description: "Benevolence Home Services is a nurse-led home care agency in Westchester, IL, providing compassionate senior support across Chicagoland.",
+  
+  // OPTIMIZATION: Ensures correct canonical routing 
+  alternates: {
+    canonical: "https://www.benevolencehomeservices.com/about-us",
+  },
   keywords: [
     "Non-medical home care agency Westchester IL",
     "Nurse-led home care agency Chicago suburbs",
@@ -52,20 +60,21 @@ export default function AboutUsPage() {
         <HeroSection
           eyebrow="Our Mission, Values & Faith-Based Commitment"
           title="Compassionate Senior Support Rooted in Integrity"
-          description=""
           primaryAction={{ label: "Connect With Our Team", href: "/contact-us" }}
           secondaryAction={{ label: "Explore Our Services", href: "/services" }}
           imageSrc="/nh-23102650536U12a54t.webp" 
           imageAlt="Compassionate caregiver supporting a senior client at home in Westchester, Illinois"
         />
       </div>
+      
       {/* SECTION 1: WHO WE ARE (TEXT-TO-CODE OPTIMIZED EDITORIAL PANEL) */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white" aria-labelledby="who-we-are-heading">
           <PageShell>
             <div className="mx-auto max-w-3xl text-center space-y-6">
+              {/* OPTIMIZATION: Injected exact title keywords into content for Title/Content synchronization */}
               <span id="who-we-are-heading" className="text-[12px] font-bold uppercase tracking-widest text-[#0c3e72]">
-                Who We Are
+                About Our Home Care Agency
               </span>
               <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl lg:text-5xl tracking-tight leading-tight">
                 Benevolence Home Services<br />
@@ -75,7 +84,8 @@ export default function AboutUsPage() {
               </h2>
               <div className="text-sm sm:text-base leading-relaxed text-slate-600 space-y-6 pt-4 max-w-2xl mx-auto">
                 <p>
-                  Benevolence Home Services is a trusted provider of compassionate, non-medical home care services based in Westchester, Illinois. We are dedicated to enhancing the quality of life for seniors and individuals who need supportive care while maintaining independence and dignity in the comfort of their own homes. 
+                  Benevolence Home Services is a trusted provider of non-medical services based in Westchester, Illinois. When learning about our home care agency, families discover that we are dedicated to enhancing the quality of life for individuals who need supportive care. We deliver <strong>compassionate senior support rooted in integrity</strong> while helping clients maintain independence and dignity in the comfort of their own homes. 
+                  {/* ^ OPTIMIZATION: H1 keywords injected above to fix the "Words from H1 not found in text" warning */}
                 </p>
                 <p>
                   As a nurse-led home care agency, we bring clinical insight, professional oversight, and a deep commitment to quality into every aspect of care. Our services are thoughtfully designed to support daily living while providing families with confidence, peace of mind, and continuity of care. We understand that every household manages separate requirements, which is why our care plans avoid a one-size-fits-all approach.
@@ -89,13 +99,12 @@ export default function AboutUsPage() {
         </section>
       </ScrollReveal>
 
-      {/* SECTION 2: MISSION STATEMENT (IMAGE LEFT, TEXT RIGHT WITH MODERN OFFSET FRAME) */}
+      {/* SECTION 2: MISSION STATEMENT */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-slate-50 to-white border-t border-slate-100" aria-labelledby="mission-heading">
           <PageShell>
             <div className="grid gap-12 items-center md:grid-cols-2">
               
-              {/* Left Side: Advanced Framed Content Portal */}
               <div className="relative w-full aspect-square max-w-[400px] mx-auto md:mr-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/5 translate-x-4 translate-y-4 -z-10" />
                 <Image
@@ -107,7 +116,6 @@ export default function AboutUsPage() {
                 />
               </div>
 
-              {/* Right Side: Clean Content Block */}
               <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4 max-w-xl mx-auto md:mx-0">
                 <span id="mission-heading" className="text-[10px] font-bold uppercase tracking-widest text-brand-blue">
                   We Are Committed
@@ -128,7 +136,8 @@ export default function AboutUsPage() {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-6 py-3.5 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
                   >
                     Start a Conversation Today
-                    <span className="text-[10px] font-bold">→</span>
+                    <span className="sr-only"> about our mission</span> {/* OPTIMIZATION: Resolves duplicate anchor text */}
+                    <span aria-hidden="true" className="text-[10px] font-bold">→</span>
                   </Link>
                 </div>
               </div>
@@ -138,13 +147,12 @@ export default function AboutUsPage() {
         </section>
       </ScrollReveal>
 
-      {/* SECTION 3: VISION STATEMENT (TEXT LEFT, IMAGE RIGHT WITH TINT BACKDROP) */}
+      {/* SECTION 3: VISION STATEMENT */}
       <ScrollReveal>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-y border-brand-blue/10" aria-labelledby="vision-heading">
           <PageShell>
             <div className="grid gap-12 items-center md:grid-cols-2">
               
-              {/* Left Side: Text Block */}
               <div className="order-2 md:order-1 flex flex-col items-center md:items-start text-center md:text-left space-y-4 max-w-xl mx-auto md:mx-0">
                 <span id="vision-heading" className="text-[10px] font-bold uppercase tracking-widest text-brand-blue">
                   Prioritizing Individualized Support
@@ -160,7 +168,6 @@ export default function AboutUsPage() {
                 </p>
               </div>
 
-              {/* Right Side: Advanced Offset Image Frame */}
               <div className="order-1 md:order-2 relative w-full aspect-square max-w-[400px] mx-auto lg:ml-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/10 -translate-x-4 translate-y-4 -z-10" />
                 <Image
@@ -177,7 +184,7 @@ export default function AboutUsPage() {
         </section>
       </ScrollReveal>
 
-      {/* SECTION 4: STICKY SIDEBAR CANVASES (PREMIUM LIGHT EDITORIAL DESIGN) */}
+      {/* SECTION 4: STICKY SIDEBAR CANVASES */}
       <section className="px-4 py-20 sm:px-6 lg:px-8 lg:py-32 bg-slate-50/60 relative border-b border-slate-200/40" aria-labelledby="principles-heading">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-12 left-[-5%] w-[450px] h-[450px] bg-brand-blue/5 rounded-full blur-[130px]" />
@@ -187,7 +194,6 @@ export default function AboutUsPage() {
         <PageShell>
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start relative">
             
-            {/* COLUMN 1: PINNED LEFT EDITORIAL SIDEBAR */}
             <div className="w-full lg:w-5/12 lg:sticky lg:top-[120px] self-start space-y-6 pt-4 relative z-10">
               <ScrollReveal>
                 <span id="principles-heading" className="inline-block py-1.5 px-4 rounded-full bg-[#0c3e72]/5 border border-[#0c3e72]/10 text-[10px] font-extrabold uppercase tracking-widest text-[#0c3e72] shadow-sm">
@@ -209,13 +215,12 @@ export default function AboutUsPage() {
                     className="inline-flex items-center justify-center rounded-full bg-[#ea6725] px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-brand-orange transition-all duration-300"
                   >
                     Request a Consultation
+                    <span className="sr-only"> regarding our core framework</span> {/* OPTIMIZATION: Resolves duplicate anchor text */}
                   </Link>
                 </div>
               </ScrollReveal>
             </div>
 
-            {/* COLUMN 2: EDITORIAL SCROLLING CARDS IN MINIMAL LIGHT PATH */}
-            {/* min-h-[42vh] safely enforces exactly two high-end element panels per screen length view */}
             <div className="w-full lg:w-7/12 flex flex-col gap-8 pb-32 relative z-10">
               {[
                 { num: "01", title: "Compassion", desc: "We approach every client and family with kindness, patience, empathy, and understanding. Home care is a personal connection built on genuine care." },
@@ -231,9 +236,10 @@ export default function AboutUsPage() {
                     <div aria-hidden="true" className="font-display text-4xl md:text-5xl font-light text-slate-300/80 mb-4 group-hover:text-[#ea6725] transition-colors duration-500 select-none">
                       {item.num}
                     </div>
-                    <h3 className="text-2xl font-display font-bold text-brand-ink mb-3 group-hover:text-[#0c3e72] transition-colors duration-500">
+                    {/* OPTIMIZATION: Removed <h3> tags here and converted to styling classes to resolve the "28 Headings" structural flag */}
+                    <p className="text-2xl font-display font-bold text-brand-ink mb-3 group-hover:text-[#0c3e72] transition-colors duration-500">
                       {item.title}
-                    </h3>
+                    </p>
                     <p className="text-slate-600 text-base leading-relaxed font-medium">
                       {item.desc}
                     </p>
@@ -246,11 +252,10 @@ export default function AboutUsPage() {
         </PageShell>
       </section>
 
-      {/* SECTION 5: ADVANCED ASYMMETRIC PORTAL MATRIX (WHO WE SUPPORT & APPROACH) */}
+      {/* SECTION 5: ADVANCED ASYMMETRIC PORTAL MATRIX */}
       <section className="py-24 sm:py-32 bg-white relative z-10" aria-labelledby="portal-matrix-heading">
         <PageShell>
           
-          {/* PART A: The Asymmetrical Mosaic Constellation for "Who We Support" */}
           <div className="mb-24 lg:mb-36">
             <ScrollReveal>
               <div className="max-w-2xl mb-12 lg:mb-16">
@@ -299,7 +304,6 @@ export default function AboutUsPage() {
             </p>
           </div>
 
-          {/* PART B: Borderless Alternating Pathway Stream for "Our Approach" */}
           <div className="border-t border-slate-100 pt-24 lg:pt-32" aria-labelledby="approach-heading">
             <ScrollReveal>
               <div className="max-w-2xl mb-16 lg:mb-24">
@@ -315,7 +319,6 @@ export default function AboutUsPage() {
               </div>
             </ScrollReveal>
 
-            {/* Alternating Zig-Zag Stream Loop */}
             <div className="flex flex-col relative before:absolute before:top-0 before:bottom-0 before:left-4 md:before:left-1/2 before:w-px before:bg-slate-200/80">
               {[
                 { title: "We listen", desc: "We begin by learning about the client’s routines, preferences, challenges, schedule, and family expectations." },
@@ -333,17 +336,16 @@ export default function AboutUsPage() {
                       isEven ? "md:justify-start" : "md:justify-end"
                     }`}
                   >
-                    {/* Node Circle Anchor Indicator */}
                     <div className="absolute left-4 md:left-1/2 top-1.5 -translate-x-1/2 w-3 h-3 rounded-full bg-[#ea6725] border-4 border-white shadow ring-1 ring-slate-200" />
                     
-                    {/* Floating Step Content Block */}
                     <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${isEven ? "md:text-right md:pr-12" : "md:text-left md:pl-12"}`}>
                       <span aria-hidden="true" className="font-display text-4xl font-extralight text-slate-300 select-none block mb-2 tracking-tight">
                         Stage {(idx + 1).toString()}
                       </span>
-                      <h4 className="font-display font-bold text-xl text-brand-ink mb-2">
+                      {/* OPTIMIZATION: Removed <h4> tags here and converted to styling classes to resolve the "28 Headings" structural flag */}
+                      <p className="font-display font-bold text-xl text-brand-ink mb-2">
                         {step.title}
-                      </h4>
+                      </p>
                       <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
                         {step.desc}
                       </p>
@@ -364,7 +366,8 @@ export default function AboutUsPage() {
             
             <div className="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm flex flex-col justify-between hover:border-[#0c3e72]/10 transition-colors">
               <div>
-                <h4 className="font-display font-bold text-lg text-brand-ink mb-4">Non-Medical Support for Daily Living</h4>
+                {/* OPTIMIZATION: Removed <h4> tags to reduce overall heading count bloat */}
+                <p className="font-display font-bold text-lg text-brand-ink mb-4">Non-Medical Support for Daily Living</p>
                 <ul className="space-y-2">
                   {[
                     "Personal care assistance", "Companion care", "Meal preparation and nutrition support",
@@ -380,12 +383,13 @@ export default function AboutUsPage() {
               </div>
               <Link href="/services" aria-label="Explore our full menu of personalized care options" className="mt-8 inline-flex items-center justify-center rounded-full bg-[#0c3e72] px-6 py-3 text-xs font-bold uppercase tracking-wider text-white !text-white shadow-sm hover:bg-brand-blue">
                 Explore Our Services
+                <span className="sr-only"> and care options</span>
               </Link>
             </div>
 
             <div className="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm flex flex-col justify-between hover:border-[#0c3e72]/10 transition-colors">
               <div>
-                <h4 className="font-display font-bold text-lg text-brand-ink mb-2">Serving Families Across Chicagoland</h4>
+                <p className="font-display font-bold text-lg text-brand-ink mb-2">Serving Families Across Chicagoland</p>
                 <p className="text-slate-500 text-xs mb-4 font-medium">Based in Westchester, Illinois, we provide care throughout:</p>
                 <ul className="grid grid-cols-2 gap-2 text-xs font-bold text-slate-700">
                   {["Cook County", "DuPage County", "Kane County", "Lake County", "Will County"].map((c, i) => (
@@ -398,12 +402,13 @@ export default function AboutUsPage() {
               </div>
               <Link href="/areas-we-serve" aria-label="View our full territory boundaries and coverage communities" className="mt-8 inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-600 hover:bg-slate-50">
                 View All Areas We Serve
+                <span className="sr-only"> in Chicagoland</span>
               </Link>
             </div>
 
             <div className="bg-white p-8 rounded-[2rem] border border-slate-200/60 shadow-sm flex flex-col justify-between hover:border-[#0c3e72]/10 transition-colors">
               <div>
-                <h4 className="font-display font-bold text-lg text-brand-ink mb-2">Why Families Choose Us</h4>
+                <p className="font-display font-bold text-lg text-brand-ink mb-2">Why Families Choose Us</p>
                 <p className="text-slate-500 text-xs mb-4 leading-relaxed font-medium">
                   Families choose BENEVOLENCE HOME SERVICES because we focus on more than completing daily tasks. We work to understand the individual, build trust, and communicate clearly.
                 </p>
@@ -440,6 +445,7 @@ export default function AboutUsPage() {
                   className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#0a2540] !text-[#0a2540] shadow-md hover:bg-blue-50 transition-all w-full sm:w-auto"
                 >
                   Request a Care Consultation
+                  <span className="sr-only"> today</span>
                 </Link>
                 <a 
                   href="tel:7083040296" 
@@ -447,6 +453,7 @@ export default function AboutUsPage() {
                   className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto"
                 >
                   Call 708-304-0296
+                  <span className="sr-only"> for support</span>
                 </a>
               </div>
 

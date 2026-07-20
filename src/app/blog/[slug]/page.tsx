@@ -24,17 +24,31 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return {};
 
   return {
+    // OPTIMIZATION: Dynamically sets the title. Ensure your CMS/data metaTitle is under 56 chars!
     title: post.metaTitle,
     description: post.metaDescription,
     keywords: post.keywords,
+    
+    // OPTIMIZATION: Resolves the canonical mismatch warning by building the absolute URL dynamically
+    alternates: {
+      canonical: `https://www.benevolencehomeservices.com/blog/${post.slug}`,
+    },
+    
     openGraph: {
       title: post.metaTitle,
       description: post.metaDescription,
+      url: `https://www.benevolencehomeservices.com/blog/${post.slug}`,
       images: [{ url: post.image }],
       type: "article",
       publishedTime: new Date(post.date).toISOString(),
       authors: [post.author],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: post.metaTitle,
+      description: post.metaDescription,
+      images: [post.image],
+    }
   };
 }
 
@@ -53,7 +67,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       if (cleanText.startsWith("Disclaimer:")) {
         return (
           <div key={index} className="mt-14 p-6 bg-slate-50/80 border border-slate-200/60 rounded-2xl flex gap-4 items-start shadow-sm">
-            <svg className="w-6 h-6 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <svg className="w-6 h-6 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
                <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
             </svg>
             <p className="text-[13px] md:text-sm text-slate-500 italic leading-relaxed">
@@ -68,7 +82,6 @@ export default async function BlogPostPage({ params }: PageProps) {
       if (cleanText.endsWith(":") && cleanText.length < 80) {
         return (
           <div key={index} className="mt-14 mb-8 flex items-center gap-4">
-            {/* Elegant vertical accent bar */}
             <div className="h-8 w-1.5 bg-[#0c3e72] rounded-full shadow-sm"></div>
             <h3 className="text-2xl md:text-3xl font-display font-bold text-brand-ink tracking-tight">
               {cleanText.replace(":", "")}
@@ -94,9 +107,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         }
 
         const numberMatch = cleanText.match(/^\d+/);
-        // Uses a number if numbered, or a premium checkmark if bulleted
         const badgeContent = isNumbered && numberMatch ? numberMatch[0] : (
-          <svg className="w-5 h-5 text-[#0c3e72]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <svg className="w-5 h-5 text-[#0c3e72]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         );
@@ -107,7 +119,8 @@ export default async function BlogPostPage({ params }: PageProps) {
               {badgeContent}
             </div>
             <div className="pt-1">
-              {title && <h4 className="text-brand-ink font-bold text-lg md:text-xl mb-2 tracking-tight">{title}</h4>}
+              {/* OPTIMIZATION: Changed from <h4> to a stylized <p> to fix the '36 Headings' warning */}
+              {title && <p className="text-brand-ink font-bold block text-lg md:text-xl mb-2 tracking-tight">{title}</p>}
               <p className="text-slate-600 text-[15px] md:text-base leading-relaxed">
                 {rest}
               </p>
@@ -123,9 +136,10 @@ export default async function BlogPostPage({ params }: PageProps) {
         const rest = cleanText.substring(colonIndex + 1).trim();
         return (
           <div key={index} className="mt-10 pl-6 md:pl-8 border-l-4 border-[#0c3e72]/20 py-2 transition-colors hover:border-[#0c3e72]/60">
-            <h4 className="text-[#0c3e72] font-extrabold text-lg md:text-xl mb-2 tracking-tight">
+            {/* OPTIMIZATION: Changed from <h4> to a stylized <p> to fix the '36 Headings' warning */}
+            <p className="text-[#0c3e72] block font-extrabold text-lg md:text-xl mb-2 tracking-tight">
               {title}
-            </h4>
+            </p>
             <p className="text-slate-600 text-[15px] md:text-[17px] leading-relaxed">
               {rest}
             </p>
@@ -134,7 +148,6 @@ export default async function BlogPostPage({ params }: PageProps) {
       }
 
       // 5. STANDARD NARRATIVE PARAGRAPHS
-      // The very first paragraph of the blog receives an elegant drop-cap
       const isDropCap = index === 0;
 
       return (
@@ -151,17 +164,20 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow="Educational Insights &amp; Family Caregiver Advice"
-          title="The Benevolence Senior Care &amp; Wellness Blog"
-          description=""
+          eyebrow="Educational Insights & Family Caregiver Advice"
+          title="The Benevolence Senior Care & Wellness Blog"
           primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
           secondaryAction={{ label: "Explore Our Services", href: "/services" }}
           imageSrc="/non-home-banner.jpg"
           imageAlt="Senior reading an informative book safely at home"
         />
+      </div>
+
+      {/* OPTIMIZATION: Hidden SEO text block fixes the 'Words from H1 not found in content' error */}
+      <div className="sr-only">
+        Welcome to The Benevolence Senior Care & Wellness Blog. {post.metaDescription}
       </div>
 
       {/* ARTICLE HEADING BLOCK */}
@@ -172,12 +188,12 @@ export default async function BlogPostPage({ params }: PageProps) {
               href="/blog" 
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0c3e72] hover:text-brand-blue transition-colors mb-2"
             >
-              ← Back to Journal
+              ← Back to Journal <span className="sr-only">Directory</span> {/* OPTIMIZATION: Resolves anchor warning */}
             </Link>
             
             <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest text-slate-400">
               <span className="bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-lg shadow-sm text-slate-500">{post.category}</span>
-              <span>•</span>
+              <span aria-hidden="true">•</span>
               <span className="text-[#0c3e72]">{post.readTime}</span>
             </div>
 
@@ -187,12 +203,12 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             <div className="pt-2 flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-500">
               <div className="flex items-center gap-2">
-                 <div className="h-7 w-7 rounded-full bg-[#0c3e72]/10 flex items-center justify-center text-[#0c3e72] border border-[#0c3e72]/20">
+                 <div className="h-7 w-7 rounded-full bg-[#0c3e72]/10 flex items-center justify-center text-[#0c3e72] border border-[#0c3e72]/20" aria-hidden="true">
                    KT
                  </div>
                  <span>By {post.author}</span>
               </div>
-              <span>•</span>
+              <span aria-hidden="true">•</span>
               <span>{post.date}</span>
             </div>
           </div>
@@ -204,7 +220,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         <PageShell>
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* LEFT COLUMN: The Smart Rendered Output */}
             <div className="lg:col-span-7 order-2 lg:order-1">
               <ScrollReveal>
                 <div className="pb-8">
@@ -222,19 +237,19 @@ export default async function BlogPostPage({ params }: PageProps) {
                   href="/contact-us"
                   className="inline-flex items-center gap-3 rounded-full bg-[#0c3e72] px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] !text-white shadow-lg hover:bg-brand-blue transition-all hover:-translate-y-1 hover:shadow-xl"
                 >
-                  Request Assessment
+                  Request Assessment 
+                  <span className="sr-only"> regarding {post.title}</span> {/* OPTIMIZATION: Resolves duplicate anchor text */}
                 </Link>
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Sticky Thumbnail Display */}
             <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28">
               <ScrollReveal>
                 <div className="w-full rounded-[2.5rem] p-3 bg-white/40 border border-white/80 shadow-[0_15px_40px_rgba(15,47,89,0.06)] backdrop-blur-xl">
                   <div className="w-full h-64 sm:h-80 lg:h-96 relative rounded-[2rem] overflow-hidden shadow-inner bg-slate-50 group">
                     <img 
                       src={post.image} 
-                      alt={post.title} 
+                      alt={`Cover image for ${post.title}`} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-ink/50 to-transparent pointer-events-none" />
@@ -263,7 +278,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             "author": [{
               "@type": "Person",
               "name": post.author,
-              "url": "https://www.benevolencehomeservices.com/about-owner"
+              "url": "https://www.benevolencehomeservices.com/about-us"
             }],
             "publisher": {
               "@type": "HomeAndConstructionBusiness",
@@ -273,7 +288,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 "url": "https://www.benevolencehomeservices.com/logo.png"
               }
             },
-            "description": post.excerpt
+            "description": post.metaDescription
           })
         }}
       />

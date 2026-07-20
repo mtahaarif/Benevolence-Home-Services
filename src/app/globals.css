@@ -26,24 +26,33 @@
   --color-brand-gold: var(--brand-gold);
   --color-brand-ink: var(--brand-ink);
 
-  /* This binds Next.js font variables directly to Tailwind utility tokens */
-  --font-sans: var(--font-manrope), sans-serif;
-  --font-display: var(--font-fraunces), Georgia, serif;
+  /* FIXED: Synchronized with the Inter and Playfair fonts exported from your layout.tsx */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, serif;
 }
 
+/* Base HTML setup for smooth anchoring and preventing horizontal scroll-breaking */
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
 }
 
+/* Optimized typography rendering engine */
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-manrope), Arial, sans-serif;
-  min-height: 100%;
+  font-family: var(--font-sans); /* Now correctly maps to the Tailwind theme variable */
+  min-height: 100vh;
   overflow-x: clip;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Hardware-accelerated background ambient glowing blobs.
+  Using translateZ(0) forces the GPU to render them, 
+  preventing paint-thrashing lag when the user scrolls.
+*/
 body::before,
 body::after {
   content: "";
@@ -51,6 +60,7 @@ body::after {
   inset: auto;
   pointer-events: none;
   z-index: -1;
+  transform: translateZ(0); 
 }
 
 body::before {
@@ -71,6 +81,7 @@ body::after {
   background: radial-gradient(circle, rgba(17, 104, 179, 0.18), rgba(17, 104, 179, 0));
 }
 
+/* Custom brand highlight color */
 ::selection {
   background: rgba(245, 170, 65, 0.28);
   color: var(--brand-ink);
@@ -81,6 +92,10 @@ a {
   text-decoration: none;
 }
 
-.brand-shadow {
+/* UPGRADE: Converted standard CSS class to a Tailwind v4 @utility.
+  This allows you to use modifiers in your React components! 
+  (e.g., hover:brand-shadow, md:brand-shadow)
+*/
+@utility brand-shadow {
   box-shadow: 0 20px 60px rgba(15, 47, 89, 0.08);
 }

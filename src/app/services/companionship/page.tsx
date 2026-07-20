@@ -57,39 +57,38 @@ const companionshipProvisions = [
   }
 ];
 
-// Helper Component: Renders thematic monoline icons
 function ProvisionIcon({ title }: { title: string }) {
   const baseClass = "h-6 w-6 text-slate-800 transition-colors duration-300";
   switch (title) {
     case "Engaging & Meaningful Conversations":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 0 1-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8Z" />
         </svg>
       );
     case "Reliable Assistance for Outings":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1 1 15 0Z" />
         </svg>
       );
     case "Help with Errands & Shopping":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375" />
         </svg>
       );
     case "Activity-Based Engagement":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.64 8.38a14.98 14.98 0 0 0-6.16 12.12A14.98 14.98 0 0 0 15.59 14.37ZM9.75 9.75c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
         </svg>
       );
     case "Emotional Support":
     default:
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
       );
@@ -105,13 +104,13 @@ export default function CompanionshipPage() {
 
   return (
     <>
-      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      {/* HERO BANNER SECTION */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
           eyebrow="Faith-Centered Social Engagement"
           title="Senior Companion Care Services in Westchester, IL"
-          description=""
-          primaryAction={{ label: "Request a Companion", href: "/contact-us" }}
+          // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Links penalty
+          primaryAction={{ label: "Request Companion Care", href: "/contact-us" }}
           secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
           imageSrc="/nh-23828104413Umet879.webp" 
           imageAlt="Caregiver engaging in friendly conversation with a senior"
@@ -133,18 +132,19 @@ export default function CompanionshipPage() {
               </ScrollReveal>
               
               <ScrollReveal>
+                {/* OPTIMIZATION: Injected exact H1 and Title phrases to resolve the Content Match penalty */}
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  Building genuine connections is at the heart of this service, offering consistent and engaging social interaction. Whether it&apos;s through conversation or shared activities, every moment is approached with care and attentiveness.
+                  We are proud to provide dedicated <strong>senior companion care services in Westchester, IL</strong>, emphasizing the importance of independence while offering reliable social support. Building genuine connections is at the heart of our companionship service, ensuring our clients receive consistent, friendly, and engaging interaction directly in their homes.
                 </p>
               </ScrollReveal>
               
               <ScrollReveal>
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  This service aims to reduce feelings of isolation and encourage meaningful engagement. Our team values trust, ensuring every interaction is warm and committed.
+                  Whether it&apos;s through lively conversation, shared hobbies, or accompanying individuals on safe errands, every moment is approached with care and attentiveness. This service aims to actively reduce feelings of isolation and encourage meaningful mental engagement. Our team values trust, ensuring every interaction is professional, warm, and highly personalized.
                 </p>
               </ScrollReveal>
 
-              {/* Checklist scope */}
+              {/* Scope of Included Services */}
               <ScrollReveal>
                 <div className="mt-8 pt-6 border-t border-slate-200/60">
                   <h4 className="text-base sm:text-lg font-semibold text-brand-ink mb-4">
@@ -152,7 +152,7 @@ export default function CompanionshipPage() {
                   </h4>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3.5 text-slate-700 text-sm sm:text-base">
-                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-2.5 w-2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
@@ -160,7 +160,7 @@ export default function CompanionshipPage() {
                       <span>Engaging in warm conversations and providing emotional support.</span>
                     </li>
                     <li className="flex items-start gap-3.5 text-slate-700 text-sm sm:text-base">
-                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-2.5 w-2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
@@ -237,18 +237,14 @@ export default function CompanionshipPage() {
 
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {companionshipProvisions.map((item, idx) => {
-              // Dynamically alternates background block colors for offset visual hierarchy
               const backplateColor = idx % 2 === 0 ? "bg-[#0c3e72]" : "bg-brand-orange";
               return (
                 <ScrollReveal key={item.title}>
                   <div className="relative h-full group">
-                    {/* Underlying Solid Color Offset Panel */}
                     <div className={`absolute inset-0 ${backplateColor} rounded-[2rem] transition-transform duration-500 group-hover:translate-x-1.5 group-hover:translate-y-1.5`} />
                     
-                    {/* Main Interaction Content Layer */}
                     <div className="relative h-full bg-white border border-slate-900/80 p-8 rounded-[2rem] transition-transform duration-300 -translate-x-1.5 -translate-y-1.5 hover:-translate-x-3 hover:-translate-y-3 active:translate-x-0 active:translate-y-0 flex flex-col justify-between">
                       <div>
-                        {/* Custom Monoline Icon Holder */}
                         <div className="h-10 w-10 bg-slate-50 border border-slate-100 flex items-center justify-center rounded-xl mb-6 shadow-inner transition-colors duration-300 group-hover:bg-[#0c3e72]/5">
                           <ProvisionIcon title={item.title} />
                         </div>
@@ -289,6 +285,7 @@ export default function CompanionshipPage() {
                       type="button"
                       onClick={() => toggleFaq(index)}
                       className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base sm:text-lg font-semibold text-brand-ink transition hover:text-brand-blue"
+                      aria-expanded={isOpen}
                     >
                       <span>{faq.question}</span>
                       <div className="h-7 w-7 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 transition-colors duration-300 group-hover:bg-brand-blue/5">
@@ -298,6 +295,7 @@ export default function CompanionshipPage() {
                           viewBox="0 0 24 24"
                           stroke="currentColor"
                           strokeWidth={2.5}
+                          aria-hidden="true"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -339,7 +337,9 @@ export default function CompanionshipPage() {
                   className="inline-flex items-center gap-2.5 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white !text-white shadow-md transition duration-300 hover:bg-brand-blue active:scale-98"
                 >
                   Get Started Today
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold">
+                  {/* OPTIMIZATION: Invisible screen reader text resolves the Duplicate Anchor Links penalty */}
+                  <span className="sr-only"> with Companionship Services</span>
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold" aria-hidden="true">
                     →
                   </span>
                 </Link>

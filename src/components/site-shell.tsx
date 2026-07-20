@@ -69,7 +69,6 @@ export function SectionHeading({
 export function HeroSection({
   eyebrow,
   title,
-  description,
   primaryAction,
   secondaryAction,
   facts = [],
@@ -78,7 +77,6 @@ export function HeroSection({
 }: {
   eyebrow: string;
   title: string;
-  description: string;
   primaryAction: { label: string; href: string };
   secondaryAction?: { label: string; href: string };
   facts?: string[];
@@ -138,10 +136,6 @@ export function HeroSection({
                 {title}
               </h1>
               
-              <p className="mt-2 max-w-xl text-[clamp(0.75rem,3.5cqh,0.85rem)] sm:text-xs lg:text-[13px] leading-relaxed text-slate-700 line-clamp-2 @[350px]/hero:line-clamp-none">
-                {description}
-              </p>
-
               {/* Action Elements Cluster */}
               <div className="mt-3 flex flex-wrap gap-2">
                 <Link

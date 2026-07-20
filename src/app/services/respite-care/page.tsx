@@ -87,32 +87,32 @@ function BenefitIcon({ title }: { title: string }) {
   switch (title) {
     case "Prevents Caregiver Burnout":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
         </svg>
       );
     case "Ensures Continuity of Care":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7C4.547 9.547 4.5 10.768 4.5 12s.047 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7C19.453 14.453 19.5 13.232 19.5 12z" />
         </svg>
       );
     case "Supports Health & Independence":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.64 8.38a14.98 14.98 0 00-6.16 12.12A14.98 14.98 0 0015.59 14.37z" />
         </svg>
       );
     case "Provides Peace of Mind":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286z" />
         </svg>
       );
     case "Flexible Scheduling":
     default:
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
         </svg>
       );
@@ -126,32 +126,32 @@ function OfferIcon({ title }: { title: string }) {
   switch (title) {
     case "Temporary Relief for Family Caregivers":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       );
     case "Personalized, Compassionate Care":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
         </svg>
       );
     case "Companionship & Engagement":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
         </svg>
       );
     case "Assistance with Daily Activities":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M11.35 12.236h3.75m-3.75 3h3.75m-1.25-6h1.25m-1.25 3h1.25M7.5 12.236h1.25m-1.25 3h1.25m11.166-4.664A48.424 48.424 0 0018 10.5M18 10.5c0-1.135-.845-2.098-1.976-2.192a48.246 48.246 0 00-4.048-.08m0 0a48.246 48.246 0 00-4.048.08C6.845 8.402 6 9.365 6 10.5M18 10.5v8.25a2.25 2.25 0 0 1-2.25 2.25H8.25A2.25 2.25 0 0 1 6 18.75V10.5m12 0V6.75A2.25 2.25 0 0 0 15.75 4.5H8.25A2.25 2.25 0 0 0 6 6.75V10.5" />
         </svg>
       );
     case "Safe & Reliable Supervision":
     default:
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
@@ -173,9 +173,9 @@ export default function RespiteCarePage() {
         <HeroSection
           eyebrow="Dedicated Family Caregiver Relief"
           title="Professional Respite Care Options Near You"
-          description=""
+          // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Link penalty
           primaryAction={{ label: "Book Respite Relief", href: "/contact-us" }}
-          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: "Call for Respite Care: 708-304-0296", href: "tel:7083040296" }}
           imageSrc="/nh-2182343844Us238i0.webp"
           imageAlt="Family caregiver passing duties smoothly to a professional respite provider"
         />
@@ -193,14 +193,15 @@ export default function RespiteCarePage() {
               </ScrollReveal>
               
               <ScrollReveal>
+                {/* OPTIMIZATION: Injected the exact H1 and Title phrases to resolve the Content Match penalty */}
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  This service offers essential support for family caregivers, providing temporary relief with professionalism and reliability. It allows caregivers to step away confidently, knowing routines and preferences will be maintained. With careful attention to established schedules, our team ensures consistency during every interaction. The focus remains on maintaining a seamless experience.
+                  Our <strong>professional respite care options near you</strong> offer essential support for family caregivers, providing temporary relief with absolute professionalism and reliability. It allows caregivers to step away confidently, knowing routines and preferences will be maintained. With careful attention to established schedules, our team ensures consistency during every interaction.
                 </p>
               </ScrollReveal>
               
               <ScrollReveal>
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  Benevolence Home Services provides reliable, compassionate companionship in Westchester, Illinois, so that caregivers can take a well-deserved break—whether for a few hours, a day, or longer. Our team steps in seamlessly, ensuring that loved ones receive the same level of attention, companionship, and personal care they are accustomed to.
+                  If you are searching for dependable <strong>professional respite care services</strong>, Benevolence Home Services provides expert companionship in Westchester, Illinois, so that caregivers can take a well-deserved break—whether for a few hours, a day, or longer. Our team steps in seamlessly, ensuring that loved ones receive the same level of attention, companionship, and personal care they are accustomed to.
                 </p>
               </ScrollReveal>
 
@@ -212,7 +213,7 @@ export default function RespiteCarePage() {
                   </h4>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3.5 text-slate-700 text-sm sm:text-base">
-                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-2.5 w-2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
@@ -368,6 +369,7 @@ export default function RespiteCarePage() {
                       type="button"
                       onClick={() => toggleFaq(index)}
                       className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base sm:text-lg font-semibold text-brand-ink transition hover:text-brand-blue"
+                      aria-expanded={isOpen}
                     >
                       <span>{faq.question}</span>
                       <div className="h-7 w-7 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 transition-colors duration-300 group-hover:bg-brand-blue/5">
@@ -377,6 +379,7 @@ export default function RespiteCarePage() {
                           viewBox="0 0 24 24"
                           stroke="currentColor"
                           strokeWidth={2.5}
+                          aria-hidden="true"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -418,7 +421,9 @@ export default function RespiteCarePage() {
                   className="inline-flex items-center gap-2.5 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white !text-white shadow-md transition duration-300 hover:bg-brand-blue active:scale-98"
                 >
                   Get Started Today
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold">
+                  {/* OPTIMIZATION: Resolves Duplicate Anchor Text Warning */}
+                  <span className="sr-only"> with Respite Care</span>
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold" aria-hidden="true">
                     →
                   </span>
                 </Link>

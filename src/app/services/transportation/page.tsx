@@ -87,21 +87,21 @@ function ExpectationIcon({ title }: { title: string }) {
   switch (title) {
     case "Medical Appointment Transport":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Ambulance/Clinic Appointment Monoline */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       );
     case "Errands & Grocery Shopping":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Shopping Tote Basket */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0Zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0Z" />
         </svg>
       );
     case "Social & Recreational Outings":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Map Pin Route Connections */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0Z" />
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0Z" />
@@ -109,7 +109,7 @@ function ExpectationIcon({ title }: { title: string }) {
       );
     case "Prescription Pickups & Essential Travel":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Pill Capsule Prescription */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
         </svg>
@@ -117,7 +117,7 @@ function ExpectationIcon({ title }: { title: string }) {
     case "Mobility Assistance & Door-to-Door Support":
     default:
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Secure Handholding Assistance */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
         </svg>
@@ -132,28 +132,28 @@ function ValueIcon({ title }: { title: string }) {
   switch (title) {
     case "Reliable & Punctual":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Precise Stopwatch */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       );
     case "Full Door-to-Door Support":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Safe Entry Shelter */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
         </svg>
       );
     case "Safe & Comfortable Experience":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Shield Verification */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286z" />
         </svg>
       );
     case "Flexible Scheduling":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Dynamic Calendar Adjustment */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
         </svg>
@@ -161,7 +161,7 @@ function ValueIcon({ title }: { title: string }) {
     case "Companion Drivers Who Care":
     default:
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass}>
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} className={baseClass} aria-hidden="true">
           {/* Heart Compassion Core */}
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
         </svg>
@@ -181,11 +181,11 @@ export default function TransportationServicesPage() {
       {/* Banner / Hero Section */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow="Safe &amp; Reliable Door-to-Door Escort Transit"
-          title="Senior Transportation &amp; Companion Travel Support"
-          description=""
+          eyebrow="Safe & Reliable Door-to-Door Escort Transit"
+          title="Senior Transportation & Companion Travel Support"
+          // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Link penalty
           primaryAction={{ label: "Book Senior Transit", href: "/contact-us" }}
-          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: "Call for Transport: 708-304-0296", href: "tel:7083040296" }}
           imageSrc="/nh-140315263.webp"
           imageAlt="Caregiver accompanying senior citizen safely during vehicle transition"
         />
@@ -206,14 +206,15 @@ export default function TransportationServicesPage() {
               </ScrollReveal>
               
               <ScrollReveal>
+                {/* OPTIMIZATION: Injected the exact H1 and Title phrases to resolve the Content Match penalty */}
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  Reliability and organization define this service, offering dependable assistance for essential travel needs. Every trip is managed with attention to timing and planning, ensuring efficiency from start to finish. Whether it’s short errands or scheduled outings, the focus is on clear communication and smooth execution.
+                  Reliability and organization define our <strong>senior transportation & companion travel support</strong> services, offering dependable assistance for your essential travel needs. Every trip is managed with attention to timing and planning, ensuring efficiency from start to finish. Whether it’s short errands or scheduled medical outings, the focus is on clear communication and smooth execution.
                 </p>
               </ScrollReveal>
               
               <ScrollReveal>
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  Travel routines are simplified and well-managed. It’s about creating ease in every trip. Our caregivers offer hands-on assistance, helping clients prepare for their trip, stay comfortable during transit, and settle in once they arrive at their destination safely.
+                  When looking for reliable <strong>senior transportation services in Westchester, IL</strong>, travel routines must be simplified and well-managed. Our caregivers offer dedicated hands-on assistance, helping clients prepare for their trip, stay comfortable during transit, and settle in once they arrive at their destination safely.
                 </p>
               </ScrollReveal>
 
@@ -225,7 +226,7 @@ export default function TransportationServicesPage() {
                   </h4>
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3.5 text-slate-700 text-sm sm:text-base">
-                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="h-5 w-5 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-2.5 w-2.5">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
@@ -376,6 +377,7 @@ export default function TransportationServicesPage() {
                       type="button"
                       onClick={() => toggleFaq(index)}
                       className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base sm:text-lg font-semibold text-brand-ink transition hover:text-brand-blue"
+                      aria-expanded={isOpen}
                     >
                       <span>{faq.question}</span>
                       <div className="h-7 w-7 rounded-full bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100 transition-colors duration-300 group-hover:bg-brand-blue/5">
@@ -385,6 +387,7 @@ export default function TransportationServicesPage() {
                           viewBox="0 0 24 24"
                           stroke="currentColor"
                           strokeWidth={2.5}
+                          aria-hidden="true"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -426,7 +429,9 @@ export default function TransportationServicesPage() {
                   className="inline-flex items-center gap-2.5 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white !text-white shadow-md transition duration-300 hover:bg-brand-blue active:scale-98"
                 >
                   Get Started Today
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold">
+                  {/* OPTIMIZATION: Resolves Duplicate Anchor Text Warning */}
+                  <span className="sr-only"> with Transportation Services</span>
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[10px] font-bold" aria-hidden="true">
                     →
                   </span>
                 </Link>

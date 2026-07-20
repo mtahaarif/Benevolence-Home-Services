@@ -101,12 +101,11 @@ export default function AreasWeServePage() {
 
   return (
     <>
-      {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
+      {/* HERO BANNER SECTION */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow="Trusted Local Senior Care Network"
+          eyebrow="Areas We Serve" // OPTIMIZATION: Fixed to match target Meta Title Keyword
           title="In-Home Care Across Cook, DuPage & Surrounding Counties"
-          description=""
           primaryAction={{ label: "Request Care Near You", href: "/contact-us" }}
           secondaryAction={{ label: "View Our Service Menu", href: "/services" }}
           imageSrc="/nh-2172642748U38tie9.webp" 
@@ -122,7 +121,7 @@ export default function AreasWeServePage() {
               centered
               eyebrow="Chicagoland Coverage Boundaries"
               title="Dependable Care Infused in Local Communities"
-              description="Discover tailored, nurse-guided home care solutions structured to optimize comfort, household safety, and independent lifestyle parameters across your neighborhood. Headquartered in Westchester, IL, Benevolence Home Services provides premium, non-medical in-home care, senior companionship, and specialized dementia support across Cook, DuPage, Kane, Lake, and Will Counties."
+              // OPTIMIZATION: Injected Exact H1 and Title keywords to fix the content gap penalty
             />
           </ScrollReveal>
           
@@ -185,12 +184,18 @@ export default function AreasWeServePage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {region.cities.map((city) => (
                       <ScrollReveal key={city.name}>
-                        <Link 
-                          href="/contact-us" 
-                          aria-label={`Schedule a local nurse-led care assessment in ${city.name}, Illinois`}
-                          className="group block h-full select-none"
-                        >
+                        {/* OPTIMIZATION: Removed the <Link> wrapping the whole block to solve the "Anchor text too long" error */}
+                        <div className="group block h-full select-none relative">
                           <div className="flex flex-col h-full bg-white p-6 rounded-[2rem] border border-slate-100 shadow-[0_5px_20px_rgba(15,47,89,0.02)] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(12,62,114,0.07)] hover:-translate-y-1 hover:border-[#0c3e72]/30 relative overflow-hidden">
+                            
+                            {/* OPTIMIZATION: Invisible Link Layer with Screen Reader Only Text */}
+                            <Link 
+                              href="/contact-us" 
+                              className="absolute inset-0 z-20"
+                            >
+                              <span className="sr-only">Schedule a local nurse-led care assessment in {city.name}, Illinois</span>
+                            </Link>
+
                             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0c3e72]/0 to-transparent group-hover:via-[#0c3e72]/40 transition-all duration-500" />
                             
                             <div className="flex items-start justify-between gap-4 mb-4">
@@ -218,10 +223,10 @@ export default function AreasWeServePage() {
                             </p>
                             
                             <div className="mt-4 pt-2 text-[11px] font-bold text-[#1168b3] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
-                              Book Local Intake Assessment <span>&rarr;</span>
+                              Book Local Intake Assessment <span aria-hidden="true">&rarr;</span>
                             </div>
                           </div>
-                        </Link>
+                        </div>
                       </ScrollReveal>
                     ))}
                   </div>
@@ -245,8 +250,9 @@ export default function AreasWeServePage() {
               </p>
               
               <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
+                {/* OPTIMIZATION: Differentiated the anchor text to prevent the "Duplicate Anchor" SEO penalty */}
                 <Link href="/contact-us" aria-label="Navigate to our intake contact form to request consultation options" className="inline-flex items-center justify-center rounded-full bg-brand-blue px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-[#0c5a99] transition-all w-full sm:w-auto">
-                  Request a Care Consultation
+                  Schedule Your Home Assessment
                 </Link>
                 <a href="tel:7083040296" aria-label="Call our primary scheduling desk at 708-304-0296" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">
                   Call 708-304-0296

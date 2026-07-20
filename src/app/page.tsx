@@ -168,12 +168,11 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO BANNER SECTION WITH ARBITRARY CHILD TARGETING FOR BUTTON COLOR */}
+      {/* HERO BANNER SECTION WITH OPTIMIZED SEO H1 TAG */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow="Chicagoland’s trusted provider for in-home senior care"
-          title="Introducing Benevolence Home Services"
-          description=""
+          eyebrow="Westchester, IL & Chicagoland’s trusted provider for in-home senior care"
+          title="Benevolence Home Services: Compassionate Home Care"
           primaryAction={{ 
             label: "Request a Care Consultation", 
             href: "/contact-us"
@@ -197,7 +196,7 @@ export default function HomePage() {
                   Elevating Home Care with Compassion
                 </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                  At Benevolence Home Services, we provide compassionate, reliable, and personalized home care services throughout the Chicagoland area. Our mission is to help seniors and individuals maintain their independence, dignity, and quality of life while remaining safe and comfortable in their own homes.
+                  At Benevolence Home Services, a premier home care and staffing agency based in Westchester, IL, we provide compassionate, reliable, and personalized care services. Our mission is to help seniors and individuals maintain their independence, dignity, and quality of life while remaining safe and comfortable in their own homes.
                 </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
                   Our experienced caregivers offer a wide range of in-home care services, including personal care, companionship, assistance with daily living activities, respite care, and nurse-led oversight and care coordination. Every care plan is tailored to the unique needs, preferences, and goals of each client and their family.
@@ -218,7 +217,6 @@ export default function HomePage() {
                 </div>
               </div>
               
-              {/* Performance Fixed: Added explicit responsive widths map */}
               <div className="relative aspect-[4/3] w-full max-w-[480px] mx-auto lg:ml-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/10 translate-x-3 translate-y-3 -z-10" />
                 <Image 
@@ -242,7 +240,6 @@ export default function HomePage() {
               centered
               eyebrow="How We Meet Your Needs"
               title="Offering a Better Choice for You"
-              description="Benevolence Home Services offers a comprehensive suite of in-home options structured around your daily lifestyle preferences."
             />
             
             <div className="mt-14 space-y-8 sm:space-y-0 sm:grid sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 relative pb-12">
@@ -259,9 +256,7 @@ export default function HomePage() {
                     <p className="mt-3 text-xs sm:text-sm text-slate-500 leading-relaxed">
                       {item.body}
                     </p>
-                    <p className="mt-2 text-xs text-slate-400 leading-relaxed hidden sm:block">
-                      Our customized approach prioritizes safety, routine consistency, and individual family comfort requirements across Chicagoland.
-                    </p>
+                    {/* SEO FIX: Removed the duplicated hidden paragraph that was causing the content overlap penalty */}
                   </div>
 
                   <div className="mt-6 space-y-6 flex flex-col items-center">
@@ -270,11 +265,11 @@ export default function HomePage() {
                       aria-label={`Explore our full suite of personalized care programs for ${item.title}`}
                       className="w-full text-center inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
                     >
-                      Explore Care Options
-                      <span className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                      {/* SEO FIX: Added screen-reader-only text to make internal links uniquely distinct */}
+                      Explore Care Options <span className="sr-only">for {item.title}</span>
+                      <span aria-hidden="true" className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                     </Link>
 
-                    {/* Performance Fixed: Added strict mobile responsive layout sizes constraints */}
                     <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-slate-50 shadow-sm transition-transform duration-500 group-hover:scale-105">
                       <Image 
                         src={`/middle-img${idx + 1}.webp`} 
@@ -318,7 +313,6 @@ export default function HomePage() {
                   {functionalComparisonMatrix.map((row, idx) => (
                     <tr key={idx} className="transition-colors duration-200 hover:bg-slate-50/40">
                       <td className="p-5.5 text-xs sm:text-sm font-semibold text-brand-ink">{row.pillar}</td>
-                      
                       <td className="p-5.5 text-xs sm:text-sm text-slate-700 bg-brand-blue/[0.005] font-medium border-r border-slate-100">
                         <div className="flex items-start gap-3">
                           <div className="h-5 w-5 rounded-full bg-brand-blue/5 text-[#1168b3] flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
@@ -327,7 +321,6 @@ export default function HomePage() {
                           <span className="leading-relaxed">{row.benevolence}</span>
                         </div>
                       </td>
-                      
                       <td className="p-5.5 text-xs sm:text-sm text-red-900/80 bg-red-50/[0.01]">
                         <div className="flex items-start gap-3">
                           <div className="h-5 w-5 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
@@ -412,7 +405,6 @@ export default function HomePage() {
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-20 bg-white" aria-label="Action Gateways">
           <PageShell>
             <div className="grid gap-6 sm:grid-cols-3">
-              
               <div className="bg-slate-50/80 p-8 rounded-[2rem] border border-slate-100 flex flex-col justify-between group transition-all duration-300 hover:bg-white hover:shadow-lg">
                 <div>
                   <div className="h-11 w-11 bg-brand-blue/5 text-brand-blue flex items-center justify-center rounded-xl mb-5">
@@ -469,7 +461,6 @@ export default function HomePage() {
                   Book Assessment <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                 </Link>
               </div>
-
             </div>
           </PageShell>
         </section>
@@ -522,7 +513,8 @@ export default function HomePage() {
                   aria-label="Navigate to our intake contact form to request consultation details" 
                   className="inline-flex items-center justify-center rounded-full bg-brand-blue px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-[#0c5a99] transition-all w-full sm:w-auto"
                 >
-                  Request a Care Consultation
+                  {/* SEO FIX: Altered anchor text to avoid duplicating the hero CTA text */}
+                  Schedule Your Consultation
                 </Link>
                 <a href="tel:7083040296" aria-label="Call our primary phone line at 708-304-0296" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">
                   Call 708-304-0296
