@@ -1,4 +1,16 @@
 import { NextResponse } from "next/server";
+import mysql from "mysql2/promise"; // Import the MySQL library
+
+// Setup a Database Connection Pool for the old WordPress Database
+const dbPool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
 
 export async function POST(request: Request) {
   const body = (await request.json().catch(() => null)) as
@@ -14,40 +26,27 @@ export async function POST(request: Request) {
   }
 
   try {
-    // 2. Forward the payload to the GoDaddy PHP Webhook
-    // Replace with the actual domain if it's different
-    const response = await fetch("https://www.benevolencehomeservices.com/godaddy-webhook.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        form_from: body.form_from,
-        form_subject: body.form_subject,
-        form_content: body.form_content
-      }),
-    });
+    // 2. Format the date into a standard MySQL DATETIME string format
+    const dateSent = new Date().toISOString().slice(0, 19).replace("T", " ");
 
-    // 3. Catch HTML errors (just in case the URL is wrong or server is down)
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      const textError = await response.text();
-      console.error("GoDaddy Bridge Error:", textError);
-      throw new Error("Failed to reach GoDaddy bridge.");
-    }
-
-    const payload = await response.json();
-
-    if (!response.ok) {
-      throw new Error(payload.message ?? "Bridge rejected the payload.");
-    }
+    // 3. Inject into the old WordPress database table
+    await dbPool.execute(
+      `INSERT INTO formdatabase_emails (form_from, form_subject, date_sent, form_content, attachments) VALUES (?, ?, ?, ?, ?)`,
+      [
+        body.form_from,       // Maps to form_from
+        body.form_subject,    // Maps to form_subject
+        dateSent,             // Maps to date_sent
+        body.form_content,    // Maps to form_content
+        ""                    // Maps to attachments (empty string to match schema)
+      ]
+    );
 
     return NextResponse.json({
-      message: payload.message,
+      message: "Thanks. Your inquiry was received and someone will follow up soon.",
     });
 
-  } catch (error: any) {
-    console.error("🔥 WEBHOOK ERROR:", error.message);
+  } catch (error) {
+    console.error("Critical database insertion exception caught:", error);
     return NextResponse.json(
       { message: "Our backend database encountered a minor connection delay. Please resubmit shortly." },
       { status: 500 }

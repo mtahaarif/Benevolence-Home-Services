@@ -40,16 +40,6 @@ export function ContactForm() {
         }),
       });
 
-      // ----------------------------------------------------------------------
-      // NEW: Catch Vercel HTML Error Pages (Timeouts) before parsing as JSON
-      // ----------------------------------------------------------------------
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        const textError = await response.text();
-        console.error("HTML Error Received (Likely GoDaddy Timeout):", textError);
-        throw new Error("Server connection timed out. GoDaddy is likely blocking the Vercel IP. Check logs.");
-      }
-
       const payload = (await response.json()) as { message?: string };
 
       if (!response.ok) {
