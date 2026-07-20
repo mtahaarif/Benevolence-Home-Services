@@ -4,11 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 
 const initialState = {
-  fullName: "",
-  address: "",
-  email: "",
-  phone: "",
-  message: "",
+  form_from: "",
+  form_subject: "",
+  form_content: "",
   agreeToPrivacy: false,
 };
 
@@ -35,7 +33,11 @@ export function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          form_from: form.form_from,
+          form_subject: form.form_subject,
+          form_content: form.form_content
+        }),
       });
 
       const payload = (await response.json()) as { message?: string };
@@ -63,106 +65,59 @@ export function ContactForm() {
       
       <div className="grid gap-6">
         
-        {/* Full Name */}
+        {/* Form From (Maps to form_from) */}
         <div className="relative">
           <input
             required
-            id="fullName"
+            id="form_from"
             type="text"
-            value={form.fullName}
-            onChange={(event) => updateField("fullName", event.target.value)}
+            value={form.form_from}
+            onChange={(event) => updateField("form_from", event.target.value)}
             className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
-            placeholder="Full Name"
+            placeholder="Your Name / Email"
           />
           <label
-            htmlFor="fullName"
+            htmlFor="form_from"
             className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
           >
-            Full Name <span className="text-red-500">*</span>
+            Your Name / Email <span className="text-red-500">*</span>
           </label>
         </div>
 
-        {/* Address */}
+        {/* Form Subject (Maps to form_subject) */}
         <div className="relative">
           <input
             required
-            id="address"
+            id="form_subject"
             type="text"
-            value={form.address}
-            onChange={(event) => updateField("address", event.target.value)}
+            value={form.form_subject}
+            onChange={(event) => updateField("form_subject", event.target.value)}
             className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
-            placeholder="Address"
+            placeholder="Subject"
           />
           <label
-            htmlFor="address"
+            htmlFor="form_subject"
             className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
           >
-            Address <span className="text-red-500">*</span>
+            Subject <span className="text-red-500">*</span>
           </label>
         </div>
 
-        {/* Email & Phone Row */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {/* Email */}
-          <div className="relative">
-            <input
-              required
-              id="email"
-              type="email"
-              value={form.email}
-              onChange={(event) => updateField("email", event.target.value)}
-              className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
-              placeholder="Email Address"
-            />
-            <label
-              htmlFor="email"
-              className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
-            >
-              Email Address <span className="text-red-500">*</span>
-            </label>
-          </div>
-
-          {/* Phone */}
-          <div className="relative flex">
-            {/* Simulated Country Dropdown to match design */}
-            <div className="flex items-center justify-center rounded-l-full border border-r-0 border-slate-300 bg-slate-50 px-4 text-lg">
-              🇺🇸
-            </div>
-            <div className="relative w-full">
-              <input
-                required
-                id="phone"
-                type="tel"
-                value={form.phone}
-                onChange={(event) => updateField("phone", event.target.value)}
-                className="peer block w-full rounded-r-full border border-l-slate-300 border-slate-300 bg-transparent px-4 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
-                placeholder="Phone Number"
-              />
-              <label
-                htmlFor="phone"
-                className="absolute left-4 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
-              >
-                Phone Number <span className="text-red-500">*</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        {/* Message / Question */}
+        {/* Form Content (Maps to form_content) */}
         <div className="relative">
           <textarea
             required
-            id="message"
-            value={form.message}
-            onChange={(event) => updateField("message", event.target.value)}
+            id="form_content"
+            value={form.form_content}
+            onChange={(event) => updateField("form_content", event.target.value)}
             className="peer block w-full min-h-[140px] rounded-[2rem] border border-slate-300 bg-transparent px-6 pb-4 pt-8 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent resize-y"
-            placeholder="Question / Comment"
+            placeholder="Message / Question"
           />
           <label
-            htmlFor="message"
+            htmlFor="form_content"
             className="absolute left-6 top-3 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-3 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
           >
-            Question / Comment <span className="text-red-500">*</span>
+            Message / Question <span className="text-red-500">*</span>
           </label>
         </div>
       </div>
