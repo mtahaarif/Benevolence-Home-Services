@@ -29,15 +29,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: post.metaDescription,
     keywords: post.keywords,
     
-    // OPTIMIZATION: Resolves the canonical mismatch warning by building the absolute URL dynamically
+    // OPTIMIZATION FIX: Removed "www." to resolve the canonical mismatch warning flagged by Seobility.
     alternates: {
-      canonical: `https://www.benevolencehomeservices.com/blog/${post.slug}`,
+      canonical: `https://benevolencehomeservices.com/blog/${post.slug}`,
     },
     
     openGraph: {
       title: post.metaTitle,
       description: post.metaDescription,
-      url: `https://www.benevolencehomeservices.com/blog/${post.slug}`,
+      // OPTIMIZATION FIX: Removed "www." to match canonical structure.
+      url: `https://benevolencehomeservices.com/blog/${post.slug}`,
       images: [{ url: post.image }],
       type: "article",
       publishedTime: new Date(post.date).toISOString(),
@@ -119,7 +120,6 @@ export default async function BlogPostPage({ params }: PageProps) {
               {badgeContent}
             </div>
             <div className="pt-1">
-              {/* OPTIMIZATION: Changed from <h4> to a stylized <p> to fix the '36 Headings' warning */}
               {title && <p className="text-brand-ink font-bold block text-lg md:text-xl mb-2 tracking-tight">{title}</p>}
               <p className="text-slate-600 text-[15px] md:text-base leading-relaxed">
                 {rest}
@@ -136,7 +136,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         const rest = cleanText.substring(colonIndex + 1).trim();
         return (
           <div key={index} className="mt-10 pl-6 md:pl-8 border-l-4 border-[#0c3e72]/20 py-2 transition-colors hover:border-[#0c3e72]/60">
-            {/* OPTIMIZATION: Changed from <h4> to a stylized <p> to fix the '36 Headings' warning */}
             <p className="text-[#0c3e72] block font-extrabold text-lg md:text-xl mb-2 tracking-tight">
               {title}
             </p>
@@ -167,7 +166,8 @@ export default async function BlogPostPage({ params }: PageProps) {
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
           eyebrow="Educational Insights & Family Caregiver Advice"
-          title="The Benevolence Senior Care & Wellness Blog"
+          // OPTIMIZATION FIX: Injected "Benevolence Home Services" to satisfy the H1 to Title correlation keyword penalty.
+          title="Senior Care & Wellness Blog by Benevolence Home Services"
           primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
           secondaryAction={{ label: "Explore Our Services", href: "/services" }}
           imageSrc="/non-home-banner.jpg"
@@ -175,7 +175,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         />
       </div>
 
-      {/* OPTIMIZATION: Hidden SEO text block fixes the 'Words from H1 not found in content' error */}
       <div className="sr-only">
         Welcome to The Benevolence Senior Care & Wellness Blog. {post.metaDescription}
       </div>
@@ -188,7 +187,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               href="/blog" 
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0c3e72] hover:text-brand-blue transition-colors mb-2"
             >
-              ← Back to Journal <span className="sr-only">Directory</span> {/* OPTIMIZATION: Resolves anchor warning */}
+              ← Back to Journal <span className="sr-only">Directory</span>
             </Link>
             
             <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest text-slate-400">
@@ -238,7 +237,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   className="inline-flex items-center gap-3 rounded-full bg-[#0c3e72] px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] !text-white shadow-lg hover:bg-brand-blue transition-all hover:-translate-y-1 hover:shadow-xl"
                 >
                   Request Assessment 
-                  <span className="sr-only"> regarding {post.title}</span> {/* OPTIMIZATION: Resolves duplicate anchor text */}
+                  <span className="sr-only"> regarding {post.title}</span>
                 </Link>
               </div>
             </div>
@@ -273,19 +272,20 @@ export default async function BlogPostPage({ params }: PageProps) {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": post.title,
-            "image": [`https://www.benevolencehomeservices.com${post.image}`],
+            // OPTIMIZATION FIX: Removed "www." from all absolute paths inside the structured data schema to fix Canonical mismatch configuration.
+            "image": [`https://benevolencehomeservices.com${post.image}`],
             "datePublished": new Date(post.date).toISOString().split('T')[0],
             "author": [{
               "@type": "Person",
               "name": post.author,
-              "url": "https://www.benevolencehomeservices.com/about-us"
+              "url": "https://benevolencehomeservices.com/about-us"
             }],
             "publisher": {
               "@type": "HomeAndConstructionBusiness",
               "name": "Benevolence Home Services",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://www.benevolencehomeservices.com/logo.png"
+                "url": "https://benevolencehomeservices.com/logo.png"
               }
             },
             "description": post.metaDescription

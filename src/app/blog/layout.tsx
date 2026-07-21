@@ -7,9 +7,10 @@ export const metadata: Metadata = {
   // OPTIMIZATION: 154 characters. Keeps the description focused and safely prevents cutoff on Google.
   description: 'Explore The Benevolence Senior Care & Wellness Blog for expert articles, local elder care guidance, and practical planning tips for family caregivers.',
   
-  // OPTIMIZATION: Explicitly defines the canonical URL to resolve "Points to different page" warning.
   alternates: {
-    canonical: 'https://www.benevolencehomeservices.com/blog',
+    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
+    // detected by the SEO crawler and prevent the canonical mismatch error.
+    canonical: 'https://benevolencehomeservices.com/blog',
   },
   
   keywords: [
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Senior Care & Wellness Blog | Benevolence Home Services",
     description: "Explore The Benevolence Senior Care & Wellness Blog for expert articles and local elder care guidance.",
-    url: "https://www.benevolencehomeservices.com/blog",
+    url: "https://benevolencehomeservices.com/blog",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
