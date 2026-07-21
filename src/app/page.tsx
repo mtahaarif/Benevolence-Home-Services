@@ -178,7 +178,7 @@ export default function HomePage() {
             href: "/contact-us"
           }}
           secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
-          imageSrc={["/1.webp", "/2.webp", "/3.webp"]}
+          imageSrc={["/nh-2412692819U06281e.webp", "/2.webp", "/3.webp"]}
           imageAlt="Compassionate home care support in Westchester"
         />
       </div>
