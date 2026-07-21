@@ -104,7 +104,7 @@ export function HeroSection({
     <section className="w-full px-0 pt-0">
       <div className="relative w-full overflow-hidden bg-white">
         
-        <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[320px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
+        <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
           
           {/* BACKGROUND SLIDER WITH SMOOTH CROSSFADE */}
           {images.map((src, index) => (
@@ -119,7 +119,7 @@ export function HeroSection({
           ))}
 
           {/* Smart Gradient Fade */}
-          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/95 via-white/80 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-0" />
+          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/35 via-white/40 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-0" />
           
           <div className="absolute inset-x-0 top-0 h-[3px] bg-[color:var(--brand-orange)] z-10" />
           <div className="absolute inset-y-0 left-0 w-[5px] bg-[color:var(--brand-blue)] z-10" />
