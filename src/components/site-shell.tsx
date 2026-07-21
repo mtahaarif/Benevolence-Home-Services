@@ -29,12 +29,11 @@ export function SiteChrome({ children }: ChromeProps) {
   );
 }
 
-
 export function SectionHeading({
   eyebrow,
   title,
   description,
-  centered = false, // ADDED: Optional centered prop (defaults to false for other pages)
+  centered = false, 
 }: {
   eyebrow?: string;
   title: string;
@@ -80,96 +79,97 @@ export function HeroSection({
   primaryAction: { label: string; href: string };
   secondaryAction?: { label: string; href: string };
   facts?: string[];
-  imageSrc?: string | string[]; // Upgraded to accept a single string or an array of strings
+  imageSrc?: string | string[]; 
   imageAlt?: string;
 }) {
-  // Setup state for tracking the current image
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  // Normalize imageSrc to always be an array
   const images = Array.isArray(imageSrc) ? imageSrc : imageSrc ? [imageSrc] : [];
 
-  // Auto-advance the slider every 5 seconds if there are multiple images
   useEffect(() => {
     if (images.length <= 1) return;
     
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // 5000ms = 5 seconds
+    }, 5000); 
     
     return () => clearInterval(interval);
   }, [images.length]);
 
   return (
     <section className="w-full px-0 pt-0">
-      <div className="relative w-full overflow-hidden bg-white">
+      <div className="relative w-full overflow-hidden bg-[color:var(--brand-ink)]">
         
-        <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
+        <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden sm:h-[calc(40svh+50px)] lg:h-[calc(50svh+50px)]">
           
-          {/* BACKGROUND SLIDER WITH SMOOTH CROSSFADE */}
+          {/* BACKGROUND SLIDER WITH ENHANCED CSS FILTERS */}
           {images.map((src, index) => (
             <img
               key={src}
               src={src}
               alt={`${imageAlt ?? title} - Image ${index + 1}`}
-              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-in-out ${
+              /* Added saturate and contrast to make the background images pop slightly more */
+              className={`absolute inset-0 h-full w-full object-cover object-center saturate-[1.1] contrast-[1.05] transition-opacity duration-1000 ease-in-out ${
                 index === currentIndex ? "opacity-100 z-0" : "opacity-0 -z-10"
               }`}
             />
           ))}
 
-          {/* Smart Gradient Fade */}
-          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/35 via-white/40 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-0" />
-          
+          {/* Top/Left Accent Borders */}
           <div className="absolute inset-x-0 top-0 h-[3px] bg-[color:var(--brand-orange)] z-10" />
           <div className="absolute inset-y-0 left-0 w-[5px] bg-[color:var(--brand-blue)] z-10" />
 
           {/* Content Box Container */}
           <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-            <div className="flex max-w-xl flex-col justify-center h-full py-2 sm:max-w-2xl lg:max-w-[40rem]">
+            <div className="flex max-w-xl flex-col justify-center h-full py-6 sm:max-w-2xl lg:max-w-[40rem]">
               
-              <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[color:var(--brand-blue)]">
-                {eyebrow}
-              </p>
-              
-              <h1 className="mt-1 max-w-2xl font-display text-[clamp(1.25rem,7cqh,1.85rem)] lg:text-[clamp(1.5rem,8cqh,2.25rem)] font-semibold leading-[1.1] text-[color:var(--brand-ink)]">
-                {title}
-              </h1>
-              
-              {/* Action Elements Cluster */}
-              <div className="mt-3 flex flex-wrap gap-2">
-                <Link
-                  href={primaryAction.href}
-                  className="inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-blue)] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-[color:#0c5a99]"
-                >
-                  {primaryAction.label}
-                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white text-[color:var(--brand-blue)] text-[9px]">
-                    →
-                  </span>
-                </Link>
-                {secondaryAction ? (
+              {/* THE FROSTED GLASS UPGRADE */}
+              {/* This guarantees 100% text readability while looking highly professional */}
+              <div className="rounded-3xl bg-white/75 backdrop-blur-md border border-white/50 p-6 sm:p-8 shadow-2xl transition-all">
+                
+                <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[color:var(--brand-blue)]">
+                  {eyebrow}
+                </p>
+                
+                <h1 className="mt-2 max-w-2xl font-display text-[clamp(1.5rem,7cqh,2rem)] lg:text-[clamp(1.75rem,8cqh,2.5rem)] font-semibold leading-[1.1] text-[color:var(--brand-ink)] drop-shadow-sm">
+                  {title}
+                </h1>
+                
+                {/* Action Elements Cluster */}
+                <div className="mt-6 flex flex-wrap gap-3">
                   <Link
-                    href={secondaryAction.href}
-                    className="inline-flex items-center gap-2 rounded-full bg-[rgba(245,170,65,0.12)] px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--brand-ink)] transition hover:bg-[rgba(245,170,65,0.2)]"
+                    href={primaryAction.href}
+                    className="inline-flex items-center gap-2 rounded-full bg-[color:var(--brand-blue)] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-md transition hover:bg-[color:#0c5a99] hover:scale-[1.02]"
                   >
-                    {secondaryAction.label}
+                    {primaryAction.label}
+                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white text-[color:var(--brand-blue)] text-[9px]">
+                      →
+                    </span>
                   </Link>
-                ) : null}
-              </div>
-
-              {/* Facts/Metadata Badges */}
-              {facts.length ? (
-                <div className="mt-3 hidden @[340px]/hero:flex flex-wrap gap-1.5">
-                  {facts.map((fact) => (
-                    <div
-                      key={fact}
-                      className="rounded-full border border-[color:var(--border)] bg-white/90 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-700"
+                  {secondaryAction ? (
+                    <Link
+                      href={secondaryAction.href}
+                      className="inline-flex items-center gap-2 rounded-full bg-white/90 border border-slate-200 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--brand-ink)] shadow-sm transition hover:bg-white hover:scale-[1.02]"
                     >
-                      {fact}
-                    </div>
-                  ))}
+                      {secondaryAction.label}
+                    </Link>
+                  ) : null}
                 </div>
-              ) : null}
+
+                {/* Facts/Metadata Badges */}
+                {facts.length ? (
+                  <div className="mt-5 hidden @[340px]/hero:flex flex-wrap gap-2">
+                    {facts.map((fact) => (
+                      <div
+                        key={fact}
+                        className="rounded-full border border-slate-300 bg-white/90 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-700 shadow-sm"
+                      >
+                        {fact}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+                
+              </div>
 
             </div>
           </div>
@@ -257,10 +257,8 @@ function SiteFooter() {
   return (
     <footer className="mt-16 bg-[color:var(--brand-ink)] text-white">
       <PageShell>
-        {/* Top Section: Smart 4-Column Grid */}
         <div className="grid gap-10 py-10 md:grid-cols-2 lg:grid-cols-4 lg:py-12">
           
-          {/* Column 1: Get in Touch */}
           <div className="space-y-4">
             <div>
               <p className="text-sm font-semibold uppercase tracking-widest text-[color:var(--brand-gold)]">
@@ -275,7 +273,6 @@ function SiteFooter() {
             </p>
           </div>
 
-          {/* Column 2: Reach Us & Location */}
           <div className="space-y-6 lg:mt-7">
             <div>
               <h4 className="text-base font-semibold text-white">Call or Message Us</h4>
@@ -296,10 +293,8 @@ function SiteFooter() {
             </div>
           </div>
 
-          {/* Column 3: Quick Links */}
           <div className="lg:mt-7">
             <h4 className="text-base font-semibold text-white mb-4">Quick Links</h4>
-            {/* Split links into 2 columns dynamically */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-white/80">
               {navItems.map((item) => (
                 <Link key={item.href} href={item.href} className="hover:text-[color:var(--brand-gold)] transition">
@@ -309,30 +304,23 @@ function SiteFooter() {
             </div>
           </div>
 
-        {/* Column 4: Logo Box */}
           <div className="flex items-start lg:justify-end lg:mt-7">
-            {/* White card wrapper to make the logo pop against the dark footer */}
             <div className="bg-white p-5 rounded-2xl flex flex-col items-center justify-center brand-shadow w-full max-w-[220px]">
-              
-              {/* Update src to match your logo file */}
               <img
                 src="/footer-logo.png"
                 alt="Benevolence Home Services Logo"
                 className="h-16 w-auto object-contain" 
               />
-              
             </div>
           </div>
 
         </div>
       </PageShell>
 
-      {/* Bottom Legal & Social Bar */}
       <div className="border-t border-white/15 bg-[color:var(--brand-ink)] py-5">
         <PageShell>
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             
-            {/* Copyright & Legal Text */}
             <div className="text-[11px] leading-relaxed tracking-wider text-white/70">
               <p>© Copyright 2026 | Privacy Notice </p>
               <p className="mt-0.5">
@@ -342,7 +330,6 @@ function SiteFooter() {
               </p>
             </div>
 
-            {/* Social Share Cluster */}
             <div className="flex items-center gap-4">
               <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">
                 Like, Share, or Comment:
