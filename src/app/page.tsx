@@ -189,8 +189,9 @@ export default function HomePage() {
           <PageShell>
             <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] items-center">
               <div className="space-y-6">
-                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-ink tracking-tight leading-tight block">
-                  Supporting Independence, <br /> Comfort, and Dignity
+                {/* SEO FIX: Removed <br />. H2 must contain purely text nodes to pass Sitechecker indexability testing. */}
+                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-ink tracking-tight leading-tight block max-w-lg">
+                  Supporting Independence, Comfort, and Dignity
                 </h2>
                 <p className="font-display text-xl sm:text-2xl font-medium text-[#0c3e72] tracking-tight leading-tight">
                   Elevating Home Care with Compassion
@@ -256,7 +257,6 @@ export default function HomePage() {
                     <p className="mt-3 text-xs sm:text-sm text-slate-500 leading-relaxed">
                       {item.body}
                     </p>
-                    {/* SEO FIX: Removed the duplicated hidden paragraph that was causing the content overlap penalty */}
                   </div>
 
                   <div className="mt-6 space-y-6 flex flex-col items-center">
@@ -265,7 +265,6 @@ export default function HomePage() {
                       aria-label={`Explore our full suite of personalized care programs for ${item.title}`}
                       className="w-full text-center inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
                     >
-                      {/* SEO FIX: Added screen-reader-only text to make internal links uniquely distinct */}
                       Explore Care Options <span className="sr-only">for {item.title}</span>
                       <span aria-hidden="true" className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                     </Link>
@@ -513,7 +512,6 @@ export default function HomePage() {
                   aria-label="Navigate to our intake contact form to request consultation details" 
                   className="inline-flex items-center justify-center rounded-full bg-brand-blue px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-[#0c5a99] transition-all w-full sm:w-auto"
                 >
-                  {/* SEO FIX: Altered anchor text to avoid duplicating the hero CTA text */}
                   Schedule Your Consultation
                 </Link>
                 <a href="tel:7083040296" aria-label="Call our primary phone line at 708-304-0296" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact Our Home Care Team | Benevolence Home Services",
     description: "Contact our home care team to schedule your free in-home care consultation.",
-    url: "https://www.benevolencehomeservices.com/contact-us",
+    url: "https://benevolencehomeservices.com/contact-us",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
@@ -217,8 +217,9 @@ export default function ContactUsPage() {
           {/* Google Maps Location Widget */}
           <ScrollReveal>
             <div className="mt-20 w-full max-w-5xl mx-auto h-[400px] sm:h-[500px] overflow-hidden rounded-[2.5rem] brand-shadow border border-slate-200">
+              {/* OPTIMIZATION FIX: Updated the iframe source to a valid Google Maps embed URL pointing directly to the HQ to resolve the "Internal Links to 4xx Pages" penalty. */}
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.331264879201!2d-87.898614!3d41.8424501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e4bba3c0aab93%3A0xbef4791468d0fdbf!2sHQ+Westbrook+Corporate+Center!5e0!3m2!1sen!2sus!4v1715000000000!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2971.218844837896!2d-87.9255755!3d41.8666352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e4b77f9cdb8df%3A0x6d8b74681fbfa971!2s1%20Westbrook%20Corporate%20Center%20%23300%2C%20Westchester%2C%20IL%2060154!5e0!3m2!1sen!2sus!4v1714522964177!5m2!1sen!2sus"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

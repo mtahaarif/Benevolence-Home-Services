@@ -7,17 +7,11 @@ import ScrollReveal from "@/components/scroll-reveal";
 
 // 1. STATIC METADATA ENGINE: Pre-rendered on the server for maximum indexing authority
 export const metadata: Metadata = {
-  // OPTIMIZATION: Removed the hardcoded brand name. Next.js layout.tsx will append " | Benevolence Home Services" automatically.
-  // This completely resolves the "Title too long" and "Word repetition" penalties!
   title: "About Our Home Care Agency",
-  
   description: "Benevolence Home Services is a nurse-led home care agency in Westchester, IL, providing compassionate senior support across Chicagoland.",
-  
-  // OPTIMIZATION: Using a relative path syncs flawlessly with the metadataBase in layout.tsx, resolving the Canonical mismatch error.
   alternates: {
     canonical: "/about-us",
   },
-  
   keywords: [
     "Non-medical home care agency Westchester IL",
     "Nurse-led home care agency Chicago suburbs",
@@ -26,7 +20,6 @@ export const metadata: Metadata = {
     "Faith-based home care solutions Illinois",
     "Personal care assistance near me"
   ],
-  
   openGraph: {
     title: "About Our Home Care Agency | Benevolence Home Services",
     description: "Discover our nurse-guided approach to personalized home care, companionship, and specialized dementia support frameworks across Chicagoland.",
@@ -74,12 +67,15 @@ export default function AboutUsPage() {
               <span id="who-we-are-heading" className="text-[12px] font-bold uppercase tracking-widest text-[#0c3e72]">
                 About Our Home Care Agency
               </span>
+              
+              {/* SEO FIX: Removed nested <span> and <br /> tags from the H2. Extracted the subtitle into an adjacent <p> tag to pass Sitechecker's "H2 has other tags inside" indexability test. */}
               <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl lg:text-5xl tracking-tight leading-tight">
-                Benevolence Home Services<br />
-                <span className="text-brand-blue font-medium text-2xl sm:text-3xl lg:text-4xl mt-2 block">
-                  Non-Medical, Nurse-Led Home Care Agency
-                </span>
+                Benevolence Home Services
               </h2>
+              <p className="text-brand-blue font-display font-medium text-2xl sm:text-3xl lg:text-4xl mt-2 block leading-tight tracking-tight">
+                Non-Medical, Nurse-Led Home Care Agency
+              </p>
+
               <div className="text-sm sm:text-base leading-relaxed text-slate-600 space-y-6 pt-4 max-w-2xl mx-auto">
                 <p>
                   Benevolence Home Services is a trusted provider of non-medical services based in Westchester, Illinois. When learning about our home care agency, families discover that we are dedicated to enhancing the quality of life for individuals who need supportive care. We deliver <strong>compassionate senior support rooted in integrity</strong> while helping clients maintain independence and dignity in the comfort of their own homes. 

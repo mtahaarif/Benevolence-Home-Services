@@ -135,7 +135,8 @@ export function ContactForm() {
         </div>
         <label htmlFor="privacy" className="text-sm text-slate-700 cursor-pointer select-none">
           By submitting this form you agree to the terms of the{" "}
-          <Link href="/privacy-policy.pdf" target="_blank" className="font-semibold text-brand-blue hover:underline">
+          {/* SEO FIX: Changed from /privacy-policy.pdf to the valid Next.js route /privacy-policy to resolve the 404 client error penalty */}
+          <Link href="/privacy-policy" target="_blank" className="font-semibold text-brand-blue hover:underline">
             Privacy Policy
           </Link>.
         </label>

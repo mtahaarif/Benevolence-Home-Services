@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/site-shell";
+import { GoogleTagManager } from '@next/third-parties/google';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -85,6 +86,10 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans bg-slate-50 text-slate-900">
         <SiteChrome>{children}</SiteChrome>
       </body>
+      {/* NOTE: Replace 'GTM-XXXXXXX' below with your actual Google Tag Manager container ID 
+        when you are ready to track conversions and analytics.
+      */}
+      <GoogleTagManager gtmId="GTM-XXXXXXX" />
     </html>
   );
 }
