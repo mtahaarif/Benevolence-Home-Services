@@ -1,15 +1,18 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  // OPTIMIZATION: Resolves Title Length & Word Repetition penalties.
-  title: 'In-Home Medication Reminders for Seniors',
+  // OPTIMIZATION FIX: Shortened to fit under the strict 580px visual limit. 
+  // "In-Home Medication Reminders | Benevolence Home Services" fits perfectly.
+  title: 'In-Home Medication Reminders',
   
   // OPTIMIZATION: 154 characters. Strong local keywords without exceeding the 160 char limit.
+  // The SEO tool marked this description's length as "perfect" (925/1000 pixels).
   description: 'Ensure safety and consistency with in-home medication reminders for seniors in Westchester, IL. Our caregivers provide gentle, reliable daily prompts.',
   
-  // OPTIMIZATION: Resolves "Canonical link points to a different page" warning
   alternates: {
-    canonical: 'https://www.benevolencehomeservices.com/services/medication-reminders',
+    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
+    // detected by the SEO crawler and prevent the canonical mismatch error.
+    canonical: 'https://benevolencehomeservices.com/services/medication-reminders',
   },
   
   // OPTIMIZATION: Keyword matrix targeting medication adherence intent in local counties
@@ -23,9 +26,10 @@ export const metadata: Metadata = {
   ],
   
   openGraph: {
-    title: "In-Home Medication Reminders for Seniors | Benevolence Home Services",
+    title: "In-Home Medication Reminders | Benevolence Home Services",
     description: "Ensure safety and consistency with in-home medication reminders for seniors in Westchester, IL.",
-    url: "https://www.benevolencehomeservices.com/services/medication-reminders",
+    // OPTIMIZATION FIX: Removed "www." to match canonical structure.
+    url: "https://benevolencehomeservices.com/services/medication-reminders",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
@@ -40,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "In-Home Medication Reminders for Seniors | Benevolence Home Services",
+    title: "In-Home Medication Reminders | Benevolence Home Services",
     description: "Ensure safety and consistency with in-home medication reminders for seniors in Westchester, IL.",
     images: ["/nh-2371714204U3a085e.webp"],
   }

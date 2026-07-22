@@ -2,14 +2,17 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   // OPTIMIZATION: Hits the exact length requirement. layout.tsx will append " | Benevolence Home Services".
+  // The SEO tool marked this title's length as "perfect" (535/580 pixels).
   title: 'Light Housekeeping Services',
   
-  // OPTIMIZATION: 154 characters. Captures strong local keywords without truncation.
-  description: 'Benevolence Home Services provides light housekeeping and senior homemaker services in Westchester, IL. We ensure a safe, clean, and organized environment.',
+  // OPTIMIZATION FIX: Shortened slightly to ensure it falls strictly under the 1000 pixel visual limit
+  // while retaining all core keywords and location data.
+  description: 'Benevolence Home Services provides light housekeeping and senior homemaker services in Westchester, IL, ensuring a safe and clean environment.',
   
-  // OPTIMIZATION: Resolves "Canonical link points to a different page" warning
   alternates: {
-    canonical: 'https://www.benevolencehomeservices.com/services/light-housekeeping',
+    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
+    // detected by the SEO crawler and prevent the canonical mismatch error.
+    canonical: 'https://benevolencehomeservices.com/services/light-housekeeping',
   },
   
   // OPTIMIZATION: High-value local keyword matrix specifically targeting homemaker intent
@@ -24,8 +27,9 @@ export const metadata: Metadata = {
   
   openGraph: {
     title: "Light Housekeeping Services | Benevolence Home Services",
-    description: "Discover customized in-home light housekeeping and senior homemaker services in Westchester, IL.",
-    url: "https://www.benevolencehomeservices.com/services/light-housekeeping",
+    description: "Benevolence Home Services provides light housekeeping and senior homemaker services in Westchester, IL, ensuring a safe and clean environment.",
+    // OPTIMIZATION FIX: Removed "www." to match canonical structure.
+    url: "https://benevolencehomeservices.com/services/light-housekeeping",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
@@ -41,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Light Housekeeping Services | Benevolence Home Services",
-    description: "Discover customized in-home light housekeeping and senior homemaker services in Westchester, IL.",
+    description: "Benevolence Home Services provides customized in-home light housekeeping and senior homemaker services.",
     images: ["/nh-2172630013U9i2e14.webp"],
   }
 };
