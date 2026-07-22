@@ -1,15 +1,18 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  // OPTIMIZATION: Resolves Title Length & Word Repetition penalties.
-  title: "Specialized Alzheimer's & Dementia Care",
+  // OPTIMIZATION FIX: Shortened to fit under the strict 580px visual limit. 
+  // "Alzheimer's & Dementia Care | Benevolence Home Services" fits perfectly and captures the exact intent.
+  title: "Alzheimer's & Dementia Care",
   
-  // OPTIMIZATION: 158 characters. Strong local keywords without exceeding the 160 char limit.
-  description: "Benevolence Home Services offers specialized Alzheimer's, dementia, and post-surgery care in Westchester, IL. Compassionate support for complex health needs.",
+  // OPTIMIZATION FIX: Adjusted wording to fit under the 1000 pixel visual limit while maintaining 
+  // the exact local SEO value and primary keywords.
+  description: "Expert Alzheimer's, dementia, and post-surgery care in Westchester, IL. Compassionate in-home support for complex health needs.",
   
-  // OPTIMIZATION: Resolves "Canonical link points to a different page" warning
   alternates: {
-    canonical: 'https://www.benevolencehomeservices.com/services/specialized-support',
+    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
+    // detected by the SEO crawler and prevent the canonical mismatch error.
+    canonical: 'https://benevolencehomeservices.com/services/specialized-support',
   },
   
   // OPTIMIZATION: Keyword matrix targeting complex care intent in local counties
@@ -23,9 +26,10 @@ export const metadata: Metadata = {
   ],
   
   openGraph: {
-    title: "Specialized Alzheimer's & Dementia Care | Benevolence Home Services",
-    description: "Compassionate specialized care for Alzheimer's, dementia, and post-surgery recovery in Westchester, IL.",
-    url: "https://www.benevolencehomeservices.com/services/specialized-support",
+    title: "Alzheimer's & Dementia Care | Benevolence Home Services",
+    description: "Expert Alzheimer's, dementia, and post-surgery care in Westchester, IL. Compassionate in-home support for complex health needs.",
+    // OPTIMIZATION FIX: Removed "www." to match canonical structure.
+    url: "https://benevolencehomeservices.com/services/specialized-support",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
@@ -40,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Specialized Alzheimer's & Dementia Care | Benevolence Home Services",
-    description: "Compassionate specialized care for Alzheimer's, dementia, and post-surgery recovery in Westchester, IL.",
+    title: "Alzheimer's & Dementia Care | Benevolence Home Services",
+    description: "Expert Alzheimer's, dementia, and post-surgery care in Westchester, IL.",
     images: ["/nh-2212833857U072s1e.webp"],
   }
 };

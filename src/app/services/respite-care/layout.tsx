@@ -1,15 +1,17 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  // OPTIMIZATION: Perfectly hits the length requirement. layout.tsx will append " | Benevolence Home Services".
-  title: 'Professional Respite Care Services',
+  // OPTIMIZATION FIX: Shortened to fit under the 580px visual limit. 
+  // "Professional Respite Care | Benevolence Home Services" fits perfectly and aligns with your H1.
+  title: 'Professional Respite Care',
   
   // OPTIMIZATION: 153 characters. Captures strong local keywords and fits flawlessly under the 160 char limit.
   description: 'Discover professional respite care services in Westchester, IL. We provide temporary relief and compassionate support for family caregivers across Chicagoland.',
   
-  // OPTIMIZATION: Resolves "Canonical link points to a different page" warning
   alternates: {
-    canonical: 'https://www.benevolencehomeservices.com/services/respite-care',
+    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
+    // detected by the SEO crawler and prevent the canonical mismatch error.
+    canonical: 'https://benevolencehomeservices.com/services/respite-care',
   },
   
   // OPTIMIZATION: High-value local keyword matrix specifically targeting respite and caregiver relief intent
@@ -23,9 +25,10 @@ export const metadata: Metadata = {
   ],
   
   openGraph: {
-    title: "Professional Respite Care Services | Benevolence Home Services",
+    title: "Professional Respite Care | Benevolence Home Services",
     description: "Discover professional respite care services in Westchester, IL. We provide temporary relief and compassionate support for family caregivers.",
-    url: "https://www.benevolencehomeservices.com/services/respite-care",
+    // OPTIMIZATION FIX: Removed "www." to match canonical structure.
+    url: "https://benevolencehomeservices.com/services/respite-care",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
@@ -40,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Respite Care Services | Benevolence Home Services",
+    title: "Professional Respite Care | Benevolence Home Services",
     description: "Discover professional respite care services in Westchester, IL.",
     images: ["/nh-2182343844Us238i0.webp"],
   }
