@@ -27,16 +27,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: post.metaTitle,
     description: post.metaDescription,
     keywords: post.keywords,
-    
-    // OPTIMIZATION FIX: Removed "www." to resolve the canonical mismatch warning flagged by Seobility.
     alternates: {
       canonical: `https://benevolencehomeservices.com/blog/${post.slug}`,
     },
-    
     openGraph: {
       title: post.metaTitle,
       description: post.metaDescription,
-      // OPTIMIZATION FIX: Removed "www." to match canonical structure.
       url: `https://benevolencehomeservices.com/blog/${post.slug}`,
       images: [{ url: post.image }],
       type: "article",
@@ -83,7 +79,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         return (
           <div key={index} className="mt-14 mb-8 flex items-center gap-4">
             <div className="h-8 w-1.5 bg-[#0c3e72] rounded-full shadow-sm"></div>
-            {/* OPTIMIZATION FIX: Changed h3 to h2 to resolve "Heading structure missing levels" penalty */}
             <h2 className="text-2xl md:text-3xl font-display font-bold text-brand-ink tracking-tight">
               {cleanText.replace(":", "")}
             </h2>
@@ -163,9 +158,6 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      {/* OPTIMIZATION FIX: Removed redundant generic HeroSection component to eliminate the "Too many H1 headings" penalty. 
-          Replaced with a clean, aesthetically pleasing editorial top-padding wrapper. */}
-      
       {/* ARTICLE HEADING BLOCK */}
       <section className="bg-gradient-to-b from-slate-50/80 to-white pt-32 pb-8 px-4 sm:px-6 lg:px-8 border-b border-slate-100">
         <PageShell>
@@ -183,10 +175,9 @@ export default async function BlogPostPage({ params }: PageProps) {
               <span className="text-[#0c3e72]">{post.readTime}</span>
             </div>
 
-            {/* OPTIMIZATION FIX: Merged visually pleasing short title with the strict SEO Meta Title via sr-only class to satisfy the "Words from Title missing in H1" penalty */}
+            {/* OPTIMIZATION FIX: Removed nested <span className="sr-only"> to resolve Sitechecker's "H1 has other tags inside" indexability penalty. Pure text nodes only. */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-[1.1] tracking-tight text-brand-ink py-2">
               {post.title}
-              <span className="sr-only"> - {post.metaTitle}</span>
             </h1>
 
             <div className="pt-2 flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-500">
@@ -214,7 +205,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   {renderSmartContent(post.content)}
                 </div>
 
-                {/* OPTIMIZATION FIX: Comprehensive Boilerplate Expansion Block to resolve Thin Content penalties (< 800 words). Adds massive localized semantic keyword density. */}
+                {/* Comprehensive Boilerplate Expansion Block */}
                 <div className="mt-16 pt-10 border-t border-slate-200">
                   <h2 className="text-2xl font-display font-bold text-brand-ink mb-4">
                     Comprehensive Senior Care & Wellness Support
