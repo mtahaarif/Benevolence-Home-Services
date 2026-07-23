@@ -4,14 +4,18 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { brand, navItems } from "@/data/site-content";
+import Image from "next/image";
 
 function BrandMark() {
   return (
     <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-      <img
+      <Image
         src="/footer-logo.png"
         alt="Benevolence Home Services Logo"
+        width={250} 
+        height={65}
         className="h-9 w-auto shrink-0 sm:h-11 object-contain"
+        loading="lazy"
       />
       <div className="leading-tight shrink-0">
         <p className="text-[0.62rem] font-bold uppercase tracking-[0.3em] text-[#0c3e72] sm:text-[0.68rem]">

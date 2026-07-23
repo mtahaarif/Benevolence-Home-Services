@@ -189,7 +189,6 @@ export default function HomePage() {
           <PageShell>
             <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] items-center">
               <div className="space-y-6">
-                {/* SEO FIX: Removed <br />. H2 must contain purely text nodes to pass Sitechecker indexability testing. */}
                 <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-brand-ink tracking-tight leading-tight block max-w-lg">
                   Supporting Independence, Comfort, and Dignity
                 </h2>
@@ -244,43 +243,47 @@ export default function HomePage() {
             />
             
             <div className="mt-14 space-y-8 sm:space-y-0 sm:grid sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 relative pb-12">
-              {homeHighlights.map((item, idx) => (
-                <div 
-                  key={item.title}
-                  style={{ "--stack-top": `calc(6rem + ${idx * 16}px)` } as React.CSSProperties}
-                  className="group sticky top-[var(--stack-top)] sm:relative sm:top-auto flex flex-col justify-between bg-white border border-slate-100/70 p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(15,47,89,0.04)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(17,104,179,0.06)] min-h-[420px]"
-                >
-                  <div>
-                    <h3 className="font-display text-xl font-semibold text-[#0c3e72] leading-snug">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-xs sm:text-sm text-slate-500 leading-relaxed">
-                      {item.body}
-                    </p>
-                  </div>
+              {homeHighlights.map((item, idx) => {
+                const stickyOffsets = ["top-24", "top-28", "top-32", "top-36"];
+                
+                return (
+                  <div 
+                    key={item.title}
+                    className={`group sticky ${stickyOffsets[idx] || "top-24"} sm:relative sm:top-auto flex flex-col justify-between bg-white border border-slate-100/70 p-8 rounded-[2rem] shadow-[0_10px_30px_rgba(15,47,89,0.04)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(17,104,179,0.06)] min-h-[420px]`}
+                  >
+                    <div>
+                      <h3 className="font-display text-xl font-semibold text-[#0c3e72] leading-snug">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 text-xs sm:text-sm text-slate-500 leading-relaxed">
+                        {item.body}
+                      </p>
+                    </div>
 
-                  <div className="mt-6 space-y-6 flex flex-col items-center">
-                    <Link 
-                      href="/services"
-                      aria-label={`Explore our full suite of personalized care programs for ${item.title}`}
-                      className="w-full text-center inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
-                    >
-                      Explore Care Options <span className="sr-only">for {item.title}</span>
-                      <span aria-hidden="true" className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-                    </Link>
+                    <div className="mt-6 space-y-6 flex flex-col items-center">
+                      <Link 
+                        href="/services"
+                        aria-label={`Explore our full suite of personalized care programs for ${item.title}`}
+                        className="w-full text-center inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
+                      >
+                        Explore Care Options <span className="sr-only">for {item.title}</span>
+                        <span aria-hidden="true" className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                      </Link>
 
-                    <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-slate-50 shadow-sm transition-transform duration-500 group-hover:scale-105">
-                      <Image 
-                        src={`/middle-img${idx + 1}.webp`} 
-                        alt={`Supportive imagery for ${item.title}`}
-                        fill
-                        sizes="80px"
-                        className="object-cover"
-                      />
+                      <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-slate-50 shadow-sm transition-transform duration-500 group-hover:scale-105">
+                        <Image 
+                          src={`/middle-img${idx + 1}.webp`} 
+                          alt={`Supportive imagery for ${item.title}`}
+                          width="151" 
+                          height="151"
+                          sizes="80px"
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </PageShell>
         </section>
@@ -301,6 +304,9 @@ export default function HomePage() {
 
             <div className="w-full overflow-x-auto rounded-[2rem] border border-slate-200/70 shadow-[0_8px_30px_rgba(15,47,89,0.03)] bg-white">
               <table className="w-full min-w-[760px] border-collapse text-left">
+                <caption className="sr-only">
+                  Comparison of Care Standards: Benevolence Home Services versus Traditional Home Care
+                </caption>
                 <thead>
                   <tr className="bg-slate-50 border-b border-slate-200/60">
                     <th className="p-5.5 font-display text-xs font-bold uppercase tracking-wider text-slate-500 w-1/4">Core Metric</th>
@@ -469,11 +475,13 @@ export default function HomePage() {
       <ScrollReveal>
         <section className="relative px-4 py-24 sm:px-6 lg:px-8 lg:py-32 overflow-hidden border-t border-slate-200/50 rounded-t-[3rem]" aria-label="Core Philosophy Statement">
           <div className="absolute inset-0 -z-10 w-full h-full">
+            {/* PERFORMANCE FIX: Removed the eager 'priority' tag to force this non-critical bottom image to lazy load! */}
             <Image
               src="/ff329731-2265-4376-a04c-f10a744fb417.jpg"
               alt="Serene living room setup reflecting our home care mission environment"
-              fill
-              priority
+              width="1024" 
+              height="434"
+              loading="lazy"
               sizes="100vw"
               className="object-cover object-center scale-102 filter transition-all duration-300"
             />

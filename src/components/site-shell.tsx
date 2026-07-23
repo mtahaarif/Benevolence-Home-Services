@@ -1,7 +1,9 @@
 "use client"; // MUST be at the very top of site-shell.tsx
+
 import Link from "next/link";
+import Image from "next/image"; // Upgraded to native Next.js Image component
 import { SiteNav } from "@/components/site-nav";
-import { brand, contactDetails, navItems, socialLinks } from "@/data/site-content";
+import { contactDetails, navItems, socialLinks } from "@/data/site-content";
 import { useState, useEffect } from "react";
 import {
   FaFacebookF,
@@ -29,12 +31,11 @@ export function SiteChrome({ children }: ChromeProps) {
   );
 }
 
-
 export function SectionHeading({
   eyebrow,
   title,
   description,
-  centered = false, // ADDED: Optional centered prop (defaults to false for other pages)
+  centered = false,
 }: {
   eyebrow?: string;
   title: string;
@@ -80,10 +81,9 @@ export function HeroSection({
   primaryAction: { label: string; href: string };
   secondaryAction?: { label: string; href: string };
   facts?: string[];
-  imageSrc?: string | string[]; // Upgraded to accept a single string or an array of strings
+  imageSrc?: string | string[];
   imageAlt?: string;
 }) {
-  // Setup state for tracking the current image
   const [currentIndex, setCurrentIndex] = useState(0);
   
   // Normalize imageSrc to always be an array
@@ -95,7 +95,7 @@ export function HeroSection({
     
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // 5000ms = 5 seconds
+    }, 5000);
     
     return () => clearInterval(interval);
   }, [images.length]);
@@ -103,19 +103,25 @@ export function HeroSection({
   return (
     <section className="w-full px-0 pt-0">
       <div className="relative w-full overflow-hidden bg-white">
-        
         <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
           
-          {/* BACKGROUND SLIDER WITH SMOOTH CROSSFADE */}
+          {/* BACKGROUND SLIDER WITH NEXT.JS OPTIMIZED IMAGES */}
           {images.map((src, index) => (
-            <img
+            <div
               key={src}
-              src={src}
-              alt={`${imageAlt ?? title} - Image ${index + 1}`}
-              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ease-in-out ${
+              className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${
                 index === currentIndex ? "opacity-100 z-0" : "opacity-0 -z-10"
               }`}
-            />
+            >
+              <Image
+                src={src}
+                alt={`${imageAlt ?? title} - Hero Slide ${index + 1}`}
+                fill
+                priority={index === 0} // Load the first hero image immediately
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </div>
           ))}
 
           {/* Smart Gradient Fade */}
@@ -271,12 +277,12 @@ function SiteFooter() {
               </h3>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-white/80 mt-4">
-              Services Areas Covered: {contactDetails.serviceAreas}
+              Service Areas Covered: {contactDetails.serviceAreas}
             </p>
           </div>
 
-          {/* Column 2: Reach Us & Location */}
-          <div className="space-y-6 lg:mt-7">
+          {/* Column 2: Reach Us & Location (Wrapped in Semantic <address>) */}
+          <address className="not-italic space-y-6 lg:mt-7">
             <div>
               <h4 className="text-base font-semibold text-white">Call or Message Us</h4>
               <div className="mt-2 space-y-1 text-sm text-white/80">
@@ -294,12 +300,11 @@ function SiteFooter() {
                 {contactDetails.address}
               </p>
             </div>
-          </div>
+          </address>
 
-          {/* Column 3: Quick Links */}
-          <div className="lg:mt-7">
+          {/* Column 3: Quick Links Navigation */}
+          <nav aria-label="Footer Navigation" className="lg:mt-7">
             <h4 className="text-base font-semibold text-white mb-4">Quick Links</h4>
-            {/* Split links into 2 columns dynamically */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-white/80">
               {navItems.map((item) => (
                 <Link key={item.href} href={item.href} className="hover:text-[color:var(--brand-gold)] transition">
@@ -307,20 +312,18 @@ function SiteFooter() {
                 </Link>
               ))}
             </div>
-          </div>
+          </nav>
 
-        {/* Column 4: Logo Box */}
+          {/* Column 4: Logo Box (Differentiated Alt Tag to prevent duplicate alt penalties) */}
           <div className="flex items-start lg:justify-end lg:mt-7">
-            {/* White card wrapper to make the logo pop against the dark footer */}
             <div className="bg-white p-5 rounded-2xl flex flex-col items-center justify-center brand-shadow w-full max-w-[220px]">
-              
-              {/* Update src to match your logo file */}
-              <img
+              <Image
                 src="/footer-logo.png"
-                alt="Benevolence Home Services Logo"
-                className="h-16 w-auto object-contain" 
+                alt="Benevolence Home Services Footer Logo" // FIXED: Unique alt text clears duplicate alt warnings
+                width={180}
+                height={64}
+                className="h-16 w-auto object-contain"
               />
-              
             </div>
           </div>
 
@@ -347,31 +350,30 @@ function SiteFooter() {
               <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">
                 Like, Share, or Comment:
               </span>
-            <div className="flex gap-2.5">
-              {socialLinks.map((item) => {
-                const icon = {
-                  LinkedIn: <FaLinkedinIn size={15} />,
-                  Facebook: <FaFacebookF size={15} />,
-                  Instagram: <FaInstagram size={15} />,
-                  YouTube: <FaYoutube size={15} />,
-                  TikTok: <FaTiktok size={15} />,
-                }[item.label];
+              <div className="flex gap-2.5">
+                {socialLinks.map((item) => {
+                  const icon = {
+                    LinkedIn: <FaLinkedinIn size={15} />,
+                    Facebook: <FaFacebookF size={15} />,
+                    Instagram: <FaInstagram size={15} />,
+                    YouTube: <FaYoutube size={15} />,
+                    TikTok: <FaTiktok size={15} />,
+                  }[item.label];
 
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={item.label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/30 text-white transition-all duration-300 hover:bg-white hover:text-[color:var(--brand-ink)] hover:scale-110"
-                  >
-                    {icon}
-                  </Link>
-                );
-              })}
-            </div>
-              
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer" // FIXED: Added noopener for security best practice
+                      aria-label={item.label}
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-white/30 text-white transition-all duration-300 hover:bg-white hover:text-[color:var(--brand-ink)] hover:scale-110"
+                    >
+                      {icon}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
           </div>

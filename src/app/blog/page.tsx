@@ -5,6 +5,7 @@ import Link from "next/link";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import { blogPosts } from "@/data/blogs";
+import Image from "next/image";
 
 const categories = ["All Insights", "Safety & Wellness", "Specialized Care", "Memory Support", "Transitional Care", "Veteran Support", "Care Management"];
 
@@ -87,9 +88,11 @@ export default function BlogDirectoryPage() {
                     
                     {/* Visual Card Image Section */}
                     <div className="w-full h-44 relative overflow-hidden rounded-t-[1.9rem] border-b border-white/40 bg-slate-100">
-                      <img 
+                      <Image 
                         src={post.image} 
                         alt={`Cover image for ${post.title}`} 
+                        width={613}   
+                        height={409}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
                       />

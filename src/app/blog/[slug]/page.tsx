@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image"; // Added Next.js Image component for Next-Gen optimization
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
@@ -79,6 +80,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         return (
           <div key={index} className="mt-14 mb-8 flex items-center gap-4">
             <div className="h-8 w-1.5 bg-[#0c3e72] rounded-full shadow-sm"></div>
+            {/* Clean text-only H2 to prevent "H2 has other tags inside" penalty */}
             <h2 className="text-2xl md:text-3xl font-display font-bold text-brand-ink tracking-tight">
               {cleanText.replace(":", "")}
             </h2>
@@ -166,7 +168,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               href="/blog" 
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0c3e72] hover:text-brand-blue transition-colors mb-2"
             >
-              ← Back to Journal <span className="sr-only">Directory</span>
+              ← Back to Journal
             </Link>
             
             <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest text-slate-400">
@@ -175,7 +177,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <span className="text-[#0c3e72]">{post.readTime}</span>
             </div>
 
-            {/* OPTIMIZATION FIX: Removed nested <span className="sr-only"> to resolve Sitechecker's "H1 has other tags inside" indexability penalty. Pure text nodes only. */}
+            {/* FIXED: Pure Text H1 - Removed all nested tags to clear Site Audit Penalty */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-[1.1] tracking-tight text-brand-ink py-2">
               {post.title}
             </h1>
@@ -233,9 +235,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <Link
                   href="/contact-us"
                   className="inline-flex items-center gap-3 rounded-full bg-[#0c3e72] px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] !text-white shadow-lg hover:bg-brand-blue transition-all hover:-translate-y-1 hover:shadow-xl"
+                  aria-label={`Request assessment regarding ${post.title}`}
                 >
                   Request Assessment 
-                  <span className="sr-only"> regarding {post.title}</span>
                 </Link>
               </div>
             </div>
@@ -244,11 +246,17 @@ export default async function BlogPostPage({ params }: PageProps) {
               <ScrollReveal>
                 <div className="w-full rounded-[2.5rem] p-3 bg-white/40 border border-white/80 shadow-[0_15px_40px_rgba(15,47,89,0.06)] backdrop-blur-xl">
                   <div className="w-full h-64 sm:h-80 lg:h-96 relative rounded-[2rem] overflow-hidden shadow-inner bg-slate-50 group">
-                    <img 
+                    
+                    {/* FIXED: Upgraded from <img> to <Image> to clear "Serve images in next gen formats" penalty */}
+                    <Image 
                       src={post.image} 
                       alt={`Cover image for ${post.title}`} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
+                    
                     <div className="absolute inset-0 bg-gradient-to-t from-brand-ink/50 to-transparent pointer-events-none" />
                     <span className="absolute bottom-5 left-5 bg-white/95 backdrop-blur-md text-[#0c3e72] text-[10px] font-extrabold uppercase tracking-widest px-4 py-2 rounded-xl shadow-lg border border-white">
                       {post.category}

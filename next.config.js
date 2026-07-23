@@ -5,9 +5,7 @@ const nextConfig = {
 
   // Note: Vercel automatically optimizes images, but if you still need to bypass it 
   // for your specific use case, keep this unoptimized flag enabled.
-  images: {
-    unoptimized: true, 
-  },
+
 
   async headers() {
     return [
