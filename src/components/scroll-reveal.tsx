@@ -39,10 +39,10 @@ export default function ScrollReveal({ children, className = "" }: ScrollRevealP
   return (
     <div
       ref={elementRef}
-      className={`transition-all duration-[1200ms] cubic-bezier(0.215, 0.61, 0.355, 1) will-change-[opacity,transform] ${
+      className={`transition-all duration-[1000ms] ease-out will-change-[opacity,transform,filter] ${
         isIntersecting
-          ? "opacity-100 translate-y-0 skew-y-0 scale-100"
-          : "opacity-0 translate-y-16 skew-y-2 scale-[0.97]"
+          ? "opacity-100 translate-y-0 blur-none"
+          : "opacity-0 translate-y-10 blur-[2px]"
       } ${className}`}
     >
       {children}

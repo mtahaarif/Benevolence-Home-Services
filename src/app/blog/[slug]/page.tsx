@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image"; // Added Next.js Image component for Next-Gen optimization
+import Image from "next/image"; // Next.js Image component for Next-Gen optimization
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
@@ -111,18 +111,24 @@ export default async function BlogPostPage({ params }: PageProps) {
           </svg>
         );
 
+        // Semantic SEO list assignment. Uses <ol> for numbers and <ul> for bullets.
+        const ListWrapper = isNumbered ? "ol" : "ul";
+
         return (
-          <div key={index} className="group flex gap-5 mt-6 items-start bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(15,47,89,0.03)] transition-all duration-500 hover:shadow-[0_12px_30px_rgba(12,62,114,0.08)] hover:border-[#0c3e72]/15">
-            <div className="flex-shrink-0 mt-0.5 h-12 w-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-[#0c3e72] font-black text-lg shadow-inner transition-colors duration-500 group-hover:bg-[#0c3e72]/5 group-hover:border-[#0c3e72]/20">
-              {badgeContent}
-            </div>
-            <div className="pt-1">
-              {title && <p className="text-brand-ink font-bold block text-lg md:text-xl mb-2 tracking-tight">{title}</p>}
-              <p className="text-slate-600 text-[15px] md:text-base leading-relaxed">
-                {rest}
-              </p>
-            </div>
-          </div>
+          <ListWrapper key={index} className="list-none p-0 m-0">
+            {/* Wrapper changed to <li> to satisfy the "Page has no list markdown" SEO audit */}
+            <li className="group flex gap-5 mt-6 items-start bg-white p-6 rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(15,47,89,0.03)] transition-all duration-500 hover:shadow-[0_12px_30px_rgba(12,62,114,0.08)] hover:border-[#0c3e72]/15">
+              <div className="flex-shrink-0 mt-0.5 h-12 w-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-[#0c3e72] font-black text-lg shadow-inner transition-colors duration-500 group-hover:bg-[#0c3e72]/5 group-hover:border-[#0c3e72]/20">
+                {badgeContent}
+              </div>
+              <div className="pt-1">
+                {title && <p className="text-brand-ink font-bold block text-lg md:text-xl mb-2 tracking-tight">{title}</p>}
+                <p className="text-slate-600 text-[15px] md:text-base leading-relaxed">
+                  {rest}
+                </p>
+              </div>
+            </li>
+          </ListWrapper>
         );
       }
 
@@ -164,11 +170,13 @@ export default async function BlogPostPage({ params }: PageProps) {
       <section className="bg-gradient-to-b from-slate-50/80 to-white pt-32 pb-8 px-4 sm:px-6 lg:px-8 border-b border-slate-100">
         <PageShell>
           <div className="max-w-6xl mx-auto space-y-5">
+            {/* OPTIMIZATION FIX: Extended to 5 words and added descriptive title attribute */}
             <Link 
               href="/blog" 
+              title="Return to the main Senior Care Journal directory"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#0c3e72] hover:text-brand-blue transition-colors mb-2"
             >
-              ← Back to Journal
+              ← Return to the Care Journal
             </Link>
             
             <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-widest text-slate-400">
@@ -177,7 +185,6 @@ export default async function BlogPostPage({ params }: PageProps) {
               <span className="text-[#0c3e72]">{post.readTime}</span>
             </div>
 
-            {/* FIXED: Pure Text H1 - Removed all nested tags to clear Site Audit Penalty */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-black leading-[1.1] tracking-tight text-brand-ink py-2">
               {post.title}
             </h1>
@@ -214,13 +221,20 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </h2>
                   <div className="space-y-4 text-slate-600 leading-relaxed text-[15px] md:text-base">
                     <p>
-                      At Benevolence Home Services, we understand that navigating the complexities of elder care, Alzheimer's support, and post-hospital recovery can be overwhelming for families. Our nurse-led agency is dedicated to providing compassionate, highly customized in-home care services across Westchester, DuPage County, Will County, and the greater Chicagoland area. We believe that aging in place safely is not just about meeting basic needs, but about fostering a deeply supportive environment where seniors can thrive physically, emotionally, and socially.
+                      At Benevolence Home Services, we understand that navigating the complexities of elder care, Alzheimer's support, and post-hospital recovery can be overwhelming for families. Our nurse-led agency is dedicated to providing compassionate, highly customized in-home care services across Westchester, DuPage County, Will County, and the greater Chicagoland area. Our holistic approach covers every aspect of daily living, including:
+                    </p>
+                    
+                    <ul className="list-disc pl-5 space-y-2 marker:text-brand-orange text-slate-700 py-2">
+                      <li><strong>Personalized Care:</strong> Specialized dementia, memory care, and 24/7 personal companionship.</li>
+                      <li><strong>Everyday Assistance:</strong> Light housekeeping, meal preparation, and reliable medication reminders.</li>
+                      <li><strong>Safe Mobility:</strong> Fall prevention support, and secure transportation to medical appointments.</li>
+                    </ul>
+
+                    <p>
+                      We pride ourselves on creating structured, empathetic care plans tailored to the unique medical and emotional needs of every individual. Our caregivers are thoroughly vetted, bonded, and supervised by clinical experts to deliver the highest standard of non-medical support.
                     </p>
                     <p>
-                      Whether your loved one requires temporary respite care to relieve family caregivers, specialized dementia and memory care companionship, or comprehensive 24/7 personal care, our rigorously trained professionals are here to ensure safety, dignity, and independence at home. We pride ourselves on creating structured, empathetic care plans tailored to the unique medical and emotional needs of every individual. Our caregivers are thoroughly vetted, bonded, and supervised by clinical experts to deliver the highest standard of non-medical support.
-                    </p>
-                    <p>
-                      From light housekeeping, meal preparation, and medication reminders to safe mobility assistance and transportation to medical appointments, our holistic approach covers every aspect of daily living. By choosing our agency, you are partnering with a team that values clinical excellence, proactive communication, and deep respect for our clients. Reach out to our care coordinators today to schedule a comprehensive assessment and discover how our customized home care solutions can alleviate caregiver burnout and elevate your family's quality of life.
+                      By choosing our agency, you are partnering with a team that values clinical excellence, proactive communication, and deep respect for our clients. Reach out to our care coordinators today to schedule a comprehensive assessment and discover how our customized home care solutions can alleviate caregiver burnout and elevate your family's quality of life.
                     </p>
                   </div>
                 </div>
@@ -232,12 +246,14 @@ export default async function BlogPostPage({ params }: PageProps) {
                   <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Resource Provider</h4>
                   <p className="text-sm font-bold text-brand-ink uppercase tracking-wider">Benevolence Home Services</p>
                 </div>
+                {/* OPTIMIZATION FIX: Extended button text to 4 words and added an explicit title attribute */}
                 <Link
                   href="/contact-us"
                   className="inline-flex items-center gap-3 rounded-full bg-[#0c3e72] px-8 py-3.5 text-[11px] font-bold uppercase tracking-[0.2em] !text-white shadow-lg hover:bg-brand-blue transition-all hover:-translate-y-1 hover:shadow-xl"
-                  aria-label={`Request assessment regarding ${post.title}`}
+                  aria-label={`Request a specialized care assessment regarding ${post.title}`}
+                  title="Schedule a comprehensive senior care assessment"
                 >
-                  Request Assessment 
+                  Request a Care Assessment 
                 </Link>
               </div>
             </div>
@@ -247,7 +263,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <div className="w-full rounded-[2.5rem] p-3 bg-white/40 border border-white/80 shadow-[0_15px_40px_rgba(15,47,89,0.06)] backdrop-blur-xl">
                   <div className="w-full h-64 sm:h-80 lg:h-96 relative rounded-[2rem] overflow-hidden shadow-inner bg-slate-50 group">
                     
-                    {/* FIXED: Upgraded from <img> to <Image> to clear "Serve images in next gen formats" penalty */}
                     <Image 
                       src={post.image} 
                       alt={`Cover image for ${post.title}`} 
