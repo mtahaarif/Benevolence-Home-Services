@@ -20,8 +20,8 @@ export default function ScrollReveal({ children, className = "" }: ScrollRevealP
       },
       {
         root: null,
-        threshold: 0.02, // Triggers immediately upon viewport entry edge
-        rootMargin: "-20px 0px -40px 0px", // Asymmetric margins to favor downward scrolling flows
+        threshold: 0.05, // Slightly higher threshold so it fades in naturally as you scroll
+        rootMargin: "-20px 0px -40px 0px", 
       }
     );
 
@@ -39,10 +39,8 @@ export default function ScrollReveal({ children, className = "" }: ScrollRevealP
   return (
     <div
       ref={elementRef}
-      className={`transition-all duration-[1000ms] ease-out will-change-[opacity,transform,filter] ${
-        isIntersecting
-          ? "opacity-100 translate-y-0 blur-none"
-          : "opacity-0 translate-y-10 blur-[2px]"
+      className={`transition-opacity duration-1000 ease-in-out will-change-[opacity] ${
+        isIntersecting ? "opacity-100" : "opacity-0"
       } ${className}`}
     >
       {children}
