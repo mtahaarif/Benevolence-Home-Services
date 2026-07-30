@@ -43,12 +43,20 @@ export function SiteNav() {
     <header className="sticky top-0 z-50 w-full border-b border-white/50 bg-white/85 shadow-[0_10px_40px_rgba(15,47,89,0.06)] backdrop-blur-xl">
       {/* Removed overflow-x-clip here so dropdowns aren't artificially chopped off */}
       <div className="relative flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        
         {/* Brand/Logo Anchor */}
         <Link
           href="/"
           className="shrink-0 transition-transform active:scale-98"
           aria-label={brand.name}
-          onClick={() => setOpen(false)}
+          onClick={(e) => {
+            setOpen(false);
+            // Smooth scroll to top if already on the homepage
+            if (pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
         >
           <BrandMark />
         </Link>
@@ -119,6 +127,11 @@ export function SiteNav() {
                       toggleSubmenu(item.label, e);
                     } else {
                       setOpen(false);
+                      // Smooth scroll to top if already on this page
+                      if (pathname === item.href) {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
                     }
                   }}
                   className={`flex items-center justify-between whitespace-nowrap rounded-full px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] transition-all xl:px-3.5 xl:text-[11px] gap-1.5 ${
@@ -161,7 +174,14 @@ export function SiteNav() {
                           href={sub.href}
                           target={sub.target}
                           rel={sub.target === "_blank" ? "noopener noreferrer" : undefined}
-                          onClick={() => setOpen(false)}
+                          onClick={(e) => {
+                            setOpen(false);
+                            // Smooth scroll to top if already on this page
+                            if (pathname === sub.href) {
+                              e.preventDefault();
+                              window.scrollTo({ top: 0, behavior: "smooth" });
+                            }
+                          }}
                           className="whitespace-nowrap rounded-xl px-4 py-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500 transition-colors hover:bg-slate-50 hover:text-[#0c3e72]"
                         >
                           {sub.label}
@@ -179,6 +199,13 @@ export function SiteNav() {
                             href={sub.href}
                             target={sub.target}
                             rel={sub.target === "_blank" ? "noopener noreferrer" : undefined}
+                            onClick={(e) => {
+                              // Smooth scroll to top if already on this page
+                              if (pathname === sub.href) {
+                                e.preventDefault();
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                              }
+                            }}
                             className="whitespace-nowrap rounded-xl px-4 py-2.5 text-[9.5px] font-bold uppercase tracking-widest text-slate-600 transition-all hover:translate-x-0.5 hover:bg-brand-blue/5 hover:text-[#0c3e72]"
                           >
                             {sub.label}

@@ -1,38 +1,28 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/site-shell";
 import { GoogleTagManager } from '@next/third-parties/google';
 
-const inter = Inter({
-  variable: "--font-inter",
+// 1. Import and configure Quicksand
+const quicksand = Quicksand({
+  variable: "--font-quicksand",
   subsets: ["latin"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-// GLOBAL SEO ENGINE: Resolves missing canonicals, OG tags, and Twitter audit warnings instantly
+// GLOBAL SEO ENGINE
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.benevolencehomeservices.com"),
   alternates: {
-    // Instructs Next.js to dynamically render absolute canonical URLs seamlessly
     canonical: "/", 
   },
   title: {
-    // OPTIMIZED: Exactly 56 characters. Stays under the 580-pixel limit.
     default: "Benevolence Home Services | Home Care in Westchester, IL",
-    // OPTIMIZED: Shortened template prevents the "Word Repetition" and "Title too long" penalties on subpages
     template: "%s | Benevolence Home Services",
   },
-  // OPTIMIZED: 151 characters. Safely under the 160 character / 1000 pixel cutoff limit.
   description:
     "Benevolence Home Services provides nurse-led, compassionate home care and staffing solutions in Westchester, IL, serving seniors across Chicagoland.",
-  // OPTIMIZED: Highly expanded matrix targeting your specific services and local county territories
   keywords: [
     "Home care in Westchester IL",
     "Nurse-led home care agency",
@@ -82,13 +72,24 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-slate-50 text-slate-900">
-        <SiteChrome>{children}</SiteChrome>
-      </body>
-      {/* NOTE: Replace 'GTM-XXXXXXX' below with your actual Google Tag Manager container ID 
-        when you are ready to track conversions and analytics.
+    <html lang="en" className={`${quicksand.variable} h-full antialiased`}>
+      {/* UNIVERSAL PRISTINE DEFAULT:
+        1. bg-white: Forces the pure minimalist background globally.
+        2. selection:*: Highlights text in your brand blue.
       */}
+      <body className="min-h-full flex flex-col font-sans bg-white text-slate-900 relative selection:bg-[#0c3e72] selection:text-white">
+        
+        {/* PRISTINE GLOBAL ANCHOR: The razor-thin brand line at the absolute top of the browser. 
+            This grounds the minimalist design without cluttering it. */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-[color:var(--border)] z-50" />
+
+        {/* Clean, undisturbed content injection */}
+        <SiteChrome>
+          {children}
+        </SiteChrome>
+        
+      </body>
+      
       <GoogleTagManager gtmId="GTM-XXXXXXX" />
     </html>
   );

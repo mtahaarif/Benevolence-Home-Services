@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fffdf7;
+  /* PURE MINIMALISM: Changed from cream to absolute crisp white */
+  --background: #ffffff;
   --foreground: #12305e;
   --surface: rgba(255, 255, 255, 0.84);
   --surface-strong: #ffffff;
@@ -26,9 +27,9 @@
   --color-brand-gold: var(--brand-gold);
   --color-brand-ink: var(--brand-ink);
 
-  /* FIXED: Synchronized with the Inter and Playfair fonts exported from your layout.tsx */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-playfair), Georgia, serif;
+  /* FIXED: Synchronized with the Quicksand font exported from your layout.tsx */
+  --font-sans: var(--font-quicksand), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-quicksand), Georgia, serif;
 }
 
 /* Base HTML setup for smooth anchoring and preventing horizontal scroll-breaking */
@@ -41,7 +42,7 @@ html {
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans); /* Now correctly maps to the Tailwind theme variable */
+  font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: clip;
   text-rendering: optimizeLegibility;
@@ -49,42 +50,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hardware-accelerated background ambient glowing blobs.
-  Using translateZ(0) forces the GPU to render them, 
-  preventing paint-thrashing lag when the user scrolls.
+/* =========================================
+  NUKED: body::before and body::after 
+  The floating orange and blue ambient circles 
+  have been entirely deleted from the CSS.
+  =========================================
 */
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  inset: auto;
-  pointer-events: none;
-  z-index: -1;
-  transform: translateZ(0); 
-}
 
-body::before {
-  top: -6rem;
-  left: -8rem;
-  width: 24rem;
-  height: 24rem;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(245, 170, 65, 0.22), rgba(245, 170, 65, 0));
-}
-
-body::after {
-  right: -7rem;
-  top: 8rem;
-  width: 26rem;
-  height: 26rem;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(17, 104, 179, 0.18), rgba(17, 104, 179, 0));
-}
-
-/* Custom brand highlight color */
+/* Custom brand highlight color - Upgraded to Professional Blue */
 ::selection {
-  background: rgba(245, 170, 65, 0.28);
-  color: var(--brand-ink);
+  background: var(--brand-blue);
+  color: #ffffff;
 }
 
 a {
@@ -92,10 +68,7 @@ a {
   text-decoration: none;
 }
 
-/* UPGRADE: Converted standard CSS class to a Tailwind v4 @utility.
-  This allows you to use modifiers in your React components! 
-  (e.g., hover:brand-shadow, md:brand-shadow)
-*/
+/* UPGRADE: Converted standard CSS class to a Tailwind v4 @utility. */
 @utility brand-shadow {
   box-shadow: 0 20px 60px rgba(15, 47, 89, 0.08);
 }

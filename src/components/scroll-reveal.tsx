@@ -39,7 +39,8 @@ export default function ScrollReveal({ children, className = "" }: ScrollRevealP
   return (
     <div
       ref={elementRef}
-      className={`transition-opacity duration-1000 ease-in-out will-change-[opacity] ${
+      // Changed duration-1000 to duration-[1500ms] for a slower, more graceful fade
+      className={`transition-opacity duration-[1500ms] ease-in-out will-change-[opacity] ${
         isIntersecting ? "opacity-100" : "opacity-0"
       } ${className}`}
     >
