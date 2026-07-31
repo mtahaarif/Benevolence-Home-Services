@@ -6,6 +6,7 @@ import Link from "next/link";
 const initialState = {
   name: "",
   email: "",
+  phone: "", // NEW FIELD
   form_subject: "",
   form_content: "",
   agreeToPrivacy: false,
@@ -37,6 +38,7 @@ export function ContactForm() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
+          phone: form.phone, // INCLUDED IN PAYLOAD
           form_subject: form.form_subject,
           form_content: form.form_content
         }),
@@ -67,7 +69,7 @@ export function ContactForm() {
       
       <div className="grid gap-6">
         
-        {/* Name and Email side-by-side on desktop, stacked on mobile */}
+        {/* ROW 1: Name and Email */}
         <div className="grid gap-6 sm:grid-cols-2">
           
           {/* Name Field */}
@@ -109,23 +111,47 @@ export function ContactForm() {
           </div>
         </div>
 
-        {/* Form Subject */}
-        <div className="relative">
-          <input
-            required
-            id="form_subject"
-            type="text"
-            value={form.form_subject}
-            onChange={(event) => updateField("form_subject", event.target.value)}
-            className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
-            placeholder="Subject"
-          />
-          <label
-            htmlFor="form_subject"
-            className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
-          >
-            Subject <span className="text-red-500">*</span>
-          </label>
+        {/* ROW 2: Phone and Subject */}
+        <div className="grid gap-6 sm:grid-cols-2">
+          
+          {/* Phone Field */}
+          <div className="relative">
+            <input
+              required
+              id="phone"
+              type="tel"
+              value={form.phone}
+              onChange={(event) => updateField("phone", event.target.value)}
+              className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
+              placeholder="Phone Number"
+            />
+            <label
+              htmlFor="phone"
+              className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
+            >
+              Phone Number <span className="text-red-500">*</span>
+            </label>
+          </div>
+
+          {/* Form Subject */}
+          <div className="relative">
+            <input
+              required
+              id="form_subject"
+              type="text"
+              value={form.form_subject}
+              onChange={(event) => updateField("form_subject", event.target.value)}
+              className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
+              placeholder="Subject"
+            />
+            <label
+              htmlFor="form_subject"
+              className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
+            >
+              Subject <span className="text-red-500">*</span>
+            </label>
+          </div>
+
         </div>
 
         {/* Form Content */}

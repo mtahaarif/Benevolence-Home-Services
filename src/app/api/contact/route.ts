@@ -37,6 +37,7 @@ export async function POST(request: Request) {
     const body = (await request.json()) as {
       name?: string;
       email?: string;
+      phone?: string; // NEW FIELD
       form_subject?: string;
       form_content?: string;
       company?: string; // Honeypot for bots
@@ -44,12 +45,13 @@ export async function POST(request: Request) {
 
     const name = String(body?.name ?? "").trim();
     const email = String(body?.email ?? "").trim();
+    const phone = String(body?.phone ?? "").trim(); // EXTACTED
     const formSubject = String(body?.form_subject ?? "").trim();
     const formContent = String(body?.form_content ?? "").trim();
     const company = String(body?.company ?? "").trim(); // Invisible honeypot
 
     // 1. Basic Validation
-    if (!name || !email || !formSubject || !formContent) {
+    if (!name || !email || !phone || !formSubject || !formContent) {
       return NextResponse.json(
         { success: false, message: "Please complete all required fields." },
         { status: 400 }
@@ -72,7 +74,12 @@ export async function POST(request: Request) {
     }
 
     // 3. Length Validation
-    if (name.length > MAX_LENGTH || email.length > MAX_LENGTH || formSubject.length > MAX_LENGTH) {
+    if (
+      name.length > MAX_LENGTH || 
+      email.length > MAX_LENGTH || 
+      phone.length > MAX_LENGTH || 
+      formSubject.length > MAX_LENGTH
+    ) {
       return NextResponse.json(
         { success: false, message: "Input fields exceed maximum allowed length." },
         { status: 400 }
@@ -97,6 +104,7 @@ export async function POST(request: Request) {
     // Sanitize Inputs for Email/Database
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
+    const safePhone = escapeHtml(phone);
     const safeSubject = escapeHtml(formSubject);
     const safeContent = escapeHtml(formContent);
     const dateSent = new Date().toISOString().slice(0, 19).replace("T", " ");
@@ -116,12 +124,12 @@ export async function POST(request: Request) {
         await doc.loadInfo();
         const sheet = doc.sheetsByIndex[0];
 
-        // Appends to distinct columns: Date | Name | Email | Subject | Message
-        // *Ensure row 1 of your Google Sheet has exactly these headers!*
+        // Appends to distinct columns: Date | Name | Email | Phone | Subject | Message
         await sheet.addRow({
           "Date": dateSent,
           "Name": name,      
-          "Email": email,    
+          "Email": email,
+          "Phone": phone, // INJECTS PHONE NUMBER
           "Subject": formSubject, 
           "Message": formContent,
         });
@@ -143,6 +151,7 @@ export async function POST(request: Request) {
       `You have a new form submission:\n`,
       `Name: ${name}`,
       `Email: ${email}`,
+      `Phone: ${phone}`,
       `Subject: ${formSubject}`,
       `Message:\n${formContent}\n`,
       `To view the complete database, kindly click here: ${GOOGLE_SHEET_URL || 'URL not configured'}`,
@@ -153,6 +162,7 @@ export async function POST(request: Request) {
         <h2 style="color: #0c3e72;">You have a new form submission:</h2>
         <p><strong>Name:</strong> ${safeName}</p>
         <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+        <p><strong>Phone:</strong> ${safePhone}</p>
         <p><strong>Subject:</strong> ${safeSubject}</p>
         <p><strong>Message:</strong><br />${safeContent.replace(/\n/g, "<br />")}</p>
         <br />
@@ -167,7 +177,7 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: CONTACT_FROM_EMAIL,
       to: [CONTACT_TO_EMAIL],
-      replyTo: email, // Maps directly so hitting "Reply" goes to the sender
+      replyTo: email, 
       subject,
       text: textTemplate,
       html: htmlTemplate,
