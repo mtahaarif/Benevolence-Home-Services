@@ -34,10 +34,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/nh-2412692819U06281e.webp",
+        url: "/nh-2371714204U3a085e.webp",
         width: 1200,
         height: 630,
-        alt: "Caregiver and elderly woman looking at a tablet together",
+        alt: "Caregiver and elderly man looking at a tablet together",
       },
     ],
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact Our Home Care Team | Benevolence Home Services",
     description: "Contact our home care team to schedule your free in-home care consultation.",
-    images: ["/nh-2412692819U06281e.webp"],
+    images: ["/nh-2371714204U3a085e.webp"],
   }
 };
 

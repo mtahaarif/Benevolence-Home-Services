@@ -96,7 +96,7 @@ export default function AreasWeServePage() {
           title="In-Home Care Across Cook, DuPage & Surrounding Counties"
           primaryAction={{ label: "Request Care Near You", href: "/contact-us" }}
           secondaryAction={{ label: "View Our Service Menu", href: "/services" }}
-          imageSrc="/nh-2172642748U38tie9.webp" 
+          imageSrc="/nh-2411535922U62t38i.webp" 
           imageAlt="Caregiver and senior client reviewing an authorized home care service area map"
         />
       </div>
