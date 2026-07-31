@@ -77,7 +77,7 @@ export default function PrivacyPolicyPage() {
           title="Our Privacy Policy & Security Commitment"
           primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
           secondaryAction={{ label: "Return to Homepage", href: "/" }}
-          imageSrc="/nh-23102650536U12a54t.webp"
+          imageSrc="/3.webp"
           imageAlt="Secure data processing and compliance records backdrop at Benevolence Home Services in Westchester, Illinois"
         />
       </div>

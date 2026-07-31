@@ -185,22 +185,33 @@ export default function PersonalCarePage() {
 
       {/* FINAL BOTTOM CONVERSION PANEL */}
       <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-[#0a2540] text-center relative z-50 rounded-t-[3rem] text-white" aria-label="Get Started">
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-t border-brand-blue/10 rounded-t-[3rem]">
           <PageShell>
-            <div className="mx-auto max-w-3xl space-y-6">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-white">Let Us Help You Build the Right Care Plan</h2>
-              <p className="text-blue-100/80 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
-                Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or requiring immediate assistance, our care team is ready to help. Contact us to discuss non-medical personal care in Westchester and Chicagoland.
-              </p>
+            <div className="mx-auto max-w-3xl text-center space-y-6">
+              <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl lg:text-5xl tracking-tight">
+                Let Us Help You Build the Right Care Plan
+              </h2>
+              <div className="text-sm sm:text-base leading-relaxed text-slate-700 max-w-2xl mx-auto space-y-4">
+                <p>
+                  Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or requiring immediate assistance, our care team is ready to help. Contact us to discuss non-medical personal care in Westchester and Chicagoland.
+                </p>
+              </div>
               
-              <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
+              <div className="pt-6 flex flex-wrap justify-center gap-4">
                 <Link 
-                  href="/contact-us" 
-                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#0a2540] !text-[#0a2540] shadow-md hover:bg-blue-50 transition-all w-full sm:w-auto"
+                  href="/contact-us"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-md transition-all duration-300 hover:bg-brand-blue active:scale-98"
                 >
-                  Request a Care Consultation
-                  {/* OPTIMIZATION: Resolves Duplicate Anchor Text Warning */}
-                  <span className="sr-only"> regarding personal care needs</span>
+                  Schedule Your Consultation
+                  <span aria-hidden="true" className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[9px] font-bold">
+                    →
+                  </span>
+                </Link>
+                <Link 
+                  href="tel:7083040296"
+                  className="inline-flex items-center justify-center rounded-full bg-white border border-slate-200 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-brand-ink transition hover:bg-slate-50 shadow-sm"
+                >
+                  Call 708-304-0296
                 </Link>
               </div>
             </div>
