@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 
 const initialState = {
-  form_from: "",
+  name: "",
+  email: "",
   form_subject: "",
   form_content: "",
   agreeToPrivacy: false,
@@ -34,7 +35,8 @@ export function ContactForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          form_from: form.form_from,
+          name: form.name,
+          email: form.email,
           form_subject: form.form_subject,
           form_content: form.form_content
         }),
@@ -65,26 +67,49 @@ export function ContactForm() {
       
       <div className="grid gap-6">
         
-        {/* Form From (Maps to form_from) */}
-        <div className="relative">
-          <input
-            required
-            id="form_from"
-            type="text"
-            value={form.form_from}
-            onChange={(event) => updateField("form_from", event.target.value)}
-            className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
-            placeholder="Your Name / Email"
-          />
-          <label
-            htmlFor="form_from"
-            className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
-          >
-            Your Name / Email <span className="text-red-500">*</span>
-          </label>
+        {/* Name and Email side-by-side on desktop, stacked on mobile */}
+        <div className="grid gap-6 sm:grid-cols-2">
+          
+          {/* Name Field */}
+          <div className="relative">
+            <input
+              required
+              id="name"
+              type="text"
+              value={form.name}
+              onChange={(event) => updateField("name", event.target.value)}
+              className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
+              placeholder="Your Name"
+            />
+            <label
+              htmlFor="name"
+              className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
+            >
+              Your Name <span className="text-red-500">*</span>
+            </label>
+          </div>
+
+          {/* Email Field */}
+          <div className="relative">
+            <input
+              required
+              id="email"
+              type="email"
+              value={form.email}
+              onChange={(event) => updateField("email", event.target.value)}
+              className="peer block w-full rounded-full border border-slate-300 bg-transparent px-6 pb-2 pt-6 text-sm text-slate-900 transition focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue placeholder-transparent"
+              placeholder="Email Address"
+            />
+            <label
+              htmlFor="email"
+              className="absolute left-6 top-2 z-10 origin-[0] -translate-y-0 scale-75 transform text-xs font-semibold uppercase tracking-wider text-slate-500 duration-150 peer-placeholder-shown:translate-y-2.5 peer-placeholder-shown:scale-100 peer-focus:-translate-y-0 peer-focus:scale-75 peer-focus:text-brand-blue"
+            >
+              Email Address <span className="text-red-500">*</span>
+            </label>
+          </div>
         </div>
 
-        {/* Form Subject (Maps to form_subject) */}
+        {/* Form Subject */}
         <div className="relative">
           <input
             required
@@ -103,7 +128,7 @@ export function ContactForm() {
           </label>
         </div>
 
-        {/* Form Content (Maps to form_content) */}
+        {/* Form Content */}
         <div className="relative">
           <textarea
             required
@@ -135,7 +160,6 @@ export function ContactForm() {
         </div>
         <label htmlFor="privacy" className="text-sm text-slate-700 cursor-pointer select-none">
           By submitting this form you agree to the terms of the{" "}
-          {/* SEO FIX: Changed from /privacy-policy.pdf to the valid Next.js route /privacy-policy to resolve the 404 client error penalty */}
           <Link href="/privacy-policy" target="_blank" className="font-semibold text-brand-blue hover:underline">
             Privacy Policy
           </Link>.

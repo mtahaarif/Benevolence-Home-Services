@@ -15,8 +15,7 @@ const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY;
 
 // --- Validation Limits ---
-const MAX_FROM_LENGTH = 150;
-const MAX_SUBJECT_LENGTH = 150;
+const MAX_LENGTH = 150;
 const MAX_CONTENT_LENGTH = 3000;
 
 // --- Security Helpers ---
@@ -36,21 +35,30 @@ function escapeHtml(value: string) {
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as {
-      form_from?: string;
+      name?: string;
+      email?: string;
       form_subject?: string;
       form_content?: string;
       company?: string; // Honeypot for bots
     };
 
-    const formFrom = String(body?.form_from ?? "").trim();
+    const name = String(body?.name ?? "").trim();
+    const email = String(body?.email ?? "").trim();
     const formSubject = String(body?.form_subject ?? "").trim();
     const formContent = String(body?.form_content ?? "").trim();
     const company = String(body?.company ?? "").trim(); // Invisible honeypot
 
     // 1. Basic Validation
-    if (!formFrom || !formSubject || !formContent) {
+    if (!name || !email || !formSubject || !formContent) {
       return NextResponse.json(
         { success: false, message: "Please complete all required fields." },
+        { status: 400 }
+      );
+    }
+
+    if (!email.includes("@")) {
+      return NextResponse.json(
+        { success: false, message: "Please provide a valid email address." },
         { status: 400 }
       );
     }
@@ -64,7 +72,7 @@ export async function POST(request: Request) {
     }
 
     // 3. Length Validation
-    if (formFrom.length > MAX_FROM_LENGTH || formSubject.length > MAX_SUBJECT_LENGTH) {
+    if (name.length > MAX_LENGTH || email.length > MAX_LENGTH || formSubject.length > MAX_LENGTH) {
       return NextResponse.json(
         { success: false, message: "Input fields exceed maximum allowed length." },
         { status: 400 }
@@ -87,7 +95,8 @@ export async function POST(request: Request) {
     }
 
     // Sanitize Inputs for Email/Database
-    const safeFrom = escapeHtml(formFrom);
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
     const safeSubject = escapeHtml(formSubject);
     const safeContent = escapeHtml(formContent);
     const dateSent = new Date().toISOString().slice(0, 19).replace("T", " ");
@@ -107,10 +116,12 @@ export async function POST(request: Request) {
         await doc.loadInfo();
         const sheet = doc.sheetsByIndex[0];
 
-        // Appends to columns: Date | Name/Email | Subject | Message
+        // Appends to distinct columns: Date | Name | Email | Subject | Message
+        // *Ensure row 1 of your Google Sheet has exactly these headers!*
         await sheet.addRow({
           "Date": dateSent,
-          "Name/Email": formFrom,     // Keeping raw data for spreadsheet
+          "Name": name,      
+          "Email": email,    
           "Subject": formSubject, 
           "Message": formContent,
         });
@@ -130,7 +141,8 @@ export async function POST(request: Request) {
 
     const textTemplate = [
       `You have a new form submission:\n`,
-      `Name/Email: ${formFrom}`,
+      `Name: ${name}`,
+      `Email: ${email}`,
       `Subject: ${formSubject}`,
       `Message:\n${formContent}\n`,
       `To view the complete database, kindly click here: ${GOOGLE_SHEET_URL || 'URL not configured'}`,
@@ -139,7 +151,8 @@ export async function POST(request: Request) {
     const htmlTemplate = `
       <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
         <h2 style="color: #0c3e72;">You have a new form submission:</h2>
-        <p><strong>Name/Email:</strong> ${safeFrom}</p>
+        <p><strong>Name:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
         <p><strong>Subject:</strong> ${safeSubject}</p>
         <p><strong>Message:</strong><br />${safeContent.replace(/\n/g, "<br />")}</p>
         <br />
@@ -154,8 +167,7 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: CONTACT_FROM_EMAIL,
       to: [CONTACT_TO_EMAIL],
-      // If the user entered a valid email in formFrom, set it as reply-to
-      replyTo: formFrom.includes("@") ? formFrom : undefined, 
+      replyTo: email, // Maps directly so hitting "Reply" goes to the sender
       subject,
       text: textTemplate,
       html: htmlTemplate,
