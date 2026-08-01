@@ -172,155 +172,226 @@ To reduce security liabilities and backend maintenance, highly complex workflows
 
 ### 8.2. Internal Serverless API: `POST /api/contact`
 A Next.js App Router serverless route handler (`src/app/api/contact/route.ts`) that receives JSON payloads from the frontend contact form. 
-* **Validation:** Performs required-field validation (Name, Email, Message, Privacy Consent) before processing.
-* **Response Handling:** Returns standard HTTP status codes (`200 OK` for success, `400 Bad Request` for missing fields).
-* *Note:* Currently designed as a resilient front-end success prototype. Backend integrations for email dispatches (e.g., SendGrid) or CRM logging will be appended directly to this endpoint.
----
+# Benevolence Home Services
 
-## 9. Design System & Theming
+Benevolence Home Services is a Next.js App Router website for a nurse-led home care and staffing agency based in Westchester, Illinois. The project is built as a fast, mostly static marketing site with local content stored in the repository, route-specific metadata, and a small serverless contact workflow.
 
-The brand utilizes a premium, faith-adjacent healthcare aesthetic defined globally in `src/app/globals.css` and executed via Tailwind CSS.
+The codebase focuses on clarity, trust, and conversion. The homepage introduces the agency, service pages describe each care offering in detail, the blog provides educational content for families, and the contact flow ties everything back to consultation booking and inquiry handling.
 
-* **Color Palette Tokens:**
-    * *Primary Trust:* Brand Blue (`#0c3e72`)
-    * *Accent Warmth:* Brand Orange (`#ea6725`)
-    * *Typography:* Brand Ink (Deep Navy/Slate used for optimal contrast, strictly avoiding harsh pure blacks like `#000000` to reduce eye strain).
-* **Glassmorphism (Frosted Glass):** Extensive use of `bg-white/60`, `backdrop-blur-xl`, and `border-white/80` to create floating depth against soft, blurred gradient backgrounds (using `mix-blend-multiply` and heavy blur utilities).
-* **Typography System:** Strict adherence to a dual-font matrix:
-    * `font-display`: Used exclusively for headings (H1, H2, H3).
-    * `font-sans`: Used for high-legibility body copy and UI elements.
-    * Both are optimized via `next/font/google` to eliminate cumulative layout shifts (CLS).
-* **Border Radii:** Heavy use of exaggerated rounded corners (`rounded-[2rem]`, `rounded-[3rem]`) on cards and media elements to convey approachability, safety, and modern software aesthetics.
----
+## What This Project Does
 
-## 10. Project File Structure
+- Presents the agency, its mission, and its owner profile.
+- Explains the care services offered across Westchester and the surrounding Chicagoland counties.
+- Publishes educational blog content with category filtering and article pages.
+- Provides a local SEO page for service areas.
+- Collects inquiry submissions through a contact form and API route.
+- Routes users to external tools for payment, scheduling, and hiring intake.
 
-An exhaustive map of the finalized workspace architecture:
+## Tech Stack
+
+- Next.js 16.2.10 with the App Router
+- React 19.2.4
+- TypeScript 5
+- Tailwind CSS 4
+- ESLint 9
+- Google Tag Manager integration via `@next/third-parties`
+- Email delivery via Resend
+- Google Sheets logging via `google-spreadsheet` and `google-auth-library`
+- Icons from `react-icons`
+
+## Project Structure
 
 ```text
 src/
- ├── app/
- │    ├── layout.tsx                # Root HTML, Fonts, Metadata, SiteChrome
- │    ├── manifest.ts               # PWA configuration and mobile icons
- │    ├── globals.css               # Tailwind config & Brand color variables
- │    ├── page.tsx                  # Master Homepage
- │    ├── about-us/page.tsx         
- │    ├── about-owner/page.tsx      
- │    ├── areas-we-serve/page.tsx   # Scrollspy local SEO geographic page
- │    ├── blog/
- │    │    ├── page.tsx             # Filterable Frosted-Glass directory
- │    │    └── [slug]/page.tsx      # Smart Content Parser editorial viewer
- │    ├── careers/page.tsx          
- │    ├── contact-us/page.tsx       
- │    ├── resources/page.tsx        
- │    ├── services/
- │    │    ├── page.tsx             # Master Services grid
- │    │    └── [slug]/page.tsx      # Unified dynamic service template
- │    └── api/contact/route.ts      # Serverless JSON form handler
- │
- ├── components/
- │    ├── contact-form.tsx          # Client-side form with state handling
- │    ├── scroll-reveal.tsx         # IntersectionObserver animations
- │    ├── site-nav.tsx              # Sticky header and mobile menus
- │    ├── site-shell.tsx            # UI primitives (HeroSection, PageShell, Cards)
- │
- └── data/
-      ├── site-content.ts           # Global strings, highlight copy & nav maps
-      ├── blogs.ts                  # Blog Data Engine (30+ legacy posts)
-      ├── services.ts               # Services Data Engine
-      └── areas.ts                  # Geolocation Data Engine
+├── app/
+│   ├── layout.tsx              # Root layout, metadata, fonts, SiteChrome, GTM
+│   ├── template.tsx            # Global fade-in transition wrapper
+│   ├── globals.css             # Tailwind theme tokens and base styling
+│   ├── page.tsx                # Home page
+│   ├── about-us/page.tsx       # Agency overview
+│   ├── about-owner/page.tsx    # Owner bio page
+│   ├── areas-we-serve/page.tsx # Scrollspy-based service area page
+│   ├── blog/page.tsx           # Blog index with category filters
+│   ├── blog/[slug]/page.tsx    # Static blog post pages
+│   ├── careers/page.tsx        # Careers page with hiring call-to-action
+│   ├── contact-us/page.tsx     # Contact page and intake form
+│   ├── privacy-policy/page.tsx  # Privacy policy page
+│   ├── resources/page.tsx      # External resource directory
+│   ├── services/page.tsx       # Services overview grid
+│   ├── services/*/page.tsx     # Individual service pages
+│   └── api/contact/route.ts    # Contact form API endpoint
+├── components/
+│   ├── contact-form.tsx        # Client-side contact form
+│   ├── scroll-reveal.tsx       # IntersectionObserver animation wrapper
+│   ├── site-nav.tsx            # Sticky navigation with submenus
+│   └── site-shell.tsx          # Shared layout and content primitives
+└── data/
+  ├── site-content.ts        # Navigation, brand copy, contact details
+  └── blogs.ts               # Blog post data and article metadata
 
-public/                             
- │    ├── non-home-banner.jpg       # Shared fallback hero imagery
- │    ├── logo.png                  # Brand assets
- │    └── ...static post thumbnails and SVGs
+public/
+├── robots.txt
+├── sitemap.xml
+├── manifest.json
+├── contact.php
+└── static image and logo assets
 ```
 
-## 11. Developer Guide: How to Append New Features
+## Routes
 
-This repository is strictly designed for **simple, horizontal expansion**. Future developers must follow these protocols when appending new features to avoid rewriting existing logic, breaking the `generateStaticParams` compiler, or causing hydration errors.
+### Public Pages
 
-### 11.1. How to add a new Blog Post
-Because the application utilizes a Local Data Engine and a Smart Content Parser, you **must not** create new files or folders inside the `app/blog/` directory.
+- `/` - Homepage
+- `/about-us` - Agency overview, mission, vision, and care philosophy
+- `/about-owner` - Owner biography and leadership story
+- `/services` - Service listing and overview
+- `/services/personal-care` - Personal care details
+- `/services/companionship` - Companionship details
+- `/services/meal-preparation` - Meal preparation and nutrition details
+- `/services/light-housekeeping` - Housekeeping support details
+- `/services/medication-reminders` - Medication reminder support details
+- `/services/respite-care` - Respite care details
+- `/services/transportation` - Transportation support details
+- `/services/specialized-support` - Specialized support details
+- `/areas-we-serve` - Local coverage and city-by-city support page
+- `/careers` - Hiring and caregiver recruiting page
+- `/resources` - Curated external resource directory
+- `/contact-us` - Contact and consultation page
+- `/privacy-policy` - Privacy policy and data handling notice
+- `/blog` - Blog index with category filters
+- `/blog/[slug]` - Individual blog articles
 
-1. Open `src/data/blogs.ts`.
-2. Append a new object to the bottom of the `blogPosts` array adhering to the `BlogPost` interface.
-3. **Crucial:** Ensure the `slug` is entirely unique and formatted as a URL-friendly string (kebab-case).
-4. Paste the raw text into the `content: []` array, separating paragraphs by commas and enclosing them in quotes. The Smart Content Parser will automatically detect formatting rules (bullets, colons, disclaimers) at runtime.
-5. Place the associated image inside the `/public` directory and link the relative path in the `image` string.
+### API Route
 
-**Example Append:**
-```typescript
-  {
-    slug: "new-article-url-slug",
-    title: "Your New Article Title",
-    metaTitle: "SEO Optimized Title | Westchester IL",
-    metaDescription: "A 150-160 character summary for Google.",
-    keywords: ["keyword 1", "keyword 2"],
-    excerpt: "A short preview for the blog directory card.",
-    date: "August 30, 2026",
-    readTime: "4 min read",
-    category: "Safety & Wellness",
-    author: "Katrina Turman",
-    image: "/new-article-thumbnail.jpg",
-    content: [
-      "This is the first paragraph. It will automatically get a drop-cap.",
-      "Disclaimer: This will automatically render as a gray alert box.",
-      "1. This will automatically render as a floating feature card."
-    ]
-  }
+- `POST /api/contact` - Validates contact submissions, optionally appends them to Google Sheets, and sends email notifications through Resend
+
+### External Links
+
+- Payment is handled through PayPal.
+- Scheduling is handled through Calendly.
+- Hiring intake is handled through Jotform.
+
+## Architecture Overview
+
+This site uses local TypeScript data instead of a CMS or database for most content. That keeps the project simple to deploy, fast to render, and easy to maintain.
+
+- `src/data/site-content.ts` stores brand copy, navigation items, contact details, social links, service highlights, and privacy summary content.
+- `src/data/blogs.ts` stores the blog post catalog, including metadata and paragraph arrays.
+- `src/app/blog/[slug]/page.tsx` uses `generateStaticParams()` and `generateMetadata()` so blog posts are prebuilt and fully SEO-aware.
+- `src/components/site-shell.tsx` provides the shared page framework used throughout the site, including the main shell, hero component, section heading component, content cards, and footer.
+- `src/components/scroll-reveal.tsx` adds lightweight reveal-on-scroll animation using `IntersectionObserver`.
+- `src/app/api/contact/route.ts` handles the contact form submission workflow.
+
+## Shared UI System
+
+The app is built around a small set of reusable components:
+
+- `SiteChrome` renders the navigation, main content slot, and footer.
+- `SiteNav` provides the sticky top navigation, mobile toggle, and submenu behavior.
+- `HeroSection` powers the top-of-page hero banners and supports one or more background images.
+- `PageShell` standardizes page width and horizontal spacing.
+- `SectionHeading` keeps section titles visually consistent.
+- `InfoCard`, `BulletPanel`, and `SectionCard` provide reusable content blocks.
+- `ContactForm` collects and submits the contact inquiry data.
+
+## Design System
+
+The visual language is defined in `src/app/globals.css` and uses Tailwind theme variables.
+
+- Brand blue: `#1168b3`
+- Brand orange: `#f5aa41`
+- Brand gold: `#f8c967`
+- Brand ink: `#0f2f59`
+- Background: white with soft surface overlays
+- Typography: Quicksand, loaded through `next/font/google`
+- Layout style: clean cards, soft shadows, rounded corners, and restrained motion
+
+The site is intentionally consistent with a blue, orange, and white brand palette, and the navbar and footer are styled to stay squared and minimal rather than heavily ornamented.
+
+## Contact Workflow
+
+The contact form in `src/components/contact-form.tsx` sends JSON to `POST /api/contact` with:
+
+- Name
+- Email
+- Phone
+- Subject
+- Message
+- Privacy consent
+
+The API route performs validation, rejects oversized or malformed input, and includes a honeypot field named `company` to reduce bot submissions. When the required environment variables are present, the submission is:
+
+- sent by email through Resend
+- optionally appended to the first sheet in Google Sheets
+
+### Required Environment Variables
+
+The contact API expects these variables when email delivery and sheet logging are enabled:
+
+- `RESEND_API_KEY`
+- `CONTACT_FROM_EMAIL`
+- `CONTACT_TO_EMAIL`
+- `GOOGLE_SHEET_ID`
+- `GOOGLE_SHEET_URL`
+- `GOOGLE_SERVICE_ACCOUNT_EMAIL`
+- `GOOGLE_PRIVATE_KEY`
+
+If the Google Sheets variables are missing, the app skips the spreadsheet append and still continues with the rest of the workflow.
+
+## SEO and Metadata
+
+The project uses route-level metadata heavily.
+
+- The root layout defines the base metadata, canonical root, Open Graph defaults, and icons.
+- Major pages define their own title, description, keywords, and canonical URL.
+- The blog post pages generate per-article metadata from the local blog data.
+- Structured data is injected on selected pages with JSON-LD.
+- `next.config.js` adds security headers and redirects legacy `index.html` and `index.php` URLs to the homepage.
+
+## Routing Notes
+
+- Blog posts are fully generated from `src/data/blogs.ts`.
+- Service detail pages are implemented as individual routes under `src/app/services/` rather than one shared dynamic template.
+- The site includes `/privacy-policy`, `/about-owner`, and `/areas-we-serve` in addition to the core marketing routes.
+- The navbar also exposes a blog link, a payment link, and an external career intake link.
+
+## Local Server
+
+The repository includes `server.js`, a lightweight custom Node server that hands requests to Next.js. Standard development and production scripts still use the normal Next.js commands, but the file is available if you need a self-hosted entrypoint.
+
+## Available Scripts
+
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
 ```
-### 11.2. How to add a new Service
-Similarly, do not create a new routing folder inside app/services/. The dynamic [slug]/page.tsx template handles all rendering.
 
-Open src/data/services.ts.
+## Setup
 
-Append a new service object to the array, adhering to the strict TypeScript schema.
+1. Install dependencies with `npm install`.
+2. Copy your required environment variables into your local environment.
+3. Run `npm run dev` for development.
+4. Run `npm run build` before shipping changes.
 
-The Next.js compiler will automatically:
+## Content Maintenance Guidelines
 
-Generate the new /services/your-new-slug route.
+- Add shared copy and navigation updates in `src/data/site-content.ts`.
+- Add or edit blog content in `src/data/blogs.ts`.
+- Keep page-specific metadata close to the page implementation.
+- Prefer shared components from `src/components/site-shell.tsx` instead of duplicating layout patterns.
+- Preserve the existing blue, orange, and white visual system when adding new pages.
 
-Inject the localized SEO metadata.
+## Public Assets
 
-Insert the new service card into the master /services index grid.
+The `public/` directory contains the site-wide static assets, including the logo, thumbnails, hero images, manifest, robots file, sitemap, and a legacy `contact.php` file retained in the repository.
 
-### 11.3. How to integrate a CRM/Email provider
-The contact form currently validates data and returns a success response to the client. To plug in a backend provider (like SendGrid, HubSpot, Salesforce, or Firebase):
+## Validation
 
-Open src/app/api/contact/route.ts.
+The project is expected to pass:
 
-Keep the existing JSON parsing and if (!name || !email) validation logic intact.
+- `npm run build`
+- `npm run lint`
 
-Append your backend fetch() call immediately before the final NextResponse block.
-
-Example Implementation:
-
-TypeScript
-// ... existing validation logic ...
-
-// 1. APPEND YOUR EXTERNAL API CALL HERE
-try {
-  await fetch('[https://api.sendgrid.com/v3/mail/send](https://api.sendgrid.com/v3/mail/send)', {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}` },
-    body: JSON.stringify({ /* payload */ })
-  });
-} catch (error) {
-  return NextResponse.json({ error: "Failed to sync with CRM." }, { status: 500 });
-}
-
-// 2. EXISTING SUCCESS RESPONSE
-return NextResponse.json({ success: true });
-## 12. Implementation Log (Changelog)
-This section acts as an ongoing chronological changelog. Developers should append new system-wide changes, version bumps, or architectural shifts to the bottom of this list.
-
-[v1.0.0] Initial Migration: Core Next.js 14+ setup initiated. Shared SiteChrome, Nav, and Footer components implemented with Tailwind configuration.
-
-[v1.1.0] WordPress Deprecation: Fixed legacy GoDaddy wp-admin 404 spacing issues for the client. Migrated away from PHP entirely into static Next.js App Router deployments.
-
-[v1.2.0] Zero-CMS Architecture: Established Local Data Engines. Refactored bloated, hardcoded service folders into a single dynamic /services/[slug] route pattern.
-
-[v1.3.0] Local SEO Dominance: Built the /areas-we-serve architecture with IntersectionObserver scrollspy tracking and dynamic HomeAndConstructionBusiness Knowledge Panel JSON-LD schema injection.
-
-[v1.4.0] Smart Blog Engine & Parser: Migrated 30+ legacy WordPress articles into the src/data/blogs.ts data layer. Implemented the Smart Content Parser for automated editorial styling (drop-caps, blockquotes, intelligent lists, disclaimer boxes). Integrated generateMetadata for dynamic OpenGraph support. Updated [slug] catch-alls to handle Next.js 16 Turbopack async params promises.
+If you change routing, metadata, or contact handling, build the project before considering the update complete.
