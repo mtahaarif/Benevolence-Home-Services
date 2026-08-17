@@ -16,7 +16,7 @@
 13. [SEO & Performance](#seo--performance)
 14. [Contact & Support](#contact--support)
 
----
+----
 
 ## Project Overview
 
