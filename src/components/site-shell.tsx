@@ -319,10 +319,10 @@ function SiteFooter() {
             <div className="bg-white p-5 rounded-2xl flex flex-col items-center justify-center brand-shadow w-full max-w-[220px]">
               <Image
                 src="/footer-logo.png"
-                alt="Benevolence Home Services Footer Logo" // FIXED: Unique alt text clears duplicate alt warnings
+                alt="Benevolence Home Services Footer Logo"
                 width={180}
                 height={64}
-                className="h-16 w-auto object-contain"
+                className="object-contain"
               />
             </div>
           </div>

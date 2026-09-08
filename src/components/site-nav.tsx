@@ -10,12 +10,12 @@ function BrandMark() {
   return (
     <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
       <Image
-        src="/footer-logo.png"
+        src="/navbar-logo.png"
         alt="Benevolence Home Services Logo"
         width={250}
         height={65}
         className="h-9 w-auto shrink-0 object-contain sm:h-11"
-        loading="lazy"
+        priority
       />
       <div className="shrink-0 leading-tight">
         <p className="text-[0.62rem] font-bold uppercase tracking-[0.3em] text-[#0c3e72] sm:text-[0.68rem]">
