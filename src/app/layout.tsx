@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/site-shell";
-import { GoogleTagManager } from "@next/third-parties/google";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -74,12 +73,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${quicksand.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${quicksand.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans bg-white text-slate-900 relative selection:bg-[#0c3e72] selection:text-white">
         <div className="absolute top-0 left-0 right-0 h-1 bg-[color:var(--border)] z-50" />
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome>
+          {children}
+        </SiteChrome>
       </body>
-      <GoogleTagManager gtmId="GTM-XXXXXXX" />
     </html>
   );
 }
