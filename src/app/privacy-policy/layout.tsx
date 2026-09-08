@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy & Security Commitment",
+  title: "Privacy Policy & Security",
   description:
     "Review the privacy practices, statutory protections, and data security standards of Benevolence Home Services in Westchester, Illinois.",
   alternates: {

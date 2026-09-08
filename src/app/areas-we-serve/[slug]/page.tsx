@@ -363,32 +363,47 @@ export async function generateStaticParams() {
   return Object.keys(cityDirectory).map((slug) => ({ slug }));
 }
 
-// 2. Programmatic SEO Metadata per Location
+// 2. Programmatic SEO Metadata per Location (Maximized < 60 chars)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const city = cityDirectory[slug];
 
   if (!city) return {};
 
+  // Formats to: "In-Home Senior Care in [City], IL | Benevolence" (52-58 chars)
+  // Replaces the generic ~25 char title and prevents snippet truncation
+  const fullTitle = `In-Home Senior Care in ${city.name}, IL | Benevolence`;
+
   return {
-    title: `Home Care in ${city.name}, IL`,
+    title: {
+      absolute: fullTitle,
+    },
+    // 155 characters: Captures local intent while staying below the 160-char / 1000px limit
     description: `Compassionate, nurse-led non-medical home care, companion care, and respite services for seniors and families in ${city.name}, IL. Call ${contactDetails.phone}.`,
     alternates: {
-      canonical: `https://www.benevolencehomeservices.com/areas-we-serve/${city.slug}`,
+      canonical: `/areas-we-serve/${city.slug}`,
     },
     openGraph: {
-      title: `Home Care Services in ${city.name}, IL | Benevolence Home Services`,
+      title: `${fullTitle} Home Services`,
       description: `Nurse-led in-home elderly care, dementia support, and personal care serving families in ${city.name}, ${city.county}.`,
       url: `https://www.benevolencehomeservices.com/areas-we-serve/${city.slug}`,
+      siteName: "Benevolence Home Services",
+      locale: "en_US",
       type: "website",
       images: [
         {
           url: "/nh-2411535922U62t38i.webp",
           width: 1200,
           height: 630,
-          alt: `Home Care Services in ${city.name}, Illinois`,
+          alt: `In-Home Senior Care Services in ${city.name}, Illinois`,
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${fullTitle} Home Services`,
+      description: `Nurse-led in-home elderly care and caregiver support in ${city.name}, IL.`,
+      images: ["/nh-2411535922U62t38i.webp"],
     },
   };
 }

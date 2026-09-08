@@ -1,33 +1,49 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  // Title template in root layout appends "| Benevolence Home Services"
-  // Compiles to: "Home Care Service Areas in Chicagoland | Benevolence Home Services" (67 chars / ~540px)
-  title: "Home Care Service Areas in Chicagoland",
+  // Compiles to: "Chicagoland Home Care Areas | Benevolence Home Services" (54 characters)
+  title: "Chicagoland Home Care Areas",
 
   // 154 characters: Fits safely below the 160-character / 1000-pixel cut-off
   description:
     "Explore nurse-led, non-medical home care services from Benevolence Home Services across Cook, DuPage, Lake, and Will Counties in the Chicago metropolitan area.",
 
+  // Relative path automatically resolves with metadataBase to prevent canonical mismatches
   alternates: {
-    canonical: "https://www.benevolencehomeservices.com/areas-we-serve",
+    canonical: "/areas-we-serve",
   },
 
   keywords: [
-    "Home care service areas Illinois",
-    "In-home senior care Cook County",
-    "Home care agency DuPage County",
-    "Elderly care services Will County",
+    // High-Intent Local Searches
+    "home care near me",
+    "home care agency near me",
+    "caregiver near me",
+    "senior care near me",
+
+    // Priority Nearby Focus Markets
+    "home care Westchester IL",
+    "home care Oak Brook IL",
+    "home care Elmhurst IL",
+    "senior care La Grange IL",
+    "in-home care Western Springs IL",
+    "elderly care Oak Park IL",
+    "home care Downers Grove IL",
+    "senior home care Lombard IL",
+    "companion care Hinsdale IL",
+    "private duty care Burr Ridge IL",
+    "home care Hillside IL",
+    "senior care River Forest IL",
+
+    // Regional County Coverage
+    "home care service areas Cook County",
+    "in-home senior care DuPage County",
+    "elderly care services Will County",
     "Lake County senior care",
-    "Westchester IL home care",
-    "Oak Brook home care providers",
-    "Naperville senior companion care",
-    "Chicagoland home health care agencies",
-    "Nurse-led home care Illinois",
+    "Chicagoland home care service areas",
   ],
 
   openGraph: {
-    title: "Home Care Service Areas | Benevolence Home Services",
+    title: "Chicagoland Home Care Areas | Benevolence Home Services",
     description:
       "Nurse-led senior home care, companion services, and personalized support across Cook, DuPage, Lake, and Will Counties.",
     url: "https://www.benevolencehomeservices.com/areas-we-serve",
@@ -46,7 +62,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Home Care Service Areas | Benevolence Home Services",
+    title: "Chicagoland Home Care Areas | Benevolence Home Services",
     description:
       "Nurse-led in-home elderly care across Cook, DuPage, Lake, and Will Counties.",
     images: ["/nh-2411535922U62t38i.webp"],

@@ -575,7 +575,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "combatting-senior-loneliness",
     title: "Combatting Senior Loneliness Through Companionship",
-    metaTitle: "Combatting Isolation with Senior Companionship | DuPage County",
+    metaTitle: "Combatting Isolation with Companionship | DuPage County",
     metaDescription: "How structured home companion services lower health risks associated with senior isolation across DuPage County.",
     keywords: ["senior isolation relief", "companion care benefits", "loneliness mitigation"],
     excerpt: "In today’s fast-paced world, senior loneliness has emerged as a significant health concern. Discover the healing power of dedicated companion care.",
