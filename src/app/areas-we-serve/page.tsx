@@ -11,28 +11,36 @@ const regionalData = [
     name: "Cook County",
     description: "Providing premium private duty home care, hourly respite relief, and senior companionship across Cook County communities.",
     cities: [
-      { name: "Chicago", zipCodes: "Select Neighborhoods", desc: "Comprehensive home care coverage across Chicago, focusing on safe, independent urban living, personal care, and specialized support." },
-      { name: "Oak Park", zipCodes: "60301, 60302", desc: "Premium live-in home care, overnight assistance, and hourly senior support services for Oak Park families." },
+      { name: "Westchester", zipCodes: "60154", desc: "Our hometown headquarters, offering premier round-the-clock specialized support and personal home care in Westchester." },
+      { name: "Oak Park", zipCodes: "60301, 60302, 60304", desc: "Premium live-in home care, overnight assistance, and hourly senior support services for Oak Park families." },
+      { name: "River Forest", zipCodes: "60305", desc: "Concierge personal assistance, dignified daily routine support, and trusted respite relief in River Forest." },
+      { name: "La Grange", zipCodes: "60525", desc: "Dedicated respite care, engaging companionship, and safe mobility assistance in the heart of La Grange." },
+      { name: "Western Springs", zipCodes: "60558", desc: "Compassionate, attentive senior care, medication prompting, and customized daily living assistance in Western Springs." },
       { name: "Orland Park", zipCodes: "60462, 60467", desc: "Trustworthy elderly companion care, Alzheimer's support, and specialized daily living assistance in Orland Park." },
-      { name: "Tinley Park", zipCodes: "60477, 60487", desc: "Reliable medication reminders, overnight companion monitoring, and dedicated homemaker help for Tinley Park seniors." },
-      { name: "Oak Lawn", zipCodes: "60453", desc: "Dignified personal hygiene care, bathing, grooming support, and safe mobility assistance in Oak Lawn." },
-      { name: "Skokie", zipCodes: "60076, 60077", desc: "Compassionate transitional care from hospital to home, plus continuous non-medical chronic support in Skokie." }
+      { name: "Palos Park", zipCodes: "60464", desc: "Gentle mobility guidance, private duty care plans, and daily routine assistance for Palos Park seniors." },
+      { name: "Palos Heights", zipCodes: "60463", desc: "Reliable post-hospital transitional assistance, bathing support, and friendly companion care in Palos Heights." },
+      { name: "Northbrook", zipCodes: "60062", desc: "Comprehensive companion services, light housekeeping, and structured cognitive wellness support in Northbrook." },
+      { name: "Glenview", zipCodes: "60025, 60026", desc: "Attentive personal care, routine medication reminders, and family caregiver respite throughout Glenview." },
+      { name: "Wilmette", zipCodes: "60091", desc: "Discreet in-home elder care, mobility guidance, and personalized meal planning for Wilmette families." },
+      { name: "Chicago", zipCodes: "Select Neighborhoods", desc: "Comprehensive home care coverage across Chicago, focusing on safe, independent urban living, personal care, and specialized support." }
     ]
   },
   {
-    id: "dupage-will-county",
-    name: "DuPage & Will Counties",
-    description: "Delivering top-tier, nurse-led home care, Alzheimer's support, and live-in assistance to seniors and families throughout DuPage and Will Counties.",
+    id: "dupage-county",
+    name: "DuPage County",
+    description: "Delivering top-tier, nurse-led home care, Alzheimer's support, and live-in assistance to seniors and families throughout DuPage County.",
     cities: [
-      { name: "Naperville", zipCodes: "60540, 60563", desc: "Comprehensive senior home care tailored to Naperville residents, including hourly care and transportation services." },
+      { name: "Oak Brook", zipCodes: "60523", desc: "Luxury, concierge-level private duty care, overnight support, and 24-hour assistance for Oak Brook seniors." },
+      { name: "Elmhurst", zipCodes: "60126", desc: "Dedicated homemaker services, light housekeeping, and nutritious meal preparation for Elmhurst families." },
+      { name: "Glen Ellyn", zipCodes: "60137", desc: "Compassionate respite relief for devoted family caregivers, paired with engaging companionship in Glen Ellyn." },
       { name: "Wheaton", zipCodes: "60187, 60189", desc: "Holistic senior wellness, personal hygiene assistance, and dedicated respite care options in Wheaton." },
       { name: "Downers Grove", zipCodes: "60515, 60516", desc: "Flexible hourly home care, overnight monitoring, and reliable medication reminders in Downers Grove." },
+      { name: "Naperville", zipCodes: "60540, 60563", desc: "Comprehensive senior home care tailored to Naperville residents, including hourly care and transportation services." },
       { name: "Lombard", zipCodes: "60148", desc: "Trustworthy companion care, daily routine assistance, and fall prevention services for Lombard seniors." },
-      { name: "Elmhurst", zipCodes: "60126", desc: "Dedicated homemaker services, light housekeeping, and nutritious meal preparation for Elmhurst families." },
-      { name: "Joliet", zipCodes: "60431 - 60435", desc: "Professional private duty care configurations, hourly caregiver relief, and non-medical support for Joliet families." },
-      { name: "Bolingbrook", zipCodes: "60440, 60490", desc: "Dependable medication reminders, active social companionship, and routine comfort checks in Bolingbrook." },
-      { name: "Plainfield", zipCodes: "60544, 60585", desc: "Safe transitional assistance following clinical discharge, paired with warm daily companion care in Plainfield." },
-      { name: "Frankfort", zipCodes: "60423", desc: "Dignified assistance with personal routines, bathing help, and dedicated respite relief maps in Frankfort." }
+      { name: "Clarendon Hills", zipCodes: "60514", desc: "Personalized mobility support, fall prevention, and trusted hourly senior care in Clarendon Hills." },
+      { name: "Darien", zipCodes: "60561", desc: "Dependable personal hygiene care, routine comfort checks, and homemaker support in Darien." },
+      { name: "Willowbrook", zipCodes: "60527", desc: "Dignified routine care, meal preparation, and private duty caregiving solutions in Willowbrook." },
+      { name: "Lisle", zipCodes: "60532", desc: "Warm companion care, medication reminders, and flexible day-to-day senior help across Lisle." }
     ]
   },
   {
@@ -40,9 +48,25 @@ const regionalData = [
     name: "Lake County",
     description: "Providing specialized non-medical home care options, memory care support, and friendly companion escorts for Lake County families.",
     cities: [
+      { name: "Lake Forest", zipCodes: "60045", desc: "Private duty assistance, dignified personal routines, and dedicated companion care in Lake Forest." },
+      { name: "Highland Park", zipCodes: "60035", desc: "Reliable meal prep, family respite relief, and customized living support for Highland Park seniors." },
+      { name: "Deerfield", zipCodes: "60015", desc: "Dependable medication reminders, active socialization, and routine personal care in Deerfield." },
       { name: "Libertyville", zipCodes: "60048", desc: "High-caliber respite relief, engaging companionship, and safe fall prevention configurations in Libertyville." },
       { name: "Vernon Hills", zipCodes: "60061", desc: "Dedicated personal routines care, post-hospital transition plans, and memory care support in Vernon Hills." },
       { name: "Gurnee", zipCodes: "60031", desc: "Trustworthy non-medical support, prescription prompts, and reliable companion systems for Gurnee seniors." }
+    ]
+  },
+  {
+    id: "will-county",
+    name: "Will County",
+    description: "Extending professional, nurse-led companion models, specialized dementia care, and personal routine assistance across Will County territory.",
+    cities: [
+      { name: "Frankfort", zipCodes: "60423", desc: "Dignified assistance with personal routines, bathing help, and dedicated respite relief in Frankfort." },
+      { name: "Homer Glen", zipCodes: "60491", desc: "Attentive companion care, mobility support, and family caregiver peace of mind in Homer Glen." },
+      { name: "Plainfield", zipCodes: "60544, 60585", desc: "Safe transitional assistance following clinical discharge, paired with warm daily companion care in Plainfield." },
+      { name: "Bolingbrook", zipCodes: "60440, 60490", desc: "Dependable medication reminders, active social companionship, and routine comfort checks in Bolingbrook." },
+      { name: "Joliet", zipCodes: "60431 - 60435", desc: "Professional private duty care configurations, hourly caregiver relief, and non-medical support for Joliet families." },
+      { name: "New Lenox", zipCodes: "60451", desc: "Custom senior care plans, household meal support, and dependable daily living assistance in New Lenox." }
     ]
   }
 ];
@@ -93,7 +117,7 @@ export default function AreasWeServePage() {
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
           eyebrow="Areas We Serve" 
-          title="In-Home Care Across Cook, DuPage & Surrounding Counties"
+          title="In-Home Care Across Cook, DuPage, Lake & Will Counties"
           primaryAction={{ label: "Request Care Near You", href: "/contact-us" }}
           secondaryAction={{ label: "View Our Service Menu", href: "/services" }}
           imageSrc="/nh-2411535922U62t38i.webp" 
@@ -106,13 +130,12 @@ export default function AreasWeServePage() {
         <PageShell>
           <ScrollReveal>
             <div className="md:mb-20">
-            {/* OPTIMIZATION: Exact H1 match seamlessly injected into description text to satisfy keyword tracking constraints */}
-            <SectionHeading
-              centered
-              eyebrow="Chicagoland Coverage Boundaries"
-              title="Dependable Care Infused in Local Communities"
-              description="Benevolence Home Services is proud to deliver reliable, nurse-led non-medical support and professional in-home care across Cook, DuPage & surrounding counties. Explore our regional service coverage directory to discover customized caregiver resources near you."
-            />
+              <SectionHeading
+                centered
+                eyebrow="Chicagoland Coverage Boundaries"
+                title="Dependable Care Infused in Local Communities"
+                description="Benevolence Home Services delivers reliable, nurse-led non-medical support and professional in-home care across Cook, DuPage, Lake, and Will Counties. Explore our regional service coverage directory to discover customized caregiver resources near you."
+              />
             </div>
           </ScrollReveal>
           
@@ -121,7 +144,6 @@ export default function AreasWeServePage() {
             {/* LEFT SIDEBAR: Pinned Sticky Floating Scrollspy Control board */}
             <aside className="w-full lg:w-[30%] sticky top-[100px] z-40 bg-white lg:bg-transparent p-4 lg:p-0 rounded-2xl border lg:border-0 border-slate-200/60 shadow-sm lg:shadow-none">
               <div className="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-2 pb-2 lg:pb-0 scrollbar-hide">
-                {/* OPTIMIZATION: Maintained h3 here as a legitimate global layout navigational anchor */}
                 <h3 className="hidden lg:block text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-5 pl-4">
                   Filter By Service District
                 </h3>
@@ -179,7 +201,7 @@ export default function AreasWeServePage() {
                         <div className="group block h-full select-none relative">
                           <div className="flex flex-col h-full bg-white p-6 rounded-[2rem] border border-slate-100 shadow-[0_5px_20px_rgba(15,47,89,0.02)] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(12,62,114,0.07)] hover:-translate-y-1 hover:border-[#0c3e72]/30 relative overflow-hidden">
                             
-                            {/* Invisible Link Layer with Screen Reader Only Text */}
+                            {/* Invisible Link Layer */}
                             <Link 
                               href="/contact-us" 
                               className="absolute inset-0 z-20"
@@ -195,8 +217,6 @@ export default function AreasWeServePage() {
                                   <MapPinIcon />
                                 </div>
                                 <div>
-                                  {/* OPTIMIZATION: Converted from an <h3> to a strongly typed <p> block element. */}
-                                  {/* This immediately reduces the heading bloat metric from 35 down to a perfectly balanced 5, clearing the Page Structure warning! */}
                                   <p className="font-display font-bold text-brand-ink text-base sm:text-lg group-hover:text-[#0c3e72] transition-colors leading-tight">
                                     {city.name}, IL
                                   </p>
@@ -253,7 +273,7 @@ export default function AreasWeServePage() {
                 >
                   Schedule Your Home Assessment
                   <span aria-hidden="true" className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-brand-blue text-[9px] font-bold">
-                    →
+                    &rarr;
                   </span>
                 </Link>
                 <Link 
@@ -291,7 +311,7 @@ export default function AreasWeServePage() {
               region.cities.map(city => ({
                 "@type": "AdministrativeArea",
                 "name": `${city.name}, IL`,
-                "sameAs": `https://en.wikipedia.org/wiki/${city.name.replace(' ', '_')},_Illinois`
+                "sameAs": `https://en.wikipedia.org/wiki/${city.name.replace(/\s+/g, '_')},_Illinois`
               }))
             )
           })

@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@next/third-parties": "^16.2.11",
+    "@next/third-parties": "^16.3.4",
     "google-auth-library": "^10.9.1",
     "google-spreadsheet": "^5.3.0",
     "mysql2": "^3.23.1",
