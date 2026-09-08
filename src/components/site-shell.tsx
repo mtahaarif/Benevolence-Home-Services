@@ -103,11 +103,12 @@ export function HeroSection({
   return (
     <section className="w-full px-0 pt-0">
       <div className="relative w-full overflow-hidden bg-white">
+        {/* Parent container with explicit responsive height and min-height */}
         <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden">
 
           {/* 1. FAST-PATH: Static Single Image for Inner Pages */}
           {!isMultiple && images.length === 1 && (
-            <div className="absolute inset-0 h-full w-full z-0">
+            <div className="absolute inset-0 h-full w-full z-0 overflow-hidden">
               <Image
                 src={images[0]}
                 alt={imageAlt ?? title}
@@ -116,7 +117,7 @@ export function HeroSection({
                 fetchPriority="high"
                 quality={75}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
-                className="object-cover object-center"
+                className="object-cover object-center w-full h-full"
               />
             </div>
           )}
@@ -124,8 +125,8 @@ export function HeroSection({
           {/* 2. OPTIMIZED SLIDER PATH (Used on Homepage) */}
           {isMultiple && (
             <>
-              {/* SLIDE 1: Rendered as static base element for instant Frame-0 LCP paint */}
-              <div className="absolute inset-0 h-full w-full z-0">
+              {/* SLIDE 1: Immediate Frame-0 Static Base Element */}
+              <div className="absolute inset-0 h-full w-full z-0 overflow-hidden">
                 <Image
                   src={images[0]}
                   alt={`${imageAlt ?? title} - Slide 1`}
@@ -135,11 +136,11 @@ export function HeroSection({
                   fetchPriority="high"
                   quality={75}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
-                  className="object-cover object-center"
+                  className="object-cover object-center w-full h-full"
                 />
               </div>
 
-              {/* SLIDES 2 & 3: Mount as lazy crossfade overlays */}
+              {/* SLIDES 2 & 3: Rotating Overlays */}
               {images.slice(1).map((src, index) => {
                 const slideIndex = index + 1;
                 const isActive = slideIndex === currentIndex;
@@ -147,7 +148,7 @@ export function HeroSection({
                 return (
                   <div
                     key={src}
-                    className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${
+                    className={`absolute inset-0 h-full w-full overflow-hidden transition-opacity duration-1000 ease-in-out ${
                       isActive ? "opacity-100 z-10" : "opacity-0 -z-10"
                     }`}
                   >
@@ -159,7 +160,7 @@ export function HeroSection({
                       fetchPriority="low"
                       quality={75}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
-                      className="object-cover object-center"
+                      className="object-cover object-center w-full h-full"
                     />
                   </div>
                 );
@@ -167,7 +168,7 @@ export function HeroSection({
             </>
           )}
 
-          {/* Gradient Overlay placed above images (z-20) but below content */}
+          {/* Gradient Overlay */}
           <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/75 via-white/70 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-20 pointer-events-none" />
 
           {/* Accent Borders */}
