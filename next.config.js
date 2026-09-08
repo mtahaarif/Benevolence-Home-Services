@@ -1,14 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Normalizes URL paths without trailing slashes across edge crawlers
   trailingSlash: false,
 
-  // PAGE SPEED FIX: Enable Brotli/Gzip compression on all responses
+  // PAGE SPEED: Enables gzip and brotli text-based asset compression
   compress: true,
 
-  // PAGE SPEED FIX: Optimize modern image formats (AVIF & WebP)
+  // PAGE SPEED: Generates next-gen WebP/AVIF images with a 1-year cache threshold
   images: {
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 31536000, // 1 year cache for static assets
+    minimumCacheTTL: 31536000,
   },
 
   async headers() {
@@ -18,7 +19,8 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: blob:; frame-src 'self' https://www.google.com https://form.jotform.com;",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https: blob:; frame-src 'self' https://www.google.com https://form.jotform.com;",
           },
           {
             key: 'X-Content-Type-Options',
@@ -38,7 +40,7 @@ const nextConfig = {
           },
         ],
       },
-      // PAGE SPEED FIX: Cache immutable static assets for 1 year
+      // PAGE SPEED: Sets immutable long-term caching for static media in /public
       {
         source: '/(.*).(jpg|jpeg|png|webp|avif|ico|svg)',
         headers: [
@@ -53,19 +55,6 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // CRITICAL DOMAIN FIX: Force 301 (instead of Vercel 308) from non-www to www
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'benevolencehomeservices.com',
-          },
-        ],
-        destination: 'https://www.benevolencehomeservices.com/:path*',
-        permanent: true, // Emits a true 301 Moved Permanently
-      },
-      // Legacy index redirects
       {
         source: '/index.html',
         destination: '/',
