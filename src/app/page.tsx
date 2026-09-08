@@ -216,11 +216,11 @@ export default function HomePage() {
               </div>
               
               <div className="relative aspect-[4/3] w-full max-w-[480px] mx-auto lg:ml-auto">
-                <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/10 translate-x-3 translate-y-3 -z-10" />
                 <Image 
                   src="/o6ipogo6ipogo6ip.webp" 
                   alt="Compassionate nurse-led interaction model tracking options"
-                  fill
+                  width={600}
+                  height={600}
                   sizes="(max-width: 768px) 100vw, 480px"
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl"
                 />

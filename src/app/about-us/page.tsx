@@ -98,11 +98,11 @@ export default function AboutUsPage() {
             <div className="grid gap-12 items-center md:grid-cols-2">
               
               <div className="relative w-full aspect-square max-w-[400px] mx-auto md:mr-auto">
-                <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/5 translate-x-4 translate-y-4 -z-10" />
                 <Image
                   src="/thumb-23706104744U61tse5.webp"
                   alt="Benevolence Care Team providing professional family caregiver relief and companionship"
-                  fill
+                  width={600}
+                  height={400}
                   sizes="(max-width: 768px) 100vw, 400px"
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl" 
                 />
@@ -160,12 +160,12 @@ export default function AboutUsPage() {
                 </p>
               </div>
 
-              <div className="order-1 md:order-2 relative w-full aspect-square max-w-[400px] mx-auto lg:ml-auto">
-                <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/10 -translate-x-4 translate-y-4 -z-10" />
+              <div className="order-1 md:order-2 relative w-full aspect-square max-w-full mx-auto lg:ml-auto">
                 <Image
                   src="/thumb-22914111356U07ma39.webp"
                   alt="Dignified independent senior living supported by Benevolence Home Services solutions"
-                  fill
+                  width={600}
+                  height={400}
                   sizes="(max-width: 768px) 100vw, 400px"
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl"
                 />

@@ -222,9 +222,10 @@ export default function MedicationRemindersPage() {
               <div className="relative w-full aspect-square max-w-[460px] mx-auto lg:ml-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/5 translate-x-3 translate-y-3 -z-10" />
                 <Image
-                  src="/nh-2371714204U3a085e.webp" 
+                  src="/nh-2371714204U3a085e.jpg" 
                   alt="Safe and organized pillbox tracking with professional assistance"
-                  fill
+                  width={600}
+                  height={600}
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl"
                 />
               </div>

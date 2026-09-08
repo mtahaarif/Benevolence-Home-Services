@@ -260,7 +260,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28">
               <ScrollReveal>
                 <div className="w-full rounded-[2.5rem] p-3 bg-white/40 border border-white/80 shadow-[0_15px_40px_rgba(15,47,89,0.06)] backdrop-blur-xl">
-                  <div className="w-full h-64 sm:h-80 lg:h-96 relative rounded-[2rem] overflow-hidden shadow-inner bg-slate-50 group">
+                  <div className="w-full h-full sm:h-full lg:h-full relative rounded-[2rem] overflow-hidden shadow-inner bg-slate-50 group">
                     
                     <Image 
                       src={post.image} 

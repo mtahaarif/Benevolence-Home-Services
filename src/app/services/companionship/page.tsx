@@ -177,9 +177,10 @@ export default function CompanionshipPage() {
               <div className="relative w-full aspect-square max-w-[460px] mx-auto lg:ml-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/5 translate-x-3 translate-y-3 -z-10" />
                 <Image
-                  src="/nh-23828104413Umet879.webp" 
+                  src="/nh-23828104413Umet879.jpg" 
                   alt="Compassionate companion care services in Westchester"
-                  fill
+                  width={600}
+                  height={600}
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl"
                 />
               </div>

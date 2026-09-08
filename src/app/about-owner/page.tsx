@@ -34,12 +34,13 @@ export default function AboutOwnerPage() {
             <div className="mx-auto max-w-3xl flex flex-col items-center text-center space-y-10">
               
               {/* Owner Portrait Container with Premium Dynamic Offset Backdrop */}
-              <div className="relative w-[224px] h-[280px] sm:w-[280px] sm:h-[350px] group">
+              <div className="relative w-[224px] h-[230px] sm:w-[280px] sm:h-[290px] group">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/10 translate-x-3 translate-y-3 -z-10 transition-transform duration-500 group-hover:translate-x-4 group-hover:translate-y-4" />
                 <Image
                   src="/katrina.webp" 
                   alt="Katrina Turman, Founder and Owner"
-                  fill
+                  width={400}
+                  height={400}
                   className="object-cover rounded-[2.5rem] border border-slate-200/50 shadow-xl"
                 />
               </div>

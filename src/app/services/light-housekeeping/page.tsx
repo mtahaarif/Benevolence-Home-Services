@@ -178,9 +178,10 @@ export default function LightHousekeepingPage() {
               <div className="relative w-full aspect-square max-w-[460px] mx-auto lg:ml-auto">
                 <div className="absolute inset-0 rounded-[2.5rem] bg-brand-blue/5 translate-x-3 translate-y-3 -z-10" />
                 <Image
-                  src="/nh-2172630013U9i2e14.webp" 
+                  src="/nh-2172630013U9i2e14.jpg" 
                   alt="Tidy and organized neat living environment home care"
-                  fill
+                  width={600}
+                  height={600}
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl"
                 />
               </div>

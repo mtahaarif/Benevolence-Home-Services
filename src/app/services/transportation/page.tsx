@@ -245,8 +245,9 @@ export default function TransportationServicesPage() {
                 <Image 
                   alt="Safe physical mobility assistance and transit support for seniors" 
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl" 
-                  fill 
-                  src="/transportation.webp"
+                  width={600}
+                  height={600}
+                  src="/transportation.jpg"
                 />
               </div>
             </ScrollReveal>

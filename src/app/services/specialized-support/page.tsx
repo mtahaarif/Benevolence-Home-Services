@@ -175,8 +175,9 @@ export default function SpecializedSupportPage() {
                 <Image 
                   alt="Compassionate specialized memory care and rehabilitation support" 
                   className="object-cover rounded-[2.5rem] border border-slate-200/40 shadow-xl" 
-                  fill 
-                  src="/nh-2212833857U072s1e.webp"
+                  width={600}
+                  height={600}
+                  src="/nh-2212833857U072s1e.jpg"
                 />
               </div>
             </ScrollReveal>

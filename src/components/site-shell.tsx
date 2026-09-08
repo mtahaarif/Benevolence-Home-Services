@@ -112,7 +112,8 @@ export function HeroSection({
               <Image
                 src={images[0]}
                 alt={imageAlt ?? title}
-                fill
+                width={1920}
+                height={600}
                 priority
                 fetchPriority="high"
                 quality={75}
@@ -130,7 +131,8 @@ export function HeroSection({
                 <Image
                   src={images[0]}
                   alt={`${imageAlt ?? title} - Slide 1`}
-                  fill
+                  width={1920}
+                  height={899}
                   priority
                   loading="eager"
                   fetchPriority="high"
@@ -155,7 +157,8 @@ export function HeroSection({
                     <Image
                       src={src}
                       alt={`${imageAlt ?? title} - Slide ${slideIndex + 1}`}
-                      fill
+                      width={1920}
+                      height={899}
                       loading="lazy"
                       fetchPriority="low"
                       quality={75}
