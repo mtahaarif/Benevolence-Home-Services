@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Normalizes URL paths without trailing slashes across edge crawlers
+  // Enforces clean URL paths without trailing slashes across crawlers
   trailingSlash: false,
 
-  // PAGE SPEED: Enables gzip and brotli text-based asset compression
+  // PAGE SPEED: Enables Brotli/Gzip compression on all text assets
   compress: true,
 
-  // PAGE SPEED: Generates next-gen WebP/AVIF images with a 1-year cache threshold
+  // PAGE SPEED: Converts raster assets to modern AVIF & WebP formats with 1-year caching
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 31536000,
@@ -40,7 +40,7 @@ const nextConfig = {
           },
         ],
       },
-      // PAGE SPEED: Sets immutable long-term caching for static media in /public
+      // PAGE SPEED: Static immutable browser cache for public media
       {
         source: '/(.*).(jpg|jpeg|png|webp|avif|ico|svg)',
         headers: [
@@ -55,6 +55,7 @@ const nextConfig = {
 
   async redirects() {
     return [
+      // Legacy index cleanups: Emits permanent 301s to prevent duplicate homepage penalties
       {
         source: '/index.html',
         destination: '/',
