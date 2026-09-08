@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -9,17 +8,12 @@ import {
   SectionHeading,
 } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
+import HomeAccordion from "@/components/home-accordion";
 import {
   homeHighlights,
 } from "@/data/site-content";
 
 export default function HomePage() {
-  const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
-
-  const toggleAccordion = (idx: number) => {
-    setActiveAccordion((prev) => (prev === idx ? null : idx));
-  };
-
   // Structured matrix matching your exact layout with new strategic terminology
   const functionalComparisonMatrix = [
     {
@@ -59,110 +53,6 @@ export default function HomePage() {
     }
   ];
 
-  const accordionData = [
-    {
-      title: "What Makes Nurse-Led Home Care Different?",
-      content: (
-        <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed text-left">
-          <p>
-            Unlike traditional home care agencies that are scheduler-led, nurse-led home care means a registered nurse actively oversees care plans, supports caregivers, and monitors changes in condition.
-          </p>
-          <p className="font-semibold text-brand-ink">This model allows us to:</p>
-          <ul className="grid gap-3 sm:grid-cols-2 pl-1">
-            <li className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Recognize early signs of decline</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Provide stronger caregiver guidance and accountability</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Support safer aging at home</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Reduce avoidable hospital visits</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Offer families clarity and confidence</span>
-            </li>
-          </ul>
-          <p className="pt-2 text-xs sm:text-sm text-slate-500 border-t border-slate-100 mt-2">
-            Our nurse-led structure bridges clinical insight with compassionate, everyday care, creating better outcomes and a more personal experience.
-          </p>
-        </div>
-      )
-    },
-    {
-      title: "Faith in Action Through Care",
-      content: (
-        <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed text-left">
-          <p className="font-semibold text-brand-ink">Our services are grounded in faith-based values of:</p>
-          <ul className="grid gap-2 sm:grid-cols-2 pl-1">
-            <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Compassion</span>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Stewardship</span>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Respect</span>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Service</span>
-            </li>
-          </ul>
-          <p className="pt-2 border-t border-slate-100 mt-2">
-            We view caregiving as ministry in motion—serving seniors and families with humility, patience, and grace. Whether supporting daily routines or providing respite for loved ones, our goal is to bring comfort, stability, and peace into every home we serve.
-          </p>
-        </div>
-      )
-    },
-    {
-      title: "Helping Families Navigate Care Options",
-      content: (
-        <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed text-left">
-          <p>
-            Understanding how to pay for home care can feel overwhelming. We walk alongside families to help them navigate:
-          </p>
-          <ul className="space-y-2 pl-1">
-            <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Private pay home care</span>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Medicaid home care options</span>
-            </li>
-            <li className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0" />
-              <span>Community and long-term care resources</span>
-            </li>
-          </ul>
-          <p className="pt-2 border-t border-slate-100 mt-2">
-            Our role is to simplify the process so families can focus on what matters most—caring for their loved ones.
-          </p>
-        </div>
-      )
-    },
-    {
-      title: "Serving Seniors With Dignity at Home",
-      content: (
-        <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed text-left">
-          <p>
-            Aging at home allows seniors to remain surrounded by familiarity, comfort, and independence. Our mission is to make that possible through faith-centered, nurse-led home care that supports the whole person—body, mind, and spirit.
-          </p>
-        </div>
-      )
-    }
-  ];
 
   return (
     <>
@@ -194,10 +84,10 @@ export default function HomePage() {
                   Elevating Home Care with Compassion
                 </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                  At Benevolence Home Services, a premier home care and staffing agency based in Westchester, IL, we provide compassionate, reliable, and personalized care services. Our mission is to help seniors and individuals maintain their independence, dignity, and quality of life while remaining safe and comfortable in their own homes.
+                  At Benevolence Home Services, a premier <strong>home care and staffing agency based in Westchester, IL</strong>, we provide compassionate, reliable, and personalized care services. Our mission is to help seniors and individuals maintain their independence, dignity, and quality of life while remaining safe and comfortable in their own homes.
                 </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                  Our experienced caregivers offer a wide range of in-home care services, including personal care, companionship, assistance with daily living activities, respite care, and nurse-led oversight and care coordination. Every care plan is tailored to the unique needs, preferences, and goals of each client and their family.
+                  Our experienced caregivers offer a wide range of <strong>in-home care services</strong>, including personal care, companionship, assistance with daily living activities, respite care, and nurse-led oversight and care coordination. Every care plan is tailored to the unique needs, preferences, and goals of each client and their family.
                 </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
                   Whether you need short-term assistance or ongoing senior care support, Benevolence Home Services is committed to delivering exceptional home care services you can trust. We proudly serve families across Will County, Cook County, DuPage County, and Kane County, providing dependable care that brings peace of mind to clients and their loved ones.
@@ -262,13 +152,13 @@ export default function HomePage() {
                       <Link 
                         href="/services"
                         aria-label={`Explore our full suite of personalized care programs for ${item.title}`}
-                        className="w-full text-center inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue"
+                        className="highlight-cta"
                       >
                         Explore Care Options <span className="sr-only">for {item.title}</span>
                         <span aria-hidden="true" className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                       </Link>
 
-                      <div className="relative w-20 h-20 rounded-full overflow-hidden border-4 border-slate-50 shadow-sm transition-transform duration-500 group-hover:scale-105">
+                      <div className="highlight-thumb">
                         <Image 
                           src={`/middle-img${idx + 1}.webp`} 
                           alt={`Supportive imagery for ${item.title}`}
@@ -296,7 +186,7 @@ export default function HomePage() {
                 Nurse-Led Home Care vs. Traditional Home Care
               </h2>
               <p className="text-slate-500 text-xs sm:text-sm mt-3 max-w-xl mx-auto">
-                Not all home care is the same. Our nurse-led model ensures a registered nurse oversees care, providing safer and more responsive support.
+                Not all home care is the same. Our <strong>nurse-led model</strong> ensures a registered nurse oversees care, providing safer and more responsive support.
               </p>
             </div>
 
@@ -316,9 +206,9 @@ export default function HomePage() {
                   {functionalComparisonMatrix.map((row, idx) => (
                     <tr key={idx} className="transition-colors duration-200 hover:bg-slate-50/40">
                       <td className="p-5.5 text-xs sm:text-sm font-semibold text-brand-ink">{row.pillar}</td>
-                      <td className="p-5.5 text-xs sm:text-sm text-slate-700 bg-brand-blue/[0.005] font-medium border-r border-slate-100">
+                      <td className="compare-cell">
                         <div className="flex items-start gap-3">
-                          <div className="h-5 w-5 rounded-full bg-brand-blue/5 text-[#1168b3] flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
+                          <div className="compare-tick">
                             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-3 w-3" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
                           </div>
                           <span className="leading-relaxed">{row.benevolence}</span>
@@ -326,7 +216,7 @@ export default function HomePage() {
                       </td>
                       <td className="p-5.5 text-xs sm:text-sm text-red-900/80 bg-red-50/[0.01]">
                         <div className="flex items-start gap-3">
-                          <div className="h-5 w-5 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                          <div className="compare-cross">
                             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} className="h-3 w-3" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                           </div>
                           <span className="leading-relaxed">{row.traditional}</span>
@@ -362,43 +252,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="max-w-4xl mx-auto space-y-3.5">
-              {accordionData.map((item, idx) => {
-                const isOpen = activeAccordion === idx;
-                return (
-                  <div 
-                    key={idx} 
-                    className="rounded-xl border border-[#0a3566]/20 bg-white overflow-hidden shadow-sm transition-all duration-300"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => toggleAccordion(idx)}
-                      aria-expanded={isOpen}
-                      className="flex w-full items-center justify-between bg-[#0c3e72] px-6 py-4 text-left transition-colors duration-300 hover:bg-[#114b7d]"
-                    >
-                      <span className="font-display text-sm sm:text-base font-semibold text-white !text-white tracking-wide">
-                        {item.title}
-                      </span>
-                      <div className="h-6 w-6 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0">
-                        <span className="text-base font-bold leading-none select-none">
-                          {isOpen ? "−" : "+"}
-                        </span>
-                      </div>
-                    </button>
-                    
-                    <div 
-                      className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                        isOpen ? "max-h-[600px] border-t border-slate-100 opacity-100" : "max-h-0 opacity-0"
-                      }`}
-                    >
-                      <div className="p-6 sm:p-8 bg-white">
-                        {item.content}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <HomeAccordion />
           </PageShell>
         </section>
       </ScrollReveal>

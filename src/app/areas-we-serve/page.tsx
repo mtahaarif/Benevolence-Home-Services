@@ -166,7 +166,7 @@ export default function AreasWeServePage() {
                         <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md transition-colors ${
                           isActive ? "bg-white/10 text-blue-200" : "bg-slate-100 text-slate-400 group-hover:bg-slate-200/60"
                         }`}>
-                          {region.cities.length} Areas
+                          {`${region.cities.length} Areas`}
                         </span>
                         <span className={`hidden lg:block transition-transform duration-300 ${isActive ? "translate-x-1 text-brand-orange" : "text-slate-300 group-hover:translate-x-1"}`}>
                           &rarr;
@@ -185,7 +185,7 @@ export default function AreasWeServePage() {
                   <ScrollReveal>
                     <div className="mb-8 border-b border-slate-200/60 pb-5">
                       <h2 className="text-2xl md:text-3xl font-display font-bold text-brand-ink mb-3">
-                        {region.name} Home Care Support
+                        {`${region.name} Home Care Support`}
                       </h2>
                       <p className="text-slate-500 text-xs sm:text-sm max-w-2xl leading-relaxed">
                         {region.description}
@@ -193,16 +193,19 @@ export default function AreasWeServePage() {
                     </div>
                   </ScrollReveal>
 
-                  {/* Architectural Card Matrix Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {/* Architectural Card Matrix Grid.
+                      A directory of places is a list, so it ships as <ul>/<li>
+                      rather than a bare grid of divs. */}
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {region.cities.map((city) => {
                       // Routes to dedicated landing page if available, otherwise routes to assessment inquiry
                       const targetHref = city.slug ? `/areas-we-serve/${city.slug}` : "/contact-us";
 
                       return (
-                        <ScrollReveal key={city.name}>
+                        <li key={city.name}>
+                          <ScrollReveal>
                           <div className="group block h-full select-none relative">
-                            <div className="flex flex-col h-full bg-white p-6 rounded-[2rem] border border-slate-100 shadow-[0_5px_20px_rgba(15,47,89,0.02)] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(12,62,114,0.07)] hover:-translate-y-1 hover:border-[#0c3e72]/30 relative overflow-hidden">
+                            <div className="area-card">
                               
                               {/* Direct Internal Anchor Link */}
                               <Link
@@ -210,28 +213,28 @@ export default function AreasWeServePage() {
                                 className="absolute inset-0 z-20"
                               >
                                 <span className="sr-only">
-                                  View nurse-led home care services in {city.name}, Illinois
+                                  {`View nurse-led home care services in ${city.name}, Illinois`}
                                 </span>
                               </Link>
 
-                              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0c3e72]/0 to-transparent group-hover:via-[#0c3e72]/40 transition-all duration-500" />
+                              <div className="area-card-rule" />
 
                               <div className="flex items-start justify-between gap-4 mb-4">
                                 <div className="flex items-center gap-3">
-                                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-50 border border-slate-200/40 text-slate-400 transition-colors duration-500 group-hover:bg-brand-blue/5 group-hover:text-[#0c3e72] group-hover:border-brand-blue/10">
+                                  <div className="area-card-pin">
                                     <MapPinIcon />
                                   </div>
                                   <div>
                                     <p className="font-display font-bold text-brand-ink text-base sm:text-lg group-hover:text-[#0c3e72] transition-colors leading-tight">
-                                      {city.name}, IL
+                                      {`${city.name}, IL`}
                                     </p>
                                     <p className="text-[10px] font-bold tracking-wider text-slate-400 mt-0.5">
-                                      Coverage ZIP: {city.zipCodes}
+                                      {`Coverage ZIP: ${city.zipCodes}`}
                                     </p>
                                   </div>
                                 </div>
 
-                                <div className="h-7 w-7 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center transition-all duration-300 text-slate-400 group-hover:bg-[#0c3e72] group-hover:text-white group-hover:border-[#0c3e72]">
+                                <div className="area-card-chevron">
                                   <span className="transform transition-transform duration-300 group-hover:translate-x-0.5 text-xs font-bold">&rarr;</span>
                                 </div>
                               </div>
@@ -241,14 +244,15 @@ export default function AreasWeServePage() {
                               </p>
 
                               <div className="mt-4 pt-2 text-[11px] font-bold text-[#1168b3] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
-                                Explore {city.name} In-Home Care <span aria-hidden="true">&rarr;</span>
+                                {`Explore ${city.name} In-Home Care `}<span aria-hidden="true">&rarr;</span>
                               </div>
                             </div>
                           </div>
-                        </ScrollReveal>
+                          </ScrollReveal>
+                        </li>
                       );
                     })}
-                  </div>
+                  </ul>
                 </section>
               ))}
             </div>
@@ -267,7 +271,7 @@ export default function AreasWeServePage() {
               </h2>
               <div className="text-sm sm:text-base leading-relaxed text-slate-700 max-w-2xl mx-auto space-y-4">
                 <p>
-                  Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, BENEVOLENCE HOME SERVICES is ready to help. Contact us to discuss non-medical home care in Westchester or throughout Cook, DuPage, Lake, and Will Counties.
+                  Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, <strong>Benevolence Home Services</strong> is ready to help. Contact us to discuss <strong>non-medical home care in Westchester</strong> or throughout Cook, DuPage, Lake, and Will Counties.
                 </p>
               </div>
 

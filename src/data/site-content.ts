@@ -17,6 +17,35 @@ export type NavItem = {
   }[];
 };
 
+/**
+ * Footer "Quick Links".
+ *
+ * These deliberately do NOT reuse `navItems`. The header needs short labels to
+ * fit the bar, but reusing them in the footer meant every page shipped a dozen
+ * single-word internal anchors ("Home", "Services", "Careers", "Blog"…) and
+ * gave pages like /careers and /about-owner an identical anchor on all 83
+ * incoming internal links. Descriptive, distinct anchor text here tells search
+ * engines what each destination is actually about.
+ */
+export type FooterLink = {
+  label: string;
+  href: string;
+  target?: "_blank" | "_self";
+};
+
+export const footerLinks: FooterLink[] = [
+  { label: "Home Care in Westchester", href: "/" },
+  { label: "About Our Agency", href: "/about-us" },
+  { label: "Meet Our Founder", href: "/about-owner" },
+  { label: "In-Home Care Services", href: "/services" },
+  { label: "Chicagoland Service Areas", href: "/areas-we-serve" },
+  { label: "Caregiver Job Openings", href: "/careers" },
+  { label: "Senior Care Resources", href: "/resources" },
+  { label: "Home Care Blog", href: "/blog" },
+  { label: "Make a Secure Payment", href: "https://www.paypal.com/ncp/payment/H8ETWPE4HU59A", target: "_blank" },
+  { label: "Contact Our Care Team", href: "/contact-us" },
+];
+
 export const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { 

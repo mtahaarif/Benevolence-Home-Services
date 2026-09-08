@@ -184,32 +184,32 @@ export default function ContactUsPage() {
                 Frequently Asked Intake Questions
               </h2>
               
-              <div className="grid sm:grid-cols-2 gap-8">
-                <div>
-                  <h4 className="font-bold text-brand-ink mb-2">How quickly can in-home care services start?</h4>
+              <ul className="grid sm:grid-cols-2 gap-8">
+                <li>
+                  <h3 className="font-bold text-brand-ink mb-2">How quickly can in-home care services start?</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     In many cases, we can arrange for care to begin within 24 to 48 hours after the initial in-home consultation. If you are facing an urgent discharge from a hospital or rehab facility, please call our office directly so we can expedite your assessment.
                   </p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-brand-ink mb-2">Is there any obligation after the free assessment?</h4>
+                </li>
+                <li>
+                  <h3 className="font-bold text-brand-ink mb-2">Is there any obligation after the free assessment?</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     Absolutely not. The in-home care consultation is a completely free, no-obligation meeting. It is simply an opportunity for our team to understand your needs and provide you with clear, professional recommendations for your family.
                   </p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-brand-ink mb-2">Who will be coming to my home for the assessment?</h4>
+                </li>
+                <li>
+                  <h3 className="font-bold text-brand-ink mb-2">Who will be coming to my home for the assessment?</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     A dedicated Care Coordinator or our supervising Registered Nurse will conduct the assessment. They bring years of clinical insight to help identify potential safety risks and determine the exact level of care required.
                   </p>
-                </div>
-                <div>
-                  <h4 className="font-bold text-brand-ink mb-2">Do you provide care on weekends or holidays?</h4>
+                </li>
+                <li>
+                  <h3 className="font-bold text-brand-ink mb-2">Do you provide care on weekends or holidays?</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     Yes. Our caregivers are available 24 hours a day, 7 days a week, including weekends and all major holidays. We tailor the schedule entirely around when your family needs support the most.
                   </p>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </ScrollReveal>
 

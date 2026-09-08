@@ -78,7 +78,7 @@ export default function PrivacyPolicyPage() {
           primaryAction={{ label: "Request a Care Consultation", href: "/contact-us" }}
           secondaryAction={{ label: "Return to Homepage", href: "/" }}
           imageSrc="/3.webp"
-          imageAlt="Secure data processing and compliance records backdrop at Benevolence Home Services in Westchester, Illinois"
+          imageAlt="Secure records handling at Benevolence Home Services"
         />
       </div>
 
@@ -243,19 +243,19 @@ export default function PrivacyPolicyPage() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   <div className="bg-slate-50/60 p-5 rounded-2xl border border-slate-200/50">
-                    <h4 className="font-bold text-brand-ink text-xs sm:text-sm mb-1">Essential Cookies</h4>
+                    <h3 className="font-bold text-brand-ink text-xs sm:text-sm mb-1">Essential Cookies</h3>
                     <p className="text-[11px] sm:text-xs text-slate-500 font-normal leading-relaxed">Required directly for basic website rendering and architecture navigation pathways.</p>
                   </div>
                   <div className="bg-slate-50/60 p-5 rounded-2xl border border-slate-200/50">
-                    <h4 className="font-bold text-brand-ink text-xs sm:text-sm mb-1">Performance Cookies</h4>
+                    <h3 className="font-bold text-brand-ink text-xs sm:text-sm mb-1">Performance Cookies</h3>
                     <p className="text-[11px] sm:text-xs text-slate-500 font-normal leading-relaxed">Help our backend web engines evaluate visitor metrics and track error responses.</p>
                   </div>
                   <div className="bg-slate-50/60 p-5 rounded-2xl border border-slate-200/50">
-                    <h4 className="font-bold text-brand-ink text-xs sm:text-sm mb-1">Marketing Cookies</h4>
+                    <h3 className="font-bold text-brand-ink text-xs sm:text-sm mb-1">Marketing Cookies</h3>
                     <p className="text-[11px] sm:text-xs text-slate-500 font-normal leading-relaxed">Deployed to track advertising performance metrics across relevant tracking channels.</p>
                   </div>
                   <div className="bg-slate-50/60 p-5 rounded-2xl border border-slate-200/50">
-                    <h4 className="font-bold text-brand-ink text-xs sm:text-sm mb-1">Preference Cookies</h4>
+                    <h3 className="font-bold text-brand-ink text-xs sm:text-sm mb-1">Preference Cookies</h3>
                     <p className="text-[11px] sm:text-xs text-slate-500 font-normal leading-relaxed">Cache your structural parameters and localized regional coordinate selectors.</p>
                   </div>
                 </div>

@@ -14,6 +14,7 @@ function BrandMark() {
         alt="Benevolence Home Services Logo"
         width={250}
         height={65}
+        sizes="(max-width: 640px) 140px, 170px"
         className="h-9 w-auto shrink-0 object-contain sm:h-11"
         priority
       />
@@ -182,7 +183,7 @@ export function SiteNav() {
                               window.scrollTo({ top: 0, behavior: "smooth" });
                             }
                           }}
-                          className="whitespace-nowrap rounded-xl px-4 py-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500 transition-colors hover:bg-slate-50 hover:text-[#0c3e72]"
+                          className="nav-sub-link-mobile"
                         >
                           {sub.label}
                         </Link>
@@ -191,8 +192,8 @@ export function SiteNav() {
 
                     {/* Desktop Dropdown Panel */}
                     {/* Changed left-0 to right-0 so the dropdown expands safely to the left instead of falling off the right side of the screen */}
-                    <div className="invisible absolute right-0 top-full z-50 hidden translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 lg:block">
-                      <div className="flex w-fit min-w-[200px] flex-col gap-0.5 rounded-2xl border border-slate-100 bg-white p-2 shadow-[0_15px_40px_rgba(15,47,89,0.1)] backdrop-blur-xl">
+                    <div className="nav-dropdown-wrap">
+                      <div className="nav-dropdown-panel">
                         {item.subItems!.map((sub) => (
                           <Link
                             key={sub.href}
@@ -206,7 +207,7 @@ export function SiteNav() {
                                 window.scrollTo({ top: 0, behavior: "smooth" });
                               }
                             }}
-                            className="whitespace-nowrap rounded-xl px-4 py-2.5 text-[9.5px] font-bold uppercase tracking-widest text-slate-600 transition-all hover:translate-x-0.5 hover:bg-brand-blue/5 hover:text-[#0c3e72]"
+                            className="nav-sub-link-desktop"
                           >
                             {sub.label}
                           </Link>

@@ -189,20 +189,20 @@ export default function ServicesPage() {
             </div>
           </ScrollReveal>
           
-          <div className="relative z-10 block sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-[20vh] sm:pb-0">
+          <ul className="relative z-10 block sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-[20vh] sm:pb-0">
             {enrichedServices.map((service, index) => {
               const itemUrl = `/services/${getSlug(service.title)}`;
               
               return (
-                <div 
+                <li 
                   key={service.title} 
-                  className="sticky sm:static w-full h-[400px] sm:h-auto sm:min-h-[400px] group mb-[18vh] sm:mb-0 bg-transparent rounded-[2rem]"
+                  className="sticky sm:static w-full h-[400px] sm:h-auto sm:min-h-[400px] group mb-[18vh] sm:mb-0 bg-transparent rounded-[2rem] list-none"
                   style={{ 
                     top: `calc(6.5rem + ${index * 15}px)`, 
                     zIndex: 10 + index 
                   }}
                 >
-                  <div className="flex flex-col h-full p-6 md:p-8 rounded-[2rem] bg-white/60 border border-white/80 shadow-[0_12px_40px_rgba(15,47,89,0.05)] backdrop-blur-xl transition-all duration-500 sm:group-hover:bg-white/70 sm:group-hover:border-white sm:group-hover:shadow-[0_25px_50px_rgba(12,62,114,0.12)] sm:group-hover:-translate-y-1.5 relative overflow-hidden">
+                  <div className="service-card">
                     
                     <Link 
                       href={itemUrl}
@@ -214,7 +214,7 @@ export default function ServicesPage() {
                     <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                     <div className="relative z-10 flex items-center justify-between mb-6">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-white/80 shadow-sm transition-colors duration-500 group-hover:bg-[#0c3e72]/5 group-hover:border-[#0c3e72]/10">
+                      <div className="service-card-icon">
                         <ServiceIcon title={service.title} />
                       </div>
                       <span className="font-mono text-xs font-bold text-slate-400/70 transition-colors duration-500 group-hover:text-brand-blue/60">
@@ -236,7 +236,7 @@ export default function ServicesPage() {
                         {service.subServices.map((subItem) => (
                           <span 
                             key={subItem} 
-                            className="inline-flex items-center justify-center text-center rounded-lg bg-white/80 border border-white/90 px-2 py-1 text-[10px] font-bold tracking-wide text-slate-600 shadow-sm transition-all duration-300 group-hover:bg-white group-hover:text-[#0c3e72]"
+                            className="service-pill"
                           >
                             {subItem}
                           </span>
@@ -245,10 +245,10 @@ export default function ServicesPage() {
                     </div>
 
                   </div>
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </PageShell>
       </section>
 
@@ -299,7 +299,7 @@ export default function ServicesPage() {
               </h2>
               <div className="text-sm sm:text-base leading-relaxed text-slate-700 max-w-2xl mx-auto space-y-4">
                 <p>
-                  Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, BENEVOLENCE HOME SERVICES is ready to help. Contact us to discuss non-medical home care in Westchester or throughout Cook, DuPage, Lake, and Will Counties.
+                  Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, <strong>Benevolence Home Services</strong> is ready to help. Contact us to discuss <strong>non-medical home care in Westchester</strong> or throughout Cook, DuPage, Lake, and Will Counties.
                 </p>
               </div>
               

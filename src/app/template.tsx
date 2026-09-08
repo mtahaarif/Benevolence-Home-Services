@@ -1,30 +1,14 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-
+/**
+ * Page transition wrapper.
+ *
+ * PERFORMANCE: this used to be a client component that rendered its children at
+ * `opacity-0` and only faded them in from a `useEffect` after mount. That gated
+ * every first paint — including the LCP element — behind hydration plus a
+ * 1000ms transition, which is what put the homepage LCP at 3.38s. The fade is
+ * now a pure CSS animation that runs on the very first frame the browser
+ * paints, so nothing waits for JavaScript. Next remounts `template.tsx` on each
+ * navigation, so the animation still replays between routes.
+ */
 export default function Template({ children }: { children: React.ReactNode }) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    // A tiny delay ensures the browser has painted the initial opacity-0 state
-    // before we trigger the fade-in to opacity-100.
-    const timer = setTimeout(() => {
-      setIsMounted(true);
-    }, 10);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <div
-      className={`transition-opacity duration-[1000ms] ease-in-out will-change-[opacity] ${
-        isMounted ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      {children}
-    </div>
-  );
+  return <div className="page-fade-in">{children}</div>;
 }
-
-
-

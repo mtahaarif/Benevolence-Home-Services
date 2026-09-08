@@ -72,3 +72,139 @@ a {
 @utility brand-shadow {
   box-shadow: 0 20px 60px rgba(15, 47, 89, 0.08);
 }
+/* =========================================
+  Page + scroll reveal transitions.
+
+  Both are CSS-driven so the first paint never waits on hydration. The old
+  JS-gated versions rendered content at opacity 0 until React mounted, which
+  pushed the LCP element past 3s.
+  ========================================= */
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.page-fade-in {
+  animation: page-fade-in 400ms ease-out both;
+}
+
+/* Applied by ScrollReveal only after it has confirmed the element starts below
+   the fold, so above-the-fold content is painted opaque on the first frame. */
+.reveal-pending {
+  opacity: 0;
+}
+
+.reveal-shown {
+  opacity: 1;
+  transition: opacity 900ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade-in { animation: none; }
+  .reveal-pending { opacity: 1; }
+  .reveal-shown { transition: none; }
+}
+
+/* =========================================
+  Repeated utility clusters, hoisted out of the markup.
+
+  The site nav renders its submenus twice (a mobile accordion and a desktop
+  dropdown) on every one of 83 routes, and the footer repeats its link and
+  social-button classes a dozen times each. Those few strings accounted for
+  roughly 8KB of `class=` bytes in every HTML document — class attributes were
+  41% of the homepage payload against 9% visible text, which is what actually
+  fails the text-to-code ratio check.
+
+  Declaring them once here moves those bytes into a stylesheet the browser
+  caches, instead of re-sending them with every page. @apply keeps the
+  generated CSS byte-identical to the inline utilities they replace.
+  ========================================= */
+.nav-sub-link-mobile {
+  @apply whitespace-nowrap rounded-xl px-4 py-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500 transition-colors hover:bg-slate-50 hover:text-[#0c3e72];
+}
+
+.nav-sub-link-desktop {
+  @apply whitespace-nowrap rounded-xl px-4 py-2.5 text-[9.5px] font-bold uppercase tracking-widest text-slate-600 transition-all hover:translate-x-0.5 hover:bg-brand-blue/5 hover:text-[#0c3e72];
+}
+
+.nav-dropdown-wrap {
+  @apply invisible absolute right-0 top-full z-50 hidden translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 lg:block;
+}
+
+.nav-dropdown-panel {
+  @apply flex w-fit min-w-[200px] flex-col gap-0.5 rounded-2xl border border-slate-100 bg-white p-2 shadow-[0_15px_40px_rgba(15,47,89,0.1)] backdrop-blur-xl;
+}
+
+.footer-link {
+  @apply hover:text-[color:var(--brand-gold)] transition;
+}
+
+.footer-social-btn {
+  @apply flex h-9 w-9 items-center justify-center rounded-full border border-white/30 text-white transition-all duration-300 hover:bg-white hover:text-[color:var(--brand-ink)] hover:scale-110;
+}
+
+/* Second tier: the page shell, the comparison table on the homepage, and the
+   bullet marker repeated a dozen times inside the accordion panels. */
+.page-shell {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.bullet-dot {
+  @apply h-1.5 w-1.5 rounded-full bg-brand-orange shrink-0;
+}
+
+.compare-cell {
+  @apply p-5.5 text-xs sm:text-sm text-slate-700 bg-brand-blue/[0.005] font-medium border-r border-slate-100;
+}
+
+.compare-tick {
+  @apply h-5 w-5 rounded-full bg-brand-blue/5 text-[#1168b3] flex items-center justify-center shrink-0 mt-0.5 shadow-inner;
+}
+
+.compare-cross {
+  @apply h-5 w-5 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0 mt-0.5 shadow-sm;
+}
+
+.highlight-cta {
+  @apply w-full text-center inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-white !text-white shadow-sm transition hover:bg-brand-blue;
+}
+
+.highlight-thumb {
+  @apply relative w-20 h-20 rounded-full overflow-hidden border-4 border-slate-50 shadow-sm transition-transform duration-500 group-hover:scale-105;
+}
+
+.accordion-trigger {
+  @apply flex w-full items-center justify-between bg-[#0c3e72] px-6 py-4 text-left transition-colors duration-300 hover:bg-[#114b7d];
+}
+
+/* The /areas-we-serve directory renders 35 identical city cards. Four class
+   strings repeated 35 times each were ~30KB — over a fifth of that page. */
+.area-card {
+  @apply flex flex-col h-full bg-white p-6 rounded-[2rem] border border-slate-100 shadow-[0_5px_20px_rgba(15,47,89,0.02)] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(12,62,114,0.07)] hover:-translate-y-1 hover:border-[#0c3e72]/30 relative overflow-hidden;
+}
+
+.area-card-rule {
+  @apply absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#0c3e72]/0 to-transparent group-hover:via-[#0c3e72]/40 transition-all duration-500;
+}
+
+.area-card-pin {
+  @apply flex h-9 w-9 items-center justify-center rounded-xl bg-slate-50 border border-slate-200/40 text-slate-400 transition-colors duration-500 group-hover:bg-brand-blue/5 group-hover:text-[#0c3e72] group-hover:border-brand-blue/10;
+}
+
+.area-card-chevron {
+  @apply h-7 w-7 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center transition-all duration-300 text-slate-400 group-hover:bg-[#0c3e72] group-hover:text-white group-hover:border-[#0c3e72];
+}
+
+/* /services renders 8 cards, each listing its sub-services as pills — the pill
+   class alone repeated 26 times on that page. */
+.service-pill {
+  @apply inline-flex items-center justify-center text-center rounded-lg bg-white/80 border border-white/90 px-2 py-1 text-[10px] font-bold tracking-wide text-slate-600 shadow-sm transition-all duration-300 group-hover:bg-white group-hover:text-[#0c3e72];
+}
+
+.service-card {
+  @apply flex flex-col h-full p-6 md:p-8 rounded-[2rem] bg-white/60 border border-white/80 shadow-[0_12px_40px_rgba(15,47,89,0.05)] backdrop-blur-xl transition-all duration-500 sm:group-hover:bg-white/70 sm:group-hover:border-white sm:group-hover:shadow-[0_25px_50px_rgba(12,62,114,0.12)] sm:group-hover:-translate-y-1.5 relative overflow-hidden;
+}
+
+.service-card-icon {
+  @apply flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-white/80 shadow-sm transition-colors duration-500 group-hover:bg-[#0c3e72]/5 group-hover:border-[#0c3e72]/10;
+}

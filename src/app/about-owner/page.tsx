@@ -41,6 +41,7 @@ export default function AboutOwnerPage() {
                   alt="Katrina Turman, Founder and Owner"
                   width={400}
                   height={400}
+                  sizes="(max-width: 640px) 224px, 280px"
                   className="object-cover rounded-[2.5rem] border border-slate-200/50 shadow-xl"
                 />
               </div>
@@ -89,20 +90,20 @@ export default function AboutOwnerPage() {
               <h3 className="font-display text-2xl font-bold text-brand-ink mb-8 text-center">
                 Core Leadership Philosophy
               </h3>
-              <div className="grid gap-8 sm:grid-cols-2">
-                <div className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
+              <ul className="grid gap-8 sm:grid-cols-2">
+                <li className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
                   <h4 className="font-bold text-brand-ink text-lg mb-3">Nurse-Led Clinical Excellence</h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     Because Katrina is a Registered Nurse, Benevolence Home Services operates on a higher standard of care than typical non-medical agencies. Every caregiver is carefully vetted, trained, and supervised through a clinical lens, ensuring that subtle shifts in a client's health are noticed and addressed proactively before they escalate into emergencies.
                   </p>
-                </div>
-                <div className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
+                </li>
+                <li className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
                   <h4 className="font-bold text-brand-ink text-lg mb-3">Faith-Based Compassion</h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     Benevolence Home Services operates on a fundamentally faith-based framework, treating the act of caregiving not merely as a job, but as a high calling rooted in compassion, patience, and deep humility. Katrina ensures that every caregiver hired shares these core values, fostering a workplace culture of profound respect.
                   </p>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </PageShell>
         </section>

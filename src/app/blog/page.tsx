@@ -49,6 +49,15 @@ export default function BlogDirectoryPage() {
             </div>
           </ScrollReveal>
 
+          {/* Lead paragraph carrying this page's key phrase in a <strong>. */}
+          <ScrollReveal>
+            <p className="mx-auto -mt-10 mb-14 max-w-3xl text-center text-base leading-8 text-slate-700">
+              Every article below is written and reviewed by our{" "}
+              <strong>nurse-led senior care team in Westchester, IL</strong> — practical
+              guidance for families navigating dementia, recovery at home, and caregiver burnout.
+            </p>
+          </ScrollReveal>
+
           {/* Category Filter Menu */}
           <div className="relative z-20 max-w-5xl mx-auto mb-16 overflow-x-auto scrollbar-hide py-2 px-4 flex sm:flex-wrap items-center justify-start sm:justify-center gap-2 rounded-full lg:bg-white/40 lg:backdrop-blur-md lg:border lg:border-white/60 lg:p-2 lg:shadow-sm">
             {categories.map((cat) => {
@@ -70,9 +79,9 @@ export default function BlogDirectoryPage() {
           </div>
 
           {/* Cards Grid System */}
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <ul className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {filteredPosts.map((post) => (
-              <div key={post.slug} className="w-full min-h-[460px] h-auto group relative">
+              <li key={post.slug} className="w-full min-h-[460px] h-auto group relative list-none">
                 
                 {/* OPTIMIZATION FIX: Adjusted sr-only text string to prevent duplicate anchor text detection across similar loop items */}
                 <Link 
@@ -93,6 +102,7 @@ export default function BlogDirectoryPage() {
                         alt={`Cover image for ${post.title}`} 
                         width={613}   
                         height={409}
+                        sizes="(max-width: 768px) 92vw, (max-width: 1024px) 46vw, 380px"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         loading="lazy"
                       />
@@ -137,9 +147,9 @@ export default function BlogDirectoryPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </PageShell>
       </section>
     </>

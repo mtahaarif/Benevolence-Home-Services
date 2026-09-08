@@ -73,16 +73,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
+    // PERFORMANCE: the hand-written <head> preload of the raw /1.webp was
+    // removed. next/image already emits its own preload for the hero with the
+    // full imageSrcSet, so the manual tag only fetched a second, unoptimised
+    // copy of the same picture that no element ever rendered — pure contention
+    // against the real LCP resource.
     <html lang="en" className={`${quicksand.variable} h-full antialiased`}>
-      <head>
-        <link
-          rel="preload"
-          as="image"
-          href="/1.webp"
-          type="image/webp"
-          fetchPriority="high"
-        />
-      </head>
       <body className="min-h-full flex flex-col font-sans bg-white text-slate-900 relative selection:bg-[#0c3e72] selection:text-white">
         <div className="absolute top-0 left-0 right-0 h-1 bg-[color:var(--border)] z-50" />
         <SiteChrome>

@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
@@ -51,9 +49,10 @@ export default function ResourcesPage() {
           </ScrollReveal>
 
           {/* Modernized Resource Link Directory Layout */}
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-12">
+          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-12">
             {resources.map((resource, idx) => (
-              <ScrollReveal key={resource.label || idx}>
+              <li key={resource.label || idx}>
+              <ScrollReveal>
                 <a
                   href={resource.href}
                   target="_blank"
@@ -78,8 +77,9 @@ export default function ResourcesPage() {
                   </div>
                 </a>
               </ScrollReveal>
+              </li>
             ))}
-          </div>
+          </ul>
         </PageShell>
       </section>
 

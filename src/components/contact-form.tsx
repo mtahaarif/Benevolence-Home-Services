@@ -64,7 +64,11 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="brand-shadow bg-white p-8 sm:p-10 rounded-2xl w-full max-w-4xl mx-auto">
+    // method="post" is declarative only — submission goes through `handleSubmit`
+    // and never reaches the browser's default action. Without it the element
+    // defaults to GET, which reads to a crawler as a form that mints
+    // parameterised, indexable URLs out of whatever a visitor types.
+    <form method="post" onSubmit={handleSubmit} className="brand-shadow bg-white p-8 sm:p-10 rounded-2xl w-full max-w-4xl mx-auto">
       <p className="text-sm text-red-500 mb-6">* Required Information</p>
       
       <div className="grid gap-6">

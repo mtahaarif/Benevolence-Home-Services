@@ -16,6 +16,26 @@ function getServiceSlug(title: string): string {
     .replace(/\s+/g, "-");
 }
 
+/**
+ * Neighbouring towns in the same county, for the cross-link block below.
+ *
+ * Each of these 35 pages previously had exactly one internal backlink — the
+ * directory listing at /areas-we-serve — which left them reading as
+ * low-priority leaves with almost no link equity. Linking siblings to each
+ * other gives every town page a handful of contextual inbound links and is
+ * genuinely useful to a reader whose town is a few minutes down the road.
+ */
+function nearbyCities(current: CityData, limit = 6): CityData[] {
+  const all = Object.values(cityDirectory);
+  const sameCounty = all.filter(
+    (c) => c.county === current.county && c.slug !== current.slug,
+  );
+  const rest = all.filter(
+    (c) => c.county !== current.county && c.slug !== current.slug,
+  );
+  return [...sameCounty, ...rest].slice(0, limit);
+}
+
 // 35 Municipal Markets Across Cook, DuPage, Lake & Will Counties
 interface CityData {
   name: string;
@@ -27,7 +47,7 @@ interface CityData {
   desc: string;
 }
 
-const cityDirectory: Record<string, CityData> = {
+export const cityDirectory: Record<string, CityData> = {
   // Cook County
   "westchester-il": {
     name: "Westchester",
@@ -443,6 +463,18 @@ export default async function CityAreaPage({ params }: PageProps) {
               />
             </ScrollReveal>
 
+            {/* Lead paragraph. Carries the one phrase this page should rank for
+                in a <strong>, so the page has a genuine emphasis signal instead
+                of an undifferentiated wall of body copy. */}
+            <ScrollReveal>
+              <p className="max-w-3xl text-base leading-8 text-slate-700">
+                Families across {city.name} rely on Benevolence Home Services for{" "}
+                <strong>nurse-led, non-medical home care in {city.name}, IL</strong> —
+                personal care, companionship, and respite support delivered in the
+                comfort of home, with every care plan overseen by a Registered Nurse.
+              </p>
+            </ScrollReveal>
+
             {/* Municipal Specs Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
               <div className="bg-slate-50 border border-slate-200/60 p-6 rounded-2xl">
@@ -519,7 +551,7 @@ export default async function CityAreaPage({ params }: PageProps) {
                 Post-Hospital Discharge & Recovery
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                We coordinate safe transitions home following stays at medical centers serving {city.name}, including:
+                We coordinate <strong>safe transitions home after a hospital stay</strong>, working with the medical centers serving {city.name}, including:
               </p>
               <ul className="mt-4 space-y-2">
                 {city.hospitals.map((hospital, idx) => (
@@ -536,7 +568,7 @@ export default async function CityAreaPage({ params }: PageProps) {
                 Community & Social Outings
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Maintaining community connections is vital for emotional wellbeing. Our caregivers provide safe escort and assistance near local landmarks including:
+                Maintaining community connections is vital for emotional wellbeing. Our caregivers provide <strong>safe escort and companion assistance</strong> near local landmarks including:
               </p>
               <ul className="mt-4 space-y-2">
                 {city.landmarks.map((landmark, idx) => (
@@ -547,6 +579,38 @@ export default async function CityAreaPage({ params }: PageProps) {
                 ))}
               </ul>
             </div>
+          </div>
+        </PageShell>
+      </section>
+
+      {/* NEARBY COVERAGE CROSS-LINKS */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-slate-50/60 border-t border-slate-100">
+        <PageShell>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-display font-bold text-brand-ink sm:text-3xl">
+              {`Home Care Near ${city.name}`}
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+              {`We also serve neighbouring communities across ${city.county} and the wider Chicagoland area.`}
+            </p>
+            <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {nearbyCities(city).map((neighbour) => (
+                <li key={neighbour.slug}>
+                  <Link
+                    href={`/areas-we-serve/${neighbour.slug}`}
+                    className="flex h-full items-center justify-between gap-2 rounded-2xl border border-slate-200/70 bg-white px-4 py-3 text-xs font-semibold text-brand-ink transition hover:border-[#0c3e72]/40 hover:text-[#0c3e72] hover:shadow-sm sm:text-sm"
+                  >
+                    {`Home care in ${neighbour.name}, IL`}
+                    <span aria-hidden="true" className="text-slate-300">&rarr;</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-sm text-slate-600">
+              <Link href="/areas-we-serve" className="font-semibold text-[#0c3e72] underline underline-offset-4">
+                Browse every Chicagoland community we serve
+              </Link>
+            </p>
           </div>
         </PageShell>
       </section>

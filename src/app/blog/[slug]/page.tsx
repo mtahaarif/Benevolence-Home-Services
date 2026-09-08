@@ -242,7 +242,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               {/* Consultation Context Box Panel */}
               <div className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Resource Provider</h4>
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">Resource Provider</h3>
                   <p className="text-sm font-bold text-brand-ink uppercase tracking-wider">Benevolence Home Services</p>
                 </div>
                 {/* OPTIMIZATION FIX: Extended button text to 4 words and added an explicit title attribute */}

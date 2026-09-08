@@ -116,6 +116,14 @@ export default function CareersPage() {
             />
           </ScrollReveal>
 
+          {/* Lead paragraph carrying this page's key phrase in a <strong>. */}
+          <ScrollReveal>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-base leading-8 text-slate-700">
+              We are hiring <strong>caregivers and CNAs across Chicagoland</strong> — with
+              consistent assignments, real clinical backup, and a schedule built around your life.
+            </p>
+          </ScrollReveal>
+
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {benefitsFramework.map((item) => (
               <div 
