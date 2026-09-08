@@ -89,7 +89,7 @@ export function HeroSection({
   const isMultiple = Array.isArray(imageSrc) && imageSrc.length > 1;
   const images = Array.isArray(imageSrc) ? imageSrc : imageSrc ? [imageSrc] : [];
 
-  // 1. Run the rotation interval ONLY if multiple images are provided (Homepage)
+  // 1. Run rotation interval ONLY if multiple images exist (Homepage)
   useEffect(() => {
     if (!isMultiple) return;
 
@@ -103,11 +103,11 @@ export function HeroSection({
   return (
     <section className="w-full px-0 pt-0">
       <div className="relative w-full overflow-hidden bg-white">
-        <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
+        <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden">
 
-          {/* 2. FAST-PATH: Static Single Image for Inner Pages (Zero slider overhead) */}
+          {/* 2. FAST-PATH: Static Single Image for Inner Pages */}
           {!isMultiple && images.length === 1 && (
-            <div className="absolute inset-0 h-full w-full">
+            <div className="absolute inset-0 h-full w-full z-0">
               <Image
                 src={images[0]}
                 alt={imageAlt ?? title}
@@ -121,7 +121,7 @@ export function HeroSection({
             </div>
           )}
 
-          {/* 3. SLIDER PATH: Multi-image crossfade used exclusively on the Homepage */}
+          {/* 3. SLIDER PATH: Multi-image crossfade used on Homepage */}
           {isMultiple &&
             images.map((src, index) => {
               const isFirst = index === 0;
@@ -155,13 +155,13 @@ export function HeroSection({
               );
             })}
 
-          {/* Gradient overlay */}
-          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/75 via-white/70 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-0 pointer-events-none" />
+          {/* Gradient overlay placed strictly at z-[1] */}
+          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/75 via-white/70 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-[1] pointer-events-none" />
 
           <div className="absolute inset-x-0 top-0 h-[3px] bg-[color:var(--brand-orange)] z-10" />
           <div className="absolute inset-y-0 left-0 w-[5px] bg-[color:var(--brand-blue)] z-10" />
 
-          {/* Content container */}
+          {/* Content Box Container */}
           <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
             <div className="flex max-w-xl flex-col justify-center h-full py-2 sm:max-w-2xl lg:max-w-[40rem]">
               <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[color:var(--brand-blue)]">
