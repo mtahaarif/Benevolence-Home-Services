@@ -67,7 +67,6 @@ export function SectionHeading({
   );
 }
 
-
 export function HeroSection({
   eyebrow,
   title,
@@ -86,18 +85,18 @@ export function HeroSection({
   imageAlt?: string;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  
   // Normalize imageSrc to always be an array
   const images = Array.isArray(imageSrc) ? imageSrc : imageSrc ? [imageSrc] : [];
 
-  // Auto-advance slider every 5 seconds only when multiple images exist
+  // Auto-advance the slider every 5 seconds if there are multiple images
   useEffect(() => {
     if (images.length <= 1) return;
-
+    
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000);
-
+    
     return () => clearInterval(interval);
   }, [images.length]);
 
@@ -106,32 +105,24 @@ export function HeroSection({
       <div className="relative w-full overflow-hidden bg-white">
         <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
           
-          {/* BACKGROUND SLIDER WITH TARGETED LCP PRELOAD */}
-          {images.map((src, index) => {
-            const isFirst = index === 0;
-            const isActive = index === currentIndex;
-
-            return (
-              <div
-                key={src}
-                className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${
-                  isActive ? "opacity-100 z-0" : "opacity-0 -z-10"
-                }`}
-              >
-                <Image
-                  src={src}
-                  alt={`${imageAlt ?? title} - Hero Slide ${index + 1}`}
-                  fill
-                  // LCP OPTIMIZATION: Prioritize ONLY the initial slide in the viewport
-                  priority={isFirst}
-                  loading={isFirst ? "eager" : "lazy"}
-                  fetchPriority={isFirst ? "high" : "low"}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1920px"
-                  className="object-cover object-center"
-                />
-              </div>
-            );
-          })}
+          {/* BACKGROUND SLIDER WITH NEXT.JS OPTIMIZED IMAGES */}
+          {images.map((src, index) => (
+            <div
+              key={src}
+              className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${
+                index === currentIndex ? "opacity-100 z-0" : "opacity-0 -z-10"
+              }`}
+            >
+              <Image
+                src={src}
+                alt={`${imageAlt ?? title} - Hero Slide ${index + 1}`}
+                fill
+                priority={index === 0} // Load the first hero image immediately
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </div>
+          ))}
 
           {/* Smart Gradient Fade */}
           <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/75 via-white/70 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-0" />
