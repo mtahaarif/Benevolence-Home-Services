@@ -74,6 +74,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${quicksand.variable} h-full antialiased`}>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/1.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-white text-slate-900 relative selection:bg-[#0c3e72] selection:text-white">
         <div className="absolute top-0 left-0 right-0 h-1 bg-[color:var(--border)] z-50" />
         <SiteChrome>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
+import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 
 // OPTIMIZATION FIX: Removed "use client" to convert this to a high-performance Server Component.

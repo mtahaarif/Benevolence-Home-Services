@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
-import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
+import { HeroSection, PageShell} from "@/components/site-shell";
 import { contactDetails } from "@/data/site-content";
 import ScrollReveal from "@/components/scroll-reveal";
 

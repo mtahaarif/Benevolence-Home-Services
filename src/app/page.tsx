@@ -11,8 +11,6 @@ import {
 import ScrollReveal from "@/components/scroll-reveal";
 import {
   homeHighlights,
-  nurseLedBenefits,
-  traditionalCare,
 } from "@/data/site-content";
 
 export default function HomePage() {

@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image"; // Next.js Image component for Next-Gen optimization

@@ -1,7 +1,7 @@
-"use client"; // MUST be at the very top of site-shell.tsx
+"use client";
 
 import Link from "next/link";
-import Image from "next/image"; // Upgraded to native Next.js Image component
+import Image from "next/image";
 import { SiteNav } from "@/components/site-nav";
 import { contactDetails, navItems, socialLinks } from "@/data/site-content";
 import { useState, useEffect } from "react";
@@ -89,7 +89,7 @@ export function HeroSection({
   const isMultiple = Array.isArray(imageSrc) && imageSrc.length > 1;
   const images = Array.isArray(imageSrc) ? imageSrc : imageSrc ? [imageSrc] : [];
 
-  // 1. Run rotation interval ONLY if multiple images exist (Homepage)
+  // Run rotation interval ONLY if multiple images exist (Homepage slider)
   useEffect(() => {
     if (!isMultiple) return;
 
@@ -105,7 +105,7 @@ export function HeroSection({
       <div className="relative w-full overflow-hidden bg-white">
         <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden">
 
-          {/* 2. FAST-PATH: Static Single Image for Inner Pages */}
+          {/* 1. FAST-PATH: Static Single Image for Inner Pages */}
           {!isMultiple && images.length === 1 && (
             <div className="absolute inset-0 h-full w-full z-0">
               <Image
@@ -121,48 +121,61 @@ export function HeroSection({
             </div>
           )}
 
-          {/* 3. SLIDER PATH: Multi-image crossfade used on Homepage */}
-          {isMultiple &&
-            images.map((src, index) => {
-              const isFirst = index === 0;
-              const isActive = index === currentIndex;
+          {/* 2. OPTIMIZED SLIDER PATH (Used on Homepage) */}
+          {isMultiple && (
+            <>
+              {/* SLIDE 1: Rendered as static base element for instant Frame-0 LCP paint */}
+              <div className="absolute inset-0 h-full w-full z-0">
+                <Image
+                  src={images[0]}
+                  alt={`${imageAlt ?? title} - Slide 1`}
+                  fill
+                  priority
+                  loading="eager"
+                  fetchPriority="high"
+                  quality={75}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
+                  className="object-cover object-center"
+                />
+              </div>
 
-              return (
-                <div
-                  key={src}
-                  className={`absolute inset-0 h-full w-full ${
-                    isFirst
-                      ? isActive
-                        ? "opacity-100 z-0"
-                        : "opacity-0 -z-10 transition-opacity duration-1000 ease-in-out"
-                      : `transition-opacity duration-1000 ease-in-out ${
-                          isActive ? "opacity-100 z-0" : "opacity-0 -z-10"
-                        }`
-                  }`}
-                >
-                  <Image
-                    src={src}
-                    alt={`${imageAlt ?? title} - Slide ${index + 1}`}
-                    fill
-                    priority={isFirst}
-                    loading={isFirst ? "eager" : "lazy"}
-                    fetchPriority={isFirst ? "high" : "low"}
-                    quality={75}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
-                    className="object-cover object-center"
-                  />
-                </div>
-              );
-            })}
+              {/* SLIDES 2 & 3: Mount as lazy crossfade overlays */}
+              {images.slice(1).map((src, index) => {
+                const slideIndex = index + 1;
+                const isActive = slideIndex === currentIndex;
 
-          {/* Gradient overlay placed strictly at z-[1] */}
-          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/75 via-white/70 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-[1] pointer-events-none" />
+                return (
+                  <div
+                    key={src}
+                    className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${
+                      isActive ? "opacity-100 z-10" : "opacity-0 -z-10"
+                    }`}
+                  >
+                    <Image
+                      src={src}
+                      alt={`${imageAlt ?? title} - Slide ${slideIndex + 1}`}
+                      fill
+                      loading="lazy"
+                      fetchPriority="low"
+                      quality={75}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
+                      className="object-cover object-center"
+                    />
+                  </div>
+                );
+              })}
+            </>
+          )}
 
-          <div className="absolute inset-x-0 top-0 h-[3px] bg-[color:var(--brand-orange)] z-10" />
-          <div className="absolute inset-y-0 left-0 w-[5px] bg-[color:var(--brand-blue)] z-10" />
+          {/* Gradient Overlay placed above images (z-20) but below content */}
+          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/75 via-white/70 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-20 pointer-events-none" />
+
+          {/* Accent Borders */}
+          <div className="absolute inset-x-0 top-0 h-[3px] bg-[color:var(--brand-orange)] z-30" />
+          <div className="absolute inset-y-0 left-0 w-[5px] bg-[color:var(--brand-blue)] z-30" />
 
           {/* Content Box Container */}
-          <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+          <div className="relative z-30 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
             <div className="flex max-w-xl flex-col justify-center h-full py-2 sm:max-w-2xl lg:max-w-[40rem]">
               <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[color:var(--brand-blue)]">
                 {eyebrow}
@@ -172,7 +185,7 @@ export function HeroSection({
                 {title}
               </h1>
 
-              {/* Action buttons */}
+              {/* Action Elements Cluster */}
               <div className="mt-3 flex flex-wrap gap-2">
                 <Link
                   href={primaryAction.href}
@@ -193,7 +206,7 @@ export function HeroSection({
                 ) : null}
               </div>
 
-              {/* Facts badges */}
+              {/* Facts Badges */}
               {facts.length ? (
                 <div className="mt-3 hidden @[340px]/hero:flex flex-wrap gap-1.5">
                   {facts.map((fact) => (
@@ -292,7 +305,7 @@ function SiteFooter() {
   return (
     <footer className="mt-16 bg-[color:var(--brand-ink)] text-white">
       <PageShell>
-        {/* Top Section: Smart 4-Column Grid */}
+        {/* Top Section: 4-Column Grid */}
         <div className="grid gap-10 py-10 md:grid-cols-2 lg:grid-cols-4 lg:py-12">
           
           {/* Column 1: Get in Touch */}
@@ -310,7 +323,7 @@ function SiteFooter() {
             </p>
           </div>
 
-          {/* Column 2: Reach Us & Location (Wrapped in Semantic <address>) */}
+          {/* Column 2: Reach Us & Location */}
           <address className="not-italic space-y-6 lg:mt-7">
             <div>
               <h4 className="text-base font-semibold text-white">Call or Message Us</h4>
@@ -343,7 +356,7 @@ function SiteFooter() {
             </div>
           </nav>
 
-          {/* Column 4: Logo Box (Differentiated Alt Tag to prevent duplicate alt penalties) */}
+          {/* Column 4: Footer Logo Container */}
           <div className="flex items-start lg:justify-end lg:mt-7">
             <div className="bg-white p-5 rounded-2xl flex flex-col items-center justify-center brand-shadow w-full max-w-[220px]">
               <Image
@@ -364,7 +377,7 @@ function SiteFooter() {
         <PageShell>
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             
-            {/* Copyright & Legal Text */}
+            {/* Copyright & Legal */}
             <div className="text-[11px] leading-relaxed tracking-wider text-white/70">
               <p>© Copyright 2026 | Privacy Notice </p>
               <p className="mt-0.5">
@@ -374,7 +387,7 @@ function SiteFooter() {
               </p>
             </div>
 
-            {/* Social Share Cluster */}
+            {/* Social Share Icons */}
             <div className="flex items-center gap-4">
               <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">
                 Like, Share, or Comment:
@@ -394,7 +407,7 @@ function SiteFooter() {
                       key={item.href}
                       href={item.href}
                       target="_blank"
-                      rel="noopener noreferrer" // FIXED: Added noopener for security best practice
+                      rel="noopener noreferrer"
                       aria-label={item.label}
                       className="flex h-9 w-9 items-center justify-center rounded-full border border-white/30 text-white transition-all duration-300 hover:bg-white hover:text-[color:var(--brand-ink)] hover:scale-110"
                     >

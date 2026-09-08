@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
+import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import { resources } from "@/data/site-content";
 
