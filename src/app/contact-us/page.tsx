@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact Our Home Care Team | Benevolence Home Services",
     description: "Contact our home care team to schedule your free in-home care consultation.",
-    url: "https://benevolencehomeservices.com/contact-us",
+    url: "https://www.benevolencehomeservices.com/contact-us",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",

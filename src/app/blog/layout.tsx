@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: {
     // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
     // detected by the SEO crawler and prevent the canonical mismatch error.
-    canonical: 'https://benevolencehomeservices.com/blog',
+    canonical: 'https://www.benevolencehomeservices.com/blog',
   },
   
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Senior Care & Wellness Blog | Benevolence Home Services",
     description: "Explore The Benevolence Senior Care & Wellness Blog for expert articles and local elder care guidance.",
-    url: "https://benevolencehomeservices.com/blog",
+    url: "https://www.benevolencehomeservices.com/blog",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",

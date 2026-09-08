@@ -10,9 +10,8 @@ export const metadata: Metadata = {
   description: 'Benevolence Home Services provides light housekeeping and senior homemaker services in Westchester, IL, ensuring a safe and clean environment.',
   
   alternates: {
-    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
     // detected by the SEO crawler and prevent the canonical mismatch error.
-    canonical: 'https://benevolencehomeservices.com/services/light-housekeeping',
+    canonical: 'https://www.benevolencehomeservices.com/services/light-housekeeping',
   },
   
   // OPTIMIZATION: High-value local keyword matrix specifically targeting homemaker intent
@@ -28,8 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Light Housekeeping Services | Benevolence Home Services",
     description: "Benevolence Home Services provides light housekeeping and senior homemaker services in Westchester, IL, ensuring a safe and clean environment.",
-    // OPTIMIZATION FIX: Removed "www." to match canonical structure.
-    url: "https://benevolencehomeservices.com/services/light-housekeeping",
+    url: "https://www.benevolencehomeservices.com/services/light-housekeeping",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",

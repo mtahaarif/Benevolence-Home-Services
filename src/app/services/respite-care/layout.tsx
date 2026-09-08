@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: {
     // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
     // detected by the SEO crawler and prevent the canonical mismatch error.
-    canonical: 'https://benevolencehomeservices.com/services/respite-care',
+    canonical: 'https://www.benevolencehomeservices.com/services/respite-care',
   },
   
   // OPTIMIZATION: High-value local keyword matrix specifically targeting respite and caregiver relief intent
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Professional Respite Care | Benevolence Home Services",
     description: "Discover professional respite care services in Westchester, IL. We provide temporary relief and compassionate support for family caregivers.",
     // OPTIMIZATION FIX: Removed "www." to match canonical structure.
-    url: "https://benevolencehomeservices.com/services/respite-care",
+    url: "https://www.benevolencehomeservices.com/services/respite-care",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",

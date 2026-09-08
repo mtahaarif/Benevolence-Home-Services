@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: {
     // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
     // detected by the SEO crawler and prevent the canonical mismatch error.
-    canonical: 'https://benevolencehomeservices.com/services/specialized-support',
+    canonical: 'https://www.benevolencehomeservices.com/services/specialized-support',
   },
   
   // OPTIMIZATION: Keyword matrix targeting complex care intent in local counties
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: "Alzheimer's & Dementia Care | Benevolence Home Services",
     description: "Expert Alzheimer's, dementia, and post-surgery care in Westchester, IL. Compassionate in-home support for complex health needs.",
     // OPTIMIZATION FIX: Removed "www." to match canonical structure.
-    url: "https://benevolencehomeservices.com/services/specialized-support",
+    url: "https://www.benevolencehomeservices.com/services/specialized-support",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",

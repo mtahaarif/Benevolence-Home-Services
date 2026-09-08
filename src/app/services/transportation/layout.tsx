@@ -9,9 +9,8 @@ export const metadata: Metadata = {
   description: "Discover safe and reliable senior transportation and companion travel support in Westchester, IL. We provide door-to-door mobility assistance.",
   
   alternates: {
-    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
     // detected by the SEO crawler and prevent the canonical mismatch error.
-    canonical: 'https://benevolencehomeservices.com/services/transportation',
+    canonical: 'https://www.benevolencehomeservices.com/services/transportation',
   },
   
   // OPTIMIZATION: Keyword matrix targeting mobility and transportation care intent in local counties
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
     title: "Senior Transportation & Travel | Benevolence Home Services",
     description: "Discover safe and reliable senior transportation and companion travel support in Westchester, IL.",
     // OPTIMIZATION FIX: Removed "www." to match canonical structure.
-    url: "https://benevolencehomeservices.com/services/transportation",
+    url: "https://www.benevolencehomeservices.com/services/transportation",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",

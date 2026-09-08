@@ -29,12 +29,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: post.metaDescription,
     keywords: post.keywords,
     alternates: {
-      canonical: `https://benevolencehomeservices.com/blog/${post.slug}`,
+      canonical: `https://www.benevolencehomeservices.com/blog/${post.slug}`,
     },
     openGraph: {
       title: post.metaTitle,
       description: post.metaDescription,
-      url: `https://benevolencehomeservices.com/blog/${post.slug}`,
+      url: `https://www.benevolencehomeservices.com/blog/${post.slug}`,
       images: [{ url: post.image }],
       type: "article",
       publishedTime: new Date(post.date).toISOString(),
@@ -293,19 +293,19 @@ export default async function BlogPostPage({ params }: PageProps) {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": post.title,
-            "image": [`https://benevolencehomeservices.com${post.image}`],
+            "image": [`https://www.benevolencehomeservices.com${post.image}`],
             "datePublished": new Date(post.date).toISOString().split('T')[0],
             "author": [{
               "@type": "Person",
               "name": post.author,
-              "url": "https://benevolencehomeservices.com/about-us"
+              "url": "https://www.benevolencehomeservices.com/about-us"
             }],
             "publisher": {
               "@type": "HomeAndConstructionBusiness",
               "name": "Benevolence Home Services",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://benevolencehomeservices.com/logo.png"
+                "url": "https://www.benevolencehomeservices.com/logo.png"
               }
             },
             "description": post.metaDescription

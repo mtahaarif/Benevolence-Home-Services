@@ -8,9 +8,8 @@ export const metadata: Metadata = {
   description: 'Join our growing care team. Explore rewarding home care careers and caregiver jobs at Benevolence Home Services in Westchester and Chicagoland.',
   
   alternates: {
-    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
     // detected by the SEO crawler and prevent the canonical mismatch error.
-    canonical: 'https://benevolencehomeservices.com/careers',
+    canonical: 'https://www.benevolencehomeservices.com/careers',
   },
   
   keywords: [
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Home Care Careers | Benevolence Home Services",
     description: "Join our growing care team. Explore rewarding home care careers and caregiver jobs in Westchester and Chicagoland.",
-    url: "https://benevolencehomeservices.com/careers",
+    url: "https://www.benevolencehomeservices.com/careers",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",

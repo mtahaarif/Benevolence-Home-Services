@@ -10,9 +10,8 @@ export const metadata: Metadata = {
   description: 'Ensure safety and consistency with in-home medication reminders for seniors in Westchester, IL. Our caregivers provide gentle, reliable daily prompts.',
   
   alternates: {
-    // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
     // detected by the SEO crawler and prevent the canonical mismatch error.
-    canonical: 'https://benevolencehomeservices.com/services/medication-reminders',
+    canonical: 'https://www.benevolencehomeservices.com/services/medication-reminders',
   },
   
   // OPTIMIZATION: Keyword matrix targeting medication adherence intent in local counties
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
     title: "In-Home Medication Reminders | Benevolence Home Services",
     description: "Ensure safety and consistency with in-home medication reminders for seniors in Westchester, IL.",
     // OPTIMIZATION FIX: Removed "www." to match canonical structure.
-    url: "https://benevolencehomeservices.com/services/medication-reminders",
+    url: "https://www.benevolencehomeservices.com/services/medication-reminders",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",

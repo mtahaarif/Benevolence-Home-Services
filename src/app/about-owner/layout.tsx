@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   
   alternates: {
     // OPTIMIZATION FIX: Resolves the severe Canonical mismatch error where the page was pointing back to the homepage root.
-    canonical: 'https://benevolencehomeservices.com/about-owner',
+    canonical: 'https://www.benevolencehomeservices.com/about-owner',
   },
   
   keywords: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Get to Know the Owner | Benevolence Home Services",
     description: "Get to know Katrina Turman, the visionary founder of Benevolence Home Services.",
-    url: "https://benevolencehomeservices.com/about-owner",
+    url: "https://www.benevolencehomeservices.com/about-owner",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "profile",

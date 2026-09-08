@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: {
     // OPTIMIZATION FIX: Removed "www." to match the root domain configuration 
     // detected by the SEO crawler and prevent the canonical mismatch error.
-    canonical: 'https://benevolencehomeservices.com/resources',
+    canonical: 'https://www.benevolencehomeservices.com/resources',
   },
   
   keywords: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Illinois Senior Care Resources | Benevolence Home Services",
     description: "Explore our curated list of Illinois senior care resources, planning guides, and public health portals.",
-    url: "https://benevolencehomeservices.com/resources",
+    url: "https://www.benevolencehomeservices.com/resources",
     siteName: "Benevolence Home Services",
     locale: "en_US",
     type: "website",
