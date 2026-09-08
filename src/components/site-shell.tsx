@@ -86,68 +86,82 @@ export function HeroSection({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Normalize imageSrc to always be an array
+  const isMultiple = Array.isArray(imageSrc) && imageSrc.length > 1;
   const images = Array.isArray(imageSrc) ? imageSrc : imageSrc ? [imageSrc] : [];
 
-  // Delay slider rotation so the main thread remains clear during first load
+  // 1. Run the rotation interval ONLY if multiple images are provided (Homepage)
   useEffect(() => {
-    if (images.length <= 1) return;
+    if (!isMultiple) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [isMultiple, images.length]);
 
   return (
     <section className="w-full px-0 pt-0">
       <div className="relative w-full overflow-hidden bg-white">
         <div className="@container/hero relative h-[calc(30svh+50px)] min-h-[470px] w-full overflow-hidden sm:h-[calc(30svh+50px)] lg:h-[calc(30svh+50px)]">
 
-          {/* BACKGROUND SLIDER: ZERO-DELAY LCP RENDERING */}
-          {images.map((src, index) => {
-            const isFirst = index === 0;
-            const isActive = index === currentIndex;
+          {/* 2. FAST-PATH: Static Single Image for Inner Pages (Zero slider overhead) */}
+          {!isMultiple && images.length === 1 && (
+            <div className="absolute inset-0 h-full w-full">
+              <Image
+                src={images[0]}
+                alt={imageAlt ?? title}
+                fill
+                priority
+                fetchPriority="high"
+                quality={75}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
+                className="object-cover object-center"
+              />
+            </div>
+          )}
 
-            return (
-              <div
-                key={src}
-                className={`absolute inset-0 h-full w-full ${
-                  isFirst
-                    ? isActive
-                      ? "opacity-100 z-0"
-                      : "opacity-0 -z-10 transition-opacity duration-1000 ease-in-out"
-                    : `transition-opacity duration-1000 ease-in-out ${
-                        isActive ? "opacity-100 z-0" : "opacity-0 -z-10"
-                      }`
-                }`}
-              >
-                <Image
-                  src={src}
-                  alt={`${imageAlt ?? title} - Slide ${index + 1}`}
-                  fill
-                  // 1. Prioritize ONLY the 1st image so it becomes the fast LCP winner
-                  priority={isFirst}
-                  loading={isFirst ? "eager" : "lazy"}
-                  fetchPriority={isFirst ? "high" : "low"}
-                  // 2. Reduce payload weight: 80% quality drops file size by ~40% with zero visible degradation
-                  quality={80}
-                  // 3. Accurate responsive sizes prevents loading oversized desktop image variants on mobile
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
-                  className="object-cover object-center"
-                />
-              </div>
-            );
-          })}
+          {/* 3. SLIDER PATH: Multi-image crossfade used exclusively on the Homepage */}
+          {isMultiple &&
+            images.map((src, index) => {
+              const isFirst = index === 0;
+              const isActive = index === currentIndex;
 
-          {/* Smart Gradient Fade */}
+              return (
+                <div
+                  key={src}
+                  className={`absolute inset-0 h-full w-full ${
+                    isFirst
+                      ? isActive
+                        ? "opacity-100 z-0"
+                        : "opacity-0 -z-10 transition-opacity duration-1000 ease-in-out"
+                      : `transition-opacity duration-1000 ease-in-out ${
+                          isActive ? "opacity-100 z-0" : "opacity-0 -z-10"
+                        }`
+                  }`}
+                >
+                  <Image
+                    src={src}
+                    alt={`${imageAlt ?? title} - Slide ${index + 1}`}
+                    fill
+                    priority={isFirst}
+                    loading={isFirst ? "eager" : "lazy"}
+                    fetchPriority={isFirst ? "high" : "low"}
+                    quality={75}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
+                    className="object-cover object-center"
+                  />
+                </div>
+              );
+            })}
+
+          {/* Gradient overlay */}
           <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-white via-white/75 via-white/70 to-transparent sm:w-[85%] md:w-[70%] lg:w-[60%] z-0 pointer-events-none" />
 
           <div className="absolute inset-x-0 top-0 h-[3px] bg-[color:var(--brand-orange)] z-10" />
           <div className="absolute inset-y-0 left-0 w-[5px] bg-[color:var(--brand-blue)] z-10" />
 
-          {/* Content Box Container */}
+          {/* Content container */}
           <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
             <div className="flex max-w-xl flex-col justify-center h-full py-2 sm:max-w-2xl lg:max-w-[40rem]">
               <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[color:var(--brand-blue)]">
@@ -158,7 +172,7 @@ export function HeroSection({
                 {title}
               </h1>
 
-              {/* Action Elements Cluster */}
+              {/* Action buttons */}
               <div className="mt-3 flex flex-wrap gap-2">
                 <Link
                   href={primaryAction.href}
@@ -179,7 +193,7 @@ export function HeroSection({
                 ) : null}
               </div>
 
-              {/* Facts Badges */}
+              {/* Facts badges */}
               {facts.length ? (
                 <div className="mt-3 hidden @[340px]/hero:flex flex-wrap gap-1.5">
                   {facts.map((fact) => (
