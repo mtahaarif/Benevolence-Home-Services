@@ -19,7 +19,7 @@ import Image from "next/image";
 import { SiteNav } from "@/components/site-nav";
 import HeroSlideshow from "@/components/hero-slideshow";
 import { SocialIcon } from "@/components/social-icons";
-import { contactDetails, footerLinks, socialLinks } from "@/data/site-content";
+import { contactDetails, footerLinks, priorityAreas, socialLinks } from "@/data/site-content";
 
 type ChromeProps = {
   children: React.ReactNode;
@@ -362,6 +362,30 @@ function SiteFooter() {
 
         </div>
       </PageShell>
+
+      {/* Service-area row.
+          A service-area business earns local relevance partly through internal
+          links into its town pages; these had one inbound link each. Kept to
+          the priority markets and clearly labelled, rather than dumping all 38
+          towns into the footer, which reads as link stuffing. */}
+      <div className="border-t border-white/10">
+        <PageShell>
+          <div className="py-6">
+            <h4 className="text-[11px] font-semibold uppercase tracking-widest text-[color:var(--brand-gold)]">
+              Home Care Near You
+            </h4>
+            <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/70">
+              {priorityAreas.map((area) => (
+                <li key={area.slug}>
+                  <Link href={`/areas-we-serve/${area.slug}`} className="footer-link">
+                    {`Home care in ${area.city}, IL`}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </PageShell>
+      </div>
 
       {/* Bottom Legal & Social Bar */}
       <div className="border-t border-white/15 bg-[color:var(--brand-ink)] py-5">

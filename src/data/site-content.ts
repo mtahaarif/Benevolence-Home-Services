@@ -96,6 +96,33 @@ export const navItems: NavItem[] = [
   },
 ];
 
+/**
+ * Priority local markets.
+ *
+ * The business ranks first in Westchester (where the office is) but nowhere
+ * else, and the town pages were reachable only from /areas-we-serve — one
+ * internal link each, which tells Google they are low-priority leaves. These
+ * are the markets worth spending internal link equity on, surfaced from the
+ * homepage and the footer so every page passes authority into them.
+ *
+ * Anchors are full descriptive phrases rather than bare town names so each
+ * link states what the destination is about.
+ */
+export const priorityAreas = [
+  { city: "Westchester", slug: "westchester-il", note: "Our headquarters" },
+  { city: "Hillside", slug: "hillside-il", note: "Minutes from our office" },
+  { city: "Oak Brook", slug: "oak-brook-il", note: "DuPage County" },
+  { city: "Hinsdale", slug: "hinsdale-il", note: "DuPage County" },
+  { city: "Burr Ridge", slug: "burr-ridge-il", note: "DuPage County" },
+  { city: "Elmhurst", slug: "elmhurst-il", note: "DuPage County" },
+  { city: "La Grange", slug: "la-grange-il", note: "Cook County" },
+  { city: "Western Springs", slug: "western-springs-il", note: "Cook County" },
+  { city: "Oak Park", slug: "oak-park-il", note: "Cook County" },
+  { city: "River Forest", slug: "river-forest-il", note: "Cook County" },
+  { city: "Downers Grove", slug: "downers-grove-il", note: "DuPage County" },
+  { city: "Lombard", slug: "lombard-il", note: "DuPage County" },
+] as const;
+
 export const contactDetails = {
   phone: "708-304-0296",
   phoneHref: "tel:7083040296",

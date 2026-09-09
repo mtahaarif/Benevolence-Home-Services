@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
+import FaqAccordion, { type FAQItem } from "@/components/faq-accordion";
 import { homeCareServices, contactDetails } from "@/data/site-content";
 
 // Helper to map service titles directly to your existing sub-routes
@@ -148,6 +149,16 @@ export const cityDirectory: Record<string, CityData> = {
     landmarks: ["Bahá'í House of Worship", "Gillson Park"],
     desc: "Discreet in-home elder care, mobility guidance, and personalized meal support for Wilmette families."
   },
+  "hillside-il": {
+    name: "Hillside",
+    county: "Cook County",
+    slug: "hillside-il",
+    zipCodes: "60162",
+    hospitals: ["Loyola University Medical Center", "Edward Hines Jr. VA Hospital"],
+    landmarks: ["Mount Carmel Cemetery", "Hillside Town Center"],
+    desc: "Minutes from our Westchester headquarters, Hillside families receive fast-response nurse-led personal care, companionship, and post-hospital recovery support."
+  },
+
   "chicago-il": {
     name: "Chicago",
     county: "Cook County",
@@ -257,6 +268,25 @@ export const cityDirectory: Record<string, CityData> = {
     hospitals: ["Edward Hospital", "Advocate Good Samaritan Hospital"],
     landmarks: ["The Morton Arboretum", "Community Park"],
     desc: "Warm companion care, medication reminders, and flexible day-to-day senior living assistance across Lisle."
+  },
+
+  "hinsdale-il": {
+    name: "Hinsdale",
+    county: "DuPage County",
+    slug: "hinsdale-il",
+    zipCodes: "60521, 60522",
+    hospitals: ["UChicago Medicine AdventHealth Hinsdale", "Advocate Good Samaritan Hospital"],
+    landmarks: ["Katherine Legge Memorial Park", "Robert Crown Center"],
+    desc: "Discreet private-duty caregiving, dementia support, and recovery care at home for Hinsdale seniors, coordinated closely with local hospital discharge teams."
+  },
+  "burr-ridge-il": {
+    name: "Burr Ridge",
+    county: "DuPage County",
+    slug: "burr-ridge-il",
+    zipCodes: "60527",
+    hospitals: ["UChicago Medicine AdventHealth Hinsdale", "Advocate Good Samaritan Hospital"],
+    landmarks: ["Burr Ridge Village Center", "Pleasant Dale Park"],
+    desc: "Concierge-level in-home senior care, overnight caregiver coverage, and respite relief for Burr Ridge families across the 60527 corridor."
   },
 
   // Lake County
@@ -383,6 +413,47 @@ export async function generateStaticParams() {
   return Object.keys(cityDirectory).map((slug) => ({ slug }));
 }
 
+/**
+ * Per-city FAQs.
+ *
+ * These pages were 565 words of near-identical boilerplate with only the town
+ * name swapped in — the pattern Google treats as doorway content, and the
+ * reason none of them rank outside Westchester. Every answer here is built
+ * from that city's own record (its county, ZIPs, hospitals and neighbouring
+ * towns), so each page carries genuinely distinct local detail rather than
+ * spun copy, and it roughly triples the indexable text on the page.
+ *
+ * The claims themselves are the ones the site already makes on /contact-us —
+ * 24-48 hour starts, free no-obligation assessment, RN-led intake, 24/7
+ * availability — so nothing new is being promised here.
+ */
+function cityFaqs(city: CityData, neighbours: CityData[]): FAQItem[] {
+  const nearby = neighbours.slice(0, 3).map((c) => c.name).join(", ");
+
+  return [
+    {
+      question: `How quickly can home care start in ${city.name}?`,
+      answer: `In most cases care in ${city.name} can begin within 24 to 48 hours of your in-home consultation. Because our office is in Westchester, ${city.name} sits inside our core ${city.county} service radius, so we can usually schedule an assessment within a day — and sooner when a hospital or rehab discharge is already scheduled. Call ${contactDetails.phone} and we will tell you honestly what we can staff and when.`,
+    },
+    {
+      question: `Which ${city.name} ZIP codes do you cover?`,
+      answer: `We serve ${city.zipCodes.includes(",") ? `ZIP codes ${city.zipCodes}` : `ZIP code ${city.zipCodes}`} in ${city.name}, along with the surrounding ${city.county} communities of ${nearby}. Caregivers are matched to families by travel distance so the same small team returns to your home rather than a different face each visit, which matters enormously for clients living with memory loss.`,
+    },
+    {
+      question: `Do you help with hospital discharges in ${city.name}?`,
+      answer: `Yes. We regularly coordinate the return home for ${city.name} residents discharged from ${city.hospitals.join(" and ")}. A Registered Nurse reviews the discharge instructions, sets up the home for safe mobility, arranges medication reminders, and stays in contact through the first weeks of recovery — the window when avoidable readmissions most often happen.`,
+    },
+    {
+      question: `What does in-home care in ${city.name} cost?`,
+      answer: `Cost depends on how many hours you need and whether care is hourly, overnight, or live-in, so we quote after the assessment rather than before it. The in-home consultation itself is free and carries no obligation. We provide non-medical home care, which is typically paid privately or through long-term care insurance; we are glad to walk ${city.name} families through what their policy covers.`,
+    },
+    {
+      question: `Who comes to the home for the ${city.name} assessment?`,
+      answer: `A Care Coordinator or our supervising Registered Nurse conducts every assessment personally. That is the difference between nurse-led care and a scheduler-led agency: a clinician looks at fall risks, medication routines, and early warning signs in the home itself, then builds the care plan and keeps adjusting it as needs change. Caregivers are available across ${city.name} 24 hours a day, including weekends and holidays.`,
+    },
+  ];
+}
+
 // 2. Programmatic SEO Metadata per Location (Maximized < 60 chars)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
@@ -390,21 +461,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!city) return {};
 
-  // Formats to: "In-Home Senior Care in [City], IL | Benevolence" (52-58 chars)
-  // Replaces the generic ~25 char title and prevents snippet truncation
-  const fullTitle = `In-Home Senior Care in ${city.name}, IL | Benevolence`;
+  // Leads with the exact phrase these pages are meant to win — "home care in
+  // <city>" — rather than the near-miss "In-Home Senior Care in <city>".
+  // Stays inside ~60 chars for every town in the directory.
+  const fullTitle = `Home Care in ${city.name}, IL | Benevolence Home Services`;
 
   return {
     title: {
       absolute: fullTitle,
     },
     // 155 characters: Captures local intent while staying below the 160-char / 1000px limit
-    description: `Compassionate, nurse-led non-medical home care, companion care, and respite services for seniors and families in ${city.name}, IL. Call ${contactDetails.phone}.`,
+    // Kept under 160 chars for every town so the phone number is never
+    // truncated out of the snippet — the longest name in the directory
+    // (Western Springs) lands at ~156.
+    description: `Nurse-led home care in ${city.name}, IL — personal care, companionship and respite across ${city.county}. Free assessment. Call ${contactDetails.phone}.`,
     alternates: {
       canonical: `/areas-we-serve/${city.slug}`,
     },
     openGraph: {
-      title: `${fullTitle} Home Services`,
+      title: fullTitle,
       description: `Nurse-led in-home elderly care, dementia support, and personal care serving families in ${city.name}, ${city.county}.`,
       url: `https://www.benevolencehomeservices.com/areas-we-serve/${city.slug}`,
       siteName: "Benevolence Home Services",
@@ -421,7 +496,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${fullTitle} Home Services`,
+      title: fullTitle,
       description: `Nurse-led in-home elderly care and caregiver support in ${city.name}, IL.`,
       images: ["/nh-2411535922U62t38i.webp"],
     },
@@ -437,13 +512,16 @@ export default async function CityAreaPage({ params }: PageProps) {
     notFound();
   }
 
+  const neighbours = nearbyCities(city);
+  const faqs = cityFaqs(city, neighbours);
+
   return (
     <>
       {/* HERO SECTION */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow={`Home Care in ${city.county}`}
-          title={`Compassionate In-Home Care in ${city.name}, IL`}
+          eyebrow={`Nurse-Led Care Across ${city.county}`}
+          title={`Home Care in ${city.name}, IL`}
           primaryAction={{ label: "Request Care Assessment", href: "/contact-us" }}
           secondaryAction={{ label: `Call ${contactDetails.phone}`, href: contactDetails.phoneHref }}
           imageSrc="/nh-2411535922U62t38i.webp"
@@ -594,7 +672,7 @@ export default async function CityAreaPage({ params }: PageProps) {
               {`We also serve neighbouring communities across ${city.county} and the wider Chicagoland area.`}
             </p>
             <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {nearbyCities(city).map((neighbour) => (
+              {neighbours.map((neighbour) => (
                 <li key={neighbour.slug}>
                   <Link
                     href={`/areas-we-serve/${neighbour.slug}`}
@@ -612,6 +690,20 @@ export default async function CityAreaPage({ params }: PageProps) {
               </Link>
             </p>
           </div>
+        </PageShell>
+      </section>
+
+      {/* LOCAL FAQ — the substantive, city-specific body content */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-white border-t border-slate-100">
+        <PageShell>
+          <ScrollReveal>
+            <SectionHeading
+              centered
+              eyebrow={`${city.name}, Illinois`}
+              title={`Home Care in ${city.name}: Common Questions`}
+            />
+          </ScrollReveal>
+          <FaqAccordion faqs={faqs} />
         </PageShell>
       </section>
 
@@ -643,18 +735,37 @@ export default async function CityAreaPage({ params }: PageProps) {
         </PageShell>
       </section>
 
-      {/* PROGRAMMATIC LOCAL BUSINESS SCHEMA */}
+      {/*
+        STRUCTURED DATA
+
+        Three graphs, each doing a distinct job:
+
+        1. HomeHealthCare — the business itself. The previous version named
+           each page "Benevolence Home Services - <City> Care Team" with the
+           Westchester address attached, which asserts a branch office that
+           does not exist. Google treats fabricated locations as spam, so this
+           now states the single real address and expresses the town through
+           `areaServed` instead, which is the correct way to describe a
+           service-area business.
+        2. FAQPage — makes the city Q&A eligible for FAQ rich results.
+        3. BreadcrumbList — gives the hierarchy a chance to render in the SERP
+           instead of a bare URL.
+      */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "HomeHealthCare",
-            "name": `Benevolence Home Services - ${city.name} Care Team`,
+            "@id": "https://www.benevolencehomeservices.com/#organization",
+            "name": "Benevolence Home Services",
             "url": `https://www.benevolencehomeservices.com/areas-we-serve/${city.slug}`,
             "logo": "https://www.benevolencehomeservices.com/footer-logo.png",
+            "image": "https://www.benevolencehomeservices.com/footer-logo.png",
             "telephone": contactDetails.phone,
+            "email": contactDetails.email,
             "priceRange": "$$",
+            "currenciesAccepted": "USD",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "1 Westbrook Corporate Center, Suite 300",
@@ -663,12 +774,77 @@ export default async function CityAreaPage({ params }: PageProps) {
               "postalCode": "60154",
               "addressCountry": "US"
             },
-            "areaServed": {
-              "@type": "City",
-              "name": `${city.name}, IL`,
-              "sameAs": `https://en.wikipedia.org/wiki/${encodeURIComponent(city.name.replace(/\s+/g, "_"))},_Illinois`
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 41.8666,
+              "longitude": -87.8856
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday", "Sunday"
+              ],
+              "opens": "00:00",
+              "closes": "23:59"
+            },
+            "areaServed": [
+              {
+                "@type": "City",
+                "name": `${city.name}, IL`,
+                "sameAs": `https://en.wikipedia.org/wiki/${encodeURIComponent(city.name.replace(/\s+/g, "_"))},_Illinois`
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": `${city.county}, Illinois`
+              }
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": `In-Home Care Services in ${city.name}, IL`,
+              "itemListElement": homeCareServices.map((service) => ({
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": `${service.title} in ${city.name}, IL`,
+                  "description": service.body,
+                  "serviceType": service.title,
+                  "provider": { "@id": "https://www.benevolencehomeservices.com/#organization" },
+                  "areaServed": { "@type": "City", "name": `${city.name}, IL` }
+                }
+              }))
             },
             "description": city.desc
+          })
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map((faq) => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+            }))
+          })
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.benevolencehomeservices.com" },
+              { "@type": "ListItem", "position": 2, "name": "Areas We Serve", "item": "https://www.benevolencehomeservices.com/areas-we-serve" },
+              { "@type": "ListItem", "position": 3, "name": `${city.name}, IL`, "item": `https://www.benevolencehomeservices.com/areas-we-serve/${city.slug}` }
+            ]
           })
         }}
       />

@@ -10,7 +10,10 @@ import {
 import ScrollReveal from "@/components/scroll-reveal";
 import HomeAccordion from "@/components/home-accordion";
 import {
+  contactDetails,
   homeHighlights,
+  priorityAreas,
+  socialLinks,
 } from "@/data/site-content";
 
 export default function HomePage() {
@@ -356,6 +359,55 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
+      {/* SECTION 7: LOCAL SERVICE AREAS
+          The homepage carries the most internal authority on the site, so it is
+          the right place to link the town pages we actually want ranking. Each
+          anchor names the destination in full rather than just the town. */}
+      <ScrollReveal>
+        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-20 bg-white border-t border-slate-100" aria-labelledby="service-areas-heading">
+          <PageShell>
+            <div className="mx-auto max-w-3xl text-center space-y-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-brand-blue">
+                Serving Chicagoland
+              </p>
+              <h2 id="service-areas-heading" className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl tracking-tight">
+                Where We Provide Home Care
+              </h2>
+              <p className="text-sm sm:text-base leading-relaxed text-slate-700">
+                Our office is in <strong>Westchester, Illinois</strong>, and our caregivers reach
+                families across Cook, DuPage, Lake, and Will Counties. These are the communities
+                we serve most often — each has its own page with local ZIP codes, hospital
+                partners, and answers to the questions families there ask us.
+              </p>
+            </div>
+
+            <ul className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {priorityAreas.map((area) => (
+                <li key={area.slug}>
+                  <Link
+                    href={`/areas-we-serve/${area.slug}`}
+                    className="flex h-full items-center justify-between gap-3 rounded-2xl border border-slate-200/70 bg-white px-5 py-3.5 transition hover:border-[#0c3e72]/40 hover:shadow-sm"
+                  >
+                    <span className="text-sm font-semibold text-brand-ink">
+                      {`Home care in ${area.city}, IL`}
+                    </span>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                      {area.note}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-8 text-center text-sm text-slate-600">
+              <Link href="/areas-we-serve" className="font-semibold text-[#0c3e72] underline underline-offset-4">
+                See all 38 Chicagoland communities we serve
+              </Link>
+            </p>
+          </PageShell>
+        </section>
+      </ScrollReveal>
+
       {/* FIXED FOOTER CALL TO ACTION IN THEME WITH HOMEPAGE */}
 
       <ScrollReveal>
@@ -392,6 +444,59 @@ export default function HomePage() {
           </PageShell>
         </section>
       </ScrollReveal>
+
+      {/*
+        PRIMARY ORGANIZATION ENTITY
+
+        The homepage carried no structured data at all, which left Google to
+        infer the business from page text. This declares the entity once, at a
+        stable @id the location pages already point their `provider` at, so the
+        whole site resolves to one business rather than 38 loosely related pages.
+
+        `sameAs` matters most here: it is how Google links this website to the
+        Google Business Profile and the social accounts. Without it the site and
+        the GBP listing can be treated as separate entities, which weakens both.
+      */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HomeHealthCare",
+            "@id": "https://www.benevolencehomeservices.com/#organization",
+            "name": "Benevolence Home Services",
+            "alternateName": "Benevolence Home Services and Staffing Agency",
+            "url": "https://www.benevolencehomeservices.com",
+            "logo": "https://www.benevolencehomeservices.com/footer-logo.png",
+            "image": "https://www.benevolencehomeservices.com/footer-logo.png",
+            "telephone": contactDetails.phone,
+            "email": contactDetails.email,
+            "priceRange": "$$",
+            "description":
+              "Nurse-led, faith-based non-medical home care and healthcare staffing serving seniors across Cook, DuPage, Lake and Will Counties from Westchester, Illinois.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "1 Westbrook Corporate Center, Suite 300",
+              "addressLocality": "Westchester",
+              "addressRegion": "IL",
+              "postalCode": "60154",
+              "addressCountry": "US",
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": 41.8666, "longitude": -87.8856 },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              "opens": "00:00",
+              "closes": "23:59",
+            },
+            "areaServed": priorityAreas.map((area) => ({
+              "@type": "City",
+              "name": `${area.city}, IL`,
+            })),
+            "sameAs": socialLinks.map((s) => s.href),
+          }),
+        }}
+      />
     </>
   );
 }
