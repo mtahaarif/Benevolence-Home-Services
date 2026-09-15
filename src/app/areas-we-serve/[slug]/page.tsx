@@ -23,18 +23,18 @@ function getServiceSlug(title: string): string {
 }
 
 // 1. STRICT ALLOW-LIST OF TARGET MARKETS
-// Ensures only these 35 specific locations generate pages and cross-links, 
+// Ensures only these 38 specific locations generate pages and cross-links, 
 // regardless of what else exists in the global cityDirectory data object.
 const TARGET_MARKETS = [
   // Cook County
   "westchester-il", "oak-park-il", "river-forest-il", "la-grange-il", 
   "western-springs-il", "orland-park-il", "palos-park-il", "palos-heights-il", 
-  "northbrook-il", "glenview-il", "wilmette-il", "chicago-il",
+  "northbrook-il", "glenview-il", "wilmette-il", "chicago-il", "hillside-il",
   
   // DuPage County
   "oak-brook-il", "elmhurst-il", "glen-ellyn-il", "wheaton-il", 
   "downers-grove-il", "naperville-il", "lombard-il", "clarendon-hills-il", 
-  "darien-il", "willowbrook-il", "lisle-il",
+  "darien-il", "willowbrook-il", "lisle-il", "hinsdale-il", "burr-ridge-il",
   
   // Lake County
   "lake-forest-il", "highland-park-il", "deerfield-il", "libertyville-il", 
@@ -54,7 +54,7 @@ const TARGET_MARKETS = [
  * the TARGET_MARKETS array so no outside cities bleed into the UI.
  */
 function nearbyCities(current: CityData, limit = 6): CityData[] {
-  // Filter global directory down to just our 35 target markets
+  // Filter global directory down to just our 38 target markets
   const allowedCities = Object.values(cityDirectory).filter(c => TARGET_MARKETS.includes(c.slug));
   
   const sameCounty = allowedCities.filter(
@@ -72,7 +72,7 @@ interface PageProps {
   }>;
 }
 
-// 2. Pre-render ONLY the 35 target local landing pages statically at build time
+// 2. Pre-render ONLY the 38 target local landing pages statically at build time
 export async function generateStaticParams() {
   return TARGET_MARKETS.map((slug) => ({ slug }));
 }
@@ -159,7 +159,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CityAreaPage({ params }: PageProps) {
   const { slug } = await params;
   
-  // Guard clause: Return absolute 404 if the URL slug is not in the target 35 markets
+  // Guard clause: Return absolute 404 if the URL slug is not in the target 38 markets
   if (!TARGET_MARKETS.includes(slug)) {
     notFound();
   }
@@ -375,7 +375,7 @@ export default async function CityAreaPage({ params }: PageProps) {
             <div className="pt-4 flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact-us"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-xs font-bold uppercase tracking-widest text-[#0a2540] hover:bg-slate-100 transition shadow-lg"
+                className="inline-flex items-center rounded-full border border-white/30 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white hover:bg-white/10 transition"
               >
                 Schedule Local Assessment &rarr;
               </Link>

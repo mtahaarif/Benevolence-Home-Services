@@ -110,7 +110,10 @@ export const navItems: NavItem[] = [
  */
 export const priorityAreas = [
   { city: "Westchester", slug: "westchester-il", note: "Our headquarters" },
+  { city: "Hillside", slug: "hillside-il", note: "Minutes from our office" },
   { city: "Oak Brook", slug: "oak-brook-il", note: "DuPage County" },
+  { city: "Hinsdale", slug: "hinsdale-il", note: "DuPage County" },
+  { city: "Burr Ridge", slug: "burr-ridge-il", note: "DuPage County" },
   { city: "Elmhurst", slug: "elmhurst-il", note: "DuPage County" },
   { city: "La Grange", slug: "la-grange-il", note: "Cook County" },
   { city: "Western Springs", slug: "western-springs-il", note: "Cook County" },
@@ -362,15 +365,6 @@ export const cityDirectory: Record<string, CityData> = {
     landmarks: ["Bahá'í House of Worship", "Gillson Park"],
     desc: "Discreet in-home elder care, mobility guidance, and personalized meal support for Wilmette families."
   },
-  "hillside-il": {
-    name: "Hillside",
-    county: "Cook County",
-    slug: "hillside-il",
-    zipCodes: "60162",
-    hospitals: ["Loyola University Medical Center", "Edward Hines Jr. VA Hospital"],
-    landmarks: ["Mount Carmel Cemetery", "Hillside Town Center"],
-    desc: "Minutes from our Westchester headquarters, Hillside families receive fast-response nurse-led personal care, companionship, and post-hospital recovery support."
-  },
   "chicago-il": {
     name: "Chicago",
     county: "Cook County",
@@ -379,6 +373,15 @@ export const cityDirectory: Record<string, CityData> = {
     hospitals: ["Northwestern Memorial Hospital", "Rush University Medical Center"],
     landmarks: ["Downtown Chicago", "Millennium Park"],
     desc: "Comprehensive home care coverage across Chicago neighborhoods, focusing on safe, independent urban living and specialized senior support."
+  },
+    "hillside-il": {
+    name: "Hillside",
+    county: "Cook County",
+    slug: "hillside-il",
+    zipCodes: "60162",
+    hospitals: ["Loyola University Medical Center", "Edward Hines Jr. VA Hospital"],
+    landmarks: ["Mount Carmel Cemetery", "Hillside Town Center"],
+    desc: "Minutes from our Westchester headquarters, Hillside families receive fast-response nurse-led personal care, companionship, and post-hospital recovery support."
   },
 
   // DuPage County

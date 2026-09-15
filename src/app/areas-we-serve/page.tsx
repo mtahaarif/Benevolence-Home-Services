@@ -7,7 +7,7 @@ import ScrollReveal from "@/components/scroll-reveal";
 import { ExpandableLocations } from "@/components/expandable-locations";
 
 // 1. ULTIMATE SEO DATA ENGINE
-// Organized into 4 distinct regions containing the 35 priority municipalities.
+// Organized into 4 distinct regions containing the 38 priority municipalities.
 const regionalData = [
   {
     id: "cook-county",
@@ -25,7 +25,8 @@ const regionalData = [
       { name: "Northbrook", slug: "northbrook-il", zipCodes: "60062", desc: "Comprehensive companion services, light housekeeping, and structured cognitive wellness support in Northbrook." },
       { name: "Glenview", slug: "glenview-il", zipCodes: "60025, 60026", desc: "Attentive personal care, routine medication reminders, and family caregiver respite throughout Glenview." },
       { name: "Wilmette", slug: "wilmette-il", zipCodes: "60091", desc: "Discreet in-home elder care, mobility guidance, and personalized meal planning for Wilmette families." },
-      { name: "Chicago", slug: "chicago-il", zipCodes: "Select Neighborhoods", desc: "Comprehensive home care coverage across Chicago, focusing on safe, independent urban living, personal care, and specialized support." }
+      { name: "Chicago", slug: "chicago-il", zipCodes: "Select Neighborhoods", desc: "Comprehensive home care coverage across Chicago, focusing on safe, independent urban living, personal care, and specialized support." },
+      { name: "Hillside", slug: "hillside-il", zipCodes: "60162", desc: "Minutes from our Westchester headquarters, Hillside families receive fast-response nurse-led personal care, companionship, and post-hospital recovery support." }
     ]
   },
   {
@@ -43,7 +44,9 @@ const regionalData = [
       { name: "Clarendon Hills", slug: "clarendon-hills-il", zipCodes: "60514", desc: "Personalized mobility support, fall prevention, and trusted hourly senior care in Clarendon Hills." },
       { name: "Darien", slug: "darien-il", zipCodes: "60561", desc: "Dependable personal hygiene care, routine comfort checks, and homemaker support in Darien." },
       { name: "Willowbrook", slug: "willowbrook-il", zipCodes: "60527", desc: "Dignified routine care, meal preparation, and private duty caregiving solutions in Willowbrook." },
-      { name: "Lisle", slug: "lisle-il", zipCodes: "60532", desc: "Warm companion care, medication reminders, and flexible day-to-day senior help across Lisle." }
+      { name: "Lisle", slug: "lisle-il", zipCodes: "60532", desc: "Warm companion care, medication reminders, and flexible day-to-day senior help across Lisle." },
+      { name: "Hinsdale", slug: "hinsdale-il", zipCodes: "60521, 60522", desc: "Discreet private-duty caregiving, dementia support, and recovery care at home for Hinsdale seniors, coordinated closely with local hospital discharge teams." },
+      { name: "Burr Ridge", slug: "burr-ridge-il", zipCodes: "60527", desc: "Concierge-level in-home senior care, overnight caregiver coverage, and respite relief for Burr Ridge families across the 60527 corridor." }
     ]
   },
   {
