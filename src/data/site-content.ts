@@ -110,10 +110,7 @@ export const navItems: NavItem[] = [
  */
 export const priorityAreas = [
   { city: "Westchester", slug: "westchester-il", note: "Our headquarters" },
-  { city: "Hillside", slug: "hillside-il", note: "Minutes from our office" },
   { city: "Oak Brook", slug: "oak-brook-il", note: "DuPage County" },
-  { city: "Hinsdale", slug: "hinsdale-il", note: "DuPage County" },
-  { city: "Burr Ridge", slug: "burr-ridge-il", note: "DuPage County" },
   { city: "Elmhurst", slug: "elmhurst-il", note: "DuPage County" },
   { city: "La Grange", slug: "la-grange-il", note: "Cook County" },
   { city: "Western Springs", slug: "western-springs-il", note: "Cook County" },
