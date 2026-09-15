@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
-import { ExpandableLocations } from "@/components/expandable-locations";
 
 // 1. ULTIMATE SEO DATA ENGINE
 // Organized into 4 distinct regions containing the 38 priority municipalities.
@@ -271,11 +270,6 @@ export default function AreasWeServePage() {
           </div>
         </PageShell>
       </section>
-
-      {/* EXPANDABLE LOCATIONS GRID */}
-      <div className="border-t border-slate-100 bg-white">
-        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
-      </div>
 
       {/* FOOTER CALL TO ACTION */}
       <ScrollReveal>
