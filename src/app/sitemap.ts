@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blogs";
-import { cityDirectory } from "@/app/areas-we-serve/[slug]/page";
-
+import { cityDirectory } from "@/data/site-content";
 const BASE = "https://www.benevolencehomeservices.com";
 
 /**
