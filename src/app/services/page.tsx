@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
 
 // 1. PRODUCTION METADATA ENGINE: Rendered statically for high crawling authority
 export const metadata: Metadata = {
@@ -153,6 +155,11 @@ function getSlug(title: string): string {
 }
 
 export default function ServicesPage() {
+  // Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
   return (
     <>
       {/* HERO BANNER SECTION */}
@@ -288,6 +295,10 @@ export default function ServicesPage() {
 
         </PageShell>
       </section>
+      {/* 3. The Expandable Grid Component */}
+      <div className="border-t border-slate-100 bg-white">
+        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+      </div>
 
       {/* SECURE HIGH-CONTRAST CONVERSION CONTEXT FOOTER */}
       <ScrollReveal>

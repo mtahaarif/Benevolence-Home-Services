@@ -15,6 +15,9 @@ import {
   priorityAreas,
   socialLinks,
 } from "@/data/site-content";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
+
 
 export default function HomePage() {
   // Structured matrix matching your exact layout with new strategic terminology
@@ -55,7 +58,11 @@ export default function HomePage() {
       traditional: "Care is primarily task-based"
     }
   ];
-
+// Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
 
   return (
     <>
@@ -359,54 +366,10 @@ export default function HomePage() {
         </section>
       </ScrollReveal>
 
-      {/* SECTION 7: LOCAL SERVICE AREAS
-          The homepage carries the most internal authority on the site, so it is
-          the right place to link the town pages we actually want ranking. Each
-          anchor names the destination in full rather than just the town. */}
-      <ScrollReveal>
-        <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-20 bg-white border-t border-slate-100" aria-labelledby="service-areas-heading">
-          <PageShell>
-            <div className="mx-auto max-w-3xl text-center space-y-4">
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-blue">
-                Serving Chicagoland
-              </p>
-              <h2 id="service-areas-heading" className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl tracking-tight">
-                Where We Provide Home Care
-              </h2>
-              <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                Our office is in <strong>Westchester, Illinois</strong>, and our caregivers reach
-                families across Cook, DuPage, Lake, and Will Counties. These are the communities
-                we serve most often — each has its own page with local ZIP codes, hospital
-                partners, and answers to the questions families there ask us.
-              </p>
-            </div>
-
-            <ul className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {priorityAreas.map((area) => (
-                <li key={area.slug}>
-                  <Link
-                    href={`/areas-we-serve/${area.slug}`}
-                    className="flex h-full items-center justify-between gap-3 rounded-2xl border border-slate-200/70 bg-white px-5 py-3.5 transition hover:border-[#0c3e72]/40 hover:shadow-sm"
-                  >
-                    <span className="text-sm font-semibold text-brand-ink">
-                      {`Home care in ${area.city}, IL`}
-                    </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-                      {area.note}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <p className="mt-8 text-center text-sm text-slate-600">
-              <Link href="/areas-we-serve" className="font-semibold text-[#0c3e72] underline underline-offset-4">
-                See all 38 Chicagoland communities we serve
-              </Link>
-            </p>
-          </PageShell>
-        </section>
-      </ScrollReveal>
+      {/* 3. The Expandable Grid Component */}
+      <div className="border-t border-slate-100 bg-white">
+        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+      </div>
 
       {/* FIXED FOOTER CALL TO ACTION IN THEME WITH HOMEPAGE */}
 

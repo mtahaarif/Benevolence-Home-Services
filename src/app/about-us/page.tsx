@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
 
 // 1. STATIC METADATA ENGINE: Pre-rendered on the server for maximum indexing authority
 export const metadata: Metadata = {
@@ -44,6 +46,11 @@ export const metadata: Metadata = {
 };
 
 export default function AboutUsPage() {
+  // Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
   return (
     <>
       {/* HERO BANNER SECTION WITH EXPLICIT CHILD OVERRIDES FOR WHITE BUTTON TEXT */}
@@ -416,6 +423,10 @@ export default function AboutUsPage() {
           </div>
         </PageShell>
       </section>
+      {/* 3. The Expandable Grid Component */}
+      <div className="border-t border-slate-100 bg-white">
+        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+      </div>
 
       {/* SECTION 7: FINAL BOTTOM CONVERSION PANEL */}
       <ScrollReveal>

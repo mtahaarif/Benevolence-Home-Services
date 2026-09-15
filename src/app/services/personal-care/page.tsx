@@ -5,6 +5,8 @@ import Image from "next/image";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import FaqAccordion from "@/components/faq-accordion";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
 
 type FAQItem = {
   question: string;
@@ -35,7 +37,11 @@ const faqs: FAQItem[] = [
 ];
 
 export default function PersonalCarePage() {
-
+// Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
   return (
     <>
       {/* Hero Banner Section */}
@@ -139,6 +145,11 @@ export default function PersonalCarePage() {
           <FaqAccordion faqs={faqs} />
         </PageShell>
       </section>
+
+      {/*The Expandable Grid Component */}
+      <div className="border-t border-slate-100 bg-white">
+        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+      </div>
 
       {/* FINAL BOTTOM CONVERSION PANEL */}
       <ScrollReveal>

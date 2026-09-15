@@ -2,11 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
 
 // OPTIMIZATION FIX: Removed "use client" to convert this to a high-performance Server Component.
 // This allows Google to instantly parse the newly expanded DOM structures and metadata.
 
 export default function AboutOwnerPage() {
+  // Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
   return (
     <>
       {/* HERO BANNER SECTION */}
@@ -108,6 +115,10 @@ export default function AboutOwnerPage() {
           </PageShell>
         </section>
       </ScrollReveal>
+      {/* 3. The Expandable Grid Component */}
+      <div className="border-t border-slate-100 bg-white">
+        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+      </div>
 
       {/* SECTION 7: FINAL BOTTOM CONVERSION PANEL */}
       <ScrollReveal>
