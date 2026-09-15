@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import { blogPosts } from "@/data/blogs";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
 
 interface PageProps {
   params: Promise<{
@@ -163,6 +165,11 @@ export default async function BlogPostPage({ params }: PageProps) {
     });
   };
 
+  // Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
   return (
     <>
       {/* ARTICLE HEADING BLOCK */}
@@ -284,6 +291,10 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </PageShell>
       </section>
+      {/* 3. The Expandable Grid Component */}
+      <div className="border-t border-slate-100 bg-white">
+        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+      </div>
 
       {/* AUTOMATED BLOGPOSTING JSON-LD RICH DATA SCHEMATICS */}
       <script

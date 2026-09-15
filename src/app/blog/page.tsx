@@ -6,6 +6,8 @@ import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell"
 import ScrollReveal from "@/components/scroll-reveal";
 import { blogPosts } from "@/data/blogs";
 import Image from "next/image";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
 
 const categories = ["All Insights", "Safety & Wellness", "Specialized Care", "Memory Support", "Transitional Care", "Veteran Support", "Care Management"];
 
@@ -15,7 +17,11 @@ export default function BlogDirectoryPage() {
   const filteredPosts = activeCategory === "All Insights"
     ? blogPosts
     : blogPosts.filter(post => post.category === activeCategory);
-
+// Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
   return (
     <>
       {/* HERO BANNER SECTION */}
@@ -151,6 +157,10 @@ export default function BlogDirectoryPage() {
             ))}
           </ul>
         </PageShell>
+        {/* 3. The Expandable Grid Component */}
+      <div className="border-t border-slate-100 bg-white">
+        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+      </div>
       </section>
     </>
   );

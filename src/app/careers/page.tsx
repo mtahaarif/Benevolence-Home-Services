@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
 
 const benefitsFramework = [
   {
@@ -84,7 +86,11 @@ const specializedRolesData = {
 export default function CareersPage() {
   const [activeRoleTab, setActiveRoleTab] = useState<"companion" | "cna">("companion");
   const activeRole = specializedRolesData[activeRoleTab];
-
+// Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
   return (
     <>
       {/* HERO BANNER SECTION */}
@@ -306,9 +312,13 @@ export default function CareersPage() {
         </PageShell>
       </section>
 
-      {/* SECTION 4: HIGH-IMPACT APPLICATION GATEWAY CARD */}
+      {/* SECTION 4: HIGH-IMPACT APPLICATION GATEWAY CARD */}y
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-20 bg-white" aria-label="Final Application Terminal">
         <PageShell>
+          {/* 3. The Expandable Grid Component */}
+          <div className="border-t border-slate-100 bg-white">
+            <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+          </div>
           <ScrollReveal>
             <div className="max-w-4xl mx-auto bg-[#0a2540] rounded-[3rem] border border-slate-800 p-8 sm:p-12 text-white shadow-xl relative overflow-hidden text-center">
               <div className="absolute inset-0 opacity-10 -z-10 mix-blend-overlay">

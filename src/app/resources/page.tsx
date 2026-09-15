@@ -2,8 +2,15 @@ import Link from "next/link";
 import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import { resources } from "@/data/site-content";
+import { ExpandableLocations } from "@/components/expandable-locations";
+import { cityDirectory } from "@/data/site-content";
 
 export default function ResourcesPage() {
+  // Convert the centralized cityDirectory object into a flat array
+  const allCities = Object.values(cityDirectory).map((city) => ({
+    name: city.name,
+    slug: city.slug,
+  }));
   return (
     <>
       {/* HERO BANNER SECTION */}
@@ -142,6 +149,10 @@ export default function ResourcesPage() {
 
       {/* Section 3: Immersive Bottom Exploration CTA */}
       <ScrollReveal>
+        {/* 3. The Expandable Grid Component */}
+      <div className="border-t border-slate-100 bg-white">
+        <ExpandableLocations cities={allCities} initialVisibleCount={12} />
+      </div>
         <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-brand-blue/10 border-t border-brand-blue/10 rounded-t-[3rem]">
           <PageShell>
             <div className="mx-auto max-w-3xl text-center space-y-6">
@@ -179,6 +190,7 @@ export default function ResourcesPage() {
           </PageShell>
         </section>
       </ScrollReveal>
+      
     </>
   );
 }
