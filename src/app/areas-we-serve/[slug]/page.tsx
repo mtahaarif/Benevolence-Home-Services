@@ -22,19 +22,45 @@ function getServiceSlug(title: string): string {
     .replace(/\s+/g, "-");
 }
 
+// 1. STRICT ALLOW-LIST OF TARGET MARKETS
+// Ensures only these 35 specific locations generate pages and cross-links, 
+// regardless of what else exists in the global cityDirectory data object.
+const TARGET_MARKETS = [
+  // Cook County
+  "westchester-il", "oak-park-il", "river-forest-il", "la-grange-il", 
+  "western-springs-il", "orland-park-il", "palos-park-il", "palos-heights-il", 
+  "northbrook-il", "glenview-il", "wilmette-il", "chicago-il",
+  
+  // DuPage County
+  "oak-brook-il", "elmhurst-il", "glen-ellyn-il", "wheaton-il", 
+  "downers-grove-il", "naperville-il", "lombard-il", "clarendon-hills-il", 
+  "darien-il", "willowbrook-il", "lisle-il",
+  
+  // Lake County
+  "lake-forest-il", "highland-park-il", "deerfield-il", "libertyville-il", 
+  "vernon-hills-il", "gurnee-il",
+  
+  // Will County
+  "frankfort-il", "homer-glen-il", "plainfield-il", "bolingbrook-il", 
+  "joliet-il", "new-lenox-il"
+];
+
 /**
  * Neighbouring towns in the same county, for the cross-link block below.
  *
  * Linking siblings to each other gives every town page a handful of 
  * contextual inbound links and is genuinely useful to a reader whose 
- * town is a few minutes down the road.
+ * town is a few minutes down the road. It strictly filters against 
+ * the TARGET_MARKETS array so no outside cities bleed into the UI.
  */
 function nearbyCities(current: CityData, limit = 6): CityData[] {
-  const all = Object.values(cityDirectory);
-  const sameCounty = all.filter(
+  // Filter global directory down to just our 35 target markets
+  const allowedCities = Object.values(cityDirectory).filter(c => TARGET_MARKETS.includes(c.slug));
+  
+  const sameCounty = allowedCities.filter(
     (c) => c.county === current.county && c.slug !== current.slug,
   );
-  const rest = all.filter(
+  const rest = allowedCities.filter(
     (c) => c.county !== current.county && c.slug !== current.slug,
   );
   return [...sameCounty, ...rest].slice(0, limit);
@@ -46,9 +72,9 @@ interface PageProps {
   }>;
 }
 
-// 1. Pre-render all local landing pages statically at build time
+// 2. Pre-render ONLY the 35 target local landing pages statically at build time
 export async function generateStaticParams() {
-  return Object.keys(cityDirectory).map((slug) => ({ slug }));
+  return TARGET_MARKETS.map((slug) => ({ slug }));
 }
 
 /**
@@ -84,11 +110,14 @@ function cityFaqs(city: CityData, neighbours: CityData[]): FAQItem[] {
   ];
 }
 
-// 2. Programmatic SEO Metadata per Location (Maximized < 60 chars)
+// 3. Programmatic SEO Metadata per Location (Maximized < 60 chars)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  
+  // Guard clause: Return empty metadata if slug is not in our strict target list
+  if (!TARGET_MARKETS.includes(slug)) return {};
+  
   const city = cityDirectory[slug];
-
   if (!city) return {};
 
   const fullTitle = `Home Care in ${city.name}, IL | Benevolence Home Services`;
@@ -126,9 +155,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// 3. Viewport Component
+// 4. Viewport Component
 export default async function CityAreaPage({ params }: PageProps) {
   const { slug } = await params;
+  
+  // Guard clause: Return absolute 404 if the URL slug is not in the target 35 markets
+  if (!TARGET_MARKETS.includes(slug)) {
+    notFound();
+  }
+
   const city = cityDirectory[slug];
 
   if (!city) {
