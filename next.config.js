@@ -70,19 +70,7 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // 1. Force Canonical Hostname: 301 Redirect apex to www to kill duplicate content
-      {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'benevolencehomeservices.com',
-          },
-        ],
-        destination: 'https://www.benevolencehomeservices.com/:path*',
-        permanent: true,
-      },
-      // 2. Legacy index cleanups: Emits permanent 301s to prevent duplicate homepage penalties
+      // Legacy index cleanups: Emits permanent 301s to prevent duplicate homepage penalties
       {
         source: '/index.html',
         destination: '/',
