@@ -70,7 +70,19 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // Legacy index cleanups: Emits permanent 301s to prevent duplicate homepage penalties
+      // 1. Force 301 Canonical Hostname: Bypasses 308 status issues and dual-hop chains
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'benevolencehomeservices.com',
+          },
+        ],
+        destination: 'https://www.benevolencehomeservices.com/:path*',
+        permanent: true,
+      },
+      // 2. Legacy index cleanups: Prevents duplicate homepage penalties
       {
         source: '/index.html',
         destination: '/',
