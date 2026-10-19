@@ -16,7 +16,11 @@ function BrandMark() {
         height={65}
         sizes="(max-width: 640px) 140px, 170px"
         className="h-9 w-auto shrink-0 object-contain sm:h-11"
-        priority
+        // Preloaded on purpose: on mobile, Lighthouse measures this logo as
+        // the Largest Contentful Paint element on inner pages (measured
+        // 2026-10-20), so it must not be deprioritised. `preload` replaces the
+        // `priority` prop, which Next 16 deprecates.
+        preload
       />
       <div className="shrink-0 leading-tight">
         <p className="text-[0.62rem] font-bold uppercase tracking-[0.3em] text-[#0c3e72] sm:text-[0.68rem]">

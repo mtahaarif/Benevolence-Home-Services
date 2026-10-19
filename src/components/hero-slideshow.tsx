@@ -13,11 +13,12 @@ import { useEffect, useState } from "react";
  */
 export default function HeroSlideshow({
   images,
-  imageAlt,
+  imageAlts,
   slideCount,
 }: {
   images: string[];
-  imageAlt: string;
+  /** Alt text for each image in `images`, in the same order. */
+  imageAlts: string[];
   slideCount: number;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,12 +47,12 @@ export default function HeroSlideshow({
           >
             <Image
               src={src}
-              alt={`${imageAlt} - Slide ${slideIndex + 1}`}
+              alt={imageAlts[index]}
               width={1920}
               height={899}
               loading="lazy"
               fetchPriority="low"
-              quality={75}
+              quality={65}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
               className="object-cover object-center w-full h-full"
             />

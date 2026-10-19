@@ -3,7 +3,9 @@ import Link from "next/link";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, homeCareServices, contactDetails } from "@/data/site-content";
+import { JsonLd } from "@/components/json-ld";
+import { absoluteUrl, breadcrumbSchema, countyAreas, serviceSchema } from "@/lib/schema";
 
 // 1. PRODUCTION METADATA ENGINE: Rendered statically for high crawling authority
 export const metadata: Metadata = {
@@ -269,7 +271,7 @@ export default function ServicesPage() {
               <div className="lg:w-1/3">
                 <h2 id="scheduling-heading" className="text-2xl md:text-3xl font-display font-bold text-brand-ink mb-3">Flexible Care Schedules</h2>
                 <p className="text-slate-500 text-[13px] leading-relaxed font-medium">
-                  From situational hourly relief to comprehensive live-in support, our care profiles scale effortlessly to match your family's exact timeline parameters.
+                  From situational hourly relief to comprehensive live-in support, our care profiles scale effortlessly to match your family&apos;s exact timeline parameters.
                 </p>
               </div>
               
@@ -325,10 +327,10 @@ export default function ServicesPage() {
                   </span>
                 </Link>
                 <Link 
-                  href="tel:7083040296"
+                  href={contactDetails.phoneHref}
                   className="inline-flex items-center justify-center rounded-full bg-white border border-slate-200 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-brand-ink transition hover:bg-slate-50 shadow-sm"
                 >
-                  Call 708-304-0296
+                  {`Call ${contactDetails.phone}`}
                 </Link>
               </div>
             </div>
@@ -336,34 +338,34 @@ export default function ServicesPage() {
         </section>
       </ScrollReveal>
 
-      {/* Structured offer list catalogs mapping directly to Google crawler search definitions */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "serviceType": "Non-Medical Home Care",
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "Benevolence Home Services",
-              "url": "https://www.benevolencehomeservices.com"
-            },
-            "hasOfferCatalog": {
+      {/* The provider is the organization declared once in the root layout. */}
+      <JsonLd
+        data={[
+          serviceSchema({
+            name: "In-Home Senior Care Services",
+            serviceType: "Non-Medical Home Care",
+            path: "/services",
+            areaServed: countyAreas(),
+            offerCatalog: {
               "@type": "OfferCatalog",
-              "name": "Home Care Services Menu",
-              "itemListElement": enrichedServices.map((service, i) => ({
+              name: "Home Care Services Menu",
+              itemListElement: homeCareServices.map((service, i) => ({
                 "@type": "Offer",
-                "itemOffered": {
+                position: i + 1,
+                itemOffered: {
                   "@type": "Service",
-                  "name": service.title,
-                  "description": service.body
+                  name: service.title,
+                  description: service.body,
+                  url: absoluteUrl(`/services/${service.slug}`),
                 },
-                "position": i + 1
-              }))
-            }
-          })
-        }}
+              })),
+            },
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+        ]}
       />
     </>
   );

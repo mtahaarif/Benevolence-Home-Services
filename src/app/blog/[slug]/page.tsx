@@ -7,6 +7,21 @@ import ScrollReveal from "@/components/scroll-reveal";
 import { blogPosts } from "@/data/blogs";
 import { ExpandableLocations } from "@/components/expandable-locations";
 import { cityDirectory } from "@/data/site-content";
+import { business } from "@/data/business";
+import { JsonLd } from "@/components/json-ld";
+import { absoluteUrl, breadcrumbSchema, ORG_ID } from "@/lib/schema";
+import { relatedPosts, relatedServices } from "@/lib/blog-links";
+
+/**
+ * "May 7, 2025" → "2025-05-07". Built from the parsed date's local parts:
+ * `toISOString()` converts local midnight to UTC, which shifts the date back a
+ * day whenever the build machine is east of UTC.
+ */
+function isoDate(date: string): string {
+  const d = new Date(date);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
 
 interface PageProps {
   params: Promise<{
@@ -38,7 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `https://www.benevolencehomeservices.com/blog/${post.slug}`,
       images: [{ url: post.image }],
       type: "article",
-      publishedTime: new Date(post.date).toISOString(),
+      publishedTime: isoDate(post.date),
       authors: [post.author],
     },
     twitter: {
@@ -55,6 +70,10 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
   
   if (!post) notFound();
+
+  const postPath = `/blog/${post.slug}`;
+  const services = relatedServices(post);
+  const morePosts = relatedPosts(post);
 
   // === PREMIUM SMART CONTENT PARSER ENGINE ===
   const renderSmartContent = (paragraphs: string[]) => {
@@ -227,7 +246,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   </h2>
                   <div className="space-y-4 text-slate-600 leading-relaxed text-[15px] md:text-base">
                     <p>
-                      At Benevolence Home Services, we understand that navigating the complexities of elder care, Alzheimer's support, and post-hospital recovery can be overwhelming for families. Our nurse-led agency is dedicated to providing compassionate, highly customized in-home care services across Westchester, DuPage County, Will County, and the greater Chicagoland area. Our holistic approach covers every aspect of daily living, including:
+                      At Benevolence Home Services, we understand that navigating the complexities of elder care, Alzheimer&apos;s support, and post-hospital recovery can be overwhelming for families. Our nurse-led agency is dedicated to providing compassionate, highly customized in-home care services across Westchester, DuPage County, Will County, and the greater Chicagoland area. Our holistic approach covers every aspect of daily living, including:
                     </p>
                     
                     <ul className="list-disc pl-5 space-y-2 marker:text-brand-orange text-slate-700 py-2">
@@ -240,7 +259,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                       We pride ourselves on creating structured, empathetic care plans tailored to the unique medical and emotional needs of every individual. Our caregivers are thoroughly vetted, bonded, and supervised by clinical experts to deliver the highest standard of non-medical support.
                     </p>
                     <p>
-                      By choosing our agency, you are partnering with a team that values clinical excellence, proactive communication, and deep respect for our clients. Reach out to our care coordinators today to schedule a comprehensive assessment and discover how our customized home care solutions can alleviate caregiver burnout and elevate your family's quality of life.
+                      By choosing our agency, you are partnering with a team that values clinical excellence, proactive communication, and deep respect for our clients. Reach out to our care coordinators today to schedule a comprehensive assessment and discover how our customized home care solutions can alleviate caregiver burnout and elevate your family&apos;s quality of life.
                     </p>
                   </div>
                 </div>
@@ -291,37 +310,105 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </PageShell>
       </section>
+
+      {/* RELATED SERVICES & READING: gives every post contextual links into
+          the service pages and to other posts, instead of a single inbound
+          link from the blog index. */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 bg-slate-50/60 border-t border-slate-100" aria-label="Related services and articles">
+        <PageShell>
+          <div className="max-w-6xl mx-auto space-y-14">
+            <div>
+              <h2 className="text-2xl font-display font-bold text-brand-ink sm:text-3xl">
+                Related Home Care Services
+              </h2>
+              <ul className="mt-6 flex flex-wrap gap-3">
+                {services.map((service) => (
+                  <li key={service.slug}>
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white px-5 py-2.5 text-sm font-semibold text-brand-ink transition hover:border-[#0c3e72]/40 hover:text-[#0c3e72] hover:shadow-sm"
+                    >
+                      {service.title}
+                      <span aria-hidden="true" className="text-slate-300">&rarr;</span>
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-[#0c3e72] underline underline-offset-4"
+                  >
+                    View all home care services
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-display font-bold text-brand-ink sm:text-3xl">
+                More from the Blog
+              </h2>
+              <ul className="mt-6 grid gap-5 md:grid-cols-3">
+                {morePosts.map((related) => (
+                  <li key={related.slug}>
+                    <Link
+                      href={`/blog/${related.slug}`}
+                      className="group flex h-full flex-col rounded-2xl border border-slate-200/70 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0c3e72]/40 hover:shadow-md"
+                    >
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                        {`${related.category} · ${related.date}`}
+                      </span>
+                      <span className="mt-2 font-display text-base font-bold leading-snug text-brand-ink group-hover:text-[#0c3e72]">
+                        {related.title}
+                      </span>
+                      <span className="mt-2 text-xs leading-relaxed text-slate-500">
+                        {related.excerpt}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </PageShell>
+      </section>
+
       {/* 3. The Expandable Grid Component */}
       <div className="border-t border-slate-100 bg-white">
         <ExpandableLocations cities={allCities} initialVisibleCount={12} />
       </div>
 
-      {/* AUTOMATED BLOGPOSTING JSON-LD RICH DATA SCHEMATICS */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+      {/* BlogPosting, published by the organization declared in the root layout. */}
+      <JsonLd
+        data={[
+          {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
-            "headline": post.title,
-            "image": [`https://www.benevolencehomeservices.com${post.image}`],
-            "datePublished": new Date(post.date).toISOString().split('T')[0],
-            "author": [{
+            headline: post.title,
+            image: [absoluteUrl(post.image)],
+            datePublished: isoDate(post.date),
+            // No separate edit date is tracked yet.
+            dateModified: isoDate(post.date),
+            mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(postPath) },
+            author: [{
               "@type": "Person",
-              "name": post.author,
-              "url": "https://www.benevolencehomeservices.com/about-us"
+              name: post.author,
+              url: absoluteUrl("/about-us"),
             }],
-            "publisher": {
-              "@type": "HomeAndConstructionBusiness",
-              "name": "Benevolence Home Services",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.benevolencehomeservices.com/logo.png"
-              }
+            publisher: {
+              "@type": "Organization",
+              "@id": ORG_ID,
+              name: business.name,
+              logo: { "@type": "ImageObject", url: absoluteUrl(business.logo) },
             },
-            "description": post.metaDescription
-          })
-        }}
+            description: post.metaDescription,
+          },
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: post.title, path: postPath },
+          ]),
+        ]}
       />
     </>
   );

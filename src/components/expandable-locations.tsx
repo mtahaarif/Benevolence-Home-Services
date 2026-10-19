@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import ScrollReveal from "@/components/scroll-reveal";
+import { cityHref } from "@/lib/cities";
 
 interface CityData {
   name: string;
@@ -91,8 +92,7 @@ export function ExpandableLocations({
 
 // Sub-component for the individual pill cards
 function LocationCard({ city }: { city: CityData }) {
-  // Routes to the dedicated city landing page if it exists, otherwise contact page
-  const href = city.slug ? `/areas-we-serve/${city.slug}` : "/contact-us";
+  const href = cityHref(city.slug);
 
   return (
     <ScrollReveal>

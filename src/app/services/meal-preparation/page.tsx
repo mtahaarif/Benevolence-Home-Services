@@ -1,12 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import FaqAccordion from "@/components/faq-accordion";
+import { ServiceJsonLd } from "@/components/service-json-ld";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, contactDetails } from "@/data/site-content";
 
 type FAQItem = {
   question: string;
@@ -114,7 +113,7 @@ export default function MealPreparationPage() {
           title="In-Home Senior Meal Preparation Services"
           // OPTIMIZATION: Differentiated button texts to resolve Duplicate Anchor Link penalty
           primaryAction={{ label: "Request Meal Prep Support", href: "/contact-us" }}
-          secondaryAction={{ label: "Call for Meal Services", href: "tel:7083040296" }}
+          secondaryAction={{ label: "Call for Meal Services", href: contactDetails.phoneHref }}
           imageSrc="/nh-2242925031Ui50a8e.webp" 
           imageAlt="Nutritious and balanced home cooked meal preparation"
         />
@@ -290,6 +289,8 @@ export default function MealPreparationPage() {
           </PageShell>
         </section>
       </ScrollReveal>
+
+      <ServiceJsonLd slug="meal-preparation" faqs={faqs} />
     </>
   );
 }

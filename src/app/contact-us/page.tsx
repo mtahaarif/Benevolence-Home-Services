@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
 import { HeroSection, PageShell} from "@/components/site-shell";
 import { contactDetails } from "@/data/site-content";
+import { business, licenseText } from "@/data/business";
 import ScrollReveal from "@/components/scroll-reveal";
 
 // 1. PRODUCTION METADATA ENGINE: Rendered statically for high crawling authority
@@ -62,8 +63,8 @@ export default function ContactUsPage() {
             href: contactDetails.calendly
           }}
           secondaryAction={{ 
-            label: "Call Our Office: 708-304-0296", 
-            href: "tel:7083040296" 
+            label: `Call Our Office: ${contactDetails.phone}`, 
+            href: contactDetails.phoneHref 
           }}
           imageSrc="/nh-2412692819U06281e.webp"
           imageAlt="Caregiver and elderly woman looking at a tablet"
@@ -87,7 +88,7 @@ export default function ContactUsPage() {
                   If you are looking to <strong>contact our home care team in Westchester, IL</strong>, you are in the right place. We understand that inviting a caregiver into your home is a significant decision. That is why we are here to support you and your loved ones with compassionate, reliable, and highly professional home care services tailored to your exact family requirements.
                 </p>
                 <p>
-                  Whether you have specific questions about our non-medical services, would like to schedule a free in-home assessment, or need assistance determining the right care options for an aging parent, our administrative team is ready to help today. We provide dedicated companion care, Alzheimer's support, light housekeeping, meal preparation, and specialized live-in services across Cook, DuPage, Kane, Lake, and Will Counties.
+                  Whether you have specific questions about our non-medical services, would like to schedule a free in-home assessment, or need assistance determining the right care options for an aging parent, our administrative team is ready to help today. We provide dedicated companion care, Alzheimer&apos;s support, light housekeeping, meal preparation, and specialized live-in services across Cook, DuPage, Lake, and Will Counties.
                 </p>
                 <p>
                   Please complete the secure intake form below with as much detail as possible. A clinical coordinator from Benevolence Home Services will review your submission and contact you promptly to discuss your specific scheduling needs, evaluate your coverage area, and answer any questions you might have about our personalized care plans.
@@ -112,9 +113,10 @@ export default function ContactUsPage() {
                 </div>
                 <h3 className="font-display font-bold text-brand-ink mb-2 text-lg">Office Location</h3>
                 <address className="text-sm text-slate-600 not-italic leading-relaxed">
-                  1 Westbrook Corporate Center<br/>
-                  Suite 300<br/>
-                  Westchester, IL 60154
+                  {business.address.street.split(", ").map((line) => (
+                    <span key={line} className="block">{line}</span>
+                  ))}
+                  <span className="block">{`${business.address.locality}, ${business.address.region} ${business.address.postalCode}`}</span>
                 </address>
               </div>
               
@@ -125,9 +127,14 @@ export default function ContactUsPage() {
                 <h3 className="font-display font-bold text-brand-ink mb-2 text-lg">Contact Info</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   {/* OPTIMIZATION: sr-only tags resolve duplicate anchor penalties */}
-                  Call: <a href="tel:7083040296" className="hover:text-brand-blue font-semibold">708-304-0296 <span className="sr-only">via our local office directory</span></a><br/>
-                  Fax: 708-304-0296<br/>
-                  <a href="mailto:info@benevolencehomeservices.com" className="hover:text-brand-blue truncate block mt-1">info@benevolencehomeservices.com <span className="sr-only">for general inquiries</span></a>
+                  Call: <a href={contactDetails.phoneHref} className="hover:text-brand-blue font-semibold">{contactDetails.phone} <span className="sr-only">via our local office directory</span></a><br/>
+                  {business.fax ? (
+                    <>
+                      {`Fax: ${business.fax}`}
+                      <br/>
+                    </>
+                  ) : null}
+                  <a href={contactDetails.emailHref} className="hover:text-brand-blue truncate block mt-1">{contactDetails.email} <span className="sr-only">for general inquiries</span></a>
                 </p>
               </div>
               
@@ -143,6 +150,9 @@ export default function ContactUsPage() {
                 </p>
               </div>
             </div>
+            {business.licenseNumber ? (
+              <p className="mt-6 text-center text-xs text-slate-500">{licenseText}</p>
+            ) : null}
           </ScrollReveal>
 
           {/* OPTIMIZATION: Word Count Expansion Section (Intake Process) */}
@@ -225,7 +235,7 @@ export default function ContactUsPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="HQ Westbrook Corporate Center Location - Westchester, IL"
+                title={`Map of our office: ${contactDetails.address}`}
                 className="grayscale-[10%] contrast-[1.05] opacity-95 transition duration-500 hover:grayscale-0 hover:opacity-100"
               />
             </div>

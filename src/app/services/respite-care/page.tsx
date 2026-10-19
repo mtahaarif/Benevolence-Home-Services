@@ -1,12 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import FaqAccordion from "@/components/faq-accordion";
+import { ServiceJsonLd } from "@/components/service-json-ld";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, contactDetails } from "@/data/site-content";
 
 type FAQItem = {
   question: string;
@@ -177,7 +176,7 @@ export default function RespiteCarePage() {
           title="Professional Respite Care Options Near You"
           // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Link penalty
           primaryAction={{ label: "Book Respite Relief", href: "/contact-us" }}
-          secondaryAction={{ label: "Call for Respite Care: 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: `Call for Respite Care: ${contactDetails.phone}`, href: contactDetails.phoneHref }}
           imageSrc="/nh-2182343844Us238i0.webp"
           imageAlt="Family caregiver passing duties smoothly to a professional respite provider"
         />
@@ -401,6 +400,8 @@ export default function RespiteCarePage() {
           </PageShell>
         </section>
       </ScrollReveal>
+
+      <ServiceJsonLd slug="respite-care" faqs={faqs} />
     </>
   );
 }

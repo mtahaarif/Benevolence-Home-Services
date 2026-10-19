@@ -1,12 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import FaqAccordion from "@/components/faq-accordion";
+import { ServiceJsonLd } from "@/components/service-json-ld";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, contactDetails } from "@/data/site-content";
 
 type FAQItem = {
   question: string;
@@ -186,7 +185,7 @@ export default function TransportationServicesPage() {
           title="Senior Transportation & Companion Travel Support"
           // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Link penalty
           primaryAction={{ label: "Book Senior Transit", href: "/contact-us" }}
-          secondaryAction={{ label: "Call for Transport: 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: `Call for Transport: ${contactDetails.phone}`, href: contactDetails.phoneHref }}
           imageSrc="/nh-140315263.webp"
           imageAlt="Caregiver accompanying senior citizen safely during vehicle transition"
         />
@@ -408,6 +407,8 @@ export default function TransportationServicesPage() {
           </PageShell>
         </section>
       </ScrollReveal>
+
+      <ServiceJsonLd slug="transportation" faqs={faqs} />
     </>
   );
 }

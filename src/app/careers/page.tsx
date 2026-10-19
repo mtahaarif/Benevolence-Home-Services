@@ -1,8 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
+import { RoleTabs } from "@/components/role-tabs";
 import { ExpandableLocations } from "@/components/expandable-locations";
 import { cityDirectory } from "@/data/site-content";
 
@@ -71,7 +69,7 @@ const specializedRolesData = {
   },
   cna: {
     title: "Certified Nursing Assistant (CNA)",
-    locations: "Will County, Cook County, Kane County, & Surrounding Towns",
+    locations: "Will County, Cook County & Surrounding Towns",
     highlights: ["Premium Hourly Rates", "Live-In Positions Available", "Direct RN Supervision & Advisory"],
     summary: "Designed for highly technical professionals looking for CNA employment in DuPage and Will Counties. This position bridges high-quality daily lifestyle assistance with disciplined nurse-delegated care plan tracking.",
     duties: [
@@ -83,9 +81,91 @@ const specializedRolesData = {
   }
 };
 
+type Role = (typeof specializedRolesData)[keyof typeof specializedRolesData];
+
+/** One job opening's details card; rendered on the server for each role. */
+function RolePanel({ role }: { role: Role }) {
+  return (
+    <div className="max-w-5xl mx-auto bg-white border border-slate-200/60 rounded-[2.5rem] shadow-[0_12px_40px_rgba(15,47,89,0.03)] p-6 sm:p-10 transition-all duration-300">
+      <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        
+        {/* Dashboard Left Side: Summary & Duties */}
+        <div className="space-y-6">
+          <div>
+            <span className="inline-block text-[10px] font-bold uppercase tracking-widest bg-brand-orange/10 text-brand-orange px-3 py-1 rounded-md mb-2">
+              Active Hiring Channel
+            </span>
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-brand-ink">
+              {role.title}
+            </h3>
+            <p className="text-xs sm:text-sm font-semibold text-[#1168b3] mt-1 flex items-center gap-1.5">
+              📍 Primary Employment Zones: <span className="text-slate-600 font-normal">{role.locations}</span>
+            </p>
+          </div>
+
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+            {role.summary}
+          </p>
+
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-brand-ink border-b border-slate-100 pb-2">
+              Core Clinical & Service Responsibilities:
+            </h4>
+            <ul className="space-y-2.5">
+              {role.duties.map((duty, index) => (
+                <li key={index} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-500">
+                  <span className="h-2 w-2 rounded-full bg-[#1168b3] shrink-0 mt-1.5" />
+                  <span className="leading-relaxed">{duty}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Dashboard Right Side: Perks Callout & Quick Gateway Link */}
+        <div className="bg-slate-50 rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-slate-100">
+          <div className="space-y-6">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#0c3e72]">
+              Position Highlights & Package Overview
+            </h4>
+            
+            <div className="space-y-3">
+              {role.highlights.map((highlight, index) => (
+                <div key={index} className="bg-white border border-slate-200/40 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-4 w-4 text-[#1168b3]" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  <span className="text-xs sm:text-sm font-bold text-brand-ink">{highlight}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-xs text-slate-400 leading-relaxed italic pt-2">
+              All candidates must maintain reliable, insured vehicle transportation and pass absolute reference checks to secure standard client home placements.
+            </p>
+          </div>
+
+          <div className="pt-8 border-t border-slate-200/60 mt-6">
+            <a
+              href="https://www.jotform.com/app/223625216444452"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-6 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-brand-blue transition-all duration-300"
+            >
+              {/* OPTIMIZATION FIX: Changed anchor text so it doesn't match the other Jotform links */}
+              Submit Position Application
+              <span className="sr-only">{` for ${role.title} position`}</span>
+              <span aria-hidden="true" className="text-xs font-light">→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
 export default function CareersPage() {
-  const [activeRoleTab, setActiveRoleTab] = useState<"companion" | "cna">("companion");
-  const activeRole = specializedRolesData[activeRoleTab];
 // Convert the centralized cityDirectory object into a flat array
   const allCities = Object.values(cityDirectory).map((city) => ({
     name: city.name,
@@ -154,118 +234,23 @@ export default function CareersPage() {
       {/* SECTION 2: ADVANCED INTERACTIVE JOB EXPLORER DASHBOARD */}
       <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-gradient-to-b from-white to-slate-50/50 border-t border-slate-100" aria-label="Interactive Job Directory">
         <PageShell>
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-display text-2xl sm:text-4xl font-semibold text-brand-ink">
               Explore Our Regional Care Openings
             </h2>
             <p className="text-slate-500 text-xs sm:text-sm mt-3 max-w-xl mx-auto">
               Select a position below to explore specific in-home roles, structural duties, and active regional service ranges throughout the greater Chicagoland area.
             </p>
-
-            {/* ADVANCED TAB TOGGLE CONTROL */}
-            <div className="inline-flex p-1.5 bg-slate-100 rounded-full mt-8 border border-slate-200/60 shadow-inner">
-              <button
-                type="button"
-                onClick={() => setActiveRoleTab("companion")}
-                className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-                  activeRoleTab === "companion"
-                    ? "bg-[#0c3e72] text-white shadow-md"
-                    : "text-slate-600 hover:text-brand-ink"
-                }`}
-              >
-                Caregiver & Companion
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveRoleTab("cna")}
-                className={`px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-                  activeRoleTab === "cna"
-                    ? "bg-[#0c3e72] text-white shadow-md"
-                    : "text-slate-600 hover:text-brand-ink"
-                }`}
-              >
-                Certified CNA Positions
-              </button>
-            </div>
           </div>
 
-          {/* DASHBOARD CONTENT SHEET CONTAINER */}
-          <div className="max-w-5xl mx-auto bg-white border border-slate-200/60 rounded-[2.5rem] shadow-[0_12px_40px_rgba(15,47,89,0.03)] p-6 sm:p-10 transition-all duration-300">
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-              
-              {/* Dashboard Left Side: Summary & Duties */}
-              <div className="space-y-6">
-                <div>
-                  <span className="inline-block text-[10px] font-bold uppercase tracking-widest bg-brand-orange/10 text-brand-orange px-3 py-1 rounded-md mb-2">
-                    Active Hiring Channel
-                  </span>
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-brand-ink">
-                    {activeRole.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm font-semibold text-[#1168b3] mt-1 flex items-center gap-1.5">
-                    📍 Primary Employment Zones: <span className="text-slate-600 font-normal">{activeRole.locations}</span>
-                  </p>
-                </div>
-
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
-                  {activeRole.summary}
-                </p>
-
-                <div className="space-y-3">
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-brand-ink border-b border-slate-100 pb-2">
-                    Core Clinical & Service Responsibilities:
-                  </h4>
-                  <ul className="space-y-2.5">
-                    {activeRole.duties.map((duty, index) => (
-                      <li key={index} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-500">
-                        <span className="h-2 w-2 rounded-full bg-[#1168b3] shrink-0 mt-1.5" />
-                        <span className="leading-relaxed">{duty}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Dashboard Right Side: Perks Callout & Quick Gateway Link */}
-              <div className="bg-slate-50 rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-slate-100">
-                <div className="space-y-6">
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-[#0c3e72]">
-                    Position Highlights & Package Overview
-                  </h4>
-                  
-                  <div className="space-y-3">
-                    {activeRole.highlights.map((highlight, index) => (
-                      <div key={index} className="bg-white border border-slate-200/40 rounded-xl px-4 py-3 flex items-center gap-3 shadow-sm">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} className="h-4 w-4 text-[#1168b3]" aria-hidden="true">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                        </svg>
-                        <span className="text-xs sm:text-sm font-bold text-brand-ink">{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <p className="text-xs text-slate-400 leading-relaxed italic pt-2">
-                    All candidates must maintain reliable, insured vehicle transportation and pass absolute reference checks to secure standard client home placements.
-                  </p>
-                </div>
-
-                <div className="pt-8 border-t border-slate-200/60 mt-6">
-                  <a
-                    href="https://www.jotform.com/app/223625216444452"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#0c3e72] px-6 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white shadow-md hover:bg-brand-blue transition-all duration-300"
-                  >
-                    {/* OPTIMIZATION FIX: Changed anchor text so it doesn't match the other Jotform links */}
-                    Submit Position Application
-                    <span className="sr-only"> for {activeRole.title} position</span>
-                    <span aria-hidden="true" className="text-xs font-light">→</span>
-                  </a>
-                </div>
-              </div>
-
-            </div>
-          </div>
+          {/* Role tabs: both panels render on the server; the client island only
+              toggles which is visible, so every job description is in the HTML. */}
+          <RoleTabs
+            tabs={[
+              { id: "companion", label: "Caregiver & Companion", panel: <RolePanel role={specializedRolesData.companion} /> },
+              { id: "cna", label: "Certified CNA Positions", panel: <RolePanel role={specializedRolesData.cna} /> },
+            ]}
+          />
         </PageShell>
       </section>
 
@@ -347,7 +332,7 @@ export default function CareersPage() {
                   </a>
                   
                   <div className="text-[11px] text-slate-400 max-w-md mx-auto leading-relaxed pt-2">
-                    Benevolence Home Services is an Equal Opportunity Employment provider compliant with IDPH regulatory frameworks operating across Cook, DuPage, Kane, Lake, and Will Counties.
+                    Benevolence Home Services is an Equal Opportunity Employment provider compliant with IDPH regulatory frameworks operating across Cook, DuPage, Lake, and Will Counties.
                   </div>
                 </div>
               </div>

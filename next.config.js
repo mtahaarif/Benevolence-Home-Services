@@ -10,6 +10,10 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 31536000,
+    // Next 16 only allows listed qualities and silently coerces anything else
+    // to the nearest one. 65 is the full-width hero photography (the LCP
+    // image); 75 is the default for everything else.
+    qualities: [65, 75],
   },
 
   async headers() {
@@ -70,19 +74,20 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // 1. Force 301 Canonical Hostname: Bypasses 308 status issues and dual-hop chains
+      // The non-www → www redirect is handled by the Vercel domain settings at
+      // the edge (verified 2026-10-19: the 301 comes back without
+      // x-matched-path, so this app never sees those requests).
+
+      // Westchester is the headquarters town and the homepage is its page, so
+      // the town URL hands its signals to `/` instead of competing with it for
+      // "home care Westchester IL". 301 (not the default 308) for the plainest
+      // signal to every crawler.
       {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'benevolencehomeservices.com',
-          },
-        ],
-        destination: 'https://www.benevolencehomeservices.com/:path*',
-        permanent: true,
+        source: '/areas-we-serve/westchester-il',
+        destination: '/',
+        statusCode: 301,
       },
-      // 2. Legacy index cleanups: Prevents duplicate homepage penalties
+      // Legacy index cleanups: Prevents duplicate homepage penalties
       {
         source: '/index.html',
         destination: '/',

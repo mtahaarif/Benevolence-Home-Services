@@ -20,6 +20,8 @@ import { SiteNav } from "@/components/site-nav";
 import HeroSlideshow from "@/components/hero-slideshow";
 import { SocialIcon } from "@/components/social-icons";
 import { contactDetails, footerLinks, priorityAreas, socialLinks } from "@/data/site-content";
+import { business, licenseText } from "@/data/business";
+import { cityHref } from "@/lib/cities";
 
 type ChromeProps = {
   children: React.ReactNode;
@@ -90,10 +92,20 @@ export function HeroSection({
   secondaryAction?: { label: string; href: string };
   facts?: string[];
   imageSrc?: string | string[];
-  imageAlt?: string;
+  /** One alt for every image, or one per image when the slides differ. */
+  imageAlt?: string | string[];
 }) {
   const isMultiple = Array.isArray(imageSrc) && imageSrc.length > 1;
   const images = Array.isArray(imageSrc) ? imageSrc : imageSrc ? [imageSrc] : [];
+  // Per-image alts are used as given; a single shared alt gets a slide
+  // number appended on multi-image heroes so each slide's alt is distinct.
+  const alts = images.map((_, i) =>
+    Array.isArray(imageAlt)
+      ? imageAlt[i] ?? imageAlt[0] ?? title
+      : isMultiple
+        ? `${imageAlt ?? title} - Slide ${i + 1}`
+        : imageAlt ?? title,
+  );
 
   return (
     <section className="w-full px-0 pt-0">
@@ -106,12 +118,12 @@ export function HeroSection({
             <div className="absolute inset-0 h-full w-full z-0 overflow-hidden">
               <Image
                 src={images[0]}
-                alt={imageAlt ?? title}
+                alt={alts[0]}
                 width={1920}
                 height={600}
                 priority
                 fetchPriority="high"
-                quality={75}
+                quality={65}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
                 className="object-cover object-center w-full h-full"
               />
@@ -125,13 +137,13 @@ export function HeroSection({
               <div className="absolute inset-0 h-full w-full z-0 overflow-hidden">
                 <Image
                   src={images[0]}
-                  alt={`${imageAlt ?? title} - Slide 1`}
+                  alt={alts[0]}
                   width={1920}
                   height={899}
                   priority
                   loading="eager"
                   fetchPriority="high"
-                  quality={75}
+                  quality={65}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1920px"
                   className="object-cover object-center w-full h-full"
                 />
@@ -140,7 +152,7 @@ export function HeroSection({
               {/* SLIDES 2 & 3: Rotating Overlays (client island) */}
               <HeroSlideshow
                 images={images.slice(1)}
-                imageAlt={imageAlt ?? title}
+                imageAlts={alts.slice(1)}
                 slideCount={images.length}
               />
             </>
@@ -377,7 +389,7 @@ function SiteFooter() {
             <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/70">
               {priorityAreas.map((area) => (
                 <li key={area.slug}>
-                  <Link href={`/areas-we-serve/${area.slug}`} className="footer-link">
+                  <Link href={cityHref(area.slug)} className="footer-link">
                     {`Home care in ${area.city}, IL`}
                   </Link>
                 </li>
@@ -395,6 +407,9 @@ function SiteFooter() {
             {/* Copyright & Legal */}
             <div className="text-[11px] leading-relaxed tracking-wider text-white/70">
               <p>© Copyright 2026 | Privacy Notice </p>
+              {business.licenseNumber ? (
+                <p className="mt-0.5">{licenseText}</p>
+              ) : null}
               <p className="mt-0.5">
                 <Link href="/privacy-policy" className="hover:text-white transition">
                   Do Not Sell/Share My Personal Information

@@ -1,9 +1,8 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
+import { contactDetails } from "@/data/site-content";
+import { PolicyNav } from "@/components/policy-nav";
 
 const policySections = [
   { id: "info-collect", name: "1. Information We Collect" },
@@ -38,36 +37,6 @@ function LegalBullet() {
 }
 
 export default function PrivacyPolicyPage() {
-  const [activeSection, setActiveSection] = useState(policySections[0].id);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-25% 0px -70% 0px" }
-    );
-
-    policySections.forEach((sec) => {
-      const element = document.getElementById(sec.id);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const y = element.getBoundingClientRect().top + window.scrollY - 110;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  };
-
   return (
     <>
       {/* HERO BANNER SECTION */}
@@ -97,32 +66,8 @@ export default function PrivacyPolicyPage() {
 
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-start relative mt-16">
             
-            {/* LEFT SIDEBAR: Sticky Interactive Table of Contents Scrollspy */}
-            <aside className="w-full lg:w-[32%] sticky top-[100px] z-40 bg-white lg:bg-transparent p-5 lg:p-0 rounded-2xl border lg:border-0 border-slate-200/60 shadow-sm lg:shadow-none">
-              <div className="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-1.5 pb-2 lg:pb-0 scrollbar-hide">
-                <h3 className="hidden lg:block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 pl-4">
-                  Document Navigation
-                </h3>
-                
-                {policySections.map((sec) => {
-                  const isActive = activeSection === sec.id;
-                  return (
-                    <button
-                      key={sec.id}
-                      type="button"
-                      onClick={() => scrollToSection(sec.id)}
-                      className={`flex-shrink-0 lg:flex-shrink w-auto lg:w-full text-left px-4 py-3 rounded-xl transition-all duration-200 text-xs sm:text-sm font-semibold tracking-wide ${
-                        isActive 
-                          ? "bg-[#0a2540] text-white shadow-md shadow-blue-950/10" 
-                          : "bg-transparent text-slate-500 hover:bg-white hover:text-brand-ink"
-                      }`}
-                    >
-                      {sec.name}
-                    </button>
-                  );
-                })}
-              </div>
-            </aside>
+            {/* LEFT SIDEBAR: sticky table-of-contents scroll-spy (client island) */}
+            <PolicyNav items={policySections} />
 
             {/* RIGHT STREAM: Clean, Structured Document Content Sheet */}
             <div className="w-full lg:w-[68%] bg-white border border-slate-200/50 rounded-[2.5rem] p-6 sm:p-10 shadow-[0_8px_30px_rgba(15,47,89,0.02)] space-y-12 text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed font-medium">
@@ -413,9 +358,9 @@ export default function PrivacyPolicyPage() {
                   
                   <div className="pt-2 text-xs sm:text-sm font-bold text-slate-600 space-y-2 font-mono tracking-wide">
                     <p className="text-sm sm:text-base text-[#0c3e72] font-display font-bold tracking-normal">BENEVOLENCE HOME SERVICES</p>
-                    <p>Corporate Suite: 1 Westbrook Corporate Center, Suite 300, Westchester, IL 60154</p>
-                    <p>Official Intake Line: <a href="tel:7083040296" aria-label="Call our privacy officer directly" className="underline hover:text-brand-orange">708-304-0296</a></p>
-                    <p>Inbound Mailbox: <a href="mailto:info@benevolencehomeservices.com" aria-label="Email our governance department" className="underline hover:text-brand-orange">info@benevolencehomeservices.com</a></p>
+                    <p>{`Corporate Suite: ${contactDetails.address}`}</p>
+                    <p>Official Intake Line: <a href={contactDetails.phoneHref} aria-label="Call our privacy officer directly" className="underline hover:text-brand-orange">{contactDetails.phone}</a></p>
+                    <p>Inbound Mailbox: <a href={contactDetails.emailHref} aria-label="Email our governance department" className="underline hover:text-brand-orange">{contactDetails.email}</a></p>
                   </div>
                 </div>
               </section>
@@ -432,7 +377,7 @@ export default function PrivacyPolicyPage() {
             <div className="mx-auto max-w-3xl space-y-6">
               <h2 className="text-3xl md:text-5xl font-display font-bold text-white">Let Us Help You Build the Right Care Plan</h2>
               <p className="text-blue-100/80 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
-                Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, BENEVOLENCE HOME SERVICES is ready to help. Contact us to discuss non-medical home care in Westchester or throughout Cook, DuPage, Kane, Lake, and Will Counties.
+                Finding the right support begins with a conversation. Whether you are planning ahead, supporting an aging parent, or looking for respite as a family caregiver, BENEVOLENCE HOME SERVICES is ready to help. Contact us to discuss non-medical home care in Westchester or throughout Cook, DuPage, Lake, and Will Counties.
               </p>
               
               <div className="pt-4 flex flex-col sm:flex-row gap-4 items-center justify-center">
@@ -444,8 +389,8 @@ export default function PrivacyPolicyPage() {
                   {/* OPTIMIZATION: Invisible screen reader text resolves the Duplicate Anchor Links penalty */}
                   <span className="sr-only"> securely</span>
                 </Link>
-                <a href="tel:7083040296" aria-label="Call our primary phone line at 708-304-0296" className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">
-                  Call 708-304-0296
+                <a href={contactDetails.phoneHref} aria-label={`Call our primary phone line at ${contactDetails.phone}`} className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-xs font-bold uppercase tracking-widest text-white !text-white hover:bg-white/5 transition-all w-full sm:w-auto">
+                  {`Call ${contactDetails.phone}`}
                 </a>
               </div>
             </div>

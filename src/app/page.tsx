@@ -1,5 +1,4 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -9,14 +8,58 @@ import {
 } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import HomeAccordion from "@/components/home-accordion";
+import FaqAccordion from "@/components/faq-accordion";
+import { JsonLd } from "@/components/json-ld";
+import { Testimonials } from "@/components/testimonials";
 import {
+  cityDirectory,
   contactDetails,
   homeHighlights,
-  priorityAreas,
-  socialLinks,
+  type CitySlug,
 } from "@/data/site-content";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityHref, HOME_CITY_SLUG } from "@/lib/cities";
+import { cityFaqs } from "@/lib/city-faqs";
+import { joinNatural } from "@/lib/format";
+import { faqSchema } from "@/lib/schema";
+
+const HOME_TITLE = "Home Care in Westchester, IL | Benevolence Home Services";
+const HOME_DESCRIPTION =
+  "Nurse-led home care in Westchester, IL: personal care, companionship and respite for seniors in Oak Brook, Elmhurst, La Grange and nearby. Free assessment.";
+
+/**
+ * The homepage is the Westchester page: it is the strongest page on the site
+ * and the one the Google Business Profile links to, so it targets "home care
+ * Westchester IL" directly. /areas-we-serve/westchester-il redirects here.
+ */
+export const metadata: Metadata = {
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: "https://www.benevolencehomeservices.com",
+  },
+  twitter: {
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+  },
+};
+
+const westchester = cityDirectory[HOME_CITY_SLUG];
+
+/**
+ * The closest core towns to the office, linked from the Westchester section.
+ * The first three are also the Cook County neighbours named in its FAQ.
+ */
+const WESTCHESTER_NEIGHBOURS: readonly CitySlug[] = [
+  "hillside-il",
+  "la-grange-il",
+  "western-springs-il",
+  "oak-brook-il",
+  "elmhurst-il",
+];
 
 
 export default function HomePage() {
@@ -64,20 +107,27 @@ export default function HomePage() {
     slug: city.slug,
   }));
 
+  const neighbours = WESTCHESTER_NEIGHBOURS.map((slug) => cityDirectory[slug]);
+  const westchesterFaqs = cityFaqs(westchester, neighbours);
+
   return (
     <>
       {/* HERO BANNER SECTION WITH OPTIMIZED SEO H1 TAG */}
       <div className="[&_a[href='/contact-us']]:!text-white [&_a:first-of-type]:!text-white">
         <HeroSection
-          eyebrow="Westchester, IL & Chicagoland’s trusted provider for in-home senior care"
-          title="Benevolence Home Services: Compassionate Home Care"
-          primaryAction={{ 
-            label: "Request a Care Consultation", 
+          eyebrow="Serving Westchester, Oak Brook, Elmhurst & the Western Suburbs"
+          title="Nurse-Led Home Care in Westchester, IL"
+          primaryAction={{
+            label: "Request a Care Consultation",
             href: "/contact-us"
           }}
-          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: `Call ${contactDetails.phone}`, href: contactDetails.phoneHref }}
           imageSrc={["/1.webp", "/2.webp", "/3.webp"]}
-          imageAlt="Compassionate home care support in Westchester"
+          imageAlt={[
+            "Smiling nurse in blue scrubs",
+            "Adult daughter hugging her smiling older mother at home",
+            "Caregiver in scrubs with her hands on a smiling senior woman's shoulders",
+          ]}
         />
       </div>
 
@@ -100,7 +150,7 @@ export default function HomePage() {
                   Our experienced caregivers offer a wide range of <strong>in-home care services</strong>, including personal care, companionship, assistance with daily living activities, respite care, and nurse-led oversight and care coordination. Every care plan is tailored to the unique needs, preferences, and goals of each client and their family.
                 </p>
                 <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                  Whether you need short-term assistance or ongoing senior care support, Benevolence Home Services is committed to delivering exceptional home care services you can trust. We proudly serve families across Will County, Cook County, DuPage County, and Kane County, providing dependable care that brings peace of mind to clients and their loved ones.
+                  Whether you need short-term assistance or ongoing senior care support, Benevolence Home Services is committed to delivering exceptional home care services you can trust. We proudly serve families across Cook, DuPage, Lake, and Will Counties, providing dependable care that brings peace of mind to clients and their loved ones.
                 </p>
 
                 <div className="pt-4">
@@ -129,6 +179,79 @@ export default function HomePage() {
           </PageShell>
         </section>
       </ScrollReveal>
+
+      {/* SECTION 1B: HOME CARE IN WESTCHESTER — the headquarters town's local
+          detail, which used to live on /areas-we-serve/westchester-il. */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24 bg-white border-b border-slate-100" aria-labelledby="westchester-heading">
+        <PageShell>
+          <div className="max-w-4xl mx-auto space-y-8">
+            <ScrollReveal>
+              <div className="space-y-4 max-w-3xl">
+                <p className="text-sm font-semibold uppercase tracking-[0.35em] text-brand-blue">
+                  Our Hometown
+                </p>
+                <h2 id="westchester-heading" className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
+                  Home Care in Westchester, IL
+                </h2>
+                <p className="text-base leading-8 text-slate-700 sm:text-lg">
+                  {westchester.desc}
+                </p>
+                <p className="text-base leading-8 text-slate-700">
+                  Families across Westchester rely on Benevolence Home Services for{" "}
+                  <strong>nurse-led, non-medical home care in Westchester, IL</strong> —
+                  personal care, companionship, and respite support delivered in the
+                  comfort of home, with every care plan overseen by a Registered Nurse.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+              <div className="bg-slate-50 border border-slate-200/60 p-6 rounded-2xl">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#0c3e72] mb-1">Postal Code Covered</p>
+                <p className="text-base font-bold text-brand-ink">{`Westchester, IL ${westchester.zipCodes.join(", ")}`}</p>
+                <p className="text-xs text-slate-500 mt-1">{westchester.county}</p>
+              </div>
+
+              <div className="bg-slate-50 border border-slate-200/60 p-6 rounded-2xl">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#0c3e72] mb-1">Hospital Discharge Support</p>
+                <p className="text-sm font-semibold text-brand-ink">{joinNatural(westchester.hospitals)}</p>
+              </div>
+
+              <div className="bg-slate-50 border border-slate-200/60 p-6 rounded-2xl">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#0c3e72] mb-2">Nearby Communities</p>
+                <ul className="space-y-1.5">
+                  {neighbours.map((town) => (
+                    <li key={town.slug}>
+                      <Link
+                        href={cityHref(town.slug)}
+                        className="text-sm font-semibold text-brand-ink underline-offset-4 hover:text-[#0c3e72] hover:underline"
+                      >
+                        {`Home care in ${town.name}, IL`}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="pt-6">
+              <ScrollReveal>
+                <SectionHeading
+                  centered
+                  eyebrow="Westchester, Illinois"
+                  title="Home Care in Westchester: Common Questions"
+                />
+              </ScrollReveal>
+              <FaqAccordion faqs={westchesterFaqs} />
+            </div>
+          </div>
+        </PageShell>
+      </section>
+
+      {/* FAMILY TESTIMONIALS (renders nothing until real ones are added) */}
+      <Testimonials citySlug={HOME_CITY_SLUG} />
+
+      <JsonLd data={faqSchema(westchesterFaqs)} />
 
       {/* SECTION 2: CORE HIGHLIGHTS FEATURE PANELS */}
       <ScrollReveal>
@@ -159,12 +282,11 @@ export default function HomePage() {
                     </div>
 
                     <div className="mt-6 space-y-6 flex flex-col items-center">
-                      <Link 
-                        href="/services"
-                        aria-label={`Explore our full suite of personalized care programs for ${item.title}`}
+                      <Link
+                        href={item.href}
                         className="highlight-cta"
                       >
-                        Explore Care Options <span className="sr-only">for {item.title}</span>
+                        {item.linkLabel}
                         <span aria-hidden="true" className="text-[10px] font-bold transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                       </Link>
 
@@ -359,7 +481,7 @@ export default function HomePage() {
                 &ldquo;Our mission is to provide compassionate, high-quality non-medical home care that empowers individuals to live with dignity, independence, and comfort in their own homes. We are committed to building meaningful relationships, delivering personalized care, and supporting families through dependable, nurse-guided care services.&rdquo;
               </p>
               <div className="pt-6 text-xs sm:text-sm text-slate-600 font-medium max-w-md mx-auto leading-relaxed">
-                Benevolence Home Services is proud to be a nurse-led, faith-based home care agency committed to compassionate, non-medical support for seniors and families across Cook, DuPage, Kane, Lake, and Will Counties.
+                Benevolence Home Services is proud to be a nurse-led, faith-based home care agency committed to compassionate, non-medical support for seniors and families across Cook, DuPage, Lake, and Will Counties.
               </div>
             </div>
           </PageShell>
@@ -397,69 +519,16 @@ export default function HomePage() {
                   </span>
                 </Link>
                 <Link 
-                  href="tel:7083040296"
+                  href={contactDetails.phoneHref}
                   className="inline-flex items-center justify-center rounded-full bg-white border border-slate-200 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-brand-ink transition hover:bg-slate-50 shadow-sm"
                 >
-                  Call 708-304-0296
+                  {`Call ${contactDetails.phone}`}
                 </Link>
               </div>
             </div>
           </PageShell>
         </section>
       </ScrollReveal>
-
-      {/*
-        PRIMARY ORGANIZATION ENTITY
-
-        The homepage carried no structured data at all, which left Google to
-        infer the business from page text. This declares the entity once, at a
-        stable @id the location pages already point their `provider` at, so the
-        whole site resolves to one business rather than 38 loosely related pages.
-
-        `sameAs` matters most here: it is how Google links this website to the
-        Google Business Profile and the social accounts. Without it the site and
-        the GBP listing can be treated as separate entities, which weakens both.
-      */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "HomeHealthCare",
-            "@id": "https://www.benevolencehomeservices.com/#organization",
-            "name": "Benevolence Home Services",
-            "alternateName": "Benevolence Home Services and Staffing Agency",
-            "url": "https://www.benevolencehomeservices.com",
-            "logo": "https://www.benevolencehomeservices.com/footer-logo.png",
-            "image": "https://www.benevolencehomeservices.com/footer-logo.png",
-            "telephone": contactDetails.phone,
-            "email": contactDetails.email,
-            "priceRange": "$$",
-            "description":
-              "Nurse-led, faith-based non-medical home care and healthcare staffing serving seniors across Cook, DuPage, Lake and Will Counties from Westchester, Illinois.",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "1 Westbrook Corporate Center, Suite 300",
-              "addressLocality": "Westchester",
-              "addressRegion": "IL",
-              "postalCode": "60154",
-              "addressCountry": "US",
-            },
-            "geo": { "@type": "GeoCoordinates", "latitude": 41.8666, "longitude": -87.8856 },
-            "openingHoursSpecification": {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-              "opens": "00:00",
-              "closes": "23:59",
-            },
-            "areaServed": priorityAreas.map((area) => ({
-              "@type": "City",
-              "name": `${area.city}, IL`,
-            })),
-            "sameAs": socialLinks.map((s) => s.href),
-          }),
-        }}
-      />
     </>
   );
 }

@@ -4,7 +4,8 @@ import Image from "next/image";
 import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, contactDetails } from "@/data/site-content";
+import { business } from "@/data/business";
 
 // 1. STATIC METADATA ENGINE: Pre-rendered on the server for maximum indexing authority
 export const metadata: Metadata = {
@@ -90,7 +91,7 @@ export default function AboutUsPage() {
                   As a nurse-led home care agency, we bring clinical insight, professional oversight, and a deep commitment to quality into every aspect of care. Our services are thoughtfully designed to support daily living while providing families with confidence, peace of mind, and continuity of care. We understand that every household manages separate requirements, which is why our care plans avoid a one-size-fits-all approach.
                 </p>
                 <p>
-                  By coordinating with clients, families, and primary physicians, our administrative team establishes supportive safety environments across Cook County, DuPage County, Kane County, Lake County, and Will County. We focus on active clinical review pathways to recognize changes in lifestyle indicators early, ensuring long-term wellness outcomes.
+                  By coordinating with clients, families, and primary physicians, our administrative team establishes supportive safety environments across Cook County, DuPage County, Lake County, and Will County. We focus on active clinical review pathways to recognize changes in lifestyle indicators early, ensuring long-term wellness outcomes.
                 </p>
               </div>
             </div>
@@ -388,7 +389,7 @@ export default function AboutUsPage() {
                 <p className="font-display font-bold text-lg text-brand-ink mb-2">Serving Families Across Chicagoland</p>
                 <p className="text-slate-500 text-xs mb-4 font-medium">Based in Westchester, Illinois, we provide care throughout:</p>
                 <ul className="grid grid-cols-2 gap-2 text-xs font-bold text-slate-700">
-                  {["Cook County", "DuPage County", "Kane County", "Lake County", "Will County"].map((c, i) => (
+                  {business.servedCounties.map((county) => `${county} County`).map((c, i) => (
                     <li key={i} className="bg-slate-50 p-2.5 rounded-lg border border-slate-100 flex items-center justify-center text-center">{c}</li>
                   ))}
                 </ul>
@@ -453,16 +454,16 @@ export default function AboutUsPage() {
                   </span>
                 </Link>
                 <Link 
-                  href="tel:7083040296"
+                  href={contactDetails.phoneHref}
                   className="inline-flex items-center justify-center rounded-full bg-white border border-slate-200 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-brand-ink transition hover:bg-slate-50 shadow-sm"
                 >
-                  Call 708-304-0296
+                  {`Call ${contactDetails.phone}`}
                 </Link>
               </div>
               <div className="pt-8 border-t border-white/10 max-w-md mx-auto text-xs text-ink space-y-1 font-medium tracking-wide">
                 <p className="font-bold text-ink uppercase tracking-widest">BENEVOLENCE HOME SERVICES</p>
-                <p>1 Westbrook Corporate Center, Suite 300, Westchester, IL 60154</p>
-                <p>Phone: 708-304-0296 &bull; Email: info@benevolencehomeservices.com</p>
+                <p>{contactDetails.address}</p>
+                <p>{`Phone: ${contactDetails.phone} • Email: ${contactDetails.email}`}</p>
               </div>
             </div>
           </PageShell>

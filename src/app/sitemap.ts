@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blogs";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, homeCareServices } from "@/data/site-content";
+import { HOME_CITY_SLUG } from "@/lib/cities";
 const BASE = "https://www.benevolencehomeservices.com";
 
 /**
@@ -15,17 +16,6 @@ const BASE = "https://www.benevolencehomeservices.com";
  * Deriving the entries from the same data the routes are built from means the
  * sitemap can no longer drift out of date when a town or post is added.
  */
-const SERVICE_SLUGS = [
-  "personal-care",
-  "companionship",
-  "meal-preparation",
-  "light-housekeeping",
-  "medication-reminders",
-  "respite-care",
-  "transportation",
-  "specialized-support",
-] as const;
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
@@ -49,13 +39,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency,
       priority,
     })),
-    ...SERVICE_SLUGS.map((slug) => ({
+    ...homeCareServices.map(({ slug }) => ({
       url: `${BASE}/services/${slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    ...Object.keys(cityDirectory).map((slug) => ({
+    // The headquarters town is the homepage; its town URL only redirects there.
+    ...Object.keys(cityDirectory).filter((slug) => slug !== HOME_CITY_SLUG).map((slug) => ({
       url: `${BASE}/areas-we-serve/${slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,

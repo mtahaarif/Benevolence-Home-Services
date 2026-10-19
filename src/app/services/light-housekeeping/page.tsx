@@ -1,12 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import FaqAccordion from "@/components/faq-accordion";
+import { ServiceJsonLd } from "@/components/service-json-ld";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, contactDetails } from "@/data/site-content";
 
 type FAQItem = {
   question: string;
@@ -113,7 +112,7 @@ export default function LightHousekeepingPage() {
           title="Senior Homemaker & Light Housekeeping Services"
           // OPTIMIZATION: Differentiated button texts to resolve Duplicate Anchor Link penalty
           primaryAction={{ label: "Request Homemaker Services", href: "/contact-us" }}
-          secondaryAction={{ label: "Call for Housekeeping: 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: `Call for Housekeeping: ${contactDetails.phone}`, href: contactDetails.phoneHref }}
           imageSrc="/nh-2172630013U9i2e14.webp" 
           imageAlt="Caregiver keeping living spaces tidy and organized"
         />
@@ -294,6 +293,8 @@ export default function LightHousekeepingPage() {
           </PageShell>
         </section>
       </ScrollReveal>
+
+      <ServiceJsonLd slug="light-housekeeping" faqs={faqs} />
     </>
   );
 }

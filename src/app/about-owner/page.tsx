@@ -3,7 +3,7 @@ import Link from "next/link";
 import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, contactDetails } from "@/data/site-content";
 
 // OPTIMIZATION FIX: Removed "use client" to convert this to a high-performance Server Component.
 // This allows Google to instantly parse the newly expanded DOM structures and metadata.
@@ -74,7 +74,7 @@ export default function AboutOwnerPage() {
                   Katrina&apos;s journey into the professional healthcare industry was heavily inspired by her time serving as a primary caregiver for her own mother. This deeply personal, hands-on role ignited her lifelong dedication to providing high-quality, empathetic in-home care. She understands firsthand the physical and emotional challenges that families face when seeking reliable support for their aging loved ones. This lived experience drives her mission to support individuals and families through exceptional, non-medical home care services, ensuring that every client receives the same level of devotion she provided to her own family.
                 </p>
                 <p>
-                  Operating extensively throughout Westchester, IL, and the surrounding communities of Cook, DuPage, Kane, Lake, and Will Counties, Katrina has built an agency that stands apart. Benevolence Home Services doesn&apos;t just offer basic assistance; it provides a comprehensive suite of solutions, including specialized Alzheimer&apos;s and dementia care, companion support, light housekeeping, meal preparation, medication reminders, and vital respite care for exhausted family members. By leaning on her clinical background, Katrina ensures that all care plans are rigorously designed, monitored, and executed with absolute precision.
+                  Operating extensively throughout Westchester, IL, and the surrounding communities of Cook, DuPage, Lake, and Will Counties, Katrina has built an agency that stands apart. Benevolence Home Services doesn&apos;t just offer basic assistance; it provides a comprehensive suite of solutions, including specialized Alzheimer&apos;s and dementia care, companion support, light housekeeping, meal preparation, medication reminders, and vital respite care for exhausted family members. By leaning on her clinical background, Katrina ensures that all care plans are rigorously designed, monitored, and executed with absolute precision.
                 </p>
                 <p>
                   In addition to delivering premier in-home senior care, Katrina assists local healthcare organizations by addressing critical medical staffing challenges with integrity and excellence. Through her businesses, she strives to create safe, supportive, and empowering spaces for both vulnerable clients and dedicated care professionals. Her unwavering commitment to clinical innovation, operational competence, and community enrichment has rapidly positioned Benevolence Home Services as a trusted, leading name in Illinois care and staffing solutions.
@@ -101,7 +101,7 @@ export default function AboutOwnerPage() {
                 <li className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
                   <h4 className="font-bold text-brand-ink text-lg mb-3">Nurse-Led Clinical Excellence</h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Because Katrina is a Registered Nurse, Benevolence Home Services operates on a higher standard of care than typical non-medical agencies. Every caregiver is carefully vetted, trained, and supervised through a clinical lens, ensuring that subtle shifts in a client's health are noticed and addressed proactively before they escalate into emergencies.
+                    Because Katrina is a Registered Nurse, Benevolence Home Services operates on a higher standard of care than typical non-medical agencies. Every caregiver is carefully vetted, trained, and supervised through a clinical lens, ensuring that subtle shifts in a client&apos;s health are noticed and addressed proactively before they escalate into emergencies.
                   </p>
                 </li>
                 <li className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100">
@@ -145,16 +145,16 @@ export default function AboutOwnerPage() {
                   </span>
                 </Link>
                 <Link 
-                  href="tel:7083040296"
+                  href={contactDetails.phoneHref}
                   className="inline-flex items-center justify-center rounded-full bg-white border border-slate-200 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-brand-ink transition hover:bg-slate-50 shadow-sm"
                 >
-                  Call 708-304-0296
+                  {`Call ${contactDetails.phone}`}
                 </Link>
               </div>
               <div className="pt-8 border-t border-white/10 max-w-md mx-auto text-xs text-ink space-y-1 font-medium tracking-wide">
                 <p className="font-bold text-ink uppercase tracking-widest">BENEVOLENCE HOME SERVICES</p>
-                <p>1 Westbrook Corporate Center, Suite 300, Westchester, IL 60154</p>
-                <p>Phone: 708-304-0296 &bull; Email: info@benevolencehomeservices.com</p>
+                <p>{contactDetails.address}</p>
+                <p>{`Phone: ${contactDetails.phone} • Email: ${contactDetails.email}`}</p>
               </div>
             </div>
           </PageShell>

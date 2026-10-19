@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/site-shell";
+import { JsonLd } from "@/components/json-ld";
+import { organizationSchema } from "@/lib/schema";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
   },
   // FIX 2: Template pattern ensuring pages with custom titles append the brand cleanly
   title: {
-    default: "Benevolence Home Services | Home Care in Westchester, IL",
+    default: "Home Care in Westchester, IL | Benevolence Home Services",
     template: "%s | Benevolence Home Services",
   },
   description:
@@ -59,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Benevolence Home Services | Nurse-Led Senior Care",
     description:
-      "Premium nurse-led home care and healthcare staffing solutions across five Chicagoland counties.",
+      "Premium nurse-led home care and healthcare staffing solutions across four Chicagoland counties.",
     images: ["/footer-logo.png"],
   },
   icons: {
@@ -84,6 +86,9 @@ export default function RootLayout({
         <SiteChrome>
           {children}
         </SiteChrome>
+        {/* The one declaration of the business entity. Every page carries it,
+            and page-level schema points at it by @id instead of redeclaring it. */}
+        <JsonLd data={organizationSchema()} />
       </body>
     </html>
   );

@@ -1,3 +1,6 @@
+import { business, fullAddress, socialLinks } from "@/data/business";
+import { joinNatural } from "@/lib/format";
+
 export const brand = {
   name: "Benevolence Home Services and Staffing Agency",
   shortName: "Benevolence",
@@ -96,69 +99,47 @@ export const navItems: NavItem[] = [
   },
 ];
 
-/**
- * Priority local markets.
- *
- * The business ranks first in Westchester (where the office is) but nowhere
- * else, and the town pages were reachable only from /areas-we-serve — one
- * internal link each, which tells Google they are low-priority leaves. These
- * are the markets worth spending internal link equity on, surfaced from the
- * homepage and the footer so every page passes authority into them.
- *
- * Anchors are full descriptive phrases rather than bare town names so each
- * link states what the destination is about.
- */
-export const priorityAreas = [
-  { city: "Westchester", slug: "westchester-il", note: "Our headquarters" },
-  { city: "Hillside", slug: "hillside-il", note: "Minutes from our office" },
-  { city: "Oak Brook", slug: "oak-brook-il", note: "DuPage County" },
-  { city: "Hinsdale", slug: "hinsdale-il", note: "DuPage County" },
-  { city: "Burr Ridge", slug: "burr-ridge-il", note: "DuPage County" },
-  { city: "Elmhurst", slug: "elmhurst-il", note: "DuPage County" },
-  { city: "La Grange", slug: "la-grange-il", note: "Cook County" },
-  { city: "Western Springs", slug: "western-springs-il", note: "Cook County" },
-  { city: "Oak Park", slug: "oak-park-il", note: "Cook County" },
-  { city: "River Forest", slug: "river-forest-il", note: "Cook County" },
-  { city: "Downers Grove", slug: "downers-grove-il", note: "DuPage County" },
-  { city: "Lombard", slug: "lombard-il", note: "DuPage County" },
-] as const;
-
+/** Display-ready contact values, all derived from `business` (src/data/business.ts). */
 export const contactDetails = {
-  phone: "708-304-0296",
-  phoneHref: "tel:7083040296",
-  email: "info@benevolencehomeservices.com",
-  emailHref: "mailto:info@benevolencehomeservices.com",
-  address: "One Westbrook Corporate Center, Suite 300, Westchester, IL 60154",
-  serviceAreas: "Cook, DuPage, Lake and Will counties",
+  phone: business.phoneDisplay,
+  phoneHref: business.phoneHref,
+  email: business.email,
+  emailHref: `mailto:${business.email}`,
+  address: fullAddress,
+  serviceAreas: `${joinNatural(business.servedCounties)} counties`,
   calendly: "https://calendly.com/info-27777",
 } as const;
 
-export const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/benevolence-home-services" },
-  { label: "Facebook", href: "https://www.facebook.com/people/Benevolence-Care-Page/61567035436101/" },
-  { label: "Instagram", href: "https://www.instagram.com/benevolencehsvc/" },
-  { label: "YouTube", href: "https://www.youtube.com/@BenevolenceHomeServicesStaff" },
-  { label: "TikTok", href: "https://www.tiktok.com/@benevolencehomeservices" },
-] as const;
+export { socialLinks };
 
+/**
+ * Homepage highlight cards. Each links to its own service page with a
+ * descriptive anchor, so the homepage's authority flows to the right page.
+ */
 export const homeHighlights = [
   {
     title: "Companionship",
     body: "We provide companionship to enrich lives and combat loneliness.",
     href: "/services/companionship",
+    linkLabel: "Explore Companionship",
   },
   {
-
     title: "Personal Care",
     body: "Provides compassionate assistance with daily living needs.",
+    href: "/services/personal-care",
+    linkLabel: "Explore Personal Care",
   },
   {
     title: "Medication Reminders",
     body: "Help individuals manage their prescriptions and ensure adherence to their medication schedules.",
+    href: "/services/medication-reminders",
+    linkLabel: "Explore Medication Reminders",
   },
-    {
+  {
     title: "View More Services",
     body: "Discover comprehensive care solutions for your needs.",
+    href: "/services",
+    linkLabel: "View all home care services",
   },
 ] as const;
 
@@ -182,36 +163,48 @@ export const traditionalCare = [
   "Care is primarily task-based",
 ] as const;
 
+/**
+ * The eight services. `slug` is the route segment under /services, so links
+ * and the sitemap are built from this list rather than guessed from titles.
+ */
 export const homeCareServices = [
   {
+    slug: "personal-care",
     title: "Personal Care",
     body: "Experience mobility support, including safe transfers and positioning for enhanced ease.",
   },
   {
+    slug: "companionship",
     title: "Companionship",
     body: "Build connections through engaging conversations, shared activities, and emotional encouragement.",
   },
   {
+    slug: "meal-preparation",
     title: "Meal Preparation and Nutrition",
     body: "Enjoy nutritious meals thoughtfully prepared to meet dietary preferences and requirements.",
   },
   {
+    slug: "light-housekeeping",
     title: "Light Housekeeping",
     body: "Reduce clutter and ensure spaces remain functional, welcoming, and well-maintained.",
   },
   {
+    slug: "medication-reminders",
     title: "Medication Reminders",
     body: "Stay on track with consistent reminders to take medications as directed by healthcare providers.",
   },
   {
+    slug: "respite-care",
     title: "Respite Care",
     body: "Allow family caregivers to recharge while professional care continues seamlessly in their absence.",
   },
   {
+    slug: "transportation",
     title: "Transportation Services",
     body: "Travel seamlessly with organized assistance for both short trips and planned outings.",
   },
   {
+    slug: "specialized-support",
     title: "Specialized Support",
     body: "Address care requirements for specific health conditions with attention and expertise.",
   },
@@ -246,32 +239,98 @@ export const resources = [
   { label: "U.S. Department of Health & Human Services", href: "https://www.hhs.gov/" },
 ] as const;
 
+export interface Testimonial {
+  quote: string;
+  /** As the family agreed to be credited, e.g. "Maria T." or "The Johnson family". */
+  name: string;
+  /** Town record the family lives in (a `cityDirectory` key); omit for site-wide quotes. */
+  citySlug?: string;
+  service?: string;
+}
+
+/**
+ * Family testimonials, shown on the homepage and town pages.
+ *
+ * OWNER: real, permissioned testimonials only — never paraphrased or
+ * invented. Get written consent for the wording and the credited name. While
+ * this list is empty the testimonial sections render nothing. Deliberately no
+ * Review/AggregateRating schema: Google ignores self-hosted reviews of your
+ * own business for star ratings.
+ */
+export const testimonials: readonly Testimonial[] = [];
+
 export const privacyHighlights = [
   "Contact details, professional information, application information, and service-related information",
   "Technical data such as device information, website usage, location data, and cookies",
   "Form submissions, newsletter preferences, uploaded files, and correspondence",
 ] as const;
 
-// Add this to the bottom of src/data/site-content.ts
+export type CountyName = "Cook County" | "DuPage County" | "Lake County" | "Will County";
+
+/**
+ * The four counties the agency serves, in display order. Town pages are
+ * grouped under these on /areas-we-serve.
+ */
+export const counties: readonly { id: string; name: CountyName; description: string }[] = [
+  {
+    id: "cook-county",
+    name: "Cook County",
+    description: "Providing premium private duty home care, hourly respite relief, and senior companionship across Cook County communities.",
+  },
+  {
+    id: "dupage-county",
+    name: "DuPage County",
+    description: "Delivering top-tier, nurse-led home care, Alzheimer's support, and live-in assistance to seniors and families throughout DuPage County.",
+  },
+  {
+    id: "lake-county",
+    name: "Lake County",
+    description: "Providing specialized non-medical home care options, memory care support, and friendly companion escorts for Lake County families.",
+  },
+  {
+    id: "will-county",
+    name: "Will County",
+    description: "Extending professional, nurse-led companion models, specialized dementia care, and personal routine assistance across Will County territory.",
+  },
+];
+
+/**
+ * How close a town is to the Westchester office.
+ *
+ * "core" towns sit within roughly 12 miles, where fast assessment and start
+ * times are realistic; "extended" towns are served, but start dates depend on
+ * caregiver availability nearby, so pages must not promise next-day starts
+ * there. The owner can move a town between tiers by editing its record.
+ */
+export type CityTier = "core" | "extended";
 
 export interface CityData {
   name: string;
-  county: string;
+  county: CountyName;
   slug: string;
-  zipCodes: string;
+  tier: CityTier;
+  /** Empty when coverage isn't defined by ZIP; `coverageNote` explains it instead. */
+  zipCodes: string[];
+  coverageNote?: string;
   hospitals: string[];
   landmarks: string[];
   desc: string;
 }
 
-export const cityDirectory: Record<string, CityData> = {
+/**
+ * Every town page on the site. This is the single source of truth: the town
+ * routes, /areas-we-serve, the sitemap, footer links and schema all read from
+ * it, so a town is added or removed here and nowhere else.
+ */
+const cityRecords = {
   // Cook County
   "westchester-il": {
     name: "Westchester",
     county: "Cook County",
     slug: "westchester-il",
-    zipCodes: "60154",
-    hospitals: ["Loyola University Medical Center", "AdventHealth La Grange"],
+    tier: "core",
+    zipCodes: ["60154"],
+    hospitals: ["Loyola University Medical Center", "UChicago Medicine AdventHealth La Grange"],
     landmarks: ["Westchester Woods", "Westbrook Corporate Center"],
     desc: "As our central headquarters base, Benevolence Home Services provides premier round-the-clock nurse-led personal care, medication management, and specialized senior support for Westchester families."
   },
@@ -279,7 +338,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Oak Park",
     county: "Cook County",
     slug: "oak-park-il",
-    zipCodes: "60301, 60302, 60304",
+    tier: "core",
+    zipCodes: ["60301", "60302", "60304"],
     hospitals: ["Rush Oak Park Hospital", "West Suburban Medical Center"],
     landmarks: ["Frank Lloyd Wright Home and Studio", "Oak Park Conservatory"],
     desc: "Compassionate, reliable in-home elderly care, companion services, and safe post-hospital recovery support tailored to seniors and historic homes in Oak Park."
@@ -288,7 +348,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "River Forest",
     county: "Cook County",
     slug: "river-forest-il",
-    zipCodes: "60305",
+    tier: "core",
+    zipCodes: ["60305"],
     hospitals: ["Rush Oak Park Hospital", "Gottlieb Memorial Hospital"],
     landmarks: ["Dominican University", "Thatcher Woods"],
     desc: "Concierge-level private duty personal assistance, daily routine care, and dedicated caregiver respite relief for River Forest seniors."
@@ -297,7 +358,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "La Grange",
     county: "Cook County",
     slug: "la-grange-il",
-    zipCodes: "60525",
+    tier: "core",
+    zipCodes: ["60525"],
     hospitals: ["UChicago Medicine AdventHealth La Grange"],
     landmarks: ["Historic Downtown La Grange", "Waiola Park"],
     desc: "Compassionate dementia support, mobility accompaniment, and tailored personal care services delivered directly to homes across La Grange."
@@ -306,8 +368,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Western Springs",
     county: "Cook County",
     slug: "western-springs-il",
-    zipCodes: "60558",
-    hospitals: ["UChicago Medicine AdventHealth La Grange", "AdventHealth Hinsdale"],
+    tier: "core",
+    zipCodes: ["60558"],
+    hospitals: ["UChicago Medicine AdventHealth La Grange", "UChicago Medicine AdventHealth Hinsdale"],
     landmarks: ["Western Springs Water Tower", "Spring Rock Park"],
     desc: "Attentive senior personal care, medication reminders, and customized companion models keeping Western Springs older adults thriving at home."
   },
@@ -315,7 +378,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Orland Park",
     county: "Cook County",
     slug: "orland-park-il",
-    zipCodes: "60462, 60467",
+    tier: "extended",
+    zipCodes: ["60462", "60467"],
     hospitals: ["Northwestern Medicine Palos Hospital"],
     landmarks: ["Centennial Park", "Orland Square"],
     desc: "Trustworthy companion care, personalized memory support, and flexible daily assistance for seniors throughout Orland Park."
@@ -324,8 +388,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Palos Park",
     county: "Cook County",
     slug: "palos-park-il",
-    zipCodes: "60464",
-    hospitals: ["Palos Community Hospital"],
+    tier: "extended",
+    zipCodes: ["60464"],
+    hospitals: ["Northwestern Medicine Palos Hospital"],
     landmarks: ["Swallow Cliff Woods", "The Center in Palos Park"],
     desc: "Gentle mobility guidance, private duty care plans, and daily routine assistance for Palos Park residents."
   },
@@ -333,7 +398,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Palos Heights",
     county: "Cook County",
     slug: "palos-heights-il",
-    zipCodes: "60463",
+    tier: "extended",
+    zipCodes: ["60463"],
     hospitals: ["Northwestern Medicine Palos Hospital"],
     landmarks: ["Lake Katherine Nature Center & Botanic Gardens"],
     desc: "Reliable post-hospital discharge care, bathing support, and friendly companion care across Palos Heights."
@@ -342,8 +408,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Northbrook",
     county: "Cook County",
     slug: "northbrook-il",
-    zipCodes: "60062",
-    hospitals: ["NorthShore Glenbrook Hospital"],
+    tier: "extended",
+    zipCodes: ["60062"],
+    hospitals: ["Endeavor Health Glenbrook Hospital"],
     landmarks: ["Northbrook Court", "Techny Prairie Park"],
     desc: "Structured cognitive wellness support, homemaker care, and light housekeeping designed for Northbrook seniors."
   },
@@ -351,8 +418,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Glenview",
     county: "Cook County",
     slug: "glenview-il",
-    zipCodes: "60025, 60026",
-    hospitals: ["Glenbrook Hospital"],
+    tier: "extended",
+    zipCodes: ["60025", "60026"],
+    hospitals: ["Endeavor Health Glenbrook Hospital"],
     landmarks: ["The Glen Town Center", "Wagner Farm"],
     desc: "Attentive personal care, routine medication reminders, and family caregiver respite throughout Glenview."
   },
@@ -360,8 +428,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Wilmette",
     county: "Cook County",
     slug: "wilmette-il",
-    zipCodes: "60091",
-    hospitals: ["NorthShore Evanston Hospital", "Skokie Hospital"],
+    tier: "extended",
+    zipCodes: ["60091"],
+    hospitals: ["Endeavor Health Evanston Hospital", "Endeavor Health Skokie Hospital"],
     landmarks: ["Bahá'í House of Worship", "Gillson Park"],
     desc: "Discreet in-home elder care, mobility guidance, and personalized meal support for Wilmette families."
   },
@@ -369,7 +438,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Chicago",
     county: "Cook County",
     slug: "chicago-il",
-    zipCodes: "Select Neighborhoods",
+    tier: "extended",
+    zipCodes: [],
+    coverageNote: "Select Chicago neighborhoods",
     hospitals: ["Northwestern Memorial Hospital", "Rush University Medical Center"],
     landmarks: ["Downtown Chicago", "Millennium Park"],
     desc: "Comprehensive home care coverage across Chicago neighborhoods, focusing on safe, independent urban living and specialized senior support."
@@ -378,7 +449,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Hillside",
     county: "Cook County",
     slug: "hillside-il",
-    zipCodes: "60162",
+    tier: "core",
+    zipCodes: ["60162"],
     hospitals: ["Loyola University Medical Center", "Edward Hines Jr. VA Hospital"],
     landmarks: ["Mount Carmel Cemetery", "Hillside Town Center"],
     desc: "Minutes from our Westchester headquarters, Hillside families receive fast-response nurse-led personal care, companionship, and post-hospital recovery support."
@@ -389,8 +461,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Oak Brook",
     county: "DuPage County",
     slug: "oak-brook-il",
-    zipCodes: "60523",
-    hospitals: ["AdventHealth Hinsdale Hospital", "Advocate Good Samaritan Hospital"],
+    tier: "core",
+    zipCodes: ["60523"],
+    hospitals: ["UChicago Medicine AdventHealth Hinsdale", "Advocate Good Samaritan Hospital"],
     landmarks: ["Oakbrook Center", "Fullersburg Woods"],
     desc: "Private-duty home care, concierge personal support, and 24-hour caregiver coverage for seniors and families residing in Oak Brook."
   },
@@ -398,8 +471,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Elmhurst",
     county: "DuPage County",
     slug: "elmhurst-il",
-    zipCodes: "60126",
-    hospitals: ["Elmhurst Hospital - Edward-Elmhurst Health"],
+    tier: "core",
+    zipCodes: ["60126"],
+    hospitals: ["Endeavor Health Elmhurst Hospital"],
     landmarks: ["Wilder Park Conservatory", "Downtown Elmhurst"],
     desc: "Dedicated homemaker services, light housekeeping, and nutritious meal preparation tailored to Elmhurst families."
   },
@@ -407,7 +481,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Glen Ellyn",
     county: "DuPage County",
     slug: "glen-ellyn-il",
-    zipCodes: "60137",
+    tier: "core",
+    zipCodes: ["60137"],
     hospitals: ["Northwestern Medicine Central DuPage Hospital"],
     landmarks: ["Lake Ellyn Park", "Prairie Path"],
     desc: "Compassionate respite relief for devoted family caregivers, paired with engaging companionship across Glen Ellyn."
@@ -416,7 +491,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Wheaton",
     county: "DuPage County",
     slug: "wheaton-il",
-    zipCodes: "60187, 60189",
+    tier: "extended",
+    zipCodes: ["60187", "60189"],
     hospitals: ["Northwestern Medicine Central DuPage Hospital"],
     landmarks: ["Cantigny Park", "Downtown Wheaton"],
     desc: "Holistic senior wellness, personal hygiene assistance, and dedicated respite care options for Wheaton residents."
@@ -425,7 +501,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Downers Grove",
     county: "DuPage County",
     slug: "downers-grove-il",
-    zipCodes: "60515, 60516",
+    tier: "core",
+    zipCodes: ["60515", "60516"],
     hospitals: ["Advocate Good Samaritan Hospital"],
     landmarks: ["Tivoli Theatre", "Main Street Station"],
     desc: "Flexible hourly home care, overnight monitoring, and reliable medication prompting throughout Downers Grove."
@@ -434,8 +511,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Naperville",
     county: "DuPage County",
     slug: "naperville-il",
-    zipCodes: "60540, 60563, 60564",
-    hospitals: ["Edward Hospital - Naperville"],
+    tier: "extended",
+    zipCodes: ["60540", "60563", "60564"],
+    hospitals: ["Endeavor Health Edward Hospital"],
     landmarks: ["Naperville Riverwalk", "Centennial Beach"],
     desc: "Comprehensive senior home care tailored to Naperville residents, including hourly non-medical support and medical transport accompaniment."
   },
@@ -443,8 +521,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Lombard",
     county: "DuPage County",
     slug: "lombard-il",
-    zipCodes: "60148",
-    hospitals: ["Advocate Good Samaritan Hospital", "Elmhurst Hospital"],
+    tier: "core",
+    zipCodes: ["60148"],
+    hospitals: ["Advocate Good Samaritan Hospital", "Endeavor Health Elmhurst Hospital"],
     landmarks: ["Lilacia Park", "Yorktown Center"],
     desc: "Trustworthy companion care, daily routine assistance, and fall prevention services for Lombard seniors."
   },
@@ -452,8 +531,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Clarendon Hills",
     county: "DuPage County",
     slug: "clarendon-hills-il",
-    zipCodes: "60514",
-    hospitals: ["AdventHealth Hinsdale Hospital"],
+    tier: "core",
+    zipCodes: ["60514"],
+    hospitals: ["UChicago Medicine AdventHealth Hinsdale"],
     landmarks: ["Prospect Park", "Downtown Clarendon Hills"],
     desc: "Personalized mobility support, fall prevention guidance, and trusted hourly senior care in Clarendon Hills."
   },
@@ -461,8 +541,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Darien",
     county: "DuPage County",
     slug: "darien-il",
-    zipCodes: "60561",
-    hospitals: ["AdventHealth Hinsdale Hospital"],
+    tier: "core",
+    zipCodes: ["60561"],
+    hospitals: ["UChicago Medicine AdventHealth Hinsdale"],
     landmarks: ["Waterfall Glen Forest Preserve"],
     desc: "Dependable personal hygiene care, routine comfort checks, and homemaker assistance for Darien older adults."
   },
@@ -470,8 +551,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Willowbrook",
     county: "DuPage County",
     slug: "willowbrook-il",
-    zipCodes: "60527",
-    hospitals: ["AdventHealth Hinsdale Hospital", "AdventHealth La Grange"],
+    tier: "core",
+    zipCodes: ["60527"],
+    hospitals: ["UChicago Medicine AdventHealth Hinsdale", "UChicago Medicine AdventHealth La Grange"],
     landmarks: ["Willowbrook Town Center", "Community Park"],
     desc: "Dignified routine care, meal preparation, and private duty caregiving solutions in Willowbrook."
   },
@@ -479,8 +561,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Lisle",
     county: "DuPage County",
     slug: "lisle-il",
-    zipCodes: "60532",
-    hospitals: ["Edward Hospital", "Advocate Good Samaritan Hospital"],
+    tier: "extended",
+    zipCodes: ["60532"],
+    hospitals: ["Endeavor Health Edward Hospital", "Advocate Good Samaritan Hospital"],
     landmarks: ["The Morton Arboretum", "Community Park"],
     desc: "Warm companion care, medication reminders, and flexible day-to-day senior living assistance across Lisle."
   },
@@ -488,7 +571,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Hinsdale",
     county: "DuPage County",
     slug: "hinsdale-il",
-    zipCodes: "60521, 60522",
+    tier: "core",
+    zipCodes: ["60521", "60522"],
     hospitals: ["UChicago Medicine AdventHealth Hinsdale", "Advocate Good Samaritan Hospital"],
     landmarks: ["Katherine Legge Memorial Park", "Robert Crown Center"],
     desc: "Discreet private-duty caregiving, dementia support, and recovery care at home for Hinsdale seniors, coordinated closely with local hospital discharge teams."
@@ -497,7 +581,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Burr Ridge",
     county: "DuPage County",
     slug: "burr-ridge-il",
-    zipCodes: "60527",
+    tier: "core",
+    zipCodes: ["60527"],
     hospitals: ["UChicago Medicine AdventHealth Hinsdale", "Advocate Good Samaritan Hospital"],
     landmarks: ["Burr Ridge Village Center", "Pleasant Dale Park"],
     desc: "Concierge-level in-home senior care, overnight caregiver coverage, and respite relief for Burr Ridge families across the 60527 corridor."
@@ -508,7 +593,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Lake Forest",
     county: "Lake County",
     slug: "lake-forest-il",
-    zipCodes: "60045",
+    tier: "extended",
+    zipCodes: ["60045"],
     hospitals: ["Northwestern Medicine Lake Forest Hospital"],
     landmarks: ["Market Square", "Lake Forest Beach"],
     desc: "Private duty assistance, dignified personal routines, and dedicated companion care in Lake Forest."
@@ -517,8 +603,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Highland Park",
     county: "Lake County",
     slug: "highland-park-il",
-    zipCodes: "60035",
-    hospitals: ["NorthShore Highland Park Hospital"],
+    tier: "extended",
+    zipCodes: ["60035"],
+    hospitals: ["Endeavor Health Highland Park Hospital"],
     landmarks: ["Ravinia Festival", "Rosewood Beach"],
     desc: "Reliable meal prep, family respite relief, and customized living support for Highland Park seniors."
   },
@@ -526,8 +613,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Deerfield",
     county: "Lake County",
     slug: "deerfield-il",
-    zipCodes: "60015",
-    hospitals: ["Highland Park Hospital", "Glenbrook Hospital"],
+    tier: "extended",
+    zipCodes: ["60015"],
+    hospitals: ["Endeavor Health Highland Park Hospital", "Endeavor Health Glenbrook Hospital"],
     landmarks: ["Deerfield Historic Village", "Briarwood"],
     desc: "Dependable medication reminders, active socialization, and routine personal care in Deerfield."
   },
@@ -535,7 +623,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Libertyville",
     county: "Lake County",
     slug: "libertyville-il",
-    zipCodes: "60048",
+    tier: "extended",
+    zipCodes: ["60048"],
     hospitals: ["Advocate Condell Medical Center"],
     landmarks: ["Adler Memorial Park", "MainStreet Libertyville"],
     desc: "High-caliber respite relief, engaging companionship, and safe fall prevention configurations in Libertyville."
@@ -544,7 +633,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Vernon Hills",
     county: "Lake County",
     slug: "vernon-hills-il",
-    zipCodes: "60061",
+    tier: "extended",
+    zipCodes: ["60061"],
     hospitals: ["Advocate Condell Medical Center"],
     landmarks: ["Hawthorn Center", "Century Park"],
     desc: "Dedicated personal routines care, post-hospital transition plans, and memory care support in Vernon Hills."
@@ -553,7 +643,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Gurnee",
     county: "Lake County",
     slug: "gurnee-il",
-    zipCodes: "60031",
+    tier: "extended",
+    zipCodes: ["60031"],
     hospitals: ["Advocate Condell Medical Center", "Vista Medical Center East"],
     landmarks: ["Gurnee Mills", "Viking Park"],
     desc: "Trustworthy non-medical support, prescription prompts, and reliable companion systems for Gurnee seniors."
@@ -564,7 +655,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Frankfort",
     county: "Will County",
     slug: "frankfort-il",
-    zipCodes: "60423",
+    tier: "extended",
+    zipCodes: ["60423"],
     hospitals: ["Silver Cross Hospital", "Franciscan Health"],
     landmarks: ["Frankfort Historic District", "Old Plank Road Trail"],
     desc: "Dignified assistance with personal routines, bathing help, and dedicated respite relief in Frankfort."
@@ -573,7 +665,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Homer Glen",
     county: "Will County",
     slug: "homer-glen-il",
-    zipCodes: "60491",
+    tier: "extended",
+    zipCodes: ["60491"],
     hospitals: ["Silver Cross Hospital"],
     landmarks: ["Heritage Park", "Messenger Woods"],
     desc: "Attentive companion care, mobility support, and family caregiver peace of mind in Homer Glen."
@@ -582,8 +675,9 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Plainfield",
     county: "Will County",
     slug: "plainfield-il",
-    zipCodes: "60544, 60585",
-    hospitals: ["Edward Hospital", "Ascension Saint Joseph - Joliet"],
+    tier: "extended",
+    zipCodes: ["60544", "60585"],
+    hospitals: ["Endeavor Health Edward Hospital", "Ascension Saint Joseph - Joliet"],
     landmarks: ["Settlers' Park", "Downtown Plainfield"],
     desc: "Safe transitional assistance following clinical discharge, paired with warm daily companion care in Plainfield."
   },
@@ -591,7 +685,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Bolingbrook",
     county: "Will County",
     slug: "bolingbrook-il",
-    zipCodes: "60440, 60490",
+    tier: "extended",
+    zipCodes: ["60440", "60490"],
     hospitals: ["UChicago Medicine AdventHealth Bolingbrook"],
     landmarks: ["The Promenade Bolingbrook", "Hidden Oaks Nature Center"],
     desc: "Dependable medication reminders, active social companionship, and routine comfort checks in Bolingbrook."
@@ -600,7 +695,8 @@ export const cityDirectory: Record<string, CityData> = {
     name: "Joliet",
     county: "Will County",
     slug: "joliet-il",
-    zipCodes: "60431, 60432, 60435",
+    tier: "extended",
+    zipCodes: ["60431", "60432", "60435"],
     hospitals: ["Ascension Saint Joseph - Joliet", "Silver Cross Hospital"],
     landmarks: ["Rialto Square Theatre", "Pilcher Park Nature Center"],
     desc: "Professional private duty care configurations, hourly caregiver relief, and non-medical support for Joliet families."
@@ -609,9 +705,47 @@ export const cityDirectory: Record<string, CityData> = {
     name: "New Lenox",
     county: "Will County",
     slug: "new-lenox-il",
-    zipCodes: "60451",
+    tier: "extended",
+    zipCodes: ["60451"],
     hospitals: ["Silver Cross Hospital"],
     landmarks: ["The Commons", "Hickory Creek Preserve"],
     desc: "Custom senior care plans, household meal support, and dependable daily living assistance in New Lenox."
   }
-};
+} satisfies Record<string, CityData>;
+
+export type CitySlug = keyof typeof cityRecords;
+
+export const cityDirectory: Record<string, CityData> = cityRecords;
+
+/**
+ * Priority local markets.
+ *
+ * The business ranks first in Westchester (where the office is) but nowhere
+ * else, and the town pages were reachable only from /areas-we-serve — one
+ * internal link each, which tells Google they are low-priority leaves. These
+ * are the markets worth spending internal link equity on, surfaced from the
+ * homepage and the footer so every page passes authority into them.
+ *
+ * Slugs are typed against `cityRecords`, so a typo or a removed town fails the
+ * build instead of shipping a broken link. Names come from the directory.
+ */
+const priorityMarkets: readonly { slug: CitySlug; note: string }[] = [
+  { slug: "westchester-il", note: "Our headquarters" },
+  { slug: "hillside-il", note: "Minutes from our office" },
+  { slug: "oak-brook-il", note: "DuPage County" },
+  { slug: "hinsdale-il", note: "DuPage County" },
+  { slug: "burr-ridge-il", note: "DuPage County" },
+  { slug: "elmhurst-il", note: "DuPage County" },
+  { slug: "la-grange-il", note: "Cook County" },
+  { slug: "western-springs-il", note: "Cook County" },
+  { slug: "oak-park-il", note: "Cook County" },
+  { slug: "river-forest-il", note: "Cook County" },
+  { slug: "downers-grove-il", note: "DuPage County" },
+  { slug: "lombard-il", note: "DuPage County" },
+];
+
+export const priorityAreas = priorityMarkets.map(({ slug, note }) => ({
+  city: cityRecords[slug].name,
+  slug,
+  note,
+}));

@@ -1,12 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import FaqAccordion from "@/components/faq-accordion";
+import { ServiceJsonLd } from "@/components/service-json-ld";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, contactDetails } from "@/data/site-content";
 
 type FAQItem = {
   question: string;
@@ -108,7 +107,7 @@ export default function SpecializedSupportPage() {
           title="Specialized Alzheimer's & Dementia Care Plans"
           // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Link penalty
           primaryAction={{ label: "Request Specialized Support", href: "/contact-us" }}
-          secondaryAction={{ label: "Call for Specialized Care: 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: `Call for Specialized Care: ${contactDetails.phone}`, href: contactDetails.phoneHref }}
           imageSrc="/nh-2212833857U072s1e.webp"
           imageAlt="Healthcare professional providing attentive, specialized support"
         />
@@ -131,7 +130,7 @@ export default function SpecializedSupportPage() {
               <ScrollReveal>
                 {/* OPTIMIZATION: Injected the exact H1 and Title phrases to resolve the Content Match penalty */}
                 <p className="text-sm sm:text-base leading-relaxed text-slate-700">
-                  Certain needs require focused expertise, and our <strong>specialized Alzheimer's & dementia care plans</strong> are designed to address them with clarity and precision. Whether short-term or ongoing, every detail is handled with professionalism and intention. Individual requirements are prioritized, ensuring routines and care plans are consistently followed. Our team brings focus and dedication to every interaction. 
+                  Certain needs require focused expertise, and our <strong>specialized Alzheimer&apos;s & dementia care plans</strong> are designed to address them with clarity and precision. Whether short-term or ongoing, every detail is handled with professionalism and intention. Individual requirements are prioritized, ensuring routines and care plans are consistently followed. Our team brings focus and dedication to every interaction. 
                 </p>
               </ScrollReveal>
               
@@ -289,6 +288,8 @@ export default function SpecializedSupportPage() {
           </PageShell>
         </section>
       </ScrollReveal>
+
+      <ServiceJsonLd slug="specialized-support" faqs={faqs} />
     </>
   );
 }

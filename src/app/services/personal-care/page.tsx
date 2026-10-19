@@ -1,12 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { HeroSection, PageShell, SectionHeading } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
 import FaqAccordion from "@/components/faq-accordion";
+import { ServiceJsonLd } from "@/components/service-json-ld";
 import { ExpandableLocations } from "@/components/expandable-locations";
-import { cityDirectory } from "@/data/site-content";
+import { cityDirectory, contactDetails } from "@/data/site-content";
 
 type FAQItem = {
   question: string;
@@ -51,7 +50,7 @@ export default function PersonalCarePage() {
           title="In-Home Personal Care Assistance in Westchester, IL"
           // OPTIMIZATION: Differentiated button text to resolve Duplicate Anchor Links penalty
           primaryAction={{ label: "Schedule Personal Care Assessment", href: "/contact-us" }}
-          secondaryAction={{ label: "Call for Personal Care: 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: `Call for Personal Care: ${contactDetails.phone}`, href: contactDetails.phoneHref }}
           imageSrc="/nh-2411535922U62t38i.webp" 
           imageAlt="Caregiver providing professional personal care support"
         />
@@ -176,16 +175,18 @@ export default function PersonalCarePage() {
                   </span>
                 </Link>
                 <Link 
-                  href="tel:7083040296"
+                  href={contactDetails.phoneHref}
                   className="inline-flex items-center justify-center rounded-full bg-white border border-slate-200 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-brand-ink transition hover:bg-slate-50 shadow-sm"
                 >
-                  Call 708-304-0296
+                  {`Call ${contactDetails.phone}`}
                 </Link>
               </div>
             </div>
           </PageShell>
         </section>
       </ScrollReveal>
+
+      <ServiceJsonLd slug="personal-care" faqs={faqs} />
     </>
   );
 }

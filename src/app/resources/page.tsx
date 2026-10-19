@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { HeroSection, PageShell } from "@/components/site-shell";
 import ScrollReveal from "@/components/scroll-reveal";
-import { resources } from "@/data/site-content";
+import { resources, contactDetails } from "@/data/site-content";
 import { ExpandableLocations } from "@/components/expandable-locations";
 import { cityDirectory } from "@/data/site-content";
 
@@ -24,7 +24,7 @@ export default function ResourcesPage() {
             label: "Request a Care Consultation", 
             href: "/contact-us"
           }}
-          secondaryAction={{ label: "Call 708-304-0296", href: "tel:7083040296" }}
+          secondaryAction={{ label: `Call ${contactDetails.phone}`, href: contactDetails.phoneHref }}
           imageSrc="/nh-23119104148Uam2713.webp"
           imageAlt="Happy elderly couple reviewing senior care resources together"
         />
@@ -46,7 +46,7 @@ export default function ResourcesPage() {
                   Navigating elder care can be complex, which is why we have compiled these <strong>Illinois senior care resources and planning</strong> guides. These trusted reference portals offer additional information about public health directives, home care regulations, and healthcare workforce guidance.
                 </p>
                 <p>
-                  Planning for the future is a vital step in ensuring the long-term well-being of older adults. These external directories provide comprehensive information on Medicare, Alzheimer's education, state health departments, and local community outreach programs.
+                  Planning for the future is a vital step in ensuring the long-term well-being of older adults. These external directories provide comprehensive information on Medicare, Alzheimer&apos;s education, state health departments, and local community outreach programs.
                 </p>
                 <p>
                   Whether you are seeking local aging support or federal guidelines, we keep this curated set of public health and home-care links available for families who want to continue learning about safe aging at home across Chicagoland.
@@ -111,7 +111,7 @@ export default function ResourcesPage() {
                     1. Assessing Daily Care and Medical Needs
                   </h3>
                   <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                    The first step in any senior care journey is properly evaluating the individual's ability to perform Activities of Daily Living (ADLs) such as bathing, dressing, meal preparation, and mobility. Utilizing the Illinois Department on Aging's functional assessment tools can give families a clear baseline. If cognitive decline is a concern, reaching out to the Alzheimer's Association local chapters early ensures you have access to memory care planning, caregiver support groups, and safety intervention strategies. Professional in-home care agencies, like Benevolence Home Services, often conduct these clinical assessments during initial consultations under the supervision of a Registered Nurse.
+                    The first step in any senior care journey is properly evaluating the individual&apos;s ability to perform Activities of Daily Living (ADLs) such as bathing, dressing, meal preparation, and mobility. Utilizing the Illinois Department on Aging&apos;s functional assessment tools can give families a clear baseline. If cognitive decline is a concern, reaching out to the Alzheimer&apos;s Association local chapters early ensures you have access to memory care planning, caregiver support groups, and safety intervention strategies. Professional in-home care agencies, like Benevolence Home Services, often conduct these clinical assessments during initial consultations under the supervision of a Registered Nurse.
                   </p>
                 </div>
 
